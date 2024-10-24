@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [],
+    "target": "ES2022", // or your desired ECMAScript version
+    "module": "esnext", // or "commonjs" based on your setup
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": true,
+    "lib": ["es2018", "dom"]
+  },
+  "files": ["src/main.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts" // Include all TypeScript files
+  ],
+  "exclude": [
+    "node_modules",
+    "out-tsc" // Exclude output directory
+  ]
+}
