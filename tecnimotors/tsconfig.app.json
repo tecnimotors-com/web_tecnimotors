@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": true,
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
   },
   "files": ["src/main.ts"],
   "include": [

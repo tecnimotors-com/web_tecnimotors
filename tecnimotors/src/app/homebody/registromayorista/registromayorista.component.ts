@@ -1,12 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registromayorista',
-  standalone: true,
-  imports: [],
   templateUrl: './registromayorista.component.html',
-  styleUrl: './registromayorista.component.css'
+  styleUrls: ['./registromayorista.component.css']
 })
-export class RegistromayoristaComponent {
+export class RegistromayoristaComponent  implements OnInit, OnDestroy {
+  
+  ngOnInit(): void {
+    this.initializePreLoader();
+  }
 
+  ngOnDestroy(): void {
+    this.finalizePreLoader();
+  }
+
+  private initializePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.remove('loaded');
+
+      setTimeout(() => {
+        preloaderWrapper.classList.add('loaded');
+      }, 1000);
+    } else {
+      console.error('Preloader not found!');
+    }
+  }
+
+  private finalizePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.add('loaded');
+    }
+  }
 }

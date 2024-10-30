@@ -37,6 +37,7 @@
 "use strict";
 
 // Preloader
+/*
 const preLoader = function () {
   let preloaderWrapper = document.getElementById("preloader");
   window.onload = () => {
@@ -44,7 +45,7 @@ const preLoader = function () {
   };
 };
 preLoader();
-
+*/
 // getSiblings
 var getSiblings = function (elem) {
   const siblings = [];

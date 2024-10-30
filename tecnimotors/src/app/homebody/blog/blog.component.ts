@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-cotizacion',
-  templateUrl: './cotizacion.component.html',
-  styleUrls: ['./cotizacion.component.css']
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.css']
 })
-export class CotizacionComponent implements OnInit, OnDestroy {
+export class BlogComponent  implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.initializePreLoader();

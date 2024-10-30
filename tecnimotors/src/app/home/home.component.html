@@ -4,32 +4,36 @@
         <div class="animation-preloader">
             <div class="spinner"></div>
             <div class="txt-loading">
-                <span data-text-preloader="L" class="letters-loading">
-                    L
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
+                <span data-text-preloader="C" class="letters-loading">
+                    C
                 </span>
 
                 <span data-text-preloader="A" class="letters-loading">
                     A
                 </span>
 
-                <span data-text-preloader="D" class="letters-loading">
-                    D
+                <span data-text-preloader="R" class="letters-loading">
+                    R
                 </span>
 
-                <span data-text-preloader="I" class="letters-loading">
-                    I
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
                 </span>
 
                 <span data-text-preloader="N" class="letters-loading">
                     N
                 </span>
 
-                <span data-text-preloader="G" class="letters-loading">
-                    G
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
                 </span>
             </div>
         </div>
@@ -41,71 +45,79 @@
 <!-- End preloader -->
 <app-header></app-header>
 <main class="main__content_wrapper">
+    <section class="hero__slider--section">
+        <!-- Carousel -->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" style="background-image: url('../../assets/img/banner/tecnimotors/FONDO-1.jpg');">
+                <div class="carousel-item active" style="transition: transform 0.5s ease;">
+                    <img [lazyLoad]="src1" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
+                    <img [lazyLoad]="src2" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
+                    <img [lazyLoad]="src3" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            <!-- Left and right controls/icons -->
+            <button class=" carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class=" -chevron-left">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class=" -chevron-right">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </section>
     <!-- Start slider section -->
     <section class="hero__slider--section">
         <div class="slider__thumbnail--style5 position-relative">
-            <img class="slider__thumbnail--img__style5" src="assets/img/slider/home5-slider-thumb.webp"
-                alt="slider-img">
-            <div class="hero__content--style5 text-center">
-                <h2 class="hero__content--style5__title h1">Comes Width The <br> <span class="text__secondary">Ultimate
-                        Protection</span></h2>
-            </div>
-            <!-- Start search filter area -->
             <div class="search__filter--section search__filter--style5">
                 <div class="container">
-                    <div class="section__heading style2 text-center mb-30">
-                        <h2 class="section__heading--maintitle">Search by Vehicle</h2>
-                        <p class="section__heading--desc">Filter your results by entering your Vehicle to
-                            ensure you find the parts that fit.</p>
-                    </div>
-                    <div class="search__filter--inner style5">
-                        <form class="search__filter--form__style2 d-flex" action="#">
+                    <div class="search__filter--inner style5"
+                        style="padding: 1.3rem;background: linear-gradient(to right, #c0c0c0, #ffffff) !important;">
+                        <form class="search__filter--form__style2 d-flex" action="#"
+                            style="justify-content: space-evenly;">
                             <div class="search__filter--select select search__filter--width">
                                 <select class="search__filter--select__field">
-                                    <option selected value="1">Select Make</option>
-                                    <option value="2">Brake Calipers </option>
-                                    <option value="3">Engine Oil </option>
-                                    <option value="4">Motor Oil </option>
-                                    <option value="5">Oil Filters </option>
+                                    <option selected value="1">Producto</option>
+                                    <option value="2">Llantas</option>
+                                    <option value="3">Cámaras </option>
+                                    <option value="4">Repuestos </option>
+                                    <option value="5">Aceites y Lubricantes </option>
+                                    <option value="6">Vehículos </option>
                                 </select>
                             </div>
                             <div class="search__filter--select select search__filter--width">
                                 <select class="search__filter--select__field">
-                                    <option selected value="1">Select Model</option>
-                                    <option value="2">Toyota Combo </option>
-                                    <option value="3">Model 2022 </option>
-                                    <option value="4">Air Boxes </option>
+                                    <option selected value="1">Tipo de Vehículo</option>
+                                    <option value="2">Motocicletas</option>
+                                    <option value="3">Cargueros</option>
+                                    <option value="4">Cuatrimotos</option>
+                                    <option value="5">Bicicletas</option>
                                 </select>
                             </div>
                             <div class="search__filter--select select search__filter--width">
                                 <select class="search__filter--select__field">
-                                    <option selected value="1">Choose Year</option>
-                                    <option value="2">Year 2020 </option>
-                                    <option value="3">Year 2022 </option>
-                                    <option value="4">Year 2024</option>
-                                    <option value="5">Year 2026 </option>
+                                    <option selected value="1">Marca</option>
+                                    <option value="2">Dunlop </option>
+                                    <option value="3">Kenda </option>
+                                    <option value="4">Wanda </option>
+                                    <option value="5">Maxima </option>
+                                    <option value="6">RTM </option>
+                                    <option value="7">Otras Marcas </option>
                                 </select>
                             </div>
-                            <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Select Class</option>
-                                    <option value="2">Class One </option>
-                                    <option value="3">Class Two </option>
-                                    <option value="4">Class Three </option>
-                                    <option value="5">Class Four </option>
-                                </select>
-                            </div>
-                            <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Select Type</option>
-                                    <option value="2">Tail Lights </option>
-                                    <option value="3">Car Covers </option>
-                                    <option value="4">Hoods </option>
-                                    <option value="5">Bumpers </option>
-                                </select>
-                            </div>
+
                             <div class="search__filter--width">
-                                <button class="search__filter--btn primary__btn" type="submit">Search</button>
+                                <button class="search__filter--btn primary__btn" type="submit">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -116,6 +128,51 @@
 
     </section>
     <!-- End slider section -->
+    <!-- Start product section -->
+    <section class="product__section" style="background-color: white;box-shadow: 0px 2px 20px black;
+        padding: 1rem 0;border-top: black 1px solid;">
+        <div class="container" style="padding-left:1rem;padding-right:1rem;max-width: 160rem;">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/RTM.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/TSK.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/KENDA.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/DUNLOP.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/CHENG-SHIN.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/MAXXIS.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/WANDA.jpg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <!-- End product section -->
 
     <!-- Start categories section -->
     <section class="categories__section section--padding">
@@ -250,7 +307,7 @@
     <!-- End categories section -->
 
     <!-- Start product section -->
-    <section class="product__section section--padding  pt-0">
+    <section class="product__section section--padding pt-0">
         <div class="container">
             <div class="section__heading section__heading--flex border-bottom d-flex justify-content-between mb-30">
                 <h2 class="section__heading--maintitle">Populer <span>Products</span></h2>
@@ -5706,7 +5763,7 @@
     <!-- End banner section -->
 
     <!-- Start product section -->
-    <section class="product__section section--padding  pt-0">
+    <section class="product__section section--padding pt-0">
         <div class="container">
             <div class="section__heading border-bottom mb-30">
                 <h2 class="section__heading--maintitle">Latest <span>Products</span></h2>

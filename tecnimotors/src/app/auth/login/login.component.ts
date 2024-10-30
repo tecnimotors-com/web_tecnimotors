@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'], // Corregido el typo en styleUrl
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
@@ -27,5 +27,34 @@ export class LoginComponent {
           this.errorMessage = 'Credenciales incorrectas. Intenta de nuevo.';
         }
       });
+  }
+
+  ngOnInit(): void {
+    this.initializePreLoader();
+  }
+
+  ngOnDestroy(): void {
+    this.finalizePreLoader();
+  }
+
+  private initializePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.remove('loaded');
+
+      setTimeout(() => {
+        preloaderWrapper.classList.add('loaded');
+      }, 1000);
+    } else {
+      console.error('Preloader not found!');
+    }
+  }
+
+  private finalizePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.add('loaded');
+    }
   }
 }

@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-catalogos',
-  standalone: true,
-  imports: [],
   templateUrl: './catalogos.component.html',
-  styleUrl: './catalogos.component.css'
+  styleUrls: ['./catalogos.component.css']
 })
-export class CatalogosComponent {
+export class CatalogosComponent  implements OnInit, OnDestroy {
+  
+  ngOnInit(): void {
+    this.initializePreLoader();
+  }
 
+  ngOnDestroy(): void {
+    this.finalizePreLoader();
+  }
+
+  private initializePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.remove('loaded');
+
+      setTimeout(() => {
+        preloaderWrapper.classList.add('loaded');
+      }, 1000);
+    } else {
+      console.error('Preloader not found!');
+    }
+  }
+
+  private finalizePreLoader(): void {
+    const preloaderWrapper = document.getElementById('preloader');
+    if (preloaderWrapper) {
+      preloaderWrapper.classList.add('loaded');
+    }
+  }
 }
+

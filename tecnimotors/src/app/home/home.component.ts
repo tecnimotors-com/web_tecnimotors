@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +7,16 @@ import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  public src1: string =
+    '../../assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB-5.jpg';
+  public src2: string =
+    '../../assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB-6.jpg';
+  public src3: string =
+    '../../assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB.jpg';
+
   //OnInit, OnDestroy,
   //swiper!: Swiper;
+  //public swiper?: Swiper;
 
   ngOnInit(): void {
     this.initializePreLoader();

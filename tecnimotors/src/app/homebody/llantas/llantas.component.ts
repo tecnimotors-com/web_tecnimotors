@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-llantas',
-  standalone: true,
-  imports: [],
   templateUrl: './llantas.component.html',
-  styleUrl: './llantas.component.css'
+  styleUrls: ['./llantas.component.css']
 })
 export class LlantasComponent {
 

@@ -1,4 +1,5 @@
 "use strict";
+/*
 const preLoader = function () {
   let preloaderWrapper = document.getElementById("preloader");
   window.onload = () => {
@@ -6,6 +7,7 @@ const preLoader = function () {
   };
 };
 preLoader();
+*/
 var getSiblings = function (elem) {
     const siblings = [];
     let sibling = elem.parentNode.firstChild;
