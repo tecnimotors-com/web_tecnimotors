@@ -6,8 +6,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./categoria.component.css']
 })
 export class CategoriaComponent implements OnInit, OnDestroy {
-
   ngOnInit(): void {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
     this.initializePreLoader();
   }
 

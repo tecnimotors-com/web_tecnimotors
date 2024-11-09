@@ -263,7 +263,7 @@ p,
 @media only screen and (min-width: 1200px) {
   p,
   .p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
   }
 }
 
@@ -422,16 +422,19 @@ hr {
   .container-fluid {
     --offset-fluid: 3rem;
   }
+  
 }
 @media only screen and (min-width: 1366px) {
   .container-fluid {
     --offset-fluid: calc(var(--container-fluid-offset) / 4.5);
   }
+ 
 }
 @media only screen and (min-width: 1600px) {
   .container-fluid {
     --offset-fluid: calc(var(--container-fluid-offset) / 2.5);
   }
+ 
 }
 @media only screen and (min-width: 1800px) {
   .container-fluid {
@@ -1813,19 +1816,10 @@ body.overlay__active::before,
   display: block;
 }
 .main__logo--img {
-  max-width: 120px;
+  max-width: auto;
   display: block;
 }
-@media only screen and (min-width: 480px) {
-  .main__logo--img {
-    max-width: 160px;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .main__logo--img {
-    max-width: 80%;
-  }
-}
+
 .main__logo--title {
   line-height: 1;
 }
@@ -2465,9 +2459,9 @@ body.overlay__active::before,
   opacity: 1;
 }
 .header__menu--link {
-  font-size: 1.4rem;
-  line-height: 3.5rem;
-  padding: 0 0.8rem;
+  /*font-size: 1.4rem;*/
+  line-height: 1rem;
+  /*padding: 0 0.8rem;*/
   font-weight: 600;
   border: 1px solid transparent;
   border-radius: 2rem;
@@ -2488,10 +2482,11 @@ body.overlay__active::before,
   color: var(--secondary-color) !important;
   border-color: var(--secondary-color);
 }
-@media only screen and (min-width: 1200px) {
+
+@media only screen and (max-width: 768px) {
   .header__menu--link {
-    font-size: 1.5rem;
-    padding: 0 1.2rem;
+    font-size: 0.7rem;
+    padding: 1rem;
   }
 }
 
@@ -4411,7 +4406,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 1200px) {
   .product__card--thumbnail {
-    padding: 2rem 2.5rem;
+    padding: 2rem 2.5rem 0rem;
   }
 }
 .product__card--thumbnail__link {
@@ -4581,6 +4576,11 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--foreground-sub-color);
 }
 
+.rating__review--text-label {
+  font-size: 1.2rem;
+  font-family: var(--inter-fonts);
+  color: black;
+}
 /*
   home three product css
 */
@@ -6357,11 +6357,11 @@ input[type="number"]::-webkit-outer-spin-button {
     12. Footer css 
 */
 .footer__section {
-  padding-top: 5.3rem;
+  padding-top: 0.5rem;
 }
 @media only screen and (max-width: 991px) {
   .footer__section {
-    padding-bottom: 70px;
+    padding-bottom: 1px;
   }
 }
 
@@ -6415,20 +6415,20 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 .footer__widget--desc {
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-bottom: 0;
   color: var(--foreground-sub-color);
 }
 @media only screen and (min-width: 768px) {
   .footer__widget--desc {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 }
 .footer__widget--title {
   margin-bottom: 2.2rem;
   font-weight: 600;
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 2.2rem;
   color: var(--text-white-color);
   font-family: var(--rubik-fonts);
@@ -6436,7 +6436,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 480px) {
   .footer__widget--title {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 @media only screen and (min-width: 576px) {
@@ -6446,7 +6446,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 768px) {
   .footer__widget--title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     line-height: 2.4rem;
     margin-bottom: 1.5rem;
   }

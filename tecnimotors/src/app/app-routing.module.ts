@@ -10,6 +10,8 @@ import { CotizacionComponent } from './homebody/cotizacion/cotizacion.component'
 import { RegistromayoristaComponent } from './homebody/registromayorista/registromayorista.component';
 import { CatalogosComponent } from './homebody/catalogos/catalogos.component';
 import { BlogComponent } from './homebody/blog/blog.component';
+import { HomellantaComponent } from './filterbody/homellanta/homellanta.component';
+
 // Importa las rutas desde app.routes.ts
 export const routes: Routes = [
   {
@@ -30,6 +32,7 @@ export const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full',
   },
+  /*
   {
     path: 'nosotros',
     component: NosotrosComponent,
@@ -54,6 +57,11 @@ export const routes: Routes = [
     path: 'blog',
     component: BlogComponent,
   },
+  { path: 'homellantas',
+   component: HomellantaComponent,
+  },
+  */
+  /*----------------------------------------------------------------------------*/
 ];
 
 @NgModule({

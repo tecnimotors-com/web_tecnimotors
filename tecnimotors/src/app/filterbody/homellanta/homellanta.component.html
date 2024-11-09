@@ -1,0 +1,1027 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+
+<main class="main__content_wrapper">
+    <!-- Start slider section -->
+    <section class="hero__slider--section">
+        <div class="slider__thumbnail--style5 position-relative">
+            <img class="slider__thumbnail--img__style5" src="assets/img/slider/home5-slider-thumb.webp"
+                alt="slider-img">
+            <div class="hero__content--style5 text-center">
+                <!--<h2 class="hero__content--style5__title h1">Comes Width The <br> <span class="text__secondary">Ultimate Protection</span></h2>-->
+            </div>
+            <!-- Start search filter area -->
+            <div class="search__filter--section search__filter--style5">
+                <div class="container">
+                    <div class="section__heading style2 text-center mb-30">
+                        <h2 class="section__heading--maintitle">Busqueda de Llantas</h2>
+                        <p class="section__heading--desc">Filtre sus resultados y asegúrese de encontrar las Medidas que
+                            encajen.</p>
+                    </div>
+                    <div class="search__filter--inner style5">
+                        <form class="search__filter--form__style2 d-flex" action="#">
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field">
+                                    <option selected value="1">Ancho</option>
+                                    <option value="2">80</option>
+                                    <option value="3">130</option>
+                                    <option value="4">110</option>
+                                    <option value="5">90</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field">
+                                    <option selected value="1">Perfil</option>
+                                    <option value="2">80</option>
+                                    <option value="3">70</option>
+                                    <option value="4">90</option>
+                                    <option value="5">90</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field">
+                                    <option selected value="1">Aro</option>
+                                    <option value="2">17</option>
+                                    <option value="3">17M</option>
+                                    <option value="4">18</option>
+                                    <option value="5">18M</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field">
+                                    <option selected value="1">Cocada</option>
+                                    <option value="2">TT902</option>
+                                    <option value="3">GT601</option>
+                                    <option value="4">GT501</option>
+                                    <option value="5">K388</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="select($event)">
+                                    <option selected value="1">Marca</option>
+                                    <option value="2">Dunlop</option>
+                                    <option value="3">Kenda</option>
+                                    <option value="4">Cheng Shin</option>
+                                    <option value="5">Tsk</option>
+                                    <option value="3">Katana</option>
+                                    <option value="4">Wanda</option>
+                                    <option value="5">Maxxis</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field">
+                                    <option selected value="1">Tipo de Uso</option>
+                                    <option value="2">TT</option>
+                                    <option value="3">TL</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--width">
+                                <button class="search__filter--btn primary__btn" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End search filter area -->
+        </div>
+
+    </section>
+    <!-- End slider section -->
+
+    <!-- Start categories section -->
+    <section class="categories__section section--padding">
+        <div class="container">
+            <div class="categories__shop mb-50">
+                <div class="section__heading border-bottom mb-30">
+                    <h2 class="section__heading--maintitle">ENCUENTRA TU <span>NEUMÁTICO</span></h2>
+                </div>
+                <div class="container">
+                    <li class="single__product--action__list">
+                        <a class="single__product--cart__btn"
+                            style="background: var(--secondary-color);color: var(--text-white-color);">
+                            LLANTA PISTA {{ titlellanta }}
+                        </a>
+                    </li>
+                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
+                        swiper-horizontal swiper-pointer-events">
+                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
+                                    [routerLink]="['/detallellanta']">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            TT902
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">TT902</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    80/80-17
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
+                                    [routerLink]="['/detallellanta']">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            GT601
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">GT601 </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    130/70-17M
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
+                                    [routerLink]="['/detallellanta']">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            GT501
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">GT501</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    110/90-18
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
+                                    [routerLink]="['/detallellanta']">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            K388
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">K388</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/90-18M 5
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                            aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-prev" tabindex="0" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <li class="single__product--action__list">
+                        <a class="single__product--cart__btn"
+                            style="background: var(--secondary-color);color: var(--text-white-color);">
+                            LLANTA CROSS {{ titlellanta }}
+                        </a>
+                    </li>
+                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
+                        swiper-horizontal swiper-pointer-events">
+                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            MX51F
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">MX51F</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    80/100-21
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            MX51
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">MX51</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    70/100-19
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            MX11
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">MX11</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    100/90-19
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            K388
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">K388</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/90-18M 5
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                            aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-prev" tabindex="0" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <li class="single__product--action__list">
+                        <a class="single__product--cart__btn"
+                            style="background: var(--secondary-color);color: var(--text-white-color);">
+                            LLANTA TRAIL {{ titlellanta }}
+                        </a>
+                    </li>
+                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
+                        swiper-horizontal swiper-pointer-events">
+                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            D604F
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">D604F</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    250-17 43P
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            D604
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">D604</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/90-17
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            TMX
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">TMX</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    460-17 4PR
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            K460
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">K460</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/100-19M
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                            aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-prev" tabindex="0" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <li class="single__product--action__list">
+                        <a class="single__product--cart__btn"
+                            style="background: var(--secondary-color);color: var(--text-white-color);">
+                            LLANTA ENDURO {{ titlellanta }}
+                        </a>
+                    </li>
+                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
+                        swiper-horizontal swiper-pointer-events">
+                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            D909
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">D909</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    140/80-18 70
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            EN91F
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">EN91F</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/90-21
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            D907
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">D907</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    120/90-18 6
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            D909F
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Caracteristica:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    Llantas de Motocicletas
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Marca:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    DUN
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Cocada:
+                                                </p>
+                                                <p class="rating__review--text-label">D909F</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">
+                                                    90/90-21 54
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                            aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-prev" tabindex="0" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End categories section -->
+
+</main>
+<app-footer></app-footer>

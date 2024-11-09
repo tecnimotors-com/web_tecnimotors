@@ -5561,14 +5561,15 @@ fieldset:disabled .btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15%;
+  width: 8%;
   padding: 0;
-  color: #fff;
+  color:red;
   text-align: center;
   background: 0 0;
   border: 0;
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
+  opacity:1;
+  transition: opacity 0.15s ease;   
+   font-weight: 600;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-control-next,
@@ -5580,10 +5581,10 @@ fieldset:disabled .btn {
 .carousel-control-next:hover,
 .carousel-control-prev:focus,
 .carousel-control-prev:hover {
-  color: #fff;
+  color: red;
   text-decoration: none;
   outline: 0;
-  opacity: 0.9;
+  opacity: 1;
 }
 .carousel-control-prev {
   left: 0;

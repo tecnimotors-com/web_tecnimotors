@@ -44,5 +44,218 @@
 </div>
 <!-- End preloader -->
 <app-header></app-header>
-<p>registromayorista works!</p>
+<div class="container">
+    <div class="page-container">
+        <br>
+        <h2 class="text-center">Registro Mayoristas</h2>
+        <div class="rte">
+
+            <style>
+                #formulario {
+                    max-width: 600px;
+                    margin: auto;
+                    margin-top: 20px;
+                    font-size: 16px;
+                    border-color: #CFCFCF;
+                }
+
+                .form-control {
+                    border-radius: 0.5rem !important;
+                    border-color: #CFCFCF;
+                }
+
+                input,
+                textarea {
+                    font-size: 16px !important;
+                    border-radius: 0.5rem !important;
+                    border-color: #CFCFCF;
+                }
+
+                select {
+                    font-size: 15px !important;
+                    border-radius: 0.5rem !important;
+                    color: black;
+                    border-color: #C6C6C6;
+                }
+
+                .subtitle {
+                    font-size: 16px;
+                    margin-top: 10px;
+                }
+
+                h1 {
+                    text-align: center;
+                }
+
+                span.required {
+                    color: rgb(255, 49, 49);
+                }
+            </style>
+            <p class="subtitle text-muted text-center">
+                Ingrese sus datos, para que uno de nuestros vendedores se
+                contacte con Ud. y complete el registro
+            </p>
+            <!--<form action="codigo.php" method="POST" style="width:35%;margin:0 auto;">-->
+            <form id="formulario" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-sm-4  mb-4">
+                        <label class="form-label" for="txtnombre">
+                            Nombres
+                            <span class="required">* </span>
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtnombre"
+                            id="txtnombre">
+                        <div class="alert alert-danger" *ngIf="showAlert==false" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> Nombres
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtapepater">
+                            Apellido Paterno
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtapepater" id="txtapepater"
+                            required="true">
+                    </div>
+                    <div class="col-sm-4  mb-4">
+                        <label class="form-label" for="txtapemater">
+                            Apellido Materno
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtapemater" id="txtapemater">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6  mb-4">
+                        <label class="form-label" for="txtcelular">
+                            Celular
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtcelular" id="txtcelular">
+                    </div>
+                    <div class="col-sm-6  mb-4">
+                        <label class="form-label" for="txttelefijo">
+                            Teléfono Fijo
+                        </label>
+                        <input class="form-control" type="text" formControlName="txttelefijo" id="txttelefijo">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="txtcorreo">
+                        Correo
+                        <span class="required">*</span>
+                    </label>
+                    <input class="form-control" type="text" formControlName="txtcorreo" id="txtcorreo">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtruc">
+                            Ruc
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtruc" id="txtruc">
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtrazon">
+                            Razon Social
+                        </label>
+                        <input class="form-control" type="text" formControlName="txtrazon" id="txtrazon">
+                    </div>
+
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="txtdireccion">
+                        Dirección
+                        <span class="required">*</span>
+                    </label>
+                    <textarea class="form-control" type="text" formControlName="txtdireccion" id="txtdireccion" rows="2"
+                        cols="30"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtdepa">
+                            Departamento
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" onchange="obtenerProvincias(this)" formControlName="txtdepa"
+                            id="txtdepa">
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtpro">
+                            Provincia
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" onchange="obtenerDistritos(this)" formControlName="txtpro"
+                            id="txtpro">
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtdis">
+                            Distrito
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" onchange="obtenertodo(this)" formControlName="txtdis" id="txtdis">
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtfecnac">
+                            Fecha de Nacimiento:
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="date" formControlName="txtfecnac" id="txtfecnac">
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="genero">
+                            Género:
+                            <input type="text" name="txtgenero" id="genero" hidden>
+                        </label>
+                        <div style="display: inline-flex; margin-right: 2rem;">
+                            <input value="masculino" type="radio" formControlName="txtgenero" id="txthombre">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txthombre"> Masculino
+                            </label>
+                        </div>
+                        <div style="display: inline-flex;">
+                            <input value="femenino" type="radio" formControlName="txtgenero" id="txtmujer">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txtmujer"> Femenino </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <label for="txtestado">estado</label>
+                    <input class="form-control" type="text" name="txtestado" id="txtestado">
+                </div>
+                <div class="form-group" hidden>
+                    <label for="txtfuente">Fuente</label>
+                    <input class="form-control" type="text" name="txtfuente" id="txtfuente">
+                </div>
+                <div class="form-group">
+                    <label for="txtcoment">Comentario</label>
+                    <textarea placeholder="Comentario..." class="form-control" rows="5" cols="30"
+                        formControlName="txtcoment" id="txtcoment"></textarea>
+                </div>
+                <div class="form-check mb-4">
+                    <div class="form-group" id="checkbox-value">
+                    </div>
+                    <label for="txtcheck"></label>
+                    <input value="false" class="inline checkbox" type="checkbox" formControlName="txtcheck"
+                        id="txtcheck">
+                    <label class="form-check-label" for="txtauth">
+                        Autorizo a Tecnimotors al tratamiento de mis datos personales para que pueda
+                        hacerme llegar por cualquier vía información sobre acciones formativas, iniciativas o
+                        servicios que el centro ponga en marcha y que puedan resultar de mi interés.
+                    </label>
+                    <input type="text" name="txtauth" id="txtauth" hidden>
+                </div>
+                <button style="width: 100%;font-size: 16px !important;border-radius: 0.5rem !important;"
+                    class="btn btn-primary" type="submit">
+                    Registrarse
+                </button>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
 <app-footer></app-footer>

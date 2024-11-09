@@ -3,11 +3,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
   selector: 'app-cotizacion',
   templateUrl: './cotizacion.component.html',
-  styleUrls: ['./cotizacion.component.css']
+  styleUrls: ['./cotizacion.component.css'],
 })
 export class CotizacionComponent implements OnInit, OnDestroy {
-  
   ngOnInit(): void {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
     this.initializePreLoader();
   }
 

@@ -1,7 +1,7 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { SvgIconRegistryService } from 'angular-svg-icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, DatePipe } from '@angular/common';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { HomebodyModule } from './homebody/homebody.module';
+import { FilterbodyModule } from './filterbody/filterbody.module';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,12 @@ import { HomebodyModule } from './homebody/homebody.module';
     FormsModule,
     HeaderModule,
     HomebodyModule,
+    FilterbodyModule,
     FooterModule,
+    CommonModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'app-nosotros',
-  templateUrl: './nosotros.component.html',
-  styleUrls: ['./nosotros.component.css'],
+  selector: 'app-detallellanta',
+  templateUrl: './detallellanta.component.html',
+  styleUrls: ['./detallellanta.component.css'],
 })
-export class NosotrosComponent implements OnInit, OnDestroy {
+export class DetallellantaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     setTimeout(() => {
       window.scrollTo(0, 0);

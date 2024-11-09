@@ -48,15 +48,16 @@
     <section class="hero__slider--section">
         <!-- Carousel -->
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner" style="background-image: url('../../assets/img/banner/tecnimotors/FONDO-1.jpg');">
+            <div class="carousel-inner"
+                style="background-image: url('../../assets/img/banner/tecnimotors/FONDO-1.jpg')">
                 <div class="carousel-item active" style="transition: transform 0.5s ease;">
-                    <img [lazyLoad]="src1" class="d-block w-100" style="max-width: 100%; height: auto;">
+                    <img [src]="src1" class="d-block w-100" style="max-width: 100%; height: auto;">
                 </div>
                 <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
-                    <img [lazyLoad]="src2" class="d-block w-100" style="max-width: 100%; height: auto;">
+                    <img [src]="src2" class="d-block w-100" style="max-width: 100%; height: auto;">
                 </div>
                 <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
-                    <img [lazyLoad]="src3" class="d-block w-100" style="max-width: 100%; height: auto;">
+                    <img [src]="src3" class="d-block w-100" style="max-width: 100%; height: auto;">
                 </div>
             </div>
             <!-- Left and right controls/icons -->
@@ -136,9 +137,15 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
-                            <div class="col">
+                            <div class="col" *ngFor="let logo of logos">
+                                <a [routerLink]="logo.route">
+                                    <img [src]="logo.src" alt="Logo" />
+                                </a>
+                                <!--
                                 <img src="../../assets/img/logo/logotecnimotors/RTM.jpg">
+                                -->
                             </div>
+                            <!--
                             <div class="col">
                                 <img src="../../assets/img/logo/logotecnimotors/TSK.jpg">
                             </div>
@@ -157,6 +164,7 @@
                             <div class="col">
                                 <img src="../../assets/img/logo/logotecnimotors/WANDA.jpg">
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>

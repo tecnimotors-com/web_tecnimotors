@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
@@ -10,7 +9,6 @@ import { RegistromayoristaComponent } from './registromayorista/registromayorist
 import { CatalogosComponent } from './catalogos/catalogos.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomebodyComponent } from './homebody.component';
-import { LlantasComponent } from './llantas/llantas.component';
 /*----------------------------*/
 import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
@@ -44,10 +42,6 @@ const routes: Routes = [
         path: 'blog',
         component: BlogComponent,
       },
-      {
-        path: 'llantaF',
-        component: LlantasComponent,
-      },
     ],
   },
 ];
@@ -61,7 +55,6 @@ const routes: Routes = [
     RegistromayoristaComponent,
     CatalogosComponent,
     BlogComponent,
-    LlantasComponent,
   ],
   imports: [
     FormsModule,
@@ -69,6 +62,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     HeaderModule,
     FooterModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    HomebodyComponent,
+    NosotrosComponent,
+    CategoriaComponent,
+    CotizacionComponent,
+    RegistromayoristaComponent,
+    CatalogosComponent,
+    BlogComponent,
   ],
 })
 export class HomebodyModule {}

@@ -6,8 +6,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent  implements OnInit, OnDestroy {
-  
   ngOnInit(): void {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
     this.initializePreLoader();
   }
 

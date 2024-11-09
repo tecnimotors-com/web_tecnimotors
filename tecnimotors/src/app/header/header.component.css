@@ -1,0 +1,122 @@
+/* Móviles pequeños */
+@media only screen and (max-width: 479px) {
+  .main__logo--img {
+    font-size: 14px;
+    max-width: 60%;
+  }
+  .offcanvas__header--menu__open {
+    color: white;
+    /*transition: position 0.3s ease; */ /* Transición suave */
+  }
+
+  .fixed-position {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ajusta según sea necesario */
+  }
+
+  .absolute-position {
+    position: absolute;
+    top: 0; /* Ajusta según sea necesario */
+    left: 0; /* Ajusta según sea necesario */
+    width: 100%; /* Ajusta según sea necesario */
+  }
+
+  .container-fluid {
+    --offset-fluid: 4.5rem;
+    padding-right: var(--offset-fluid);
+    padding-left: var(--offset-fluid);
+  }
+  .header__menu--link {
+    padding: 1rem;
+  }
+}
+
+/* Móviles grandes */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .main__logo--img {
+    font-size: 15px;
+  }
+}
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .main__logo--img {
+    font-size: 16px;
+  }
+}
+
+/* Laptops y Escritorios (pequeños) */
+@media only screen and (min-width: 1025px) and (max-width: 1150px) {
+  .main__logo--img {
+    font-size: 17px;
+    max-width: 40%;
+  }
+}
+@media only screen and (min-width: 1151px) and (max-width: 1280px) {
+  .main__logo--img {
+    font-size: 17px;
+    max-width: 45%;
+  }
+}
+/* Laptops y Escritorios (grandes) */
+@media only screen and (min-width: 1281px) and (max-width: 1549px) {
+  .main__logo--img {
+    font-size: 18px;
+    max-width: 50%;
+  }
+}
+@media only screen and (min-width: 1550px) and (max-width: 1749px) {
+  .main__logo--img {
+    font-size: 20px;
+    max-width: 60%;
+  }
+  .header__menu--link {
+    font-size: 11px;
+    padding: 0.8rem;
+  }
+  .header__menu--items {
+    align-content: center;
+    position: relative;
+  }
+}
+@media only screen and (min-width: 1750px) and (max-width: 1920px) {
+  .main__logo--img {
+    font-size: 20px;
+    max-width: 65%;
+  }
+  .header__menu--link {
+    font-size: 12px;
+    padding: 1rem;
+  }
+  .header__menu--items {
+    align-content: center;
+    position: relative;
+  }
+}
+
+@media only screen and (min-width: 1921px) {
+    .main__logo--img {
+      font-size: 20px;
+      max-width: 65%;
+    }
+    .header__menu--link {
+      font-size: 12px;
+      padding: 1rem;
+    }
+    .header__menu--items {
+      align-content: center;
+      position: relative;
+    }
+  }
+
+/* Pantallas grandes */
+/*
+@media only screen and (min-width: 1441px) {
+  .main__logo--img {
+    font-size: 20px;
+    max-width: 80%;
+  }
+}
+*/
