@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@ng-select/ng-select": "^13.9.1",
     "angular-svg-icon": "^18.0.2",
     "glob": "^11.0.0",
     "inflight": "^1.0.6",

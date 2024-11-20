@@ -13,6 +13,8 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { HomebodyModule } from './homebody/homebody.module';
 import { FilterbodyModule } from './filterbody/filterbody.module';
+import { provideHttpClient } from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,9 @@ import { FilterbodyModule } from './filterbody/filterbody.module';
     FooterModule,
     CommonModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

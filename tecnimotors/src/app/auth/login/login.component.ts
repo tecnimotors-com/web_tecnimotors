@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
     this.initializePreLoader();
   }
 
@@ -56,5 +60,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (preloaderWrapper) {
       preloaderWrapper.classList.add('loaded');
     }
-  }
+  } 
 }

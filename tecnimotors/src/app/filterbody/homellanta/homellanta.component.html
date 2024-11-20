@@ -64,6 +64,7 @@
                     </div>
                     <div class="search__filter--inner style5">
                         <form class="search__filter--form__style2 d-flex" action="#">
+                            <!--
                             <div class="search__filter--select select search__filter--width">
                                 <select class="search__filter--select__field">
                                     <option selected value="1">Ancho</option>
@@ -82,41 +83,72 @@
                                     <option value="5">90</option>
                                 </select>
                             </div>
+                            -->
+                            <!--search__filter--select select search__filter--width-->
+                            <!--class="search__filter--select__field"-->
+                            <div>
+                                <ng-select [items]="listinicio" bindLabel="ancho" bindValue="ancho" name="marca"
+                                    [(ngModel)]="txtanchoperfil" placeholder="ancho y Perfil" (change)="inputfiel()">
+                                </ng-select>
+                            </div>
+                            <div>
+                                <input class="search__filter--select__field" name="marca" type="text"
+                                    style="cursor: text !important;" [(ngModel)]="txtanchoperfil"
+                                    placeholder="ancho y Perfil" (change)="inputfiel()">
+                            </div>
+
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Aro</option>
-                                    <option value="2">17</option>
-                                    <option value="3">17M</option>
-                                    <option value="4">18</option>
-                                    <option value="5">18M</option>
+                                <style>
+                                    .search__filter--select__field {
+                                        border: 2px solid transparent;
+                                        transition: border-color 0.5s ease, box-shadow 0.5s ease;
+                                    }
+
+                                    .loading {
+                                        border-color: red;
+                                        box-shadow: 0 0 10px red;
+                                    }
+
+                                    .success {
+                                        border-color: green;
+                                        box-shadow: 0 0 10px green;
+                                    }
+
+                                    .hidden {
+                                        display: none;
+                                    }
+                                </style>
+                                <select class="search__filter--select__field"
+                                    [ngClass]="{'loading': loading, 'success': success}" [(ngModel)]="selectedCocada"
+                                    (change)="SelectCocada()" name="selectcodada">
+                                    <option value="" [selected]="true" disabled>Cocada</option>
+                                    <option *ngFor="let cocada of listcocada" [value]="cocada">{{ cocada }}</option>
                                 </select>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Cocada</option>
-                                    <option value="2">TT902</option>
-                                    <option value="3">GT601</option>
-                                    <option value="4">GT501</option>
-                                    <option value="5">K388</option>
+                                <select class="search__filter--select__field"
+                                    [ngClass]="{'loading': loading2, 'success': success2}" (change)="SelectMarca()"
+                                    [(ngModel)]="txtModelo" name="modelo">
+                                    <option value="" [selected]="true" disabled>Marca</option>
+                                    <option *ngFor="let marca of listmarca" [value]="marca">{{ marca }}</option>
+                                    <!--
+                                    <option selected value="Marca">Marca</option>
+                                    <option value="DUN">Dunlop</option>
+                                    <option value="KENDA">Kenda</option>
+                                    <option value="CHENG SHIN">Cheng Shin</option>
+                                    <option value="TSK">Tsk</option>
+                                    <option value="KATANA">Katana</option>
+                                    <option value="WANDA">Wanda</option>
+                                    <option value="MAXXIS">Maxxis</option>
+                                    -->
                                 </select>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" (change)="select($event)">
-                                    <option selected value="1">Marca</option>
-                                    <option value="2">Dunlop</option>
-                                    <option value="3">Kenda</option>
-                                    <option value="4">Cheng Shin</option>
-                                    <option value="5">Tsk</option>
-                                    <option value="3">Katana</option>
-                                    <option value="4">Wanda</option>
-                                    <option value="5">Maxxis</option>
-                                </select>
-                            </div>
-                            <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Tipo de Uso</option>
-                                    <option value="2">TT</option>
-                                    <option value="3">TL</option>
+                                <select class="search__filter--select__field"
+                                    [ngClass]="{'loading': loading3, 'success': success3 }" [(ngModel)]="txttipouso"
+                                    name="tipouso">
+                                    <option value="" [selected]="true" disabled>Tipo de Uso</option>
+                                    <option *ngFor="let tipouso of listtipouso" [value]="tipouso">{{ tipouso }}</option>
                                 </select>
                             </div>
                             <div class="search__filter--width">
@@ -131,6 +163,100 @@
 
     </section>
     <!-- End slider section -->
+
+
+
+    <!-- Start categories section -->
+    <section class="categories__section section--padding">
+        <div class="container">
+            <div class="categories__shop mb-50">
+                <div class="section__heading border-bottom mb-30">
+                    <h2 class="section__heading--maintitle">ENCUENTRA TU <span>NEUMÁTICO</span></h2>
+                </div>
+                <div class="container">
+                    <li class="single__product--action__list">
+                        <a class="single__product--cart__btn"
+                            style="background: var(--secondary-color);color: var(--text-white-color);">
+                            <!--{{item.descripcion}}-->
+                        </a>
+                    </li>
+                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
+                        swiper-horizontal swiper-pointer-events">
+                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                            <div class="swiper-slide" style="width: 280px; margin-right: 30px;"
+                                *ngFor="let item of listarticulo">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <div class="product__card--thumbnail">
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                        </a>
+                                    </div>
+                                    <div class="product__card--content">
+                                        <h3 style="text-align: center;">
+                                            {{item.cocada}}
+                                        </h3>
+                                        <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    medida:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.marca |uppercase}}</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Ancho:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.ancho}}</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Perfil:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.perfil}}</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Aro:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.aro}}</p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Tipo de Uso:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.tipouso}}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                            aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper__nav--btn swiper-button-prev" tabindex="0" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class=" -chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- End categories section -->
+
 
     <!-- Start categories section -->
     <section class="categories__section section--padding">
@@ -151,8 +277,8 @@
                         <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
 
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
-                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
-                                    [routerLink]="['/detallellanta']">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -199,8 +325,8 @@
                                 </div>
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
-                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
-                                    [routerLink]="['/detallellanta']">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -247,8 +373,8 @@
                                 </div>
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
-                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
-                                    [routerLink]="['/detallellanta']">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -295,8 +421,8 @@
                                 </div>
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
-                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;"
-                                    [routerLink]="['/detallellanta']">
+                                <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
+                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -361,6 +487,8 @@
                         </div>
                         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                     </div>
+
+
                 </div>
                 <div class="container">
                     <li class="single__product--action__list">
@@ -1024,4 +1152,5 @@
     <!-- End categories section -->
 
 </main>
+
 <app-footer></app-footer>

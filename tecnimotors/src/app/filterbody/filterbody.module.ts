@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-/*----------------------------*/
-import { HeaderModule } from '../header/header.module';
-import { FooterModule } from '../footer/footer.module';
 /*-----------------------------------------------*/
 import { FilterbodyComponent } from './filterbody.component';
 import { HomellantaComponent } from './homellanta/homellanta.component';
 import { DetallellantaComponent } from './detallellanta/detallellanta.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { HeaderModule } from "../header/header.module";
+import { FooterModule } from '../footer/footer.module';
 
 const routes: Routes = [
   {
@@ -28,15 +28,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FilterbodyComponent, HomellantaComponent,DetallellantaComponent],
+  declarations: [
+    FilterbodyComponent,
+    HomellantaComponent,
+    DetallellantaComponent,
+  ],
   imports: [
     FormsModule,
     CommonModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    HeaderModule,
-    FooterModule,
     ReactiveFormsModule,
-  ],
-  exports: [FilterbodyComponent, HomellantaComponent,DetallellantaComponent],
+    NgSelectModule,
+    HeaderModule,
+    FooterModule
+],
+  exports: [FilterbodyComponent, HomellantaComponent, DetallellantaComponent],
 })
 export class FilterbodyModule {}

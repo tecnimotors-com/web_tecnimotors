@@ -1,0 +1,54 @@
+[
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetAllFiltroMarcaCocada",
+    "RelativePath": "api/MaestroArticulo/GetAllFiltroMarcaCocada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trform",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFormvalue",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetAllSinFiltroArticulo",
+    "RelativePath": "api/MaestroArticulo/GetAllSinFiltroArticulo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trfrom",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.Trfrom",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetArticulos",
+    "RelativePath": "api/MaestroArticulo/GetArticulos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetMarca",
+    "RelativePath": "api/MaestroArticulo/GetMarca",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
