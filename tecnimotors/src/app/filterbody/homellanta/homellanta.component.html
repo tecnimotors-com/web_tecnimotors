@@ -46,6 +46,9 @@
 <app-header></app-header>
 
 <main class="main__content_wrapper">
+    <style>
+
+    </style>
     <!-- Start slider section -->
     <section class="hero__slider--section">
         <div class="slider__thumbnail--style5 position-relative">
@@ -88,36 +91,18 @@
                             <!--class="search__filter--select__field"-->
                             <div>
                                 <ng-select [items]="listinicio" bindLabel="ancho" bindValue="ancho" name="marca"
-                                    [(ngModel)]="txtanchoperfil" placeholder="ancho y Perfil" (change)="inputfiel()">
+                                    style="background-color: white !important;" class="search__filter--select__field"
+                                    [(ngModel)]="txtanchoperfil" (change)="inputfiel()">
                                 </ng-select>
                             </div>
+                            <!--
                             <div>
                                 <input class="search__filter--select__field" name="marca" type="text"
                                     style="cursor: text !important;" [(ngModel)]="txtanchoperfil"
                                     placeholder="ancho y Perfil" (change)="inputfiel()">
                             </div>
-
+                            -->
                             <div class="search__filter--select select search__filter--width">
-                                <style>
-                                    .search__filter--select__field {
-                                        border: 2px solid transparent;
-                                        transition: border-color 0.5s ease, box-shadow 0.5s ease;
-                                    }
-
-                                    .loading {
-                                        border-color: red;
-                                        box-shadow: 0 0 10px red;
-                                    }
-
-                                    .success {
-                                        border-color: green;
-                                        box-shadow: 0 0 10px green;
-                                    }
-
-                                    .hidden {
-                                        display: none;
-                                    }
-                                </style>
                                 <select class="search__filter--select__field"
                                     [ngClass]="{'loading': loading, 'success': success}" [(ngModel)]="selectedCocada"
                                     (change)="SelectCocada()" name="selectcodada">
@@ -250,13 +235,17 @@
                         </div>
                         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                     </div>
+                    <!-- Swiper JS -->
+                    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+                    <!-- Initialize Swiper -->
+
                 </div>
 
             </div>
         </div>
     </section>
     <!-- End categories section -->
-
 
     <!-- Start categories section -->
     <section class="categories__section section--padding">

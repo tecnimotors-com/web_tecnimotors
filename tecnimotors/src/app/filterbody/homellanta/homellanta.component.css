@@ -1,0 +1,67 @@
+.ng-dropdown-panel .ng-star-inserted .ng-select-top {
+  background-color: white !important;
+}
+.ng-dropdown-panel .ng-select-top {
+  background-color: white !important;
+}
+ng-select {
+  width: 200px; /* Ajusta el ancho según sea necesario */
+}
+/* Cambia el color de fondo del contenedor de selección */
+.ng-select .ng-select-container {
+  background-color: white !important;
+  color: black; /* Color del texto en el contenedor */
+  height: 40px; /* Ajusta la altura del contenedor */
+}
+
+/* Cambia el color del texto del placeholder */
+.ng-select .ng-select-container .ng-placeholder {
+  color: #999; /* Color del placeholder */
+}
+.ng-select {
+  background-color: white;
+  border: 1px solid #ccc; /* Cambia el color del borde */
+  border-radius: 4px; /* Ajusta el radio del borde */
+  padding: 5px 5px 5px 1.7rem;
+}
+
+.ng-select .ng-dropdown-panel {
+  border: 1px solid #ccc; /* Cambia el color del borde del panel */
+  border-radius: 4px; /* Ajusta el radio del borde */
+  background-color: white !important; /* Color de fondo blanco */
+}
+.ng-dropdown-panel {
+  background-color: white !important; /* Color de fondo blanco */
+  max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+  overflow-y: auto; /* Agrega scroll si es necesario */
+  color: black; /* Color del texto */
+}
+
+.ng-option {
+  background-color: white; /* Color de fondo blanco para cada opción */
+  color: black; /* Color del texto de cada opción */
+  padding: 10px; /* Espaciado interno de cada opción */
+}
+
+.ng-option:hover {
+  background-color: #f0f0f0; /* Color de fondo al pasar el mouse */
+}
+
+.search__filter--select__field {
+  border: 2px solid transparent;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.loading {
+  border-color: red;
+  box-shadow: 0 0 10px red;
+}
+
+.success {
+  border-color: green;
+  box-shadow: 0 0 10px green;
+}
+
+.hidden {
+  display: none;
+}

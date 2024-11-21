@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MaestroarticuloService } from '../../core/service/maestroarticulo.service';
-import { Swiper } from 'swiper';
+import Swiper from 'swiper';
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
 
 @Component({
   selector: 'app-homellanta',
@@ -8,6 +9,65 @@ import { Swiper } from 'swiper';
   styleUrls: ['./homellanta.component.css'],
 })
 export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
+  /*
+  ngAfterViewInit() {
+    const swiper = new Swiper('.product__swiper--activation', {
+      slidesPerView: 1,
+      centeredSlides: false,
+      slidesPerGroupSkip: 1,
+      grabCursor: true,
+      keyboard: {
+        enabled: true,
+      },
+      breakpoints: {
+        769: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+        },
+      },
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  }
+  */
+
+  // Import Swiper and modules
+
+  ngAfterViewInit() {
+    // Now you can use Swiper
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      centeredSlides: false,
+      slidesPerGroupSkip: 4,
+      grabCursor: true,
+      keyboard: {
+        enabled: true,
+      },
+      // Install modules
+      modules: [Navigation, Pagination, Scrollbar],
+      breakpoints: {
+        769: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+        },
+      },
+      speed: 500,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // ...
+    });
+  }
   public titlellanta: string = 'General';
   public listcocada: any[] = [];
   public listmarca: any[] = [];
@@ -28,11 +88,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   public success3 = false;
 
   constructor(private servicesmaestro: MaestroarticuloService) {}
-  ngAfterViewInit() {
-    const swiper = new Swiper('.swiper-container', {
-      // opciones de configuración
-    });
-  }
+
   ngOnInit(): void {
     this.ListadoArticulo();
     setTimeout(() => {
@@ -45,6 +101,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   ListadoArticulo() {
     this.servicesmaestro.getMaestroArticulo().subscribe({
       next: (dtl: any[]) => {
+        console.log(dtl);
         this.listinicio = dtl
           .map((item) => {
             // Acceder al índice 3 para obtener 'cocada'
@@ -225,6 +282,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.servicesmaestro.getAllSinFiltroArticulo(frombody).subscribe({
         next: (dtl: any[]) => {
+          console.log(dtl);
           setTimeout(() => {
             //this.selectedCocada = ;
             this.loading = false;
@@ -237,6 +295,12 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
                   cocada && self.indexOf(cocada) === index
               );
 
+            this.listmarca = dtl
+              .map((item) => item.marcaoriginal)
+              .filter(
+                (cocada, index, self) =>
+                  cocada && self.indexOf(cocada) === index
+              );
             setTimeout(() => {
               this.success = false;
             }, 1000);
