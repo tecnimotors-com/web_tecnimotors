@@ -20,7 +20,7 @@ const routes: Routes = [
         component: HomellantaComponent,
       },
       {
-        path: 'detallellanta',
+        path: 'detallellanta/:id',
         component: DetallellantaComponent,
       },
     ],

@@ -1,6 +1,102 @@
 [
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "AllfiltroPrincipalCocada",
+    "RelativePath": "api/MaestroArticulo/AllfiltroPrincipalCocada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trForm",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "FiltroPrincipal",
+    "RelativePath": "api/MaestroArticulo/FiltroPrincipal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trFrombody",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "FiltroPrincipalAro",
+    "RelativePath": "api/MaestroArticulo/FiltroPrincipalAro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trFrombody",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "FiltroPrincipalCocada",
+    "RelativePath": "api/MaestroArticulo/FiltroPrincipalCocada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trFrombody",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "FiltroPrincipalMarca",
+    "RelativePath": "api/MaestroArticulo/FiltroPrincipalMarca",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trFrombody",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "FiltroPrincipalTU",
+    "RelativePath": "api/MaestroArticulo/FiltroPrincipalTU",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trFrombody",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroArticulo.Model.TrFrombody",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "GetAllFiltroMarcaCocada",
     "RelativePath": "api/MaestroArticulo/GetAllFiltroMarcaCocada",
     "HttpMethod": "POST",
@@ -43,12 +139,59 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetArticulosAsync",
+    "RelativePath": "api/MaestroArticulo/GetArticulosAsync",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetBanner",
+    "RelativePath": "api/MaestroArticulo/GetBanner",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ruta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "GetMarca",
     "RelativePath": "api/MaestroArticulo/GetMarca",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "GetPrincipalAsync",
+    "RelativePath": "api/MaestroArticulo/GetPrincipalAsync/{limit}/{offset}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "limit",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "offset",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

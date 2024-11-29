@@ -1,40 +1,34 @@
-.ng-dropdown-panel .ng-star-inserted .ng-select-top {
-  background-color: white !important;
-}
-.ng-dropdown-panel .ng-select-top {
-  background-color: white !important;
-}
-ng-select {
-  width: 200px; /* Ajusta el ancho según sea necesario */
-}
 /* Cambia el color de fondo del contenedor de selección */
 .ng-select .ng-select-container {
   background-color: white !important;
   color: black; /* Color del texto en el contenedor */
-  height: 40px; /* Ajusta la altura del contenedor */
 }
 
 /* Cambia el color del texto del placeholder */
 .ng-select .ng-select-container .ng-placeholder {
   color: #999; /* Color del placeholder */
+  text-align: center;
 }
+.ng-select .ng-select-container .ng-value-container {
+  padding-left: 10px;
+}
+
 .ng-select {
+  /*width: 200px;*/
   background-color: white;
-  border: 1px solid #ccc; /* Cambia el color del borde */
-  border-radius: 4px; /* Ajusta el radio del borde */
-  padding: 5px 5px 5px 1.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 5px 0px 0rem;
 }
 
 .ng-select .ng-dropdown-panel {
   border: 1px solid #ccc; /* Cambia el color del borde del panel */
   border-radius: 4px; /* Ajusta el radio del borde */
   background-color: white !important; /* Color de fondo blanco */
-}
-.ng-dropdown-panel {
-  background-color: white !important; /* Color de fondo blanco */
-  max-height: 200px; /* Ajusta la altura máxima según sea necesario */
-  overflow-y: auto; /* Agrega scroll si es necesario */
-  color: black; /* Color del texto */
+  opacity: 1 !important;
+  padding-left: 10px !important;
+  border-style: groove !important;
+  margin-top: 5px !important;
 }
 
 .ng-option {
@@ -48,6 +42,7 @@ ng-select {
 }
 
 .search__filter--select__field {
+  -webkit-appearance: auto;
   border: 2px solid transparent;
   transition: border-color 0.5s ease, box-shadow 0.5s ease;
 }
@@ -64,4 +59,37 @@ ng-select {
 
 .hidden {
   display: none;
+}
+.ng-dropdown-panel .ng-star-inserted .ng-select-top {
+  opacity: 1 !important;
+  background-color: white !important;
+  padding-left: 10px !important;
+  border-style: groove !important;
+  margin-top: 5px !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  height: 3rem;
+  padding: 0 10px;
+}
+
+.form-floating > label {
+  margin-bottom: 0px;
+  position: absolute;
+  top: -22px;
+  left: 0;
+  height: auto;
+  width: -webkit-fill-available;
+  padding: 0rem 0.75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  background-color: #f8f8f8;
+  font-size: 13px;
+  color: #0738bc;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  padding-left: 10px !important;
 }

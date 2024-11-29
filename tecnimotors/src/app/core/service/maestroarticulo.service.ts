@@ -9,6 +9,20 @@ export class MaestroarticuloService {
   myurl = environment.apimaestroarticulo;
 
   MaestroArticulo = '/MaestroArticulo/GetArticulos';
+  MaestroArticuloAsync = '/MaestroArticulo/GetArticulosAsync';
+  MaestroPrincipalAsync = '/MaestroArticulo/GetPrincipalAsync';
+
+  FiltroPrincipal = '/MaestroArticulo/FiltroPrincipal';
+  FiltroPrincipalAro = '/MaestroArticulo/FiltroPrincipalAro';
+  FiltroPrincipalCocada = '/MaestroArticulo/FiltroPrincipalCocada';
+  FiltroPrincipalMarca = '/MaestroArticulo/FiltroPrincipalMarca';
+  FiltroPrincipalTU = '/MaestroArticulo/FiltroPrincipalTU';
+
+  /*--------------------------------------------------*/
+  //ALL COCADA
+  AllfiltroPrincipalCocada = '/MaestroArticulo/AllfiltroPrincipalCocada';
+
+  /*--------------------------------------------------*/
   MaestroMarca = '/MaestroArticulo/GetMarca';
   AllSinFiltroArticulo = '/MaestroArticulo/GetAllSinFiltroArticulo';
   AllFiltroMarcaCocada = '/MaestroArticulo/GetAllFiltroMarcaCocada';
@@ -17,6 +31,38 @@ export class MaestroarticuloService {
 
   getMaestroArticulo(): Observable<any> {
     return this.http.get(this.myurl + this.MaestroArticulo);
+  }
+
+  getMaestroArticuloAsync(): Observable<any> {
+    return this.http.get(
+      this.myurl + this.MaestroArticuloAsync 
+    );
+  }
+
+  getMaestroPrincipalAsync(limit: number, offset: number): Observable<any> {
+    return this.http.get(
+      this.myurl + this.MaestroPrincipalAsync + '/' + limit + '/' + offset
+    );
+  }
+
+  getFiltroPrincipal(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.FiltroPrincipal, frombody);
+  }
+
+  getFiltroPrincipalAro(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.FiltroPrincipalAro, frombody);
+  }
+
+  getFiltroPrincipalCocada(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.FiltroPrincipalCocada, frombody);
+  }
+
+  getFiltroPrincipalMarca(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.FiltroPrincipalMarca, frombody);
+  }
+
+  getFiltroPrincipalTU(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.FiltroPrincipalTU, frombody);
   }
 
   getMaestroMarca(): Observable<any> {
@@ -29,5 +75,11 @@ export class MaestroarticuloService {
 
   getAllFiltroMarcaCocada(frombody: any): Observable<any> {
     return this.http.post(this.myurl + this.AllFiltroMarcaCocada, frombody);
+  }
+
+  /*-----------------------------------------------------------------------------*/
+  // ALL COCADA
+  getAllfiltroPrincipalCocada(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.AllfiltroPrincipalCocada, frombody);
   }
 }

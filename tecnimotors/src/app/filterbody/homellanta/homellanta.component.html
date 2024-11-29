@@ -67,77 +67,105 @@
                     </div>
                     <div class="search__filter--inner style5">
                         <form class="search__filter--form__style2 d-flex" action="#">
-                            <!--
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Ancho</option>
-                                    <option value="2">80</option>
-                                    <option value="3">130</option>
-                                    <option value="4">110</option>
-                                    <option value="5">90</option>
-                                </select>
-                            </div>
-                            <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field">
-                                    <option selected value="1">Perfil</option>
-                                    <option value="2">80</option>
-                                    <option value="3">70</option>
-                                    <option value="4">90</option>
-                                    <option value="5">90</option>
-                                </select>
-                            </div>
-                            -->
-                            <!--search__filter--select select search__filter--width-->
-                            <!--class="search__filter--select__field"-->
-                            <div>
-                                <ng-select [items]="listinicio" bindLabel="ancho" bindValue="ancho" name="marca"
-                                    style="background-color: white !important;" class="search__filter--select__field"
-                                    [(ngModel)]="txtanchoperfil" (change)="inputfiel()">
-                                </ng-select>
-                            </div>
-                            <!--
-                            <div>
-                                <input class="search__filter--select__field" name="marca" type="text"
-                                    style="cursor: text !important;" [(ngModel)]="txtanchoperfil"
-                                    placeholder="ancho y Perfil" (change)="inputfiel()">
-                            </div>
-                            -->
-                            <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field"
-                                    [ngClass]="{'loading': loading, 'success': success}" [(ngModel)]="selectedCocada"
-                                    (change)="SelectCocada()" name="selectcodada">
-                                    <option value="" [selected]="true" disabled>Cocada</option>
-                                    <option *ngFor="let cocada of listcocada" [value]="cocada">{{ cocada }}</option>
-                                </select>
+                                <div class="form-floating">
+                                    <ng-select [items]="listinicio" bindValue="anchoperfil" bindLabel="anchoperfil"
+                                        [virtualScroll]="true" style="background-color: white !important;"
+                                        class="search__filter--select__field" [(ngModel)]="txtanchoperfil"
+                                        notFoundText="Sin Resultado" id="lblanchoperfil" name="lblanchoperfil"
+                                        (change)="SelectAnchoPerfil()">
+                                    </ng-select>
+                                    <label for="lblanchoperfil">Ancho y Perfil</label>
+                                </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field"
-                                    [ngClass]="{'loading': loading2, 'success': success2}" (change)="SelectMarca()"
-                                    [(ngModel)]="txtModelo" name="modelo">
-                                    <option value="" [selected]="true" disabled>Marca</option>
-                                    <option *ngFor="let marca of listmarca" [value]="marca">{{ marca }}</option>
+                                <div class="form-floating">
+                                    <ng-select [items]="listaro" bindValue="aro" bindLabel="aro" [virtualScroll]="true"
+                                        style="background-color: white !important;"
+                                        class="search__filter--select__field" [(ngModel)]="txtaro"
+                                        notFoundText="Sin Resultado" (change)="SelectAro()"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="lblaro" name="lblaro">
+                                    </ng-select>
                                     <!--
-                                    <option selected value="Marca">Marca</option>
-                                    <option value="DUN">Dunlop</option>
-                                    <option value="KENDA">Kenda</option>
-                                    <option value="CHENG SHIN">Cheng Shin</option>
-                                    <option value="TSK">Tsk</option>
-                                    <option value="KATANA">Katana</option>
-                                    <option value="WANDA">Wanda</option>
-                                    <option value="MAXXIS">Maxxis</option>
+                                    <select class="search__filter--select__field"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="lblaro" name="lblaro"
+                                        [(ngModel)]="txtaro">
+                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
+                                        <option *ngFor="let aro of listaro" [value]="aro">{{ aro.aro }}</option>
+                                    </select>
                                     -->
-                                </select>
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblaro">Aro</label>
+                                </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field"
-                                    [ngClass]="{'loading': loading3, 'success': success3 }" [(ngModel)]="txttipouso"
-                                    name="tipouso">
-                                    <option value="" [selected]="true" disabled>Tipo de Uso</option>
-                                    <option *ngFor="let tipouso of listtipouso" [value]="tipouso">{{ tipouso }}</option>
-                                </select>
+                                <div class="form-floating">
+                                    <ng-select [items]="listcocada" bindValue="cocada" bindLabel="cocada"
+                                        [virtualScroll]="true" style="background-color: white !important;"
+                                        notFoundText="Sin Resultado" class="search__filter--select__field"
+                                        [(ngModel)]="txtcocada" (change)="selectCocada()"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="lblcocada"
+                                        name="lblcocada">
+                                    </ng-select>
+                                    <!--
+                                    <select class="search__filter--select__field"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="lblcocada"
+                                        name="lblcocada" [(ngModel)]="txtcocada">
+                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
+                                        <option *ngFor="let cocada of listcocada" [value]="cocada">{{ cocada.cocada }}
+                                        </option>
+                                    </select>
+                                    -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}"
+                                        for="lblcocada">Cocada</label>
+                                </div>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <ng-select [items]="listmarca" bindValue="marcaoriginal" bindLabel="marcaoriginal"
+                                        [virtualScroll]="true" style="background-color: white !important;"
+                                        notFoundText="Sin Resultado" class="search__filter--select__field"
+                                        [(ngModel)]="txtmarca" (change)="selectMarca()"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="modelo" name="modelo">
+                                    </ng-select>
+                                    <!--
+                                    <select class="search__filter--select__field" [(ngModel)]="txtmarca"
+                                        [ngClass]="{'loading': loading, 'success': success}" name="modelo" id="modelo">
+                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
+                                        <option *ngFor="let marca of listmarca" [value]="marca">{{ marca.marcaoriginal
+                                            }}</option>
+                                    </select>
+                                    -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="modelo">
+                                        Marca
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <ng-select [items]="listtipouso" bindValue="tipouso" bindLabel="tipouso"
+                                        [virtualScroll]="true" style="background-color: white !important;"
+                                        notFoundText="Sin Resultado" class="search__filter--select__field"
+                                        [(ngModel)]="txttipouso" (change)="selectTipoUso()"
+                                        [ngClass]="{'loading': loading, 'success': success}" id="tipouso"
+                                        name="tipouso">
+                                    </ng-select>
+                                    <!--
+                                    <select class="search__filter--select__field" [(ngModel)]="txttipouso"
+                                        name="tipouso" id="tipouso"
+                                        [ngClass]="{'loading': loading,'success': success }">
+                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
+                                        <option *ngFor="let tipouso of listtipouso">{{ tipouso.tipouso }}
+                                        </option>
+                                    </select>
+                                    -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="tipouso">
+                                        Tipo de Uso
+                                    </label>
+                                </div>
                             </div>
                             <div class="search__filter--width">
-                                <button class="search__filter--btn primary__btn" type="submit">Search</button>
+                                <button class="search__filter--btn primary__btn" type="submit"
+                                    (click)="Limpiar()">Limpiar</button>
                             </div>
                         </form>
                     </div>
@@ -149,9 +177,8 @@
     </section>
     <!-- End slider section -->
 
-
-
     <!-- Start categories section -->
+
     <section class="categories__section section--padding">
         <div class="container">
             <div class="categories__shop mb-50">
@@ -163,8 +190,12 @@
                         <a class="single__product--cart__btn"
                             style="background: var(--secondary-color);color: var(--text-white-color);">
                             <!--{{item.descripcion}}-->
+                            {{titleGeneral}} - ancho {{txtanchoperfil.split(' ')[0]}},
+                            perfil {{txtanchoperfil.split(' ')[1]}}, Aro {{txtaro}}, Cocada {{txtcocada}}, Marca
+                            {{txtmarca}}, Tipo Uso {{txttipouso}}
                         </a>
                     </li>
+                    <br>
                     <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
                         swiper-horizontal swiper-pointer-events">
                         <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
@@ -173,8 +204,10 @@
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
+
                                             <img class="product__card--thumbnail__img product__primary--img"
-                                                src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                                src="../../../assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.png"
+                                                alt="product-img" (error)="imagenError($event)">
                                         </a>
                                     </div>
                                     <div class="product__card--content">
@@ -210,14 +243,24 @@
                                                 <p class="rating__review--text">
                                                     Tipo de Uso:
                                                 </p>
-                                                <p class="rating__review--text-label">{{item.tipouso}}</p>
+                                                <p class="rating__review--text-label">
+                                                    {{item.tipouso==''?'No Tiene':item.tipouso}}
+                                                </p>
+                                            </li>
+                                            <li class="d-flex">
+                                                <button class="single__product--cart__btn"
+                                                    style="background: var(--secondary-color);margin-top: 10px;
+                                                    color: var(--text-white-color);border: var(--secondary-color) solid 1px;"
+                                                    [routerLink]="['/detallellanta', item.id]">
+                                                    Ver Detalle
+                                                </button>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper__nav--btn swiper-button-next" tabindex="0" role="button"
+                        <div class=" swiper__nav--btn swiper-button-next" tabindex="0" role="button"
                             aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -233,6 +276,8 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-scrollbar"></div>
                         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                     </div>
                     <!-- Swiper JS -->
@@ -245,9 +290,12 @@
             </div>
         </div>
     </section>
+
     <!-- End categories section -->
 
     <!-- Start categories section -->
+
+    <!--
     <section class="categories__section section--padding">
         <div class="container">
             <div class="categories__shop mb-50">
@@ -267,7 +315,6 @@
 
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
-                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -315,7 +362,6 @@
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
-                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -363,7 +409,6 @@
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
-                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -411,7 +456,6 @@
                             </div>
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;">
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
-                                    <!-- [routerLink]="['/detallellanta']">-->
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block">
                                             <img class="product__card--thumbnail__img product__primary--img"
@@ -1137,7 +1181,9 @@
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+        -->
+
     <!-- End categories section -->
 
 </main>

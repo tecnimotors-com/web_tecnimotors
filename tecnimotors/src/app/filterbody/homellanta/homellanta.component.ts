@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MaestroarticuloService } from '../../core/service/maestroarticulo.service';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
@@ -7,6 +13,7 @@ import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
   selector: 'app-homellanta',
   templateUrl: './homellanta.component.html',
   styleUrls: ['./homellanta.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   /*
@@ -41,55 +48,78 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   */
 
   // Import Swiper and modules
+  public swiper: any;
 
   ngAfterViewInit() {
     // Now you can use Swiper
-    const swiper = new Swiper('.swiper', {
-      slidesPerView: 1,
-      centeredSlides: false,
+    this.swiper = new Swiper('.swiper', {
       slidesPerGroupSkip: 4,
-      grabCursor: true,
       keyboard: {
         enabled: true,
       },
-      // Install modules
-      modules: [Navigation, Pagination, Scrollbar],
       breakpoints: {
         769: {
           slidesPerView: 4,
           slidesPerGroup: 4,
         },
       },
+
+      slidesPerView: 1,
+      centeredSlides: false,
+      grabCursor: true,
+      modules: [Navigation, Pagination, Scrollbar],
       speed: 500,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      // ...
+      scrollbar: {
+        el: '.swiper-scrollbar',
+        hide: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'fraction',
+        clickable: true,
+      },
     });
   }
+
+  public titleGeneral: string = 'General';
   public titlellanta: string = 'General';
+  public listaro: any[] = [];
   public listcocada: any[] = [];
   public listmarca: any[] = [];
   public listtipouso: any[] = [];
   public listarticulo: any[] = [];
-  public listinicio: any[] = [];
 
-  public txtModelo: string = '';
-  public selectedCocada: string = '';
-  public txtanchoperfil: string = '';
+  public txtaro: string = '';
+  public txtcocada: string = '';
+  public txtmarca: string = '';
   public txttipouso: string = '';
 
   public loading = false;
   public success = false;
-  public loading2 = false;
-  public success2 = false;
-  public loading3 = false;
-  public success3 = false;
+
+  public limit = 2000;
+  public offset = 0;
+  public listinicio: any[] = [];
+  public txtanchoperfil: string = '';
+  public loadingperfilancho = false;
+
+  public listasPorMarca: any[] = [];
+
+  public defaultImage: string =
+    '../../../assets/img/product/main-product/product1.webp';
 
   constructor(private servicesmaestro: MaestroarticuloService) {}
 
-  ngOnInit(): void {
+  public imagenError(event: any) {
+    let ruta = this.defaultImage;
+    event.target.src = ruta;
+  }
+
+  ngOnInit() {
     this.ListadoArticulo();
     setTimeout(() => {
       window.scrollTo(0, 0);
@@ -99,16 +129,16 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ListadoArticulo() {
-    this.servicesmaestro.getMaestroArticulo().subscribe({
+    if (this.loadingperfilancho) return;
+    this.loadingperfilancho = true;
+
+    this.servicesmaestro.getMaestroArticuloAsync().subscribe({
       next: (dtl: any[]) => {
-        console.log(dtl);
-        this.listinicio = dtl
-          .map((item) => {
-            // Acceder al índice 3 para obtener 'cocada'
-            const cocada = item.ancho;
-            return cocada; // Eliminar comillas y espacios
-          })
-          .filter((cocada) => cocada);
+        this.listinicio = dtl;
+        this.loadingperfilancho = false;
+      },
+      error: () => {
+        this.loadingperfilancho = false;
       },
     });
   }
@@ -147,169 +177,291 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titlellanta = selectedValue === 'Marca' ? 'General' : selectedValue;
   }
 
-  SelectMarca() {
-    if (this.txtModelo == '') {
-      this.listtipouso = [];
-    } else {
-      this.loading3 = true;
-      this.success3 = false;
-      var buscar = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
-      var cocada = this.selectedCocada == null ? '' : this.selectedCocada;
-      const frombody: any = {
-        value: buscar,
-        cocada: cocada,
-      };
-      if (frombody.cocada == '') {
-        setTimeout(() => {
-          this.loading3 = false;
-          this.success3 = true;
-          this.txtModelo = '';
-          this.listtipouso = [];
-          setTimeout(() => {
-            this.success3 = false;
-          }, 1000);
-        }, 1000);
-      } else {
-        this.servicesmaestro.getAllFiltroMarcaCocada(frombody).subscribe({
-          next: (dtl: any[]) => {
-            setTimeout(() => {
-              //this.selectedCocada = ;
-              this.loading3 = false;
-              this.success3 = true;
-              this.listtipouso = [];
-              this.listtipouso = dtl
-                .map((item) => {
-                  const tipouso = item.tipouso;
-                  return tipouso ? tipouso : 'no tiene';
-                })
-                .filter(
-                  (tipouso, index, self) => self.indexOf(tipouso) === index
-                );
-              setTimeout(() => {
-                this.success3 = false;
-              }, 1000);
-            }, 1000);
-          },
-          error: () => {
-            this.loading3 = false;
-          },
-        });
-      }
-    }
-  }
+  SelectAnchoPerfil() {
+    var anpe = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
+    var ancho = anpe.split(' ')[0] == '--' ? '' : anpe.split(' ')[0];
+    var perfil = anpe.split(' ')[1];
+    var cocada = this.txtcocada == null ? '' : this.txtcocada;
+    var aro = this.txtaro == null ? '' : this.txtaro;
+    var marca = this.txtmarca == null ? '' : this.txtmarca;
+    var tipouso = this.txttipouso == null ? '' : this.txttipouso;
 
-  SelectCocada() {
-    if (this.selectedCocada == '') {
-      this.listmarca = [];
-    } else {
-      this.loading2 = true;
-      this.success2 = false;
-      var buscar = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
-      var cocada = this.selectedCocada == null ? '' : this.selectedCocada;
-      const frombody: any = {
-        value: buscar,
+    if (anpe != '') {
+      this.loading = true;
+      this.success = false;
+      const frombody = {
+        ancho: ancho,
+        perfil: perfil,
+        aro: aro,
         cocada: cocada,
+        marca: marca,
+        tipoUso: tipouso,
       };
-      if (frombody.cocada == '') {
-        setTimeout(() => {
-          this.loading2 = false;
-          this.success2 = true;
-          this.txtModelo = '';
-          this.listmarca = [];
+      this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
+        next: ({
+          listaro,
+          listcocada,
+          listmarca,
+          lisTtipouso,
+          listArticulo,
+        }: any) => {
           setTimeout(() => {
-            this.success2 = false;
-          }, 1000);
-        }, 1000);
-      } else {
-        this.servicesmaestro.getAllFiltroMarcaCocada(frombody).subscribe({
-          next: (dtl: any[]) => {
-            setTimeout(() => {
-              //this.selectedCocada = ;
-              this.loading2 = false;
-              this.success2 = true;
-              this.listmarca = [];
-              this.listarticulo = dtl;
-              this.listmarca = dtl
-                .map((item) => item.marcaoriginal)
-                .filter(
-                  (marca, index, self) => marca && self.indexOf(marca) === index
-                );
-              console.log(this.listarticulo);
-              setTimeout(() => {
-                this.success2 = false;
-              }, 1000);
-            }, 1000);
-          },
-          error: () => {
-            this.loading2 = false;
-          },
-        });
-      }
-    }
-  }
-
-  inputfiel() {
-    this.loading = true;
-    this.success = false;
-    var buscar = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
-    const frombody: any = {
-      value: buscar,
-    };
-    if (frombody.value == '') {
-      this.loading2 = true;
-      this.success2 = false;
-      this.loading3 = true;
-      this.success3 = false;
-      setTimeout(() => {
-        this.loading = false;
-        this.success = true;
-        this.loading2 = false;
-        this.success2 = true;
-        this.loading3 = false;
-        this.success3 = true;
-        this.selectedCocada = '';
-        this.listcocada = [];
-        this.txtModelo = '';
-        this.listmarca = [];
-        this.txttipouso = '';
-        this.listtipouso = [];
-        setTimeout(() => {
-          this.success = false;
-          this.success2 = false;
-          this.success3 = false;
-        }, 1000);
-      }, 1000);
-    } else {
-      this.servicesmaestro.getAllSinFiltroArticulo(frombody).subscribe({
-        next: (dtl: any[]) => {
-          console.log(dtl);
-          setTimeout(() => {
-            //this.selectedCocada = ;
             this.loading = false;
             this.success = true;
-            this.listcocada = [];
-            this.listcocada = dtl
-              .map((item) => item.cocada)
-              .filter(
-                (cocada, index, self) =>
-                  cocada && self.indexOf(cocada) === index
-              );
-
-            this.listmarca = dtl
-              .map((item) => item.marcaoriginal)
-              .filter(
-                (cocada, index, self) =>
-                  cocada && self.indexOf(cocada) === index
-              );
+            this.listaro = listaro;
+            this.listcocada = listcocada;
+            this.listmarca = listmarca;
+            this.listtipouso = lisTtipouso;
+            this.listarticulo = listArticulo;
+            if (this.swiper) {
+              this.swiper.slideTo(0);
+            }
             setTimeout(() => {
               this.success = false;
             }, 1000);
           }, 1000);
         },
-        error: () => {
-          this.loading = false;
+        error: (err) => {
+          console.error('Error al obtener datos:', err);
+          this.loading = false; // Cambia el estado de carga en caso de error
         },
       });
+    } else {
+      this.loading = true;
+      this.success = false;
+
+      setTimeout(() => {
+        this.loading = false;
+        this.success = true;
+        this.listaro = [];
+        this.listcocada = [];
+        this.listmarca = [];
+        this.listtipouso = [];
+        this.listarticulo = [];
+        this.txtanchoperfil = '';
+        this.txtaro = '';
+        this.txtcocada = '';
+        this.txtmarca = '';
+        this.txttipouso = '';
+        this.ListadoArticulo();
+        setTimeout(() => {
+          this.success = false;
+        }, 1000);
+      }, 1000);
     }
+  }
+
+  SelectAro() {
+    var anpe = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
+    var ancho = anpe.split(' ')[0] == '--' ? '' : anpe.split(' ')[0];
+    var perfil = anpe.split(' ')[1];
+    var cocada = this.txtcocada == null ? '' : this.txtcocada;
+    var aro = this.txtaro == null ? '' : this.txtaro;
+    var marca = this.txtmarca == null ? '' : this.txtmarca;
+    var tipouso = this.txttipouso == null ? '' : this.txttipouso;
+
+    this.loading = true;
+    this.success = false;
+    const frombody = {
+      ancho: ancho,
+      perfil: perfil,
+      aro: aro,
+      cocada: cocada,
+      marca: marca,
+      tipoUso: tipouso,
+    };
+    this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
+      next: ({
+        listaro,
+        listcocada,
+        listmarca,
+        lisTtipouso,
+        listArticulo,
+      }: any) => {
+        setTimeout(() => {
+          this.loading = false;
+          this.success = true;
+          this.listaro = listaro;
+          this.listcocada = listcocada;
+          this.listmarca = listmarca;
+          this.listtipouso = lisTtipouso;
+          this.listarticulo = listArticulo;
+          if (this.swiper) {
+            this.swiper.slideTo(0);
+          }
+          setTimeout(() => {
+            this.success = false;
+          }, 1000);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Error al obtener datos:', err);
+        this.loading = false; // Cambia el estado de carga en caso de error
+      },
+    });
+  }
+
+  selectCocada() {
+    var anpe = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
+    var ancho = anpe.split(' ')[0] == '--' ? '' : anpe.split(' ')[0];
+    var perfil = anpe.split(' ')[1];
+    var cocada = this.txtcocada == null ? '' : this.txtcocada;
+    var aro = this.txtaro == null ? '' : this.txtaro;
+    var marca = this.txtmarca == null ? '' : this.txtmarca;
+    var tipouso = this.txttipouso == null ? '' : this.txttipouso;
+
+    this.loading = true;
+    this.success = false;
+    const frombody = {
+      ancho: ancho,
+      perfil: perfil,
+      aro: aro,
+      cocada: cocada,
+      marca: marca,
+      tipoUso: tipouso,
+    };
+    this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
+      next: ({
+        listaro,
+        listcocada,
+        listmarca,
+        lisTtipouso,
+        listArticulo,
+      }: any) => {
+        setTimeout(() => {
+          this.loading = false;
+          this.success = true;
+          this.listaro = listaro;
+          this.listcocada = listcocada;
+          this.listmarca = listmarca;
+          this.listtipouso = lisTtipouso;
+          this.listarticulo = listArticulo;
+          if (this.swiper) {
+            this.swiper.slideTo(0);
+          }
+          setTimeout(() => {
+            this.success = false;
+          }, 1000);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Error al obtener datos:', err);
+        this.loading = false; // Cambia el estado de carga en caso de error
+      },
+    });
+  }
+
+  selectMarca() {
+    var anpe = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
+    var ancho = anpe.split(' ')[0] == '--' ? '' : anpe.split(' ')[0];
+    var perfil = anpe.split(' ')[1];
+    var cocada = this.txtcocada == null ? '' : this.txtcocada;
+    var aro = this.txtaro == null ? '' : this.txtaro;
+    var marca = this.txtmarca == null ? '' : this.txtmarca;
+    var tipouso = this.txttipouso == null ? '' : this.txttipouso;
+
+    this.loading = true;
+    this.success = false;
+    const frombody = {
+      ancho: ancho,
+      perfil: perfil,
+      aro: aro,
+      cocada: cocada,
+      marca: marca,
+      tipoUso: tipouso,
+    };
+    this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
+      next: ({
+        listaro,
+        listcocada,
+        listmarca,
+        lisTtipouso,
+        listArticulo,
+      }: any) => {
+        setTimeout(() => {
+          this.loading = false;
+          this.success = true;
+          this.listaro = listaro;
+          this.listcocada = listcocada;
+          this.listmarca = listmarca;
+          this.listtipouso = lisTtipouso;
+          this.listarticulo = listArticulo;
+          if (this.swiper) {
+            this.swiper.slideTo(0);
+          }
+          setTimeout(() => {
+            this.success = false;
+          }, 1000);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Error al obtener datos:', err);
+        this.loading = false; // Cambia el estado de carga en caso de error
+      },
+    });
+  }
+
+  selectTipoUso() {
+    var anpe = this.txtanchoperfil == null ? '' : this.txtanchoperfil;
+    var ancho = anpe.split(' ')[0] == '--' ? '' : anpe.split(' ')[0];
+    var perfil = anpe.split(' ')[1];
+    var cocada = this.txtcocada == null ? '' : this.txtcocada;
+    var aro = this.txtaro == null ? '' : this.txtaro;
+    var marca = this.txtmarca == null ? '' : this.txtmarca;
+    var tipouso = this.txttipouso == null ? '' : this.txttipouso;
+
+    this.loading = true;
+    this.success = false;
+    const frombody = {
+      ancho: ancho,
+      perfil: perfil,
+      aro: aro,
+      cocada: cocada,
+      marca: marca,
+      tipoUso: tipouso,
+    };
+    this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
+      next: ({
+        listaro,
+        listcocada,
+        listmarca,
+        lisTtipouso,
+        listArticulo,
+      }: any) => {
+        setTimeout(() => {
+          this.loading = false;
+          this.success = true;
+          this.listaro = listaro;
+          this.listcocada = listcocada;
+          this.listmarca = listmarca;
+          this.listtipouso = lisTtipouso;
+          this.listarticulo = listArticulo;
+
+          if (this.swiper) {
+            this.swiper.slideTo(0);
+          }
+          setTimeout(() => {
+            this.success = false;
+          }, 1000);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Error al obtener datos:', err);
+        this.loading = false; // Cambia el estado de carga en caso de error
+      },
+    });
+  }
+
+  Limpiar() {
+    this.listaro = [];
+    this.listcocada = [];
+    this.listmarca = [];
+    this.listtipouso = [];
+    this.listarticulo = [];
+    this.txtanchoperfil = '';
+    this.txtaro = '';
+    this.txtcocada = '';
+    this.txtmarca = '';
+    this.txttipouso = '';
   }
 }
