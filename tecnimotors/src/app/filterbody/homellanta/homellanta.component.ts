@@ -132,7 +132,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.loadingperfilancho) return;
     this.loadingperfilancho = true;
 
-    this.servicesmaestro.getMaestroArticuloAsync().subscribe({
+    this.servicesmaestro.getListArticulosGeneral().subscribe({
       next: (dtl: any[]) => {
         this.listinicio = dtl;
         this.loadingperfilancho = false;
@@ -218,8 +218,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             setTimeout(() => {
               this.success = false;
-            }, 1000);
-          }, 1000);
+            }, 600);
+          }, 600);
         },
         error: (err) => {
           console.error('Error al obtener datos:', err);
@@ -246,8 +246,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.ListadoArticulo();
         setTimeout(() => {
           this.success = false;
-        }, 1000);
-      }, 1000);
+        }, 600);
+      }, 600);
     }
   }
 
@@ -291,8 +291,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           setTimeout(() => {
             this.success = false;
-          }, 1000);
-        }, 1000);
+          }, 600);
+        }, 600);
       },
       error: (err) => {
         console.error('Error al obtener datos:', err);
@@ -341,8 +341,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           setTimeout(() => {
             this.success = false;
-          }, 1000);
-        }, 1000);
+          }, 600);
+        }, 600);
       },
       error: (err) => {
         console.error('Error al obtener datos:', err);
@@ -391,8 +391,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           setTimeout(() => {
             this.success = false;
-          }, 1000);
-        }, 1000);
+          }, 600);
+        }, 600);
       },
       error: (err) => {
         console.error('Error al obtener datos:', err);
@@ -442,8 +442,8 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           setTimeout(() => {
             this.success = false;
-          }, 1000);
-        }, 1000);
+          }, 600);
+        }, 600);
       },
       error: (err) => {
         console.error('Error al obtener datos:', err);
