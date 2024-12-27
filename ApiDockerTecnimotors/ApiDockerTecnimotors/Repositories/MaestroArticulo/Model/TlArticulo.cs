@@ -77,4 +77,37 @@
         public string? Tipouso { get; set; }
         public string? Estado { get; set; }
     }
+
+    public class TlProductoHome
+    {
+        public string? Descripcion_tipo_articulo { get; set; }
+    }
+
+    public class TlCategoriesCamara
+    {
+        public string? Tipo_articulo { get; set; }
+        public string? Descripcion_tipo_articulo { get;set; }
+    }
+
+    public class TlmodeloCamara
+    {
+        public int Id { get; set; }
+        public string? Descripcion_modificada { get; set; }
+    }
+
+    public class TlListCamaraAll
+    {
+        public int Id { get; set; }
+        public string? Codigo { get; set; }
+        public string? Descripcion { get; set; }
+        public string? Unidad_medida { get; set; }
+        public string? Marca { get; set; }
+        public string? Tipo { get; set; }
+        public string? Tipo_articulo { get; set; }
+        public string? Descripcion_tipo_articulo { get; set; }
+        public string? Familia { get; set; }
+        public string? Subfamilia { get; set; }
+        public string? Abreviado { get; set; }
+        public string? Codigo_equivalente { get; set; }
+    }
 }

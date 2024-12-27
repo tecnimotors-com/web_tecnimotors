@@ -66,76 +66,58 @@
                             encajen.</p>
                     </div>
                     <div class="search__filter--inner style5">
-                        <form class="search__filter--form__style2 d-flex" action="#">
+                        <form class="search__filter--form__style2 d-flex">
                             <div class="search__filter--select select search__filter--width">
                                 <div class="form-floating">
                                     <ng-select [items]="listinicio" bindValue="anchoperfil" bindLabel="anchoperfil"
                                         [virtualScroll]="true" style="background-color: white !important;"
                                         class="search__filter--select__field" [(ngModel)]="txtanchoperfil"
-                                        notFoundText="Sin Resultado" id="lblanchoperfil" name="lblanchoperfil"
-                                        (change)="SelectAnchoPerfil()">
+                                        notFoundText="Sin Resultado" (change)="SelectAnchoPerfil()" name="anchoperfil">
                                     </ng-select>
-                                    <label for="lblanchoperfil">Ancho y Perfil</label>
+                                    <!-- [virtualScroll]="true" -->
+                                    <label for="lblanchoperfil">
+                                        Ancho y Perfil
+                                    </label>
                                 </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
                                 <div class="form-floating">
-                                    <ng-select [items]="listaro" bindValue="aro" bindLabel="aro" [virtualScroll]="true"
+                                    <ng-select [items]="listaro" bindValue="aro" bindLabel="aro"
                                         style="background-color: white !important;"
                                         class="search__filter--select__field" [(ngModel)]="txtaro"
                                         notFoundText="Sin Resultado" (change)="SelectAro()"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="lblaro" name="lblaro">
+                                        [ngClass]="{'loading': loading, 'success': success}" name="aro">
                                     </ng-select>
-                                    <!--
-                                    <select class="search__filter--select__field"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="lblaro" name="lblaro"
-                                        [(ngModel)]="txtaro">
-                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
-                                        <option *ngFor="let aro of listaro" [value]="aro">{{ aro.aro }}</option>
-                                    </select>
-                                    -->
-                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblaro">Aro</label>
+                                    <!-- [virtualScroll]="true" -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblaro">
+                                        Aro
+                                    </label>
                                 </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
                                 <div class="form-floating">
                                     <ng-select [items]="listcocada" bindValue="cocada" bindLabel="cocada"
-                                        [virtualScroll]="true" style="background-color: white !important;"
-                                        notFoundText="Sin Resultado" class="search__filter--select__field"
-                                        [(ngModel)]="txtcocada" (change)="selectCocada()"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="lblcocada"
-                                        name="lblcocada">
+                                        style="background-color: white !important;" notFoundText="Sin Resultado"
+                                        class="search__filter--select__field" [(ngModel)]="txtcocada"
+                                        (change)="selectCocada()" [ngClass]="{'loading': loading, 'success': success}"
+                                        name="cocada">
                                     </ng-select>
-                                    <!--
-                                    <select class="search__filter--select__field"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="lblcocada"
-                                        name="lblcocada" [(ngModel)]="txtcocada">
-                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
-                                        <option *ngFor="let cocada of listcocada" [value]="cocada">{{ cocada.cocada }}
-                                        </option>
-                                    </select>
-                                    -->
-                                    <label [ngClass]="{'loading': loading, 'success': success}"
-                                        for="lblcocada">Cocada</label>
+                                    <!-- [virtualScroll]="true" -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblcocada">
+                                        Cocada
+                                    </label>
                                 </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
                                 <div class="form-floating">
                                     <ng-select [items]="listmarca" bindValue="marcaoriginal" bindLabel="marcaoriginal"
-                                        [virtualScroll]="true" style="background-color: white !important;"
-                                        notFoundText="Sin Resultado" class="search__filter--select__field"
-                                        [(ngModel)]="txtmarca" (change)="selectMarca()"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="modelo" name="modelo">
+                                        style="background-color: white !important;" notFoundText="Sin Resultado"
+                                        class="search__filter--select__field" [(ngModel)]="txtmarca"
+                                        (change)="selectMarca()" [ngClass]="{'loading': loading, 'success': success}"
+                                        name="marca">
                                     </ng-select>
-                                    <!--
-                                    <select class="search__filter--select__field" [(ngModel)]="txtmarca"
-                                        [ngClass]="{'loading': loading, 'success': success}" name="modelo" id="modelo">
-                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
-                                        <option *ngFor="let marca of listmarca" [value]="marca">{{ marca.marcaoriginal
-                                            }}</option>
-                                    </select>
-                                    -->
-                                    <label [ngClass]="{'loading': loading, 'success': success}" for="modelo">
+                                    <!-- [virtualScroll]="true" -->
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblmodelo">
                                         Marca
                                     </label>
                                 </div>
@@ -143,22 +125,13 @@
                             <div class="search__filter--select select search__filter--width">
                                 <div class="form-floating">
                                     <ng-select [items]="listtipouso" bindValue="tipouso" bindLabel="tipouso"
-                                        [virtualScroll]="true" style="background-color: white !important;"
-                                        notFoundText="Sin Resultado" class="search__filter--select__field"
-                                        [(ngModel)]="txttipouso" (change)="selectTipoUso()"
-                                        [ngClass]="{'loading': loading, 'success': success}" id="tipouso"
+                                        style="background-color: white !important;" notFoundText="Sin Resultado"
+                                        class="search__filter--select__field" [(ngModel)]="txttipouso"
+                                        (change)="selectTipoUso()" [ngClass]="{'loading': loading, 'success': success}"
                                         name="tipouso">
                                     </ng-select>
-                                    <!--
-                                    <select class="search__filter--select__field" [(ngModel)]="txttipouso"
-                                        name="tipouso" id="tipouso"
-                                        [ngClass]="{'loading': loading,'success': success }">
-                                        <option value="Seleccionar" [selected]="true">Seleccionar</option>
-                                        <option *ngFor="let tipouso of listtipouso">{{ tipouso.tipouso }}
-                                        </option>
-                                    </select>
-                                    -->
-                                    <label [ngClass]="{'loading': loading, 'success': success}" for="tipouso">
+                                    <!-- [virtualScroll]="true" -->
+                                    <label [ngClass]=" {'loading': loading, 'success' : success}" for="tipousoSelect">
                                         Tipo de Uso
                                     </label>
                                 </div>
@@ -196,25 +169,88 @@
                         </a>
                     </li>
                     <br>
-                    <div class="product__section--inner pb-15 product__swiper--activation swiper swiper-initialized 
-                        swiper-horizontal swiper-pointer-events">
-                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                    <div cdiv class="product__section--inner pb-15 product__swiper--activation swiper" #swiperContainer>
+                        <div class="swiper-wrapper" aria-live="polite">
                             <div class="swiper-slide" style="width: 280px; margin-right: 30px;"
-                                *ngFor="let item of listarticulo">
+                                *ngFor="let item of listarticulo  | paginate: { itemsPerPage: itemper, currentPage: p }, let i = index">
                                 <div style=" border: 1px solid var(--border-color);border-radius: 5px;">
                                     <div class="product__card--thumbnail">
-                                        <a class="product__card--thumbnail__link display-block">
-
+                                        <ng-container *ngIf="imageCache[item.codigo] !== undefined; else fallbackImage">
+                                            <a class="product__card--thumbnail__link display-block"
+                                                *ngIf="imageCache[item.codigo]">
+                                                <img class="product__card--thumbnail__img product__primary--img"
+                                                    src="../../../../assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg"
+                                                    alt="product-img" style="width: 253px; height: 380px;">
+                                            </a>
+                                        </ng-container>
+                                        <ng-template #fallbackImage>
+                                            <a class="product__card--thumbnail__link display-block">
+                                                <img class="product__card--thumbnail__img product__primary--img"
+                                                    src="assets/img/product/main-product/product1.webp"
+                                                    alt="product-img" style="width: 253px; height: 380px;">
+                                            </a>
+                                        </ng-template>
+                                        <!--
+                                        <a class="product__card--thumbnail__link display-block"
+                                            *ngIf="imageExists('../../../../assets/img/Imagen/' + item.codigo + '/' + item.codigo + '_1.jpg')">
                                             <img class="product__card--thumbnail__img product__primary--img"
-                                                src="../../../assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg"
-                                                alt="product-img" (error)="imagenError($event)">
+                                                *ngIf="'../../../../assets/img/Imagen/' + item.codigo + '/' + item.codigo + '_1.jpg'==null"
+                                                src="../../../../assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg"
+                                                alt="product-img" style="width: 253px;height: 380px;">
                                         </a>
+                                        <a class="product__card--thumbnail__link display-block">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="../../../../assets/img/product/main-product/product1.webp"
+                                                alt="product-img" style="width: 253px;height: 380px;">
+                                        </a>
+                                        -->
+                                        <!--
+                                        <a class="product__card--thumbnail__link display-block"
+                                            *ngIf="imageExists('assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg')">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg"
+                                                alt="product-img" style="width: 253px;height: 380px;">
+                                        </a>
+                                        <a class="product__card--thumbnail__link display-block"
+                                            *ngIf="!imageExists('assets/img/Imagen/{{item.codigo}}/{{item.codigo}}_1.jpg')">
+                                            <img class="product__card--thumbnail__img product__primary--img"
+                                                src="assets/img/product/main-product/product1.webp" alt="product-img"
+                                                style="width: 253px;height: 380px;">
+                                        </a>
+                                        -->
+                                        <div class="product__media--view__icon"
+                                            style="color: white;color: white;left: 0;top: 0;">
+                                            <a class="product__media--view__icon--link glightbox"
+                                                data-lg-size="480-475-480, 800-791-800, 1406-1390"
+                                                [routerLink]="['/detallellanta', item.id]">
+                                                <svg class="product__items--action__btn--svg"
+                                                    xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443"
+                                                    viewBox="0 0 512 512">
+                                                    <path
+                                                        d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                                                        fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                        stroke-width="32"></path>
+                                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                        stroke-miterlimit="10" stroke-width="32"
+                                                        d="M338.29 338.29L448 448">
+                                                    </path>
+                                                </svg>
+                                                <span class="visually-hidden">product view</span>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="product__card--content">
                                         <h3 style="text-align: center;">
                                             {{item.cocada}}
                                         </h3>
                                         <ul class="rating product__card--rating ">
+                                            <li class="d-flex">
+                                                <p class="rating__review--text">
+                                                    Codigo:
+                                                </p>
+                                                <p class="rating__review--text-label">{{item.codigo |uppercase}}</p>
+                                            </li>
+
                                             <li class="d-flex">
                                                 <p class="rating__review--text">
                                                     medida:
@@ -260,6 +296,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div class=" swiper__nav--btn swiper-button-next" tabindex="0" role="button"
                             aria-label="Next slide" aria-controls="swiper-wrapper-dc6fd167b1799144">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -276,12 +313,16 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </div>
-                        <div class="swiper-pagination"></div>
                         <div class="swiper-scrollbar"></div>
                         <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                        -->
                     </div>
-                    <!-- Swiper JS -->
                     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                    <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                        [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                        nextLabel="Siguiente" [maxSize]="10">
+                    </pagination-controls>
+                    <!-- Swiper JS -->
 
                     <!-- Initialize Swiper -->
 

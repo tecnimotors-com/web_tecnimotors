@@ -3,9 +3,7 @@ using ApiAlmacen.Context;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 using Npgsql;
-using System.Collections;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
 {
@@ -357,6 +355,144 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
 
             var result = await db.QueryFirstOrDefaultAsync<TlDetalleArticulo>(sql, new { });
             return result!;
+        }
+
+        /*------------------ tipo producto camara --------------*/
+        public async Task<IEnumerable<TlCategoriesCamara>> ListCategorieCamara()
+        {
+            var db = DbConnection();
+            var sql = @"
+						SELECT distinct mta.tipo_articulo, mta.descripcion_tipo_articulo
+						FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo
+						where mart.familia != '998' and mart.tipo BETWEEN '06' AND '07' and
+						trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+					   ";
+            return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
+        }
+
+        public async Task<IEnumerable<TlmodeloCamara>> ListModeloCamara(string txtcategoria, string txtmarca)
+        {
+            var db = DbConnection();
+            if (txtcategoria == "0" && txtmarca == "0")
+            {
+                var sql = @"
+							SELECT id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos AS mart
+							WHERE mart.familia != '998' AND mart.tipo BETWEEN '06' AND '07' AND
+							TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+					   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else if (txtcategoria == "0" && txtmarca != "0")
+            {
+                var sql = @"
+							SELECT id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos AS mart
+							WHERE mart.familia != '998' AND mart.tipo BETWEEN '06' AND '07' AND
+							TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.descripcion LIKE '%" + txtmarca + @"%'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else if (txtcategoria != "0" && txtmarca == "0")
+            {
+                var sql = @"
+							SELECT id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos AS mart
+							WHERE mart.familia != '998' AND mart.tipo = '" + txtcategoria + @"' AND
+							TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else if (txtcategoria != "0" && txtmarca != "0")
+            {
+                var sql = @"
+							SELECT id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos AS mart
+							WHERE mart.familia != '998' AND mart.tipo = '" + txtcategoria + @"' AND
+							TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.descripcion LIKE '%" + txtmarca + @"%'
+						  ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+							SELECT id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos AS mart
+							WHERE mart.familia != '998' AND mart.tipo BETWEEN '06' AND '07' AND
+							TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+						  ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<TlListCamaraAll>> ListadoCamaraGeneral(string txtcategoria, string txtmarca)
+        {
+            var db = DbConnection();
+            if (txtcategoria == "0" && txtmarca == "0")
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							where mart.familia != '998' and mart.tipo BETWEEN '06' AND '07' AND
+							trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+            else if (txtcategoria == "0" && txtmarca != "0")
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							where mart.familia != '998' and mart.tipo BETWEEN '06' AND '07' AND
+							trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744' and mart.descripcion like '%" + txtmarca + @"%'
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+
+            else if (txtcategoria != "0" && txtmarca == "0")
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							where mart.familia != '998' and mart.tipo = '" + txtcategoria + @"' and
+							trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+
+            else if (txtcategoria != "0" && txtmarca != "0")
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							where mart.familia != '998' and mart.tipo = '" + txtcategoria + @"' and
+							trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744' AND mart.descripcion like '%" + txtmarca + @"%'
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+
+            else
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							where mart.familia != '998' and mart.tipo BETWEEN '06' AND '07' AND
+							trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
         }
     }
 }

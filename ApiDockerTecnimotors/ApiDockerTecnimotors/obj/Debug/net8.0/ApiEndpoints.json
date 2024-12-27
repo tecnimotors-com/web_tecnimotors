@@ -49,12 +49,64 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoCamaraGeneral",
+    "RelativePath": "api/MaestroArticulo/ListadoCamaraGeneral/{txtcategoria}/{txtmarca}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "txtmarca",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "ListArticulosGeneral",
     "RelativePath": "api/MaestroArticulo/ListArticulosGeneral",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListCategorieCamara",
+    "RelativePath": "api/MaestroArticulo/ListCategorieCamara",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListModeloCamara",
+    "RelativePath": "api/MaestroArticulo/ListModeloCamara/{txtcategoria}/{txtmarca}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "txtmarca",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

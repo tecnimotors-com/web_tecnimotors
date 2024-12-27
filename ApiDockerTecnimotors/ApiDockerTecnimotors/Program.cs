@@ -20,6 +20,7 @@ builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 
 builder.Services.AddScoped<IMaestroArticuloRepository, MaestroArticuloRepository>();
 
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

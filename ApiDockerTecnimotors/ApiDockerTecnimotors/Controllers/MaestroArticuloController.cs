@@ -54,5 +54,27 @@ namespace ApiDockerTecnimotors.Controllers
             var detailArt = await imaestroArticuloRepository.DetalleArticulo(Id);
             return Ok(detailArt);
         }
+
+        /*--------------------Camara----------------------*/
+        [HttpGet("ListCategorieCamara")]
+        public async Task<ActionResult> ListCategorieCamara()
+        {
+            var detailArt = await imaestroArticuloRepository.ListCategorieCamara();
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListModeloCamara/{txtcategoria}/{txtmarca}")]
+        public async Task<ActionResult> ListModeloCamara(string txtcategoria, string txtmarca)
+        {
+            var detailArt = await imaestroArticuloRepository.ListModeloCamara(txtcategoria, txtmarca);
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListadoCamaraGeneral/{txtcategoria}/{txtmarca}")]
+        public async Task<ActionResult> ListadoCamaraGeneral(string txtcategoria, string txtmarca)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoCamaraGeneral(txtcategoria, txtmarca);
+            return Ok(detailArt);
+        }
     }
 }

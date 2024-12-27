@@ -4,11 +4,14 @@ import {
   OnInit,
   AfterViewInit,
   ViewEncapsulation,
+  ElementRef,
+  VERSION,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MaestroarticuloService } from '../../core/service/maestroarticulo.service';
-import Swiper from 'swiper';
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { MaestroarticuloService } from '../../../core/service/maestroarticulo.service';
+import lgZoom from 'lightgallery/plugins/zoom';
+import { BeforeSlideDetail } from 'lightgallery/lg-events';
 
 @Component({
   selector: 'app-detallellanta',
@@ -18,20 +21,15 @@ import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
   encapsulation: ViewEncapsulation.None,
 })
 export class DetallellantaComponent implements OnInit, OnDestroy {
+  /*
+  public swiper: any;
+
+  public swiper2: any;
+  
   ngAfterViewInit() {
-    // Now you can use Swiper
     this.swiper = new Swiper('.swiper', {
-      slidesPerGroupSkip: 4,
-      keyboard: {
-        enabled: true,
-      },
-      breakpoints: {
-        769: {
-          slidesPerView: 4,
-          slidesPerGroup: 4,
-        },
-      },
-      slidesPerView: 1,
+      direction: 'vertical',
+      slidesPerView: 3,
       centeredSlides: false,
       grabCursor: true,
       modules: [Navigation, Pagination, Scrollbar],
@@ -55,12 +53,9 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
       },
     });
   }
+  */
 
   public id: number = 0;
-
-  public swiper: any;
-
-  public swiper2: any;
 
   public Dtlid: number = 0;
   public Dtlcodigoimg: string = '';
@@ -78,10 +73,29 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
   public Dtltipouso: string = '';
   public Dtlestado: string = '';
 
+  public srcimg: string = '';
+  public baseurl: string = '../../../assets/img/Imagen/';
+  public count: number = 1;
+  public blndisable = false;
+
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService
   ) {}
+
+  settings = {
+    counter: false,
+    plugins: [lgZoom],
+  };
+  imageExists(imageUrl: string): boolean {
+    const img = new Image();
+    img.src = imageUrl;
+    return img.complete;
+  }
+  onBeforeSlide = (detail: BeforeSlideDetail): void => {
+    const { index, prevIndex } = detail;
+    console.log(index, prevIndex);
+  };
 
   ngOnInit(): void {
     this.DetailArticulo();
@@ -100,7 +114,6 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
 
     this.servicesmaestro.getDetalleArticulo(this.id).subscribe({
       next: (dtl: any) => {
-        console.log(dtl);
         this.Dtlid = dtl.id;
         this.Dtlcodigoimg = dtl.codigo;
         this.Dtlcodigo = dtl.codigo.slice(-5);
@@ -116,6 +129,9 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
         this.Dtlaro = dtl.aro;
         this.Dtltipouso = dtl.tipouso;
         this.Dtlestado = dtl.estado;
+
+        this.srcimg =
+          this.baseurl + this.Dtlcodigoimg + '/' + this.Dtlcodigoimg + '_1.jpg';
       },
     });
   }
@@ -142,6 +158,39 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
     const preloaderWrapper = document.getElementById('preloader');
     if (preloaderWrapper) {
       preloaderWrapper.classList.add('loaded');
+    }
+  }
+
+  DtlImagen1() {
+    this.srcimg =
+      this.baseurl + this.Dtlcodigoimg + '/' + this.Dtlcodigoimg + '_1.jpg';
+  }
+
+  DtlImagen2() {
+    this.srcimg =
+      this.baseurl + this.Dtlcodigoimg + '/' + this.Dtlcodigoimg + '_2.jpg';
+  }
+
+  DtlImagen3() {
+    this.srcimg =
+      this.baseurl + this.Dtlcodigoimg + '/' + this.Dtlcodigoimg + '_3.jpg';
+  }
+
+  AumentarCount() {
+    if (this.count < 10) {
+      this.blndisable = false;
+      this.count++;
+    } else {
+      this.blndisable = true;
+      this.count = 10;
+    }
+  }
+
+  RestarCount() {
+    if (this.count <= 1) {
+      this.count = 1;
+    } else {
+      this.count--;
     }
   }
 }

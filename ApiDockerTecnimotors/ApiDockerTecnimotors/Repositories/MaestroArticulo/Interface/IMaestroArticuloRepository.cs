@@ -21,5 +21,10 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
         /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
         public Task<TlDetalleArticulo> DetalleArticulo(int Id);
+
+        /*------------------ tipo producto camara --------------*/
+        public Task<IEnumerable<TlCategoriesCamara>> ListCategorieCamara();
+        public Task<IEnumerable<TlmodeloCamara>> ListModeloCamara(string txtcategoria, string txtmarca);
+        public Task<IEnumerable<TlListCamaraAll>> ListadoCamaraGeneral(string txtcategoria, string txtmarca);
     }
 }

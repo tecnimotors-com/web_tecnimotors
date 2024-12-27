@@ -399,7 +399,7 @@ hr {
 }
 @media only screen and (min-width: 1366px) {
   .container {
-    max-width: 1240px;
+    max-width: 1300px;
   }
 }
 .container,
@@ -1061,8 +1061,8 @@ body.overlay__active::before,
 }
 @media only screen and (min-width: 768px) {
   .section--padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 
@@ -2946,7 +2946,7 @@ input.quantity__number {
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   margin: 0px;
-  width: 3.3rem;
+  width: 4rem;
   height: 3rem;
 }
 
@@ -4382,7 +4382,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .product__card:hover .product__card--action {
   opacity: 1;
   visibility: visible;
-  bottom: 35%;
+  bottom: 45%;
 }
 .product__card:hover .product__card--action__btn {
   transform: scale(1);
@@ -4403,8 +4403,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 1200px) {
   .product__card--thumbnail {
-    padding: 2rem 0rem 0rem;
-    margin: 2rem;
+    padding: 1rem 0rem 0rem;
+    margin: 1rem;
   }
 }
 .product__card--thumbnail__link {
@@ -6132,7 +6132,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 992px) {
   .shipping__items {
-    width: 25%;
     padding: 1.5rem;
   }
 }
@@ -7304,7 +7303,7 @@ input.quickview__value--number {
 }
 @media only screen and (min-width: 768px) {
   .breadcrumb__bg {
-    padding: 3rem 0;
+    padding: 1rem 0;
   }
 }
 
