@@ -22,6 +22,26 @@ export class MaestroarticuloService {
 
   ListadoCamaraGeneral = '/MaestroArticulo/ListadoCamaraGeneral/';
 
+  DetalleCamaraAll = '/MaestroArticulo/DetalleCamaraAll/';
+
+  ListadoCamaraGeneralModelo = '/MaestroArticulo/ListadoCamaraGeneralModelo/';
+
+  /*---------------------aceite-----------------------*/
+
+  ListCategorieAceite = '/MaestroArticulo/ListCategorieAceite';
+  ListModeloAceite = '/MaestroArticulo/ListModeloAceite/';
+  ListadoAceiteGeneral = '/MaestroArticulo/ListadoAceiteGeneral/';
+
+  /*---------------------Vehiculos-----------------------*/
+
+  ListModeloVehiculo = '/MaestroArticulo/ListModeloVehiculo/';
+  ListadoVehiculoGeneral = '/MaestroArticulo/ListadoVehiculoGeneral/';
+
+  /*---------------------Repuesto-----------------------*/
+
+  ListadoRepuestoTipoCategoria =
+    '/MaestroArticulo/ListadoRepuestoTipoCategoria/';
+
   constructor(private http: HttpClient) {}
 
   getListArticulosGeneral(): Observable<any> {
@@ -45,10 +65,43 @@ export class MaestroarticuloService {
   getListModeloCamara(cat: string, mar: string): Observable<any> {
     return this.http.get(this.myurl + this.ListModeloCamara + cat + '/' + mar);
   }
-  
+
   getListadoCamaraGeneral(cat: string, mar: string): Observable<any> {
     return this.http.get(
       this.myurl + this.ListadoCamaraGeneral + cat + '/' + mar
     );
+  }
+
+  getDetalleCamaraAll(id: number): Observable<any> {
+    return this.http.get(this.myurl + this.DetalleCamaraAll + id);
+  }
+
+  getListadoCamaraGeneralModelo(IdCamara: string): Observable<any> {
+    return this.http.get(
+      this.myurl + this.ListadoCamaraGeneralModelo + IdCamara
+    );
+  }
+
+  getListCategorieAceite(): Observable<any> {
+    return this.http.get(this.myurl + this.ListCategorieAceite);
+  }
+
+  getListModeloAceite(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListModeloAceite + cat);
+  }
+
+  getListadoAceiteGeneral(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoAceiteGeneral + cat);
+  }
+
+  getListModeloVehiculo(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListModeloVehiculo + cat);
+  }
+  getListadoVehiculoGeneral(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoVehiculoGeneral + cat);
+  }
+
+  getListadoRepuestoTipoCategoria(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoRepuestoTipoCategoria + cat);
   }
 }

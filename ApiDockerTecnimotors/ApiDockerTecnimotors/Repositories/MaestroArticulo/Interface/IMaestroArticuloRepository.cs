@@ -26,5 +26,17 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
         public Task<IEnumerable<TlCategoriesCamara>> ListCategorieCamara();
         public Task<IEnumerable<TlmodeloCamara>> ListModeloCamara(string txtcategoria, string txtmarca);
         public Task<IEnumerable<TlListCamaraAll>> ListadoCamaraGeneral(string txtcategoria, string txtmarca);
+        public Task<TlListCamaraAll> DetalleCamaraAll(int Id);
+        public Task<IEnumerable<TlListCamaraAll>> ListadoCamaraGeneralModelo(string IdCamara);
+        /*------------------ tipo producto aceite --------------*/
+        public Task<IEnumerable<TlCategoriesCamara>> ListCategorieAceite();
+        public Task<IEnumerable<TlmodeloCamara>> ListModeloAceite(string txtcategoria);
+        public Task<IEnumerable<TlListCamaraAll>> ListadoAceiteGeneral(string txtcategoria);
+        /*--------------------Vehiculo----------------------*/
+        public Task<IEnumerable<TlmodeloCamara>> ListModeloVehiculo(string txtcategoria);
+        public Task<IEnumerable<TlListCamaraAll>> ListadoVehiculoGeneral(string txtcategoria);
+        /*--------------------Repuesto----------------------*/
+        public Task<IEnumerable<TlCategoriesCamara>> ListadoRepuestoTipoCategoria(string txtcategoria);
+        public Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria);
     }
 }

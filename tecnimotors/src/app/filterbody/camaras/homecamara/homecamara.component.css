@@ -110,3 +110,41 @@
 .ng-select .ng-select-container .ng-value-container .ng-input > input {
   padding-left: 10px !important;
 }
+
+.btnclassa {
+  width: 11rem;
+  opacity: 0.9;
+  border-radius: 1rem;
+  height: 4rem;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600 !important;
+  color: white !important;
+  background-color: red !important;
+  transform: scale(0.9);
+  transition: 0.5s;
+}
+
+.btnclass2a {
+  width: 11rem;
+  opacity: 0.9;
+  border-radius: 1rem;
+  height: 4rem;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600 !important;
+  color: white !important;
+  background-color: #828282 !important;
+  transform: scale(0.9);
+  transition: 0.5s;
+}
+
+.product__card--thumbnail__link:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+  bottom: 50% !important;
+}

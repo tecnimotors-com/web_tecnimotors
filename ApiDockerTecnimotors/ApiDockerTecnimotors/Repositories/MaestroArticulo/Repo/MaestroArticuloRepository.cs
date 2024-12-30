@@ -4,6 +4,7 @@ using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using Dapper;
 using Npgsql;
+using System.Collections;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
 {
@@ -494,5 +495,191 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
                 return await db.QueryAsync<TlListCamaraAll>(sql, new { });
             }
         }
+
+        public async Task<TlListCamaraAll> DetalleCamaraAll(int Id)
+        {
+            var db = DbConnection();
+            var sql = @"
+						SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+						mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado,
+						TRIM(mart.codigo_equivalente) AS codigo_equivalente FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+						where mart.id= " + Id + @"
+                       ";
+
+            var result = await db.QueryFirstOrDefaultAsync<TlListCamaraAll>(sql, new { });
+            return result!;
+        }
+
+        public async Task<IEnumerable<TlListCamaraAll>> ListadoCamaraGeneralModelo(string IdCamara)
+        {
+            var db = DbConnection();
+
+            var sql = @"
+						SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+						mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+						FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+						where mart.id= " + IdCamara + @"
+					  ";
+            return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+
+        }
+
+
+        /*---------------------- Aceite y Lubricantes----------------------*/
+        public async Task<IEnumerable<TlCategoriesCamara>> ListCategorieAceite()
+        {
+            var db = DbConnection();
+            var sql = @"
+						SELECT DISTINCT mta.tipo_articulo, mta.descripcion_tipo_articulo
+						FROM public.maestro_articulos AS mart
+						JOIN public.maestro_tipo_articulo AS mta ON mart.tipo = mta.tipo_articulo
+						WHERE mart.familia != '998' AND mart.tipo = '98' AND subfamilia = '016'
+						AND TRIM(mart.codigo) NOT IN ('VTM0032743', 'VTM0032744');
+					   ";
+            return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
+        }
+
+        public async Task<IEnumerable<TlmodeloCamara>> ListModeloAceite(string txtcategoria)
+        {
+            var db = DbConnection();
+            var sql = @"
+						SELECT id, TRIM(mart.marca) AS descripcion_modificada
+						FROM public.maestro_articulos AS mart
+						WHERE mart.familia != '998' AND mart.tipo = '98' AND subfamilia = '016' AND
+						TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+					   ";
+            return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+        }
+
+        public async Task<IEnumerable<TlListCamaraAll>> ListadoAceiteGeneral(string txtcategoria)
+        {
+            var db = DbConnection();
+            if (txtcategoria == "0")
+            {
+                var sql = @"
+						SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+						mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+						FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+						where mart.familia != '998' and mart.tipo = '98' AND subfamilia = '016' AND
+						trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+					   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+						SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+						mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+						FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+						where mart.familia != '998' and mart.tipo = '98' AND subfamilia = '016' AND
+						trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+					   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+        }
+
+
+        /*--------------------Vehiculo----------------------*/
+        public async Task<IEnumerable<TlmodeloCamara>> ListModeloVehiculo(string txtcategoria)
+        {
+            var db = DbConnection();
+
+            var sql = @"
+						SELECT id, TRIM(mart.marca) AS descripcion_modificada
+						FROM public.maestro_articulos AS mart
+						WHERE mart.familia != '998' AND mart.tipo = '01' AND subfamilia = '099' 
+						AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+						AND TRIM(mart.descripcion) like '" + txtcategoria + @"%'
+					   ";
+
+            return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+
+        }
+
+        public async Task<IEnumerable<TlListCamaraAll>> ListadoVehiculoGeneral(string txtcategoria)
+        {
+            var db = DbConnection();
+
+            var sql = @"
+						SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+						mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado, TRIM(mart.codigo_equivalente) AS codigo_equivalente
+						FROM public.maestro_articulos as mart
+						join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+						where mart.familia != '998' and mart.tipo = '01' AND subfamilia = '099' AND
+						trim(mart.codigo) != 'VTM0032743' and trim(mart.codigo) != 'VTM0032744'
+						AND TRIM(mart.descripcion) like '" + txtcategoria + @"%'
+                       ";
+            return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+
+        }
+
+        /*------------------Respuesto Motocicleta-------------*/
+
+        public async Task<IEnumerable<TlCategoriesCamara>> ListadoRepuestoTipoCategoria(string txtcategoria)
+        {
+            var db = DbConnection();
+
+            if (txtcategoria == "MOTOCICLETA")
+            {
+                var sql = @"
+							SELECT DISTINCT mta.tipo_articulo, mta.descripcion_tipo_articulo--mart.tipo, mart.familia, mart.subfamilia
+							FROM public.maestro_articulos AS mart
+							JOIN public.maestro_tipo_articulo AS mta ON mart.tipo = mta.tipo_articulo
+							WHERE mart.familia not in ('998') and mart.tipo not in ('97')
+							AND mart.tipo IN ('98', '30', '11', '32', '23','33','34','29','25')
+							AND TRIM(mart.codigo) NOT IN ('VTM0032743', 'VTM0032744')
+							order by mta.tipo_articulo desc			
+						   ";
+                return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+							SELECT DISTINCT mta.tipo_articulo, mta.descripcion_tipo_articulo--mart.tipo, mart.familia, mart.subfamilia
+							FROM public.maestro_articulos AS mart
+							JOIN public.maestro_tipo_articulo AS mta ON mart.tipo = mta.tipo_articulo
+							WHERE mart.familia not in ('998') and mart.tipo not in ('97')
+							AND mart.tipo IN ('99','55','54','53','52') 
+							AND TRIM(mart.codigo) NOT IN ('VTM0032743', 'VTM0032744')
+							order by mta.tipo_articulo desc			
+						   ";
+                return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria)
+        {
+            var db = DbConnection();
+
+            if (TipoCategoria == "0")
+            {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo IN ('99','55','54','53','52','98', '30', '11', '32', '23','33','34','29','25') 
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo = '" + TipoCategoria + @"'
+						   ";
+
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+        }
+
     }
 }

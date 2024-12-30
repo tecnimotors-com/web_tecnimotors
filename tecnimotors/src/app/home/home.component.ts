@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         clickable: true,
       },
     });
+    /*
     this.swiper = new Swiper('.swiper', {
       slidesPerGroupSkip: 4,
       keyboard: {
@@ -119,6 +120,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         clickable: true,
       },
     });
+    */
   }
 
   logos = [
@@ -253,13 +255,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       ];
       this.istruevehiculo = false;
       this.istruetipovehiculo = true;
+      this.selectedTipoVehiculo = '2';
     } else {
       this.resetSelect();
       this.ListTipoVehiculo = [
+        /*
         {
           productipovehiculo: 'Bicicletas',
           idproducttipo: 1,
         },
+        */
         {
           productipovehiculo: 'Motocicletas',
           idproducttipo: 2,

@@ -114,7 +114,7 @@
     <div class="main__header" [ngClass]="{'header__sticky': isSticky, 'sticky': isSticky}"
         style="background-color: #BA191A;padding: 0px;">
         <div class="offcanvas__header--menu__open" [ngClass]="{'absolute-position': isOpen, 'fixed-position': !isOpen}">
-            <a class="offcanvas__header--menu__open--btn" (click)="toggleOffcanvas($event)"  data-offcanvas="">
+            <a class="offcanvas__header--menu__open--btn" (click)="toggleOffcanvas($event)" data-offcanvas="">
                 <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
                     viewBox="0 0 512 512">
                     <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
@@ -169,7 +169,8 @@
                                     background-color: #E8E6E4; display: block;">
                                     <li class="header__sub--menu__items" *ngFor="let menuItem of motoscycle">
                                         <a class="header__sub--menu__link" (click)="toggleMenuprueba(menuItem)"
-                                            [ngClass]="{'selected': menuItem.isSelected}" [style]="menuItem.style">
+                                            [ngClass]="{'selected': menuItem.isSelected}" [style]="menuItem.style"
+                                            [routerLink]="[menuItem.routerlink]">
                                             {{ menuItem.title }}
                                             <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
                                                 width="12" height="7.41" viewBox="0 0 12 7.41">
@@ -206,7 +207,8 @@
                                                             <a class="header__sub--menu__link"
                                                                 [ngClass]="{'selected': subSubItem.isSelected}"
                                                                 (click)="toggleSubsubMenuprueba(subSubItem)"
-                                                                [style]="subSubItem.style">
+                                                                [style]="subSubItem.style"
+                                                                [routerLink]="[subSubItem.routerlink]">
                                                                 {{ subSubItem.subsubtitle }}
                                                                 <ng-container
                                                                     *ngIf="subSubItem.thirdtitle &&  subSubItem.thirdtitle.length > 0">
@@ -228,7 +230,8 @@
                                                                         [ngClass]="{'selected': thirdtitle.isSelected}"
                                                                         (click)="togglesubmenusegundo(thirdtitle)"
                                                                         [style]="thirdtitle.style">
-                                                                        {{ thirdtitle.submenutitle }}
+                                                                        {{ thirdtitle.submenutitle}}
+
                                                                     </a>
                                                                 </li>
                                                             </ul>

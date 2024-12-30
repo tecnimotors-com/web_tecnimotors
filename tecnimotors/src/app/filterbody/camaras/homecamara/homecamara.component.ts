@@ -13,6 +13,7 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   public txttipoVehiculo: string | null = '';
   txtmarca: string | null = '';
 
+  public loading: boolean = false;
   public txtcategiescamara: string = '';
   public txtListCategoriesCamera: any[] = [];
   public txtinpumarca: string = '';
@@ -20,15 +21,19 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   public ListMarca: any[] = [
     {
       txt: 'DUNLOP',
+      txt2: 'DUNLOP',
     },
     {
       txt: 'KENDA',
+      txt2: 'KENDA',
     },
     {
       txt: 'CELIMO',
+      txt2: 'CELIMO',
     },
     {
       txt: 'CS',
+      txt2: 'CHENG SHIN',
     },
   ];
 
@@ -38,7 +43,7 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   public listCamaraGene: any[] = [];
   public txtcamaragene: string = '';
   p: number = 1;
-  itemper: number = 16;
+  itemper: number = 12;
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService,
@@ -47,6 +52,10 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.finalizePreLoader();
+  }
+
+  getLastFiveDigits(codigo: string): string {
+    return codigo.length > 5 ? codigo.substring(codigo.length - 5) : codigo;
   }
 
   private initializePreLoader(): void {
@@ -74,8 +83,6 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       this.txttipoVehiculo = params['tipo'].toString();
       this.txtmarca = params['marca'].toString();
-      console.log('Tipo de vehículo recibido:', this.txttipoVehiculo);
-      console.log('Marca :', this.txtmarca);
     });
     this.voidiniciar();
     setTimeout(() => {
@@ -99,8 +106,6 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   }
 
   ChangeCategorieCamara() {
-    // Actualiza los parámetros de la ruta
-
     this.router.navigate([
       `/homecamara/${this.txtcategiescamara}/${this.txtmarca}`,
     ]);
@@ -137,13 +142,43 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   }
 
   ListadoCamaraGeneral() {
+    this.loading = true;
     this.servicesmaestro
       .getListadoCamaraGeneral(this.txtcategiescamara, this.txtinpumarca!)
       .subscribe({
         next: (value: any) => {
           this.listCamaraGene = value;
         },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          this.loading = false;
+        },
       });
   }
-  SelectModelo() {}
+
+  SelectModelo() {
+    var modelo = this.txtmodelo ?? '';
+    if (modelo == '') {
+      this.ListadoCamaraGeneral();
+    } else {
+      this.servicesmaestro
+        .getListadoCamaraGeneralModelo(this.txtmodelo)
+        .subscribe({
+          next: (value: any) => {
+            this.listCamaraGene = value;
+          },
+          error: (err) => {
+            console.error(err);
+          },
+          complete: () => {
+            this.loading = false;
+          },
+        });
+    }
+  }
+  BtnRouterCamara(id: any) {
+    this.router.navigateByUrl(`/detallecamara/${id}`);
+  }
 }

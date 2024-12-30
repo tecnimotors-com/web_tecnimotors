@@ -1,1 +1,139 @@
-<p>homerepuesto works!</p>
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+
+<main class="main__content_wrapper">
+
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content text-center">
+                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                            <li class="breadcrumb__content--menu__items">
+                                <a [routerLink]="['/home']">Pagina Principal</a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items"><span>Repuesto</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
+    <!-- Start shop section -->
+    <div class="shop__section section--padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
+                    <form>
+                        <div class="shop__sidebar--widget widget__area d-lg-block">
+                            <div class="single__widget widget__bg">
+                                <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
+                                    Categoría
+                                    <button type="button" style="color: white;background-color: black;
+                                    border-radius: 5px;cursor: pointer;"  (click)="limpiarbtn()">
+                                        Limpiar
+                                    </button>
+                                </h2>
+                                <ul class="widget__categories--menu">
+                                    <li class="widget__categories--menu__list">
+                                        <select class="widget__categories--menu__label d-flex align-items-center"
+                                            name="tipoproducthome" style="width: -webkit-fill-available;
+                                            border: 0px solid;padding: 10px;color: #04195b;"
+                                            [(ngModel)]="txtcategiesrepuesto" (change)="ChangeCategoria()">
+                                            <option *ngFor="let item of ListtCategoriesCamera"
+                                                [value]="item.tipo_articulo">{{item.descripcion_tipo_articulo}}</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="single__widget widget__bg">
+                                <h2 class="widget__title h3">Tipo Categoría</h2>
+                                <ul class="widget__form--check">
+                                    <li class="widget__form--check__list"
+                                        *ngFor="let item of ListTipoCategoria; let i = index">
+                                        <label class="widget__form--check__label"
+                                            [for]="'radio' + i">{{item.descripcion_tipo_articulo}}</label>
+                                        <input class="widget__form--check__input" [id]="'radio' + i" type="radio"
+                                            [value]="item.tipo_articulo" style="opacity: 1;" name="flexRadioDefault"
+                                            [(ngModel)]="txttipocategoria" (change)="ChangeTipoCategoria()">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="single__widget widget__bg" style="height: 40rem;">
+                                <h2 class="widget__title h3">Modelos</h2>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
+                    <div class="shop__right--sidebar">
+                        <!-- Start categories section -->
+                        <div class="categories__shop mb-50">
+                            <div class="section__heading border-bottom mb-30">
+                                <h2 class="section__heading--maintitle">Compra de <span>Repuestos</span></h2>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End shop section -->
+
+
+
+</main>
+
+<app-footer></app-footer>

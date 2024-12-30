@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
                     <form>
-                        <div class="shop__sidebar--widget widget__area d-none d-lg-block">
+                        <div class="shop__sidebar--widget widget__area d-lg-block">
                             <div class="single__widget widget__bg">
                                 <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
                                     Categoría
@@ -100,7 +100,7 @@
                                 <ul class="widget__form--check">
                                     <li class="widget__form--check__list" *ngFor="let item of ListMarca; let i = index">
                                         <label class="widget__form--check__label"
-                                            [for]="'radio' + i">{{item.txt}}</label>
+                                            [for]="'radio' + i">{{item.txt2}}</label>
                                         <input class="widget__form--check__input" [id]="'radio' + i" type="radio"
                                             [value]="item.txt" style="opacity: 1;" name="flexRadioDefault"
                                             [(ngModel)]="txtinpumarca" (change)="inputMarca()">
@@ -108,8 +108,7 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="single__widget widget__bg">
+                            <div class="single__widget widget__bg" style="height: 40rem;">
                                 <h2 class="widget__title h3">Modelos</h2>
                                 <div class="form-floating">
                                     <ng-select [items]="listmodelo" bindValue="id" bindLabel="descripcion_modificada"
@@ -117,7 +116,8 @@
                                         style="background-color: white !important;display: contents !important;"
                                         class="search__filter--select__field" [(ngModel)]="txtmodelo"
                                         notFoundText="Sin Resultado" (change)="SelectModelo()" name="anchoperfil">
-                                    </ng-select> <label for="lblanchoperfil">
+                                    </ng-select>
+                                    <label for="lblanchoperfil">
                                         Selecciona modelo
                                     </label>
                                 </div>
@@ -135,20 +135,63 @@
 
                             <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
                                 [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
-                                nextLabel="Siguiente" [maxSize]="10">
+                                nextLabel="Siguiente" [maxSize]="10" *ngIf="!loading">
                             </pagination-controls>
                             <ul class="categories__shop--inner">
-                                <li class="categories__shop--card"
-                                    *ngFor="let item of listCamaraGene | paginate: { itemsPerPage: itemper, currentPage: p }, let i = index">
-                                    <a class="categories__shop--card__link" href="product-details.html">
-                                        <div class="categories__thumbnail mb-15">
-                                            <img class="categories__thumbnail--img"
-                                                src="assets/img/product/main-product/product1.webp"
-                                                alt="categories-img">
+                                <li class="categories__shop--card" *ngFor="let item of listCamaraGene | paginate: 
+                                    { itemsPerPage: itemper, currentPage: p }, let i = index">
+                                    <a class="categories__shop--card__link">
+                                        <div class="product__card--thumbnail mb-15">
+                                            <a class="product__card--thumbnail__link display-block">
+                                                <img class="categories__thumbnail--img"
+                                                    src="assets/img/product/main-product/product1.webp"
+                                                    style="border-radius: 2rem;border: 1px solid black;transform: scale(1.00);"
+                                                    alt="product-img">
+                                            </a>
+                                            <div class="product__media--view__icon" (click)="BtnRouterCamara(item.id)">
+                                                <a class="product__media--view__icon--link glightbox"
+                                                    data-gallery="product-media-zoom">
+                                                    <svg class="product__items--action__btn--svg"
+                                                        xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443"
+                                                        viewBox="0 0 512 512">
+                                                        <path
+                                                            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                                                            fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                            stroke-width="32"></path>
+                                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-miterlimit="10" stroke-width="32"
+                                                            d="M338.29 338.29L448 448"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="categories__content">
-                                            <h2 class="categories__content--title">{{item.codigo}}</h2>
-                                            <span class="categories__content--subtitle">(20 Items)</span>
+                                            <h2 class="categories__content--title"
+                                                style="width: -webkit-fill-available;">{{item.marca}}</h2>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Tipo Articulo: {{item.descripcion_tipo_articulo}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Codigo: {{ getLastFiveDigits(item.codigo) }}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Familia: {{item.familia}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Subfamilia: {{item.subfamilia}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Unidad_medida: {{item.unidad_medida}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Descripcion:{{item.descripcion}}
+                                            </span>
                                         </div>
                                     </a>
                                 </li>

@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "DetalleCamaraAll",
+    "RelativePath": "api/MaestroArticulo/DetalleCamaraAll/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "GetBanner",
     "RelativePath": "api/MaestroArticulo/GetBanner",
     "HttpMethod": "GET",
@@ -43,6 +59,22 @@
         "Name": "ruta",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoAceiteGeneral",
+    "RelativePath": "api/MaestroArticulo/ListadoAceiteGeneral/{txtcategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -70,8 +102,82 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoCamaraGeneralModelo",
+    "RelativePath": "api/MaestroArticulo/ListadoCamaraGeneralModelo/{IdCamara}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdCamara",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoModeloRepuesto",
+    "RelativePath": "api/MaestroArticulo/ListadoModeloRepuesto/{TipoCategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TipoCategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoRepuestoTipoCategoria",
+    "RelativePath": "api/MaestroArticulo/ListadoRepuestoTipoCategoria/{txtcategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoVehiculoGeneral",
+    "RelativePath": "api/MaestroArticulo/ListadoVehiculoGeneral/{txtcategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "ListArticulosGeneral",
     "RelativePath": "api/MaestroArticulo/ListArticulosGeneral",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListCategorieAceite",
+    "RelativePath": "api/MaestroArticulo/ListCategorieAceite",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -90,6 +196,22 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListModeloAceite",
+    "RelativePath": "api/MaestroArticulo/ListModeloAceite/{txtcategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "ListModeloCamara",
     "RelativePath": "api/MaestroArticulo/ListModeloCamara/{txtcategoria}/{txtmarca}",
     "HttpMethod": "GET",
@@ -103,6 +225,22 @@
       },
       {
         "Name": "txtmarca",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListModeloVehiculo",
+    "RelativePath": "api/MaestroArticulo/ListModeloVehiculo/{txtcategoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "txtcategoria",
         "Type": "System.String",
         "IsRequired": true
       }

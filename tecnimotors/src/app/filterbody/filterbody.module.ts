@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       /*--------repuesto---------*/
       {
-        path: 'homerepuesto',
+        path: 'homerepuesto/:tipo',
         component: HomerepuestoComponent,
       },
       {
@@ -54,7 +54,7 @@ const routes: Routes = [
       },
       /*---------aceite--------*/
       {
-        path: 'homeaceite',
+        path: 'homeaceite/:tipo',
         component: HomeaceiteComponent,
       },
       {
@@ -63,11 +63,11 @@ const routes: Routes = [
       },
       /*---------vehiculos----------*/
       {
-        path: 'homevehiculo',
+        path: 'homevehiculo/:marca',
         component: HomevehiculoComponent,
       },
       {
-        path: 'detallevehiculo',
+        path: 'detallevehiculo/:id',
         component: DetallevehiculoComponent,
       },
     ],

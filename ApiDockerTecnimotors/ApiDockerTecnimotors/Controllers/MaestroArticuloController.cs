@@ -2,6 +2,7 @@
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace ApiDockerTecnimotors.Controllers
@@ -76,5 +77,69 @@ namespace ApiDockerTecnimotors.Controllers
             var detailArt = await imaestroArticuloRepository.ListadoCamaraGeneral(txtcategoria, txtmarca);
             return Ok(detailArt);
         }
+
+        [HttpGet("DetalleCamaraAll/{Id}")]
+        public async Task<ActionResult> DetalleCamaraAll(int Id)
+        {
+            var detailArt = await imaestroArticuloRepository.DetalleCamaraAll(Id);
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListadoCamaraGeneralModelo/{IdCamara}")]
+        public async Task<ActionResult> ListadoCamaraGeneralModelo(string IdCamara)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoCamaraGeneralModelo(IdCamara);
+            return Ok(detailArt);
+        }
+
+        /*--------------------Aceite----------------------*/
+        [HttpGet("ListCategorieAceite")]
+        public async Task<ActionResult> ListCategorieAceite()
+        {
+            var detailArt = await imaestroArticuloRepository.ListCategorieAceite();
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListModeloAceite/{txtcategoria}")]
+        public async Task<ActionResult> ListModeloAceite(string txtcategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListModeloAceite(txtcategoria);
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListadoAceiteGeneral/{txtcategoria}")]
+        public async Task<ActionResult> ListadoAceiteGeneral(string txtcategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoAceiteGeneral(txtcategoria);
+            return Ok(detailArt);
+        }
+        /*--------------------Vehiculo----------------------*/
+        [HttpGet("ListModeloVehiculo/{txtcategoria}")]
+        public async Task<ActionResult> ListModeloVehiculo(string txtcategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListModeloVehiculo(txtcategoria);
+            return Ok(detailArt);
+        }
+
+        [HttpGet("ListadoVehiculoGeneral/{txtcategoria}")]
+        public async Task<ActionResult> ListadoVehiculoGeneral(string txtcategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoVehiculoGeneral(txtcategoria);
+            return Ok(detailArt);
+        }
+        /*--------------------Repuesto----------------------*/
+        [HttpGet("ListadoRepuestoTipoCategoria/{txtcategoria}")]
+        public async Task<ActionResult> ListadoRepuestoTipoCategoria(string txtcategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoRepuestoTipoCategoria(txtcategoria);
+            return Ok(detailArt);
+        }
+        [HttpGet("ListadoModeloRepuesto/{TipoCategoria}")]
+        public async Task<ActionResult> ListadoModeloRepuesto(string TipoCategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoModeloRepuesto(TipoCategoria);
+            return Ok(detailArt);
+        }
+               
     }
 }

@@ -55,41 +55,35 @@ export class AuthService {
         break;
       case '3':
         if (selectTipo === '1') {
-          this.router.navigate(['/homerepuesto'], {
-            queryParams: { tipo: 'Bicicletas' },
-          });
+          this.router.navigate(['/homerepuesto/BICICLETA']);
         } else if (selectTipo === '2') {
-          this.router.navigate(['/homerepuesto'], {
-            queryParams: { tipo: 'Motocicletas' },
-          });
+          this.router.navigate(['/homerepuesto/MOTOCICLETA']);
         } else {
-          this.router.navigate(['/homerepuesto']);
+          this.router.navigate(['/homerepuesto/MOTOCICLETA']);
         }
         break;
       case '4':
         if (selectTipo === '2') {
-          this.router.navigate(['/homeaceite'], {
-            queryParams: { tipo: 'Motocicletas' },
-          });
+          this.router.navigate(['/homeaceite/98']);
+        } else {
+          this.router.navigate(['/homeaceite/98']);
         }
         break;
       case '5':
+        /*
         if (selectTipo === '1') {
           this.router.navigate(['/homevehiculo'], {
             queryParams: { tipo: 'Bicicletas' },
           });
-        } else if (selectTipo === '2') {
-          this.router.navigate(['/homevehiculo'], {
-            queryParams: { tipo: 'Motocicletas' },
-          });
+        } else*/
+        if (selectTipo === '2') {
+          this.router.navigate(['/homevehiculo/MOTOCI']);
         } else if (selectTipo === '3') {
-          this.router.navigate(['/homevehiculo'], {
-            queryParams: { tipo: 'Cuatrimotos' },
-          });
+          this.router.navigate(['/homevehiculo/CUATRI']);
         } else if (selectTipo === '4') {
-          this.router.navigate(['/homevehiculo'], {
-            queryParams: { tipo: 'Cargueros' },
-          });
+          this.router.navigate(['/homevehiculo/TRIMO']);
+        } else {
+          this.router.navigate(['/homevehiculo/MOTOCI']);
         }
         break;
       default:

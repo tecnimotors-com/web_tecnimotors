@@ -1,0 +1,13 @@
+.swiperdetail {
+  width: 590px !important;
+  margin-right: 10px !important;
+}
+
+.negritaP {
+  font-weight: 700;
+}
+
+.table td,
+.table th {
+  padding: 4px;
+}
