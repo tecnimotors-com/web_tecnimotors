@@ -13,8 +13,9 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { HomebodyModule } from './homebody/homebody.module';
 import { FilterbodyModule } from './filterbody/filterbody.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { Interceptorgeneral } from './core/interceptor/interceptorgeneral';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     NgSelectModule,
   ],
-  providers: [DatePipe, provideHttpClient()],
+  providers: [
+    DatePipe,
+    provideHttpClient(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptorgeneral,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

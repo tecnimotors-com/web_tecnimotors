@@ -77,7 +77,7 @@
                                 <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
                                     Categoría
                                     <button type="button" style="color: white;background-color: black;
-                                    border-radius: 5px;cursor: pointer;"  (click)="limpiarbtn()">
+                                    border-radius: 5px;cursor: pointer;" (click)="limpiarbtn()">
                                         Limpiar
                                     </button>
                                 </h2>
@@ -108,7 +108,17 @@
                             </div>
                             <div class="single__widget widget__bg" style="height: 40rem;">
                                 <h2 class="widget__title h3">Modelos</h2>
-
+                                <div class="form-floating">
+                                    <ng-select [items]="listmodelo" bindValue="id" bindLabel="descripcion_modificada"
+                                        [virtualScroll]="true" dropdownPosition="top"
+                                        style="background-color: white !important;display: contents !important;"
+                                        class="search__filter--select__field" [(ngModel)]="txtmodelo"
+                                        notFoundText="Sin Resultado" (change)="SelectModel()" name="anchoperfil">
+                                    </ng-select>
+                                    <label for="lblanchoperfil">
+                                        Selecciona modelo
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -120,11 +130,76 @@
                             <div class="section__heading border-bottom mb-30">
                                 <h2 class="section__heading--maintitle">Compra de <span>Repuestos</span></h2>
                             </div>
+                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                                nextLabel="Siguiente" [maxSize]="10">
+                            </pagination-controls>
+                            <ul class="categories__shop--inner">
+                                <li class="categories__shop--card" *ngFor="let item of listrepuesto | paginate: 
+                                { itemsPerPage: itemper, currentPage: p }, let i = index">
+                                    <a class="categories__shop--card__link">
+                                        <div class="product__card--thumbnail mb-15">
+                                            <a class="product__card--thumbnail__link display-block">
+                                                <img class="categories__thumbnail--img"
+                                                    src="assets/img/product/main-product/product1.webp"
+                                                    style="border-radius: 2rem;border: 1px solid black;transform: scale(1.00);"
+                                                    alt="product-img">
+                                            </a>
+                                            <div class="product__media--view__icon"
+                                                (click)="BtnRouterRepuesto(item.id)">
+                                                <a class="product__media--view__icon--link glightbox"
+                                                    data-gallery="product-media-zoom">
+                                                    <svg class="product__items--action__btn--svg"
+                                                        xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443"
+                                                        viewBox="0 0 512 512">
+                                                        <path
+                                                            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                                                            fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                            stroke-width="32"></path>
+                                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-miterlimit="10" stroke-width="32"
+                                                            d="M338.29 338.29L448 448"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="categories__content">
+                                            <h2 class="categories__content--title"
+                                                style="width: -webkit-fill-available;">{{item.marca}}</h2>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Tipo Articulo: {{item.descripcion_tipo_articulo}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Codigo: {{ getLastFiveDigits(item.codigo) }}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Familia: {{item.familia}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Subfamilia: {{item.subfamilia}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Unidad_medida: {{item.unidad_medida}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Descripcion:{{item.descripcion}}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
 
-
-
+                            </ul>
+                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                                nextLabel="Siguiente" [maxSize]="10">
+                            </pagination-controls>
                         </div>
-
                     </div>
                 </div>
             </div>

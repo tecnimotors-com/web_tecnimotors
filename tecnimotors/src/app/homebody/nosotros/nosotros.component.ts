@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-nosotros',
@@ -6,7 +7,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./nosotros.component.css'],
 })
 export class NosotrosComponent implements OnInit, OnDestroy {
+  constructor(private auth: AuthService) {}
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.initializePreLoader();

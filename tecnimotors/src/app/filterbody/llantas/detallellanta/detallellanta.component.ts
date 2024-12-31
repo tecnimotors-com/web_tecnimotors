@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MaestroarticuloService } from '../../../core/service/maestroarticulo.service';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { BeforeSlideDetail } from 'lightgallery/lg-events';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-detallellanta',
@@ -80,7 +81,8 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private servicesmaestro: MaestroarticuloService
+    private servicesmaestro: MaestroarticuloService,
+    private auth: AuthService
   ) {}
 
   settings = {
@@ -98,6 +100,7 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     this.DetailArticulo();
 
     setTimeout(() => {

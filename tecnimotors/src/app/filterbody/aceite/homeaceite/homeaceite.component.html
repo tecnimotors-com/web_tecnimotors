@@ -181,15 +181,12 @@
                                         </div>
                                     </a>
                                 </li>
-                                <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
-                                    [directionLinks]="true" [autoHide]="true" [responsive]="true"
-                                    previousLabel="Anterior" nextLabel="Siguiente" [maxSize]="10">
-                                </pagination-controls>
                             </ul>
-
-
+                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                                nextLabel="Siguiente" [maxSize]="10">
+                            </pagination-controls>
                         </div>
-
                     </div>
                 </div>
             </div>

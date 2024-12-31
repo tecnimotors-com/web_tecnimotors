@@ -650,12 +650,62 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
                 return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
             }
         }
-        public async Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria)
+        public async Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria,string Categoria)
         {
             var db = DbConnection();
 
-            if (TipoCategoria == "0")
+            if (TipoCategoria == "0" && Categoria== "BICICLETA")
             {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo IN ('99','55','54','53','52') AND mart.estado = '1'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else if (TipoCategoria == "0" && Categoria == "MOTOCICLETA")
+            {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo IN ('98', '30', '11', '32', '23','33','34','29','25') AND mart.estado = '1'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+
+            else if(TipoCategoria != "0" && Categoria == "BICICLETA")
+            {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998' AND mart.tipo IN ('99','55','54','53','52')
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744' AND mart.estado = '1'
+							AND mart.tipo = '" + TipoCategoria + @"'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else if (TipoCategoria != "0" && Categoria == "MOTOCICLETA")
+            {
+                var sql = @"
+							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998' AND mart.tipo IN ('98', '30', '11', '32', '23','33','34','29','25')
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744' AND mart.estado = '1'
+							AND mart.tipo = '" + TipoCategoria + @"'
+						   ";
+                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
+            }
+            else
+            {
+				
                 var sql = @"
 							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
 							FROM public.maestro_articulos as mart
@@ -663,23 +713,46 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
 							WHERE mart.familia != '998'
 							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
 							AND mart.tipo IN ('99','55','54','53','52','98', '30', '11', '32', '23','33','34','29','25') 
-						   ";
-                return await db.QueryAsync<TlmodeloCamara>(sql, new { });
-            }
-            else
-            {
-                var sql = @"
-							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
-							FROM public.maestro_articulos as mart
-							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
-							WHERE mart.familia != '998'
-							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
-							AND mart.tipo = '" + TipoCategoria + @"'
+							AND mart.estado = '1'
 						   ";
 
                 return await db.QueryAsync<TlmodeloCamara>(sql, new { });
             }
         }
+        public async Task<IEnumerable<TlListCamaraAll>> ListadoRepuestoGeneralALl(string TipoCategoria)
+        {
+            var db = DbConnection();
 
+            if (TipoCategoria == "0")
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado,
+							TRIM(mart.codigo_equivalente) AS codigo_equivalente, mart.estado
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998' AND mart.estado = '1'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo IN ('99','55','54','53','52','98', '30', '11', '32', '23','33','34','29','25') 
+						   ";
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+							SELECT distinct mart.id, TRIM(mart.codigo) AS codigo, trim(mart.descripcion) as descripcion, mart.unidad_medida, trim(mart.marca) as marca,
+							mart.tipo, mta.tipo_articulo, mta.descripcion_tipo_articulo,mart.familia, mart.subfamilia, TRIM(mart.abreviado) AS abreviado,
+							TRIM(mart.codigo_equivalente) AS codigo_equivalente, mart.estado
+							FROM public.maestro_articulos as mart
+							join public.maestro_tipo_articulo as mta on mart.tipo= mta.tipo_articulo 
+							WHERE mart.familia != '998' AND mart.estado = '1'
+							AND TRIM(mart.codigo) != 'VTM0032743' AND TRIM(mart.codigo) != 'VTM0032744'
+							AND mart.tipo IN ('99','55','54','53','52','98', '30', '11', '32', '23','33','34','29','25') 
+							AND mart.tipo = '" + TipoCategoria + @"'
+						   ";
+
+                return await db.QueryAsync<TlListCamaraAll>(sql, new { });
+            }
+        }
     }
 }

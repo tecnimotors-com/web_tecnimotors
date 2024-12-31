@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.css']
+  styleUrls: ['./blog.component.css'],
 })
-export class BlogComponent  implements OnInit, OnDestroy {
+export class BlogComponent implements OnInit, OnDestroy {
+  constructor(private auth: AuthService) {}
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.initializePreLoader();

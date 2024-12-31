@@ -47,7 +47,8 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   ngOnDestroy(): void {
@@ -80,6 +81,7 @@ export class HomecamaraComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     this.route.params.subscribe((params) => {
       this.txttipoVehiculo = params['tipo'].toString();
       this.txtmarca = params['marca'].toString();

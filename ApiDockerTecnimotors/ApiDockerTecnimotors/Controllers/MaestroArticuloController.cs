@@ -134,12 +134,17 @@ namespace ApiDockerTecnimotors.Controllers
             var detailArt = await imaestroArticuloRepository.ListadoRepuestoTipoCategoria(txtcategoria);
             return Ok(detailArt);
         }
-        [HttpGet("ListadoModeloRepuesto/{TipoCategoria}")]
-        public async Task<ActionResult> ListadoModeloRepuesto(string TipoCategoria)
+        [HttpGet("ListadoModeloRepuesto/{TipoCategoria}/{Categoria}")]
+        public async Task<ActionResult> ListadoModeloRepuesto(string TipoCategoria, string Categoria)
         {
-            var detailArt = await imaestroArticuloRepository.ListadoModeloRepuesto(TipoCategoria);
+            var detailArt = await imaestroArticuloRepository.ListadoModeloRepuesto(TipoCategoria, Categoria);
             return Ok(detailArt);
         }
-               
+        [HttpGet("ListadoRepuestoGeneralALl/{TipoCategoria}")]
+        public async Task<ActionResult> ListadoRepuestoGeneralALl(string TipoCategoria)
+        {
+            var detailArt = await imaestroArticuloRepository.ListadoRepuestoGeneralALl(TipoCategoria);
+            return Ok(detailArt);
+        }
     }
 }

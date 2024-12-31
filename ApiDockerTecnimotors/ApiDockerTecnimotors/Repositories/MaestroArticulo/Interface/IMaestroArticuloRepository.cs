@@ -37,6 +37,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
         public Task<IEnumerable<TlListCamaraAll>> ListadoVehiculoGeneral(string txtcategoria);
         /*--------------------Repuesto----------------------*/
         public Task<IEnumerable<TlCategoriesCamara>> ListadoRepuestoTipoCategoria(string txtcategoria);
-        public Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria);
+        public Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria, string Categoria);
+        public Task<IEnumerable<TlListCamaraAll>> ListadoRepuestoGeneralALl(string TipoCategoria);
     }
 }

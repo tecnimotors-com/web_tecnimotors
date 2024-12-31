@@ -266,8 +266,14 @@
                                 </a>
                             </li>
                             <li class="header__menu--items">
+                                <a class="header__menu--link" style="color: white;border-radius: 1rem;"
+                                    [routerLink]="['/nosotros']" routerLinkActive="true">
+                                    NOSOTROS
+                                </a>
+                            </li>
+                            <!--
+                            <li class="header__menu--items">
                                 <a class="header__menu--link" style="color: white;border-radius: 1rem;">
-                                    <!-- [routerLink]="['/blog']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"-->
                                     BLOG
                                     <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12"
                                         height="7.41" viewBox="0 0 12 7.41">
@@ -286,13 +292,14 @@
                                     </ul>
                                 </a>
                             </li>
+                            -->
                         </ul>
                     </nav>
                 </div>
                 <div class="header__account">
                     <ul class="header__account--wrapper d-flex align-items-center">
                         <li class="header__account--items d-none d-lg-block">
-                            <a class="header__menu--link" [routerLink]="['/']">
+                            <a class="header__menu--link" [routerLink]="['/contactowsp']">
                                 <p style="color:white">Contacto WhatsApp</p>
                             </a>
                         </li>

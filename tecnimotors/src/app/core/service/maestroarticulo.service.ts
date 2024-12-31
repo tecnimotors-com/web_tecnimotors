@@ -41,6 +41,8 @@ export class MaestroarticuloService {
 
   ListadoRepuestoTipoCategoria =
     '/MaestroArticulo/ListadoRepuestoTipoCategoria/';
+  ListadoModeloRepuesto = '/MaestroArticulo/ListadoModeloRepuesto/';
+  ListadoRepuestoGeneralALl = '/MaestroArticulo/ListadoRepuestoGeneralALl/';
 
   constructor(private http: HttpClient) {}
 
@@ -103,5 +105,15 @@ export class MaestroarticuloService {
 
   getListadoRepuestoTipoCategoria(cat: string): Observable<any> {
     return this.http.get(this.myurl + this.ListadoRepuestoTipoCategoria + cat);
+  }
+
+  getListadoModeloRepuesto(tipocat: string, cat: string): Observable<any> {
+    return this.http.get(
+      this.myurl + this.ListadoModeloRepuesto + tipocat + '/' + cat
+    );
+  }
+
+  getListadoRepuestoGeneralALl(cat: string): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoRepuestoGeneralALl + cat);
   }
 }

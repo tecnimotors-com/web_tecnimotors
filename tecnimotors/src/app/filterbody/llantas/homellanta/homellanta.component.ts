@@ -10,6 +10,7 @@ import {
 import { MaestroarticuloService } from '../../../core/service/maestroarticulo.service';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-homellanta',
@@ -155,8 +156,9 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   p: number = 1;
   itemper: number = 4;
   imageCache: { [key: string]: boolean } = {};
-  
-  constructor(private servicesmaestro: MaestroarticuloService) {}
+
+  constructor(private servicesmaestro: MaestroarticuloService,
+      private auth: AuthService) {}
 
   public imagenError(event: any) {
     let ruta = this.defaultImage;
@@ -164,6 +166,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.auth.getRefreshToken();
     this.txtanchoperfil = '';
     this.txtaro = '';
     this.txtcocada = '';
@@ -226,7 +229,6 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.titlellanta = selectedValue === 'Marca' ? 'General' : selectedValue;
   }
 
-  
   imageExists(itemCodigo: string): Promise<boolean> {
     return new Promise((resolve) => {
       const img = new Image();

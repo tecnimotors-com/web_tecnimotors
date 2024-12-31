@@ -2,25 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
 
 @Component({
-  selector: 'app-categoria',
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.css'],
+  selector: 'app-contactowsp',
+  templateUrl: './contactowsp.component.html',
+  styleUrls: ['./contactowsp.component.css'],
 })
-export class CategoriaComponent implements OnInit, OnDestroy {
-  constructor(private auth: AuthService) {}
-  ngOnInit(): void {
-    this.auth.getRefreshToken();
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      this.initializePreLoader();
-    }, 0);
-    this.initializePreLoader();
-  }
-
-  ngOnDestroy(): void {
-    this.finalizePreLoader();
-  }
-
+export class ContactowspComponent implements OnInit, OnDestroy {
   private initializePreLoader(): void {
     const preloaderWrapper = document.getElementById('preloader');
 
@@ -40,5 +26,19 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     if (preloaderWrapper) {
       preloaderWrapper.classList.add('loaded');
     }
+  }
+
+  constructor(private auth: AuthService) {}
+  ngOnInit(): void {
+    this.auth.getRefreshToken();
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
+    this.initializePreLoader();
+  }
+
+  ngOnDestroy(): void {
+    this.finalizePreLoader();
   }
 }

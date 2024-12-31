@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-registromayorista',
@@ -21,7 +22,8 @@ export class RegistromayoristaComponent implements OnInit, OnDestroy {
   constructor(
     private datePipe: DatePipe,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private auth: AuthService
   ) {
     this.myForm = this.fb.group({
       txtnombre: ['', Validators.required],
@@ -46,6 +48,7 @@ export class RegistromayoristaComponent implements OnInit, OnDestroy {
     this.finalizePreLoader();
   }
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.fechregis = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;

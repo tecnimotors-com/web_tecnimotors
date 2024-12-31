@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-catalogos',
   templateUrl: './catalogos.component.html',
-  styleUrls: ['./catalogos.component.css']
+  styleUrls: ['./catalogos.component.css'],
 })
-export class CatalogosComponent  implements OnInit, OnDestroy {
-  
+export class CatalogosComponent implements OnInit, OnDestroy {
+  constructor(private auth: AuthService) {}
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.initializePreLoader();
@@ -40,4 +42,3 @@ export class CatalogosComponent  implements OnInit, OnDestroy {
     }
   }
 }
-

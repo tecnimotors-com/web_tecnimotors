@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
+import { RrhhService } from './rrhh.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,7 @@ export class AuthService {
   private selectId: string | null = null;
   private selectTipo: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private rrhhService: RrhhService) {}
 
   login(username: string, password: string): Observable<boolean> {
     // Simula la autenticación
@@ -90,5 +92,18 @@ export class AuthService {
         // No hacer nada si no se activa ninguna ruta
         break;
     }
+  }
+
+  getRefreshToken() {
+    this.registrarTokenRRHH();
+  }
+  registrarTokenRRHH() {
+    const tokenrrhh: any = {
+      userName: environment.userrrhh,
+      password: environment.passwordrrhh,
+    };
+    this.rrhhService.getRegistrarRRHH(tokenrrhh).subscribe((data) => {
+      sessionStorage.setItem('tokenrrhh', data.tokenrrhh);
+    });
   }
 }

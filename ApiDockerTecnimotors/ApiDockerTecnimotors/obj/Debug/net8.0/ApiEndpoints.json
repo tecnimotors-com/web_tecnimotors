@@ -119,7 +119,28 @@
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "ListadoModeloRepuesto",
-    "RelativePath": "api/MaestroArticulo/ListadoModeloRepuesto/{TipoCategoria}",
+    "RelativePath": "api/MaestroArticulo/ListadoModeloRepuesto/{TipoCategoria}/{Categoria}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TipoCategoria",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Categoria",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
+    "Method": "ListadoRepuestoGeneralALl",
+    "RelativePath": "api/MaestroArticulo/ListadoRepuestoGeneralALl/{TipoCategoria}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

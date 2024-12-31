@@ -166,6 +166,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   public src3: string = 'assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB.jpg';
 
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.initializePreLoader();
@@ -349,10 +350,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.auth.navigate('1', '', '');
   }
   BtnCamara() {
-    this.auth.navigate('2', '', '');
+    this.auth.navigate('2', '0', '0');
   }
   BtnRepuesto() {
-    this.auth.navigate('3', '', '');
+    this.auth.navigate('3', '2', '');
   }
   BtnAceite() {
     this.auth.navigate('4', '2', '');

@@ -8,6 +8,7 @@ import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { RegistromayoristaComponent } from './registromayorista/registromayorista.component';
 import { CatalogosComponent } from './catalogos/catalogos.component';
 import { BlogComponent } from './blog/blog.component';
+import { ContactowspComponent } from './contactowsp/contactowsp.component';
 import { HomebodyComponent } from './homebody.component';
 /*----------------------------*/
 import { HeaderModule } from '../header/header.module';
@@ -42,6 +43,10 @@ const routes: Routes = [
         path: 'blog',
         component: BlogComponent,
       },
+      {
+        path: 'contactowsp',
+        component: ContactowspComponent,
+      },
     ],
   },
 ];
@@ -55,6 +60,7 @@ const routes: Routes = [
     RegistromayoristaComponent,
     CatalogosComponent,
     BlogComponent,
+    ContactowspComponent,
   ],
   imports: [
     FormsModule,
@@ -72,6 +78,7 @@ const routes: Routes = [
     RegistromayoristaComponent,
     CatalogosComponent,
     BlogComponent,
+    ContactowspComponent,
   ],
 })
 export class HomebodyModule {}

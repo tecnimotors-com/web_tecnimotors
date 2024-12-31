@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MaestroarticuloService } from '../../../core/service/maestroarticulo.service';
+import { AuthService } from '../../../core/service/auth.service';
 
 @Component({
   selector: 'app-detallecamara',
@@ -27,10 +28,12 @@ export class DetallecamaraComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private servicesmaestro: MaestroarticuloService
+    private servicesmaestro: MaestroarticuloService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     this.DetailArticulo();
 
     setTimeout(() => {

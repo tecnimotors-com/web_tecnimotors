@@ -29,12 +29,13 @@ export class DetalleaceiteComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private servicesmaestro: MaestroarticuloService
+    private servicesmaestro: MaestroarticuloService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.auth.getRefreshToken();
     this.DetailArticulo();
-
     setTimeout(() => {
       window.scrollTo(0, 0);
       this.initializePreLoader();
