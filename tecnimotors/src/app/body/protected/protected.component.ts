@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-protected',
   templateUrl: './protected.component.html',
   styleUrl: './protected.component.css',
+  standalone: false,
 })
 export class ProtectedComponent implements OnInit {
   public islogin: string = '';

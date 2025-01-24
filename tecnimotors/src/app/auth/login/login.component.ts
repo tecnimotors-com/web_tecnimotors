@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'], // Corregido el typo en styleUrl
+  styleUrls: ['./login.component.css'],
+  standalone: false,
 })
 export class LoginComponent implements OnInit, OnDestroy {
   username: string = '';
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(this.username, this.password)
       .subscribe((isLoggedIn) => {
         if (isLoggedIn) {
-          console.log(isLoggedIn);
           this.router.navigate(['/protected']); // Redirigir a la ruta protegida
         } else {
           this.errorMessage = 'Credenciales incorrectas. Intenta de nuevo.';
@@ -60,5 +58,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (preloaderWrapper) {
       preloaderWrapper.classList.add('loaded');
     }
-  } 
+  }
 }

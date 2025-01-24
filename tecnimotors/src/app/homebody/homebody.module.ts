@@ -10,9 +10,10 @@ import { CatalogosComponent } from './catalogos/catalogos.component';
 import { BlogComponent } from './blog/blog.component';
 import { ContactowspComponent } from './contactowsp/contactowsp.component';
 import { HomebodyComponent } from './homebody.component';
-/*----------------------------*/
 import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   {
@@ -63,8 +64,10 @@ const routes: Routes = [
     ContactowspComponent,
   ],
   imports: [
-    FormsModule,
+    NgxPaginationModule,
+    NgSelectModule,
     CommonModule,
+    FormsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     HeaderModule,
     FooterModule,

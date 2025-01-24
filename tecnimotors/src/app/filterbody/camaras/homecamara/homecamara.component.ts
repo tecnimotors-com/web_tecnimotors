@@ -8,6 +8,7 @@ import { MaestroarticuloService } from '../../../core/service/maestroarticulo.se
   templateUrl: './homecamara.component.html',
   styleUrls: ['./homecamara.component.css'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class HomecamaraComponent implements OnInit, OnDestroy {
   public txttipoVehiculo: string | null = '';

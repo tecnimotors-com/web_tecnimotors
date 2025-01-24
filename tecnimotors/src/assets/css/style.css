@@ -54,6 +54,7 @@
   --secondary-color: #ed1d24;
   --foreground-color: #121416;
   --foreground-sub-color: #898686;
+  --colorbody: #0f0fa4;
   --body-text-color: #000000;
   --text-white-color: #fff;
   --body-background-color: #fff;
@@ -10532,7 +10533,7 @@ details > summary::-webkit-details-marker {
 .account__table--body__child--items {
   border-bottom: 1px solid var(--border-color);
   padding: 1.7rem 2rem;
-  color: var(--foreground-sub-color);
+  color: var(--colorbody);
 }
 .account__table--body__child--items:last-child {
   text-align: right;

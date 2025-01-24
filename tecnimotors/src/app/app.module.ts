@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, DatePipe } from '@angular/common';
+import {
+  CommonModule,
+  DatePipe,
+  HashLocationStrategy,
+  LocationStrategy,
+} from '@angular/common';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +21,7 @@ import { FilterbodyModule } from './filterbody/filterbody.module';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Interceptorgeneral } from './core/interceptor/interceptorgeneral';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,6 +45,10 @@ import { Interceptorgeneral } from './core/interceptor/interceptorgeneral';
   ],
   providers: [
     DatePipe,
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
     provideHttpClient(),
     {
       provide: HTTP_INTERCEPTORS,

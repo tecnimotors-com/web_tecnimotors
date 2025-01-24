@@ -7,6 +7,7 @@ import { AuthService } from '../../../core/service/auth.service';
   selector: 'app-homerepuesto',
   templateUrl: './homerepuesto.component.html',
   styleUrls: ['./homerepuesto.component.css'],
+  standalone: false,
 })
 export class HomerepuestoComponent implements OnInit, OnDestroy {
   public ListtCategoriesCamera: any[] = [
@@ -156,9 +157,6 @@ export class HomerepuestoComponent implements OnInit, OnDestroy {
       .getListadoModeloRepuesto(this.txttipocategoria, this.txtcategiesrepuesto)
       .subscribe({
         next: (value: any) => {
-          console.log(this.txttipocategoria);
-          console.log(this.txtcategiesrepuesto);
-          console.log(value);
           this.listmodelo = value;
         },
       });

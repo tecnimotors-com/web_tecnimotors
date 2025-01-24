@@ -67,133 +67,132 @@
 
     <!-- Start product details section -->
     <section class="product__details--section section--padding" style="padding: 2rem 1rem;">
-        <div class="container" style="margin: 0px 2rem;max-width: -webkit-fill-available;">
-            <div class="row row-cols-lg-2 row-cols-md-2" style="justify-content: center;">
-                <div class="col-2">
-                    <div class="col">
-                        <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                            (click)="DtlImagen1()">
-                            <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
-                                src="../../../../assets/img/product/big-product/product2.webp" alt="product-nav-img">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                            (click)="DtlImagen2()">
-                            <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
-                                src="../../../../assets/img/product/big-product/product3.webp" alt="product-nav-img">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                            (click)="DtlImagen3()">
-                            <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
-                                src="../../../../assets/img/product/big-product/product4.webp" alt="product-nav-img">
-                        </div>
+        <div class="row row-cols-lg-2 row-cols-md-2" style="justify-content: center;margin: 0px;">
+            <div class="col-2">
+                <div class="col">
+                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
+                        (click)="DtlImagen1()">
+                        <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
+                            src="../../../../assets/img/product/big-product/product2.webp" alt="product-nav-img">
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="product__details--media">
-                        <div class="single__product--preview  swiper mb-25 swiperfiel">
-                            <div class="product__media--preview__items" style="border: 1px solid;">
-                                <a class="product__media--preview__items--link glightbox" style="justify-items:center;">
-                                    <img class="product__media--preview__items--img" style="width: 44% !important;"
-                                        src="{{srcimg}}" alt="product-media-img">
-                                </a>
-                            </div>
-                        </div>
+                <div class="col">
+                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
+                        (click)="DtlImagen2()">
+                        <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
+                            src="../../../../assets/img/product/big-product/product3.webp" alt="product-nav-img">
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="product__details--info">
-                        <h2 class="product__details--info__title mb-15">
-                            {{Dtlcodigo}} - {{DtlDescripcion}}
-                        </h2>
-                        <h3 class="product__details--info__desc negritaP" style="display: flex;">
-                            CARACTERISTICAS DESCRIPCION
-                        </h3>
-                        <p class="product__details--info__desc negritaP" style="display: flex;">
-                            Código:
-                            <label style="font-weight: 400;padding-left: 5px;">
-                                {{Dtlcodigo}}
-                            </label>
-                        </p>
-                        <p class="product__details--info__desc negritaP" style="display: flex;">
-                            Marca:
-                            <label style="font-weight: 400;padding-left: 5px;">
-                                {{DtlMarca}}
-                            </label>
-                        </p>
-                        <p class="product__details--info__desc negritaP" style="display: flex;">
-                            tipo Articulo:
-                            <label style="font-weight: 400;padding-left: 5px;">
-                                {{DtlTipoArticulo}}
-                            </label>
-                        </p>
-                        <br>
-                        <div class="product__variant">
-                            <div class="product__variant--list quantity d-flex align-items-center mb-20">
-                                <div class="quantity__box">
-                                    <button type="button" name="btnminus"
-                                        class="quantity__value quickview__value--quantity decrease"
-                                        aria-label="Decrementar cantidad" (click)="RestarCount()">-
-                                    </button>
-                                    <label for="inputQuantity">
-                                        <input type="number" id="inputQuantity"
-                                            class="quantity__number quickview__value--number" [(ngModel)]="count"
-                                            name="inputsum" aria-label="Cantidad" />
-                                    </label>
-                                    <button type="button" name="btnplus"
-                                        class="quantity__value quickview__value--quantity increase"
-                                        aria-label="Incrementar cantidad" (click)="AumentarCount()">+
-                                    </button>
-                                </div>
-                                <button class="primary__btn quickview__cart--btn" type="submit">
-                                    Agregar al carrito
-                                </button>
-                            </div>
-                            <div class="product__variant--list mb-15">
-                                <a class="variant__wishlist--icon mb-15" title="Add to wishlist">
-                                    <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
-                                            fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="32" />
-                                    </svg>
-                                    Agregar al Favorito
-                                </a>
-                            </div>
-                        </div>
+                <div class="col">
+                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
+                        (click)="DtlImagen3()">
+                        <img class="product__media--nav__items--img" style="height: 70px;width: 50px;"
+                            src="../../../../assets/img/product/big-product/product4.webp" alt="product-nav-img">
                     </div>
-                </div>
-                <div class="col-10">
-                    <table class="table table-bordered" style="text-align: center;">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Código</th>
-                                <th scope="col">Familia</th>
-                                <th scope="col">Subfamilia</th>
-                                <th scope="col">Marca</th>
-                                <th scope="col">Tipo Articulo</th>
-                                <th scope="col">Unidad Medida</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>{{Dtlcodigo}}</th>
-                                <td>{{DtlFamilia}}</td>
-                                <td>{{DtlSubFamilia}}</td>
-                                <td>{{DtlMarca}}</td>
-                                <td>{{DtlTipoArticulo}}</td>
-                                <td>{{DtlUnidadMedida}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-
                 </div>
             </div>
+            <div class="col-4">
+                <div class="product__details--media">
+                    <div class="single__product--preview  swiper mb-25 swiperfiel">
+                        <div class="product__media--preview__items" style="border: 1px solid;">
+                            <a class="product__media--preview__items--link glightbox" style="justify-items:center;">
+                                <img class="product__media--preview__items--img" style="width: 44% !important;"
+                                    src="{{srcimg}}" alt="product-media-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="product__details--info">
+                    <h2 class="product__details--info__title mb-15">
+                        {{Dtlcodigo}} - {{DtlDescripcion}}
+                    </h2>
+                    <h3 class="product__details--info__desc negritaP" style="display: flex;">
+                        CARACTERISTICAS DESCRIPCION
+                    </h3>
+                    <p class="product__details--info__desc negritaP" style="display: flex;">
+                        Código:
+                        <label style="font-weight: 400;padding-left: 5px;">
+                            {{Dtlcodigo}}
+                        </label>
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;">
+                        Marca:
+                        <label style="font-weight: 400;padding-left: 5px;">
+                            {{DtlMarca}}
+                        </label>
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;">
+                        tipo Articulo:
+                        <label style="font-weight: 400;padding-left: 5px;">
+                            {{DtlTipoArticulo}}
+                        </label>
+                    </p>
+                    <br>
+                    <div class="product__variant">
+                        <div class="product__variant--list quantity d-flex align-items-center mb-20">
+                            <div class="quantity__box">
+                                <button type="button" name="btnminus"
+                                    class="quantity__value quickview__value--quantity decrease"
+                                    aria-label="Decrementar cantidad" (click)="RestarCount()">-
+                                </button>
+                                <label for="inputQuantity">
+                                    <input type="number" id="inputQuantity"
+                                        class="quantity__number quickview__value--number" [(ngModel)]="count"
+                                        name="inputsum" aria-label="Cantidad" />
+                                </label>
+                                <button type="button" name="btnplus"
+                                    class="quantity__value quickview__value--quantity increase"
+                                    aria-label="Incrementar cantidad" (click)="AumentarCount()">+
+                                </button>
+                            </div>
+                            <button class="primary__btn" style="margin-left: 15px;" type="submit" (click)="AgregarCarrito()">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                        <div class="product__variant--list mb-15">
+                            <a class="variant__wishlist--icon mb-15" title="Add to wishlist">
+                                <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512">
+                                    <path
+                                        d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
+                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="32" />
+                                </svg>
+                                Agregar al Favorito
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <table class="table table-bordered" style="text-align: center;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Familia</th>
+                            <th scope="col">Subfamilia</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Tipo Articulo</th>
+                            <th scope="col">Unidad Medida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{{Dtlcodigo}}</th>
+                            <td>{{DtlFamilia}}</td>
+                            <td>{{DtlSubFamilia}}</td>
+                            <td>{{DtlMarca}}</td>
+                            <td>{{DtlTipoArticulo}}</td>
+                            <td>{{DtlUnidadMedida}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container" style="margin: 0px;max-width: -webkit-fill-available;">
+
         </div>
     </section>
 </main>

@@ -13,13 +13,14 @@ import { MaestroarticuloService } from '../../../core/service/maestroarticulo.se
 import lgZoom from 'lightgallery/plugins/zoom';
 import { BeforeSlideDetail } from 'lightgallery/lg-events';
 import { AuthService } from '../../../core/service/auth.service';
+import { CotizacionService } from '../../../core/service/cotizacion.service';
 
 @Component({
   selector: 'app-detallellanta',
   templateUrl: './detallellanta.component.html',
   styleUrls: ['./detallellanta.component.css'],
-
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class DetallellantaComponent implements OnInit, OnDestroy {
   /*
@@ -73,16 +74,22 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
   public Dtlaro: string = '';
   public Dtltipouso: string = '';
   public Dtlestado: string = '';
+  public DtlFamilia: string = '';
+  public DtlSubFamilia: string = '';
+  public DtlTipoArticulo: string = '';
+  public DtlUnidadMedida: string = '';
 
   public srcimg: string = '';
   public baseurl: string = '../../../assets/img/Imagen/';
   public count: number = 1;
   public blndisable = false;
+  public ListCarrito: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService,
-    private auth: AuthService
+    private auth: AuthService,
+    private cotizacionService: CotizacionService
   ) {}
 
   settings = {
@@ -96,7 +103,6 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
   }
   onBeforeSlide = (detail: BeforeSlideDetail): void => {
     const { index, prevIndex } = detail;
-    console.log(index, prevIndex);
   };
 
   ngOnInit(): void {
@@ -117,6 +123,10 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
 
     this.servicesmaestro.getDetalleArticulo(this.id).subscribe({
       next: (dtl: any) => {
+        this.DtlFamilia = dtl.familia;
+        this.DtlSubFamilia = dtl.subfamilia;
+        this.DtlTipoArticulo = dtl.descripcion_tipo_articulo;
+        this.DtlUnidadMedida = dtl.unidad_medida;
         this.Dtlid = dtl.id;
         this.Dtlcodigoimg = dtl.codigo;
         this.Dtlcodigo = dtl.codigo.slice(-5);
@@ -195,5 +205,26 @@ export class DetallellantaComponent implements OnInit, OnDestroy {
     } else {
       this.count--;
     }
+  }
+
+  AgregarCarrito() {
+    // Crear el producto que se va a agregar
+    const product = {
+      id: this.Dtlid,
+      codigo: this.Dtlcodigoimg,
+      descripcion: this.Dtldescripcion,
+      familia: this.DtlFamilia,
+      subfamilia: this.DtlSubFamilia,
+      marca: this.Dtlmarca,
+      tipo: this.DtlTipoArticulo,
+      unidad: this.DtlUnidadMedida,
+      cantidad: this.count, // Usar la cantidad actual
+    };
+
+    // Agregar el producto al carrito a través del servicio
+    this.cotizacionService.addToCart(product);
+
+    // Obtener el carrito actualizado
+    this.ListCarrito = this.cotizacionService.getCartItems();
   }
 }

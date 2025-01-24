@@ -1,40 +1,24 @@
+import { Injectable } from '@angular/core';
 import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
+  HttpHandler,
+  HttpEvent,
 } from '@angular/common/http';
-
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.prod';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class Interceptorgeneral implements HttpInterceptor {
-  static acestokenalmacen = '';
-  constructor(private http: HttpClient) {}
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
+  intercept(request: HttpRequest<any>,next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const tokenrrhh = sessionStorage.getItem('tokenrrhh')!;
-
-    if (tokenrrhh) {
-      const realease = request.clone({
+    const token = sessionStorage.getItem('tokenrrhh');
+    if (token) {
+      request = request.clone({
         setHeaders: {
-          Authorization: request.urlWithParams.startsWith(
-            environment.myapiurlrrhh
-          )
-            ? `Bearer ${tokenrrhh}`
-            : `Bearer ${tokenrrhh}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-      return next.handle(realease);
     }
     return next.handle(request);
   }

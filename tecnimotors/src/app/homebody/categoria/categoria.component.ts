@@ -5,6 +5,7 @@ import { AuthService } from '../../core/service/auth.service';
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
   styleUrls: ['./categoria.component.css'],
+  standalone: false,
 })
 export class CategoriaComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService) {}

@@ -8,6 +8,7 @@ import { MaestroarticuloService } from '../../../core/service/maestroarticulo.se
   templateUrl: './homeaceite.component.html',
   styleUrls: ['./homeaceite.component.css'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class HomeaceiteComponent implements OnInit, OnDestroy {
   public txttipoVehiculo: string | null = '';

@@ -96,16 +96,15 @@
                 contacte con Ud. y complete el registro
             </p>
             <!--<form action="codigo.php" method="POST" style="width:35%;margin:0 auto;">-->
-            <form id="formulario" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <form id="formulario">
                 <div class="row">
                     <div class="col-sm-4  mb-4">
                         <label class="form-label" for="txtnombre">
                             Nombres
                             <span class="required">* </span>
                         </label>
-                        <input class="form-control" type="text" formControlName="txtnombre"
-                            id="txtnombre">
-                        <div class="alert alert-danger" *ngIf="showAlert==false" id="success-alert"
+                        <input class="form-control" type="text" [(ngModel)]="lbnombre" id="txtnombre" name="lblnombre">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertnom==true" id="success-alert"
                             style="font-size: 14px;">
                             <strong>Vacio!</strong> Nombres
                         </div>
@@ -115,15 +114,24 @@
                             Apellido Paterno
                             <span class="required">*</span>
                         </label>
-                        <input class="form-control" type="text" formControlName="txtapepater" id="txtapepater"
-                            required="true">
+                        <input class="form-control" type="text" [(ngModel)]="lbapellidoparteno" id="txtapepater"
+                            name="lblapepater" required="true">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertpater==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> apellido paterno
+                        </div>
                     </div>
                     <div class="col-sm-4  mb-4">
                         <label class="form-label" for="txtapemater">
                             Apellido Materno
                             <span class="required">*</span>
                         </label>
-                        <input class="form-control" type="text" formControlName="txtapemater" id="txtapemater">
+                        <input class="form-control" type="text" [(ngModel)]="lbapellidomaterno" id="txtapemater"
+                            name="lblapemater">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertmater==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> apellido materno
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -132,13 +140,19 @@
                             Celular
                             <span class="required">*</span>
                         </label>
-                        <input class="form-control" type="text" formControlName="txtcelular" id="txtcelular">
+                        <input class="form-control" type="text" [(ngModel)]="lbcelular" id="txtcelular"
+                            name="lblcelular">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertcelular==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> celular
+                        </div>
                     </div>
                     <div class="col-sm-6  mb-4">
                         <label class="form-label" for="txttelefijo">
                             Teléfono Fijo
                         </label>
-                        <input class="form-control" type="text" formControlName="txttelefijo" id="txttelefijo">
+                        <input class="form-control" type="text" [(ngModel)]="lbtelefijo" id="txttelefijo"
+                            name="lbltelefijo">
                     </div>
                 </div>
                 <div class="mb-4">
@@ -146,20 +160,25 @@
                         Correo
                         <span class="required">*</span>
                     </label>
-                    <input class="form-control" type="text" formControlName="txtcorreo" id="txtcorreo">
+                    <input class="form-control" type="text" [(ngModel)]="lbcorreo" id="txtcorreo" name="lblcorreo">
+                    <div class="alert alert-danger" *ngIf="alerts.showalertcorreo==true" id="success-alert"
+                        style="font-size: 14px;">
+                        <strong>Vacio!</strong> correo
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 mb-4">
                         <label class="form-label" for="txtruc">
                             Ruc
                         </label>
-                        <input class="form-control" type="text" formControlName="txtruc" id="txtruc">
+                        <input class="form-control" type="text" [(ngModel)]="lbrucdni" id="txtruc" name="lblruc">
                     </div>
                     <div class="col-sm-6 mb-4">
                         <label class="form-label" for="txtrazon">
                             Razon Social
                         </label>
-                        <input class="form-control" type="text" formControlName="txtrazon" id="txtrazon">
+                        <input class="form-control" type="text" [(ngModel)]="lbrazonnombre" id="txtrazon"
+                            name="lblrazon">
                     </div>
 
                 </div>
@@ -168,8 +187,12 @@
                         Dirección
                         <span class="required">*</span>
                     </label>
-                    <textarea class="form-control" type="text" formControlName="txtdireccion" id="txtdireccion" rows="2"
-                        cols="30"></textarea>
+                    <textarea class="form-control" type="text" [(ngModel)]="lbdireccion" id="txtdireccion" rows="2"
+                        cols="30" name="lbldireccion"></textarea>
+                    <div class="alert alert-danger" *ngIf="alerts.showalertdireccion==true" id="success-alert"
+                        style="font-size: 14px;">
+                        <strong>Vacio!</strong> dirección
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4 mb-4">
@@ -177,8 +200,11 @@
                             Departamento
                             <span class="required">*</span>
                         </label>
-                        <select class="form-select" onchange="obtenerProvincias(this)" formControlName="txtdepa"
-                            id="txtdepa">
+                        <select class="form-select" (change)="ObtenerProvincia()" [(ngModel)]="departamento_id"
+                            id="txtdepa" name="lbldepa">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listDepartamento" [value]="item.departamento_id">
+                                {{item.nombre}}</option>
                         </select>
                     </div>
                     <div class="col-sm-4 mb-4">
@@ -186,8 +212,11 @@
                             Provincia
                             <span class="required">*</span>
                         </label>
-                        <select class="form-select" onchange="obtenerDistritos(this)" formControlName="txtpro"
-                            id="txtpro">
+                        <select class="form-select" (change)="listarDistrito()" [(ngModel)]="provincia_id" id="txtpro"
+                            name="lblprovi">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listProvincia" [value]="item.provincia_id">
+                                {{item.nombre}}</option>
                         </select>
                     </div>
                     <div class="col-sm-4 mb-4">
@@ -195,7 +224,11 @@
                             Distrito
                             <span class="required">*</span>
                         </label>
-                        <select class="form-select" onchange="obtenertodo(this)" formControlName="txtdis" id="txtdis">
+                        <select class="form-select" (change)="getdistrito()" [(ngModel)]="distrito_id" id="txtdis"
+                            name="lbldis">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listDistrito" [value]="item.distrito_id">
+                                {{item.nombre}}</option>
                         </select>
                     </div>
                 </div>
@@ -205,54 +238,59 @@
                             Fecha de Nacimiento:
                             <span class="required">*</span>
                         </label>
-                        <input class="form-control" type="date" formControlName="txtfecnac" id="txtfecnac">
+                        <input class="form-control" type="date" [(ngModel)]="lbfechanac" id="txtfecnac"
+                            name="lblfecnac">
                     </div>
                     <div class="col-sm-6 mb-4">
                         <label class="form-label" for="genero">
                             Género:
-                            <input type="text" name="txtgenero" id="genero" hidden>
+                            <input type="text" name="txtgenero" id="genero" [(ngModel)]="lbgenero" hidden>
                         </label>
                         <div style="display: inline-flex; margin-right: 2rem;">
-                            <input value="masculino" type="radio" formControlName="txtgenero" id="txthombre">
-                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txthombre"> Masculino
+                            <input value="masculino" type="radio" id="txthombre" name="genero" [(ngModel)]="lbgenero">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txthombre"> masculino
                             </label>
                         </div>
                         <div style="display: inline-flex;">
-                            <input value="femenino" type="radio" formControlName="txtgenero" id="txtmujer">
-                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txtmujer"> Femenino </label>
+                            <input value="femenino" type="radio" id="txtmujer" name="genero" [(ngModel)]="lbgenero">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txtmujer"> femenino </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group" hidden>
                     <label for="txtestado">estado</label>
-                    <input class="form-control" type="text" name="txtestado" id="txtestado">
+                    <input class="form-control" type="text" name="lblestado" id="txtestado">
                 </div>
                 <div class="form-group" hidden>
                     <label for="txtfuente">Fuente</label>
-                    <input class="form-control" type="text" name="txtfuente" id="txtfuente">
+                    <input class="form-control" type="text" name="lblfuente" id="txtfuente">
                 </div>
                 <div class="form-group">
                     <label for="txtcoment">Comentario</label>
-                    <textarea placeholder="Comentario..." class="form-control" rows="5" cols="30"
-                        formControlName="txtcoment" id="txtcoment"></textarea>
+                    <textarea placeholder="Comentario..." class="form-control" rows="5" cols="30" [(ngModel)]="lbcoment"
+                        id="txtcoment" name="lblcoment"></textarea>
                 </div>
                 <div class="form-check mb-4">
                     <div class="form-group" id="checkbox-value">
                     </div>
                     <label for="txtcheck"></label>
-                    <input value="false" class="inline checkbox" type="checkbox" formControlName="txtcheck"
-                        id="txtcheck">
-                    <label class="form-check-label" for="txtauth">
+                    <input value="false" class="inline checkbox" type="checkbox" [(ngModel)]="lbcheckauto" id="txtcheck"
+                        name="lblcheck">
+                    <label class="form-check-label" for="txtcheck">
                         Autorizo a Tecnimotors al tratamiento de mis datos personales para que pueda
                         hacerme llegar por cualquier vía información sobre acciones formativas, iniciativas o
                         servicios que el centro ponga en marcha y que puedan resultar de mi interés.
                     </label>
-                    <input type="text" name="txtauth" id="txtauth" hidden>
                 </div>
                 <button style="width: 100%;font-size: 16px !important;border-radius: 0.5rem !important;"
-                    class="btn btn-primary" type="submit">
+                    class="btn btn-primary" type="button" (click)="Registrarse()">
                     Registrarse
                 </button>
+                <!--*ngIf="alerts.showalertdireccion==true"-->
+                <div class="alert alert-success" *ngIf="showsuccess" id="success-alert"
+                    style="font-size: 14px;margin-top: 1rem;text-align: center;">
+                    <strong>Se registro Correctamente </strong> al Mayorista
+                </div>
             </form>
             <br>
         </div>

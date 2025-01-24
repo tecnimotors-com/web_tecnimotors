@@ -5,6 +5,7 @@ import { AuthService } from '../../core/service/auth.service';
   selector: 'app-nosotros',
   templateUrl: './nosotros.component.html',
   styleUrls: ['./nosotros.component.css'],
+  standalone: false,
 })
 export class NosotrosComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService) {}

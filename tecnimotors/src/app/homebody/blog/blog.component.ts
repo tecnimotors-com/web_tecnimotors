@@ -5,6 +5,7 @@ import { AuthService } from '../../core/service/auth.service';
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css'],
+  standalone: false,
 })
 export class BlogComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService) {}

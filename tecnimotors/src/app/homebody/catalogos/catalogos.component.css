@@ -1,0 +1,8 @@
+.categories__shop--inner {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.categories__shop--inner.ng-leave {
+    opacity: 0;
+}

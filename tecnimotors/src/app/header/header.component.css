@@ -42,22 +42,53 @@
 
 /* Tablets */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .main__header--inner {
+    gap: 0rem;
+  }
   .main__logo--img {
-    font-size: 16px;
+    max-width: 15rem;
+  }
+  .header__menu--link {
+    font-size: 9px;
+    padding: 0.4rem;
+  }
+  .header__menu--items {
+    align-content: center;
+    position: relative;
   }
 }
 
 /* Laptops y Escritorios (pequeños) */
 @media only screen and (min-width: 1025px) and (max-width: 1150px) {
+  .header__minicart--items {
+    margin-left: 15px;
+  }
+
+  .main__header--inner {
+    gap: 0rem;
+  }
   .main__logo--img {
-    font-size: 17px;
-    max-width: 40%;
+    max-width: 13rem;
+  }
+  .header__menu--link {
+    font-size: 11px;
+    padding: 0.4rem;
+  }
+  .header__menu--items {
+    align-content: center;
+    position: relative;
   }
 }
 @media only screen and (min-width: 1151px) and (max-width: 1280px) {
+  .header__minicart--items {
+    margin-left: 15px;
+  }
+
+  .main__header--inner {
+    gap: 0rem;
+  }
   .main__logo--img {
-    font-size: 17px;
-    max-width: 45%;
+    max-width: 15rem;
   }
   .header__menu--link {
     font-size: 11px;
@@ -72,7 +103,7 @@
 @media only screen and (min-width: 1281px) and (max-width: 1549px) {
   .main__logo--img {
     font-size: 18px;
-    max-width: 50%;
+    max-width: 65%;
   }
   .header__menu--link {
     font-size: 11px;
@@ -136,3 +167,11 @@
   }
 }
 */
+
+.textopuntos {
+  width: 20rem; /* Ancho fijo */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto que desborda */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos al final */
+  display: inline-block;
+}

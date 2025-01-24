@@ -7,6 +7,7 @@ import { AuthService } from '../../../core/service/auth.service';
   selector: 'app-homevehiculo',
   templateUrl: './homevehiculo.component.html',
   styleUrls: ['./homevehiculo.component.css'],
+  standalone: false,
 })
 export class HomevehiculoComponent implements OnInit, OnDestroy {
   public txttipoVehiculo: string | null = '';

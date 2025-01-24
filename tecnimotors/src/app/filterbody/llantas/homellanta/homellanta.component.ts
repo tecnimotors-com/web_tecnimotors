@@ -17,6 +17,7 @@ import { AuthService } from '../../../core/service/auth.service';
   templateUrl: './homellanta.component.html',
   styleUrls: ['./homellanta.component.css'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;

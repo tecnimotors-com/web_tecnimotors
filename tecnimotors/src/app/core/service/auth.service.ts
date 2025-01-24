@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.prod';
 import { RrhhService } from './rrhh.service';
+import { DepartamentoService } from './departamento.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,11 @@ export class AuthService {
   private selectId: string | null = null;
   private selectTipo: string | null = null;
 
-  constructor(private router: Router, private rrhhService: RrhhService) {}
+  constructor(
+    private router: Router,
+    private rrhhService: RrhhService,
+    private departamentoservice: DepartamentoService
+  ) {}
 
   login(username: string, password: string): Observable<boolean> {
     // Simula la autenticación
@@ -41,7 +46,6 @@ export class AuthService {
   }
 
   navigate(selectId: string, selectTipo: string, productmarca: string): void {
-    console.log(productmarca);
     switch (selectId) {
       case '1':
         this.router.navigateByUrl('/homellantas');
@@ -96,14 +100,28 @@ export class AuthService {
 
   getRefreshToken() {
     this.registrarTokenRRHH();
+    this.registrarTokenDepartamento();
   }
+
   registrarTokenRRHH() {
     const tokenrrhh: any = {
       userName: environment.userrrhh,
       password: environment.passwordrrhh,
     };
-    this.rrhhService.getRegistrarRRHH(tokenrrhh).subscribe((data) => {
+    this.rrhhService.getRegistrarRRHH(tokenrrhh).subscribe((data: any) => {
       sessionStorage.setItem('tokenrrhh', data.tokenrrhh);
     });
+  }
+
+  registrarTokenDepartamento() {
+    const tokendepas: any = {
+      userName: environment.userdepa,
+      password: environment.passworddepa,
+    };
+    this.departamentoservice
+      .getRegistrarDepartamento(tokendepas)
+      .subscribe((data) => {
+        sessionStorage.setItem('tokendepa', data.tokendepa);
+      });
   }
 }

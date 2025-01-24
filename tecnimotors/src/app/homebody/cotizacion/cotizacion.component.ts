@@ -5,6 +5,7 @@ import { AuthService } from '../../core/service/auth.service';
   selector: 'app-cotizacion',
   templateUrl: './cotizacion.component.html',
   styleUrls: ['./cotizacion.component.css'],
+  standalone: false,
 })
 export class CotizacionComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService) {}

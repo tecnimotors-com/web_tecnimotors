@@ -1,94 +1,4 @@
 <header class="header__section">
-    <!--
-    <div class="main__header" [ngClass]="{'header__sticky': isSticky, 'sticky': isSticky}">
-        <div class="container-fluid">
-            <div class="main__header--inner position__relative d-flex justify-content-around align-items-center">
-        
-                <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" [routerLink]="['/home']">
-                            <img class="main__logo--img" src="../../assets/img/logo/TECNIMOTORS_JES-2.png"
-                                alt="logo-img">
-                        </a>
-                    </h1>
-                </div>
-                <div class="header__search--widget d-none d-lg-block">
-                    <form class="d-flex header__search--form border-radius-5" action="#">
-                        <div class="header__search--box">
-                            <label for="txtbuscar">
-                                <input class="header__search--input" placeholder="Busca un articulo tecnimotors"
-                                    type="text" name="txtbuscar" id="txtbuscar">
-                            </label>
-                            <button class="header__search--button bg__primary text-white" aria-label="search button"
-                                type="submit">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z"
-                                        fill="currentColor" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="header__account">
-                    <ul class="header__account--wrapper d-flex align-items-center">
-                        <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn" [routerLink]="['/']">
-                                <p>Contacto WhatsApp</p>
-                                <span class="visually-hidden">Mi Cuenta</span>
-                            </a>
-                        </li>
-                        <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn" [routerLink]="['/login']">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class=" -user">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                <span class="visually-hidden">Mi Cuenta</span>
-                            </a>
-                        </li>
-                        <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class=" -heart">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                                </svg>
-                                <span class="items__count">3</span>
-                            </a>
-                        </li>
-                        <li class="header__account--items header__minicart--items">
-                            <a class="header__account--btn minicart__open--btn" href="javascript:void(0)"
-                                (click)="abrirCarrito()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.706" height="22.534"
-                                    viewBox="0 0 14.706 13.534">
-                                    <g transform="translate(0 0)">
-                                        <g>
-                                            <path data-name="Path 16787"
-                                                d="M4.738,472.271h7.814a.434.434,0,0,0,.414-.328l1.723-6.316a.466.466,0,0,0-.071-.4.424.424,0,0,0-.344-.179H3.745L3.437,463.6a.435.435,0,0,0-.421-.353H.431a.451.451,0,0,0,0,.9h2.24c.054.257,1.474,6.946,1.555,7.33a1.36,1.36,0,0,0-.779,1.242,1.326,1.326,0,0,0,1.293,1.354h7.812a.452.452,0,0,0,0-.9H4.74a.451.451,0,0,1,0-.9Zm8.966-6.317-1.477,5.414H5.085l-1.149-5.414Z"
-                                                transform="translate(0 -463.248)" fill="currentColor" />
-                                            <path data-name="Path 16788"
-                                                d="M5.5,478.8a1.294,1.294,0,1,0,1.293-1.353A1.325,1.325,0,0,0,5.5,478.8Zm1.293-.451a.452.452,0,1,1-.431.451A.442.442,0,0,1,6.793,478.352Z"
-                                                transform="translate(-1.191 -466.622)" fill="currentColor" />
-                                            <path data-name="Path 16789"
-                                                d="M13.273,478.8a1.294,1.294,0,1,0,1.293-1.353A1.325,1.325,0,0,0,13.273,478.8Zm1.293-.451a.452.452,0,1,1-.431.451A.442.442,0,0,1,14.566,478.352Z"
-                                                transform="translate(-2.875 -466.622)" fill="currentColor" />
-                                        </g>
-                                    </g>
-                                </svg>
-                                <span class="items__count">2</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
     <style>
         .router-link-active {
             font-weight: bold !important;
@@ -113,19 +23,23 @@
     </style>
     <div class="main__header" [ngClass]="{'header__sticky': isSticky, 'sticky': isSticky}"
         style="background-color: #BA191A;padding: 0px;">
-        <div class="offcanvas__header--menu__open" [ngClass]="{'absolute-position': isOpen, 'fixed-position': !isOpen}">
-            <a class="offcanvas__header--menu__open--btn" (click)="toggleOffcanvas($event)" data-offcanvas="">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
-                    viewBox="0 0 512 512">
-                    <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-                        stroke-width="32" d="M80 160h352M80 256h352M80 352h352"></path>
-                </svg>
-                <span class="visually-hidden">Offcanvas Menu Open</span>
-            </a>
-        </div>
+
 
         <div class="container-fluid">
+
             <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
+                <div class="offcanvas__header--menu__open"
+                    [ngClass]="{'absolute-position': isOpen, 'fixed-position': !isOpen}">
+                    <a class="offcanvas__header--menu__open--btn" (click)="toggleOffcanvas($event)" data-offcanvas=""
+                        style="color:white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg"
+                            viewBox="0 0 512 512">
+                            <path fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                                stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"></path>
+                        </svg>ADSDSA
+                        <span class="visually-hidden">Offcanvas Menu Open</span>
+                    </a>
+                </div>
                 <div class="main__logo">
                     <h1 class="main__logo--title">
                         <a class="main__logo--link" [routerLink]="['/home']"
@@ -137,25 +51,18 @@
                 <div class="header__menu style3 d-none d-lg-block">
                     <nav class="header__menu--navigation">
                         <ul class="header__menu--wrapper d-flex">
-                            <!--
-                            <li class="header__menu--items mega__menu--items">
-                                <a class="header__menu--link" [routerLink]="['/home']"
-                                    routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
-                                    style="color: white;border-radius: 1rem;">
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" style="color: white;border-radius: 1rem;"
+                                    [routerLink]="['/home']" routerLinkActive="true">
                                     INICIO
                                 </a>
-
                             </li>
-                            -->
-                            <!--
-                            <li class="header__menu--items mega__menu--items">
-                                <a class="header__menu--link" [routerLink]="['/nosotros']"
-                                    routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
-                                    style="color: white;border-radius: 1rem;">
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" style="color: white;border-radius: 1rem;"
+                                    [routerLink]="['/nosotros']" routerLinkActive="true">
                                     NOSOTROS
                                 </a>
                             </li>
-                            -->
                             <li class="header__menu--items">
                                 <a class="header__menu--link" style="color: white;border-radius: 1rem;">
                                     CATEGORÍA
@@ -170,13 +77,18 @@
                                     <li class="header__sub--menu__items" *ngFor="let menuItem of motoscycle">
                                         <a class="header__sub--menu__link" (click)="toggleMenuprueba(menuItem)"
                                             [ngClass]="{'selected': menuItem.isSelected}" [style]="menuItem.style"
-                                            [routerLink]="[menuItem.routerlink]">
+                                            [routerLink]="menuItem.routerlink ? [menuItem.routerlink] : []">
                                             {{ menuItem.title }}
-                                            <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
-                                                width="12" height="7.41" viewBox="0 0 12 7.41">
-                                                <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z"
-                                                    transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                                            </svg>
+                                            <ng-container *ngIf="menuItem.subtitle && 
+                                                menuItem.subtitle.length > 0">
+                                                <svg ngif class="menu__arrowdown--icon"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="7.41"
+                                                    viewBox="0 0 12 7.41">
+                                                    <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z"
+                                                        transform="translate(-6 -8.59)" fill="currentColor"
+                                                        opacity="0.7" />
+                                                </svg>
+                                            </ng-container>
                                         </a>
                                         <ul class="header__sub--menu" *ngIf="menuItem.isOpen" style="margin-top: 0px;padding: 0px;border-radius: 0px;background-color: #E8E6E4;
                                                     margin-left: 22rem;top: 0px;height: auto;display: block;">
@@ -251,6 +163,22 @@
                                     COTIZACIÓN
                                 </a>
                             </li>
+                            <!--
+                            <li class=" header__menu--items mega__menu--items">
+                                <a class="header__menu--link" [routerLink]="['/homellantas']"
+                                    routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
+                                    style="color: white;border-radius: 1rem;">
+                                    LLANTAS
+                                </a>
+                            </li>
+                            <li class=" header__menu--items mega__menu--items">
+                                <a class="header__menu--link" [routerLink]="['/homerepuesto/MOTOCICLETA']"
+                                    routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
+                                    style="color: white;border-radius: 1rem;">
+                                    REPUESTOS
+                                </a>
+                            </li>
+                            -->
                             <li class="header__menu--items mega__menu--items">
                                 <a class="header__menu--link" [routerLink]="['/mayorista']"
                                     routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
@@ -265,34 +193,13 @@
                                     CATÁLOGOS
                                 </a>
                             </li>
-                            <li class="header__menu--items">
-                                <a class="header__menu--link" style="color: white;border-radius: 1rem;"
-                                    [routerLink]="['/nosotros']" routerLinkActive="true">
-                                    NOSOTROS
+                            <li class="header__menu--items mega__menu--items">
+                                <a class="header__menu--link" [routerLink]="['/distribuidores']"
+                                    routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }"
+                                    style="color: white;border-radius: 1rem;">
+                                    DISTRIBUIDORES
                                 </a>
                             </li>
-                            <!--
-                            <li class="header__menu--items">
-                                <a class="header__menu--link" style="color: white;border-radius: 1rem;">
-                                    BLOG
-                                    <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12"
-                                        height="7.41" viewBox="0 0 12 7.41">
-                                        <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z"
-                                            transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                                    </svg>
-                                    <ul class="header__sub--menu" style="margin-top: 0px; padding: 0px; border-radius: 0px;
-                                        background-color: #E8E6E4; display: block;">
-                                        <li class="header__sub--menu__items" *ngFor="let menuItem of blog">
-                                            <a class="header__sub--menu__link" (click)="toggleblogmenu(menuItem)"
-                                                [ngClass]="{'selected': menuItem.isSelected}" [style]="menuItem.style"
-                                                [routerLink]="[menuItem.routerlink]">
-                                                {{ menuItem.title }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </li>
-                            -->
                         </ul>
                     </nav>
                 </div>
@@ -303,11 +210,11 @@
                                 <p style="color:white">Contacto WhatsApp</p>
                             </a>
                         </li>
-                        <li class="header__account--items  header__account--search__items d-sm-2-none"
-                            (click)="clicksearch()">
-                            <a class="header__account--btn search__open--btn">
+                        <li class="header__account--items header__minicart--items" (click)="clicksearch()"
+                            data-offcanvas="">
+                            <a class="header__account--btn search__open--btn" style="color:white">
                                 <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg"
-                                    width="22.51" height="20.443" viewBox="0 0 512 512" style="color:white">
+                                    width="22.51" height="20.443" viewBox="0 0 512 512">
                                     <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
                                         fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32">
                                     </path>
@@ -317,7 +224,7 @@
                                 <span class="visually-hidden">Search</span>
                             </a>
                         </li>
-                        <li class="header__account--items d-none d-lg-block">
+                        <li class="header__account--items header__minicart--items">
                             <a class="header__account--btn" [routerLink]="['/login']">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -327,7 +234,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="header__account--items d-none d-lg-block">
+                        <li class="header__account--items header__minicart--items">
                             <a class="header__account--btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -340,8 +247,8 @@
                             </a>
                         </li>
                         <li class="header__account--items header__minicart--items">
-                            <a class="header__account--btn minicart__open--btn" href="javascript:void(0)"
-                                (click)="abrirCarrito()">
+                            <a class="header__account--btn minicart__open--btn" (click)="abrirCarrito($event)"
+                                data-offcanvas="">
                                 <svg style="color:white" xmlns="http://www.w3.org/2000/svg" width="22.706"
                                     height="22.534" viewBox="0 0 14.706 13.534">
                                     <g transform="translate(0 0)">
@@ -368,7 +275,7 @@
 
         <div class="container-fluid" style="background: white;" [@toggleSearch]="searchState">
             <div class="main__header--inner position__relative d-flex justify-content-around align-items-center">
-                <div class="header__search--widget d-none d-lg-block">
+                <div class="header__search--widget d-lg-block">
                     <form class="d-flex header__search--form border-radius-5" action="#">
                         <div class="header__search--box">
                             <label for="txtbuscar">
@@ -390,10 +297,10 @@
             </div>
         </div>
     </div>
-    <div class="offcanvas__header" [class.open]=" isOpen">
+    <div class="offcanvas__header" [class.open]="isOpen">
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
-                <a class="offcanvas__logo_link" href="index.html">
+                <a class="offcanvas__logo_link">
                     <img src="../../assets/img/logo/TECNIMOTORS_JES-2.png" alt="Grocee Logo" width="158" height="36">
                 </a>
                 <button class="offcanvas__close--btn" data-offcanvas="" (click)="closeOffcanvas()">close</button>
@@ -401,131 +308,185 @@
             <nav class="offcanvas__menu">
                 <ul class="offcanvas__menu_ul">
                     <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="index.html">Home</a>
-                        <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="index.html"
-                                    class="offcanvas__sub_menu_item">Home One</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-2.html"
-                                    class="offcanvas__sub_menu_item">Home Two</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-3.html"
-                                    class="offcanvas__sub_menu_item">Home Three</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-4.html"
-                                    class="offcanvas__sub_menu_item">Home Four</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-5.html"
-                                    class="offcanvas__sub_menu_item">Home Five</a></li>
-                        </ul>
-                        <button class="offcanvas__sub_menu_toggle"></button>
-                    </li>
-                    <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="shop.html">Shop</a>
+                        <a class="offcanvas__menu_item">Home</a>
                         <ul class="offcanvas__sub_menu">
                             <li class="offcanvas__sub_menu_li">
-                                <a href="#" class="offcanvas__sub_menu_item">Column One</a>
-                                <ul class="offcanvas__sub_menu">
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="shop.html">Shop Left Sidebar</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="shop-grid.html">Shop Grid</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="shop-grid-list.html">Shop Grid List</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="shop-list.html">Shop List</a></li>
-                                </ul>
-                                <button class="offcanvas__sub_menu_toggle"></button>
+                                <a class="offcanvas__sub_menu_item">Home One</a>
                             </li>
                             <li class="offcanvas__sub_menu_li">
-                                <a href="#" class="offcanvas__sub_menu_item">Column Two</a>
-                                <ul class="offcanvas__sub_menu">
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="product-details.html">Product Details</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="product-video.html">Video Product</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="product-details.html">Variable Product</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="product-left-sidebar.html">Product Left Sidebar</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="product-gallery.html">Product Gallery</a></li>
-                                </ul>
-                                <button class="offcanvas__sub_menu_toggle"></button>
+                                <a class="offcanvas__sub_menu_item">Home Two</a>
                             </li>
                             <li class="offcanvas__sub_menu_li">
-                                <a href="#" class="offcanvas__sub_menu_item">Column Three</a>
-                                <ul class="offcanvas__sub_menu">
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="my-account.html">My Account</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="my-account-2.html">My Account 2</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="404.html">404 Page</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="login.html">Login Page</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="faq.html">Faq Page</a></li>
-                                </ul>
-                                <button class="offcanvas__sub_menu_toggle"></button>
+                                <a class="offcanvas__sub_menu_item">Home Three</a>
                             </li>
                             <li class="offcanvas__sub_menu_li">
-                                <a href="#" class="offcanvas__sub_menu_item">Column Three</a>
-                                <ul class="offcanvas__sub_menu">
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="about.html">About Us</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="contact.html">Contact Us</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="portfolio.html">Portfolio</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="compare.html">Compare Pages</a></li>
-                                    <li class="offcanvas__sub_menu_li"><a class="offcanvas__sub_menu_item"
-                                            href="checkout.html">Checkout page</a></li>
-                                </ul>
-                                <button class="offcanvas__sub_menu_toggle"></button>
+                                <a class="offcanvas__sub_menu_item">Home Four</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Home Five</a>
                             </li>
                         </ul>
                         <button class="offcanvas__sub_menu_toggle"></button>
                     </li>
                     <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="blog.html">Blog</a>
+                        <a class="offcanvas__menu_item">Shop</a>
                         <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="blog.html" class="offcanvas__sub_menu_item">Blog
-                                    Grid</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="blog-details.html"
-                                    class="offcanvas__sub_menu_item">Blog Details</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="blog-left-sidebar.html"
-                                    class="offcanvas__sub_menu_item">Blog Left Sidebar</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="blog-right-sidebar.html"
-                                    class="offcanvas__sub_menu_item">Blog Right Sidebar</a></li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Column One</a>
+                                <ul class="offcanvas__sub_menu">
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">
+                                            Shop Left Sidebar
+                                        </a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">
+                                            Shop Right Sidebar
+                                        </a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Shop Grid</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Shop Grid List</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Shop List</a>
+                                    </li>
+                                </ul>
+                                <button class="offcanvas__sub_menu_toggle"></button>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Column Two</a>
+                                <ul class="offcanvas__sub_menu">
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">
+                                            Product Details</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Video Product</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Variable Product</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Product Left Sidebar</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Product Gallery</a>
+                                    </li>
+                                </ul>
+                                <button class="offcanvas__sub_menu_toggle"></button>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Column Three</a>
+                                <ul class="offcanvas__sub_menu">
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">My
+                                            Account</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">My Account
+                                            2</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">404 Page</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Login
+                                            Page</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Faq Page</a>
+                                    </li>
+                                </ul>
+                                <button class="offcanvas__sub_menu_toggle"></button>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Column Three</a>
+                                <ul class="offcanvas__sub_menu">
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">About Us</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Contact
+                                            Us</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Portfolio</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Compare
+                                            Pages</a>
+                                    </li>
+                                    <li class="offcanvas__sub_menu_li">
+                                        <a class="offcanvas__sub_menu_item">Checkout
+                                            page</a>
+                                    </li>
+                                </ul>
+                                <button class="offcanvas__sub_menu_toggle"></button>
+                            </li>
                         </ul>
                         <button class="offcanvas__sub_menu_toggle"></button>
                     </li>
                     <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="#">Pages</a>
+                        <a class="offcanvas__menu_item">Blog</a>
                         <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="about.html"
-                                    class="offcanvas__sub_menu_item">About Us</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="contact.html"
-                                    class="offcanvas__sub_menu_item">Contact Us</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="cart.html" class="offcanvas__sub_menu_item">Cart
-                                    Page</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="portfolio.html"
-                                    class="offcanvas__sub_menu_item">Portfolio Page</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="wishlist.html"
-                                    class="offcanvas__sub_menu_item">Wishlist Page</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="login.html"
-                                    class="offcanvas__sub_menu_item">Login Page</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="404.html" class="offcanvas__sub_menu_item">Error
-                                    Page</a></li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Blog
+                                    Grid</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Blog Details</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Blog Left Sidebar</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Blog Right
+                                    Sidebar</a>
+                            </li>
                         </ul>
                         <button class="offcanvas__sub_menu_toggle"></button>
                     </li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="about.html">About</a></li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a>
+                    <li class="offcanvas__menu_li">
+                        <a class="offcanvas__menu_item">Pages</a>
+                        <ul class="offcanvas__sub_menu">
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">About Us</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Contact Us</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Cart
+                                    Page</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Portfolio Page</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Wishlist Page</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Login Page</a>
+                            </li>
+                            <li class="offcanvas__sub_menu_li">
+                                <a class="offcanvas__sub_menu_item">Error
+                                    Page</a>
+                            </li>
+                        </ul>
+                        <button class="offcanvas__sub_menu_toggle"></button>
+                    </li>
+                    <li class="offcanvas__menu_li">
+                        <a class="offcanvas__menu_item">About</a>
+                    </li>
+                    <li class="offcanvas__menu_li">
+                        <a class="offcanvas__menu_item">Contact</a>
                     </li>
                 </ul>
                 <div class="offcanvas__account--items">
-                    <a class="offcanvas__account--items__btn d-flex align-items-center" href="login.html">
+                    <a class="offcanvas__account--items__btn d-flex align-items-center">
                         <span class="offcanvas__account--items__icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20.51" height="19.443" viewBox="0 0 512 512">
                                 <path
@@ -554,10 +515,18 @@
                         </a>
                         <div class="offcanvas__account--currency__submenu">
                             <ul>
-                                <li class="currency__items"><a class="currency__text" href="#">CAD</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">CNY</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">EUR</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">GBP</a></li>
+                                <li class="currency__items">
+                                    <a class="currency__text">CAD</a>
+                                </li>
+                                <li class="currency__items">
+                                    <a class="currency__text">CNY</a>
+                                </li>
+                                <li class="currency__items">
+                                    <a class="currency__text">EUR</a>
+                                </li>
+                                <li class="currency__items">
+                                    <a class="currency__text">GBP</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -572,9 +541,9 @@
                         </a>
                         <div class="offcanvas__dropdown--language">
                             <ul>
-                                <li class="language__items"><a class="language__text" href="#">France</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Russia</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Spanish</a></li>
+                                <li class="language__items"><a class="language__text">France</a></li>
+                                <li class="language__items"><a class="language__text">Russia</a></li>
+                                <li class="language__items"><a class="language__text">Spanish</a></li>
                             </ul>
                         </div>
                     </div>
@@ -582,4 +551,73 @@
             </nav>
         </div>
     </div>
+
+    <!-- Start offCanvas minicart -->
+    <div class="offCanvas__minicart" [ngClass]="{'active': isOpenCarShop}" data-bs-backdrop="static"
+        (click)="preventClose($event)">
+        <div class="minicart__header">
+            <div style="background-color: #b1b1b1;text-align: center;color: black;
+                font-weight: bold;padding: 8px 0px;margin: -15px -15px 0px -15px;">
+                <h3 style="font-size: 18px;"> Requerimiento de Cotización </h3>
+            </div>
+            <p style="font-size: 11px;font-weight: bold;line-height: initial;
+                padding: 10px 0px;">
+                Para añadir múltiples ítems a su cotización, por favor rellene
+                los campos de cantidad y después de click "COTIZAR"</p>
+        </div>
+        <div style="background-color: #b1b1b1;text-align: center;margin-left: -15px;
+            margin-right: -15px;color: black;font-weight: bold;">
+            <label for="inlineforn1">
+                Listado de Producto
+            </label>
+            <input type="text" id="inlineforn1" hidden>
+        </div>
+        <div class="minicart__product">
+            <div class="minicart__product--items d-flex" *ngFor="let item of ListCarrito">
+                <div class="minicart__thumb">
+                    <img src="assets/img/product/small-product/product1.webp" style="width: 12rem;" alt="prduct-img">
+                </div>
+                <div class="minicart__text">
+                    <label class="textopuntos" style="font-size: 14px;margin: 0px;" placement="top" [ngbPopover]="mayorista.descripcion">
+                        <b>{{item.descripcion}}</b>
+                    </label>
+                    <label class="textopuntos" style="font-size: 14px;margin: 0px;" placement="top" [ngbPopover]="mayorista.marca">
+                        <b>Marca: </b> {{item.marca}}
+                    </label>
+                    <span class="color__variant" style="margin: 0px;">
+                        <b style="font-size: 14px;">Cantidad </b>
+                    </span>
+                    <div class="minicart__text--footer d-flex align-items-center">
+                        <div class="quantity__box minicart__quantity">
+                            <button type="button" class="quantity__value decrease" aria-label="quantity value"
+                                (click)="disminuirCantidad(item)">-</button>
+
+                            <label>
+                                <input type="number" class="quantity__number" [value]="item.cantidad" data-counter
+                                    readonly />
+                            </label>
+                            <button type="button" class="quantity__value increase" aria-label="quantity value"
+                                (click)="aumentarCantidad(item)">+</button>
+                        </div>
+                        <button class="minicart__product--remove" type="button"
+                            (click)="eliminarProducto(item)">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="minicart__conditions text-center">
+            <input class="minicart__conditions--input" id="accept" type="checkbox">
+            <label class="minicart__conditions--label" for="accept">
+                Estoy de acuerdo con el producto
+            </label>
+        </div>
+        <div class="minicart__button d-flex justify-content-center">
+            <button style="color: white;width: 15rem;text-align: center;border-radius: 5px;
+                background: var(--secondary-color);border: var(--secondary-color);">
+                Cotizar
+            </button>
+        </div>
+    </div>
+
+    <!-- End offCanvas minicart -->
 </header>

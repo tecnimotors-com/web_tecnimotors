@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'], // Asegúrate de que las rutas sean correctas
+  styleUrls: ['./footer.component.css'],
+  standalone: false, // Asegúrate de que las rutas sean correctas
 })
 export class FooterComponent {
   public correofooter: string = 'ventas@tecnimotors.com';

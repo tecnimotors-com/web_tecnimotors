@@ -6,6 +6,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { CotizacionService } from '../core/service/cotizacion.service';
 
 @Component({
   selector: 'app-header',
@@ -32,9 +33,12 @@ import {
       transition('visible => hidden', [animate('300ms ease-out')]),
     ]),
   ],
+  standalone: false,
 })
-export class HeaderComponent {
-  isOpen: boolean = false;
+export class HeaderComponent implements OnInit {
+  public isOpenCarShop: boolean = false;
+
+  public isOpen: boolean = false;
   public correo: string = 'ventas@tecnimotors.com';
   public isSticky: boolean = false;
   public isSubMenuOpen: boolean = false;
@@ -45,13 +49,15 @@ export class HeaderComponent {
     /*"background-color: rgb(181, 181, 181);font-family: 'Rubik';font-size: 11px;font-weight: 600;padding: 8px 12px;";*/
     'background-color: #474747;font-family: unset;font-size: 11px;font-weight: 600;padding: 8px 12px;color: white;text-decoration: underline;';
 
-  public carritoAbierto: boolean = false;
+  //public carritoAbierto: boolean = false;
 
   public motoscycle: any[] = [
     {
       title: 'VEHICULOS',
       isOpen: false,
       style: this.divstyle,
+      routerlink: '/homevehiculo/MOTOCI',
+      /*
       subtitle: [
         {
           subtitle: 'MOTOCICLETAS',
@@ -106,6 +112,7 @@ export class HeaderComponent {
         { subtitle: 'CUATRIMOTOS', isOpen: false, style: this.divstyle },
         { subtitle: 'CARGUEROS', isOpen: false, style: this.divstyle },
       ],
+      */
     },
     {
       title: 'LLANTAS Y CÁMARAS',
@@ -164,6 +171,8 @@ export class HeaderComponent {
           subtitle: 'CÁMARAS',
           isOpen: false,
           style: this.divstyle,
+          routerlink: '/homecamara/0/0',
+          /*
           subsubtitle2: [
             {
               subsubtitle: 'DUNLOP',
@@ -189,13 +198,9 @@ export class HeaderComponent {
               style: this.divstyle,
               routerlink: '/homecamara/0/CS',
             },
-            /*
-            { subsubtitle: 'TSK', isOpen: false, style: this.divstyle },
-            { subsubtitle: 'KATANA', isOpen: false, style: this.divstyle },
-            { subsubtitle: 'WANDA', isOpen: false, style: this.divstyle },
-            { subsubtitle: 'MIB', isOpen: false, style: this.divstyle },
-             */
+         
           ],
+          */
         },
       ],
     },
@@ -203,6 +208,8 @@ export class HeaderComponent {
       title: 'RESPUESTOS',
       isOpen: false,
       style: this.divstyle,
+      routerlink: '/homerepuesto/MOTOCICLETA',
+      /*
       subtitle: [
         {
           subtitle: 'REPUESTOS PARA MOTOCICLETA',
@@ -484,6 +491,7 @@ export class HeaderComponent {
           ],
         },
       ],
+      */
     },
     {
       title: 'ACEITES Y LUBRICANTES',
@@ -491,7 +499,9 @@ export class HeaderComponent {
       style: this.divstyle,
       routerlink: '/homeaceite/98',
     },
+    /*
     { title: 'ACCESORIOS', isOpen: false, style: this.divstyle, subtitle: [] },
+     */
   ];
 
   public blog: any[] = [
@@ -504,6 +514,10 @@ export class HeaderComponent {
   ];
 
   public hdnSearch: boolean = true;
+  public ListCarrito: any[] = [];
+
+  constructor(private cotizacionService: CotizacionService) {}
+  ngOnInit(): void {}
 
   toggleblogmenu(menuItem: any) {
     const isCurrentlyOpen = menuItem.isOpen;
@@ -529,6 +543,24 @@ export class HeaderComponent {
     }
   }
 
+  toggleSubMenuprueba(subItem: any) {
+    subItem.isOpen = !subItem.isOpen;
+
+    this.motoscycle.forEach((menu) => {
+      // Verifica si menu.subtitle está definido y es un array
+      if (Array.isArray(menu.subtitle)) {
+        menu.subtitle.forEach((item: any) => {
+          if (item !== subItem) {
+            item.isOpen = false; // Cerrar otros subelementos
+            item.isSelected = false; // Desmarcar otros subelementos
+          } else {
+            item.isSelected = !item.isSelected; // Alternar selección del subItem
+          }
+        });
+      }
+    });
+  }
+
   /*toggleSubMenuprueba(subItem: any) {
     subItem.isOpen = !subItem.isOpen;
     this.motoscycle.forEach((menu) => {
@@ -540,7 +572,7 @@ export class HeaderComponent {
       });
     });
   }*/
-
+  /*
   toggleSubMenuprueba(subItem: any) {
     subItem.isOpen = !subItem.isOpen;
     this.motoscycle.forEach((menu) => {
@@ -554,7 +586,7 @@ export class HeaderComponent {
       });
     });
   }
-
+*/
   toggleSubsubMenuprueba(subSubItem: any) {
     const parentMenu = this.motoscycle.find((item: any) =>
       item.subtitle.some(
@@ -598,13 +630,60 @@ export class HeaderComponent {
     this.isSticky = window.scrollY > 0; // Cambia esto según tu necesidad
   }
 
-  toggleSubMenu(event: MouseEvent) {
-    event.stopPropagation();
-    this.isSubMenuOpen = !this.isSubMenuOpen;
+  abrirCarrito(event: MouseEvent): void {
+    event.stopPropagation(); // Evita que el evento de clic se propague
+    this.isOpenCarShop = !this.isOpenCarShop; // Alterna el estado del carrito
+    this.isOpen = false; // Cierra el otro offcanvas si está abierto
+    this.ListCarrito = this.cotizacionService.getCartItems();
+    console.log(this.ListCarrito);
   }
+
+  cerrarCarrito(): void {
+    this.isOpenCarShop = false; // Cierra el carrito
+  }
+
+  toggleOffcanvas(event: MouseEvent): void {
+    event.stopPropagation(); // Evita que el evento de clic se propague
+    this.isOpen = !this.isOpen; // Alterna el estado del otro offcanvas
+    this.isOpenCarShop = false; // Cierra el carrito si está abierto
+  }
+  // Método para prevenir el cierre al hacer clic dentro del offcanvas
+  preventClose(event: MouseEvent): void {
+    event.stopPropagation(); // Previene que el clic se propague al documento
+  }
+
+  closeOffcanvas(): void {
+    this.isOpen = false; // Cierra el otro offcanvas
+  }
+
+  clicksearch(): void {
+    this.hdnSearch = !this.hdnSearch;
+  }
+
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
+
+    // Verifica si el clic se realizó dentro del offcanvas o del botón de abrir
+    const isClickInsideOffcanvas = target.closest('.offcanvas__header');
+    const isClickInsideToggleButton = target.closest(
+      '.offcanvas__header--menu__open--btn'
+    );
+    // Cierra el offcanvas si se hace clic fuera de él
+    if (this.isOpen && !isClickInsideOffcanvas && !isClickInsideToggleButton) {
+      this.closeOffcanvas();
+    }
+
+    // Verifica si el clic se realizó dentro del carrito
+    const isClickInsideMinicart = target.closest('.offcanvas__minicart');
+    const isclickInsideToggleButton = target.closest(
+      '.offcanvas__header--menu__open--btn2'
+    );
+    if (this.isOpenCarShop && !isclickInsideToggleButton) {
+      this.cerrarCarrito();
+    }
+
+    // Cierra el submenú si se hace clic fuera de él
     if (
       !target.closest('.header__sub--menu') &&
       !target.closest('.header__menu--items')
@@ -613,53 +692,36 @@ export class HeaderComponent {
     }
   }
 
-  toggleSubMenu2(event: MouseEvent) {
-    event.stopPropagation();
-    this.isSubMenuOpen2 = !this.isSubMenuOpen2;
-  }
-  abrirCarrito() {
-    this.carritoAbierto = !this.carritoAbierto;
-  }
-  cerrarCarrito() {
-    this.carritoAbierto = false;
-  }
-  toggleOffcanvas(event: MouseEvent) {
-    event.stopPropagation(); // Evita que el evento de clic se propague
-    this.isOpen = !this.isOpen;
-  }
-
-  closeOffcanvas() {
-    this.isOpen = false;
-  }
-  clicksearch(): void {
-    this.hdnSearch = !this.hdnSearch;
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-
-    // Verifica si el clic se realizó dentro del offcanvas o del botón de abrir
-    const isClickInsideOffcanvas = target.closest('.offcanvas__header');
-    const isClickInsideToggleButton = target.closest(
-      '.offcanvas__header--menu__open--btn'
-    );
-
-    // Cierra el offcanvas si se hace clic fuera de él
-    if (this.isOpen && !isClickInsideOffcanvas && !isClickInsideToggleButton) {
-      this.closeOffcanvas();
-    }
-
-    // Aquí puedes mantener tu lógica existente para el carrito
-    const isClickInsideMinicart =
-      target.closest('.offCanvas__minicart') ||
-      target.closest('.minicart__open--btn');
-    if (!isClickInsideMinicart) {
-      this.cerrarCarrito();
-    }
-  }
-
   get searchState() {
     return this.hdnSearch ? 'hidden' : 'visible';
+  }
+
+  // Método para aumentar la cantidad
+  aumentarCantidad(item: any): void {
+    const existingProductIndex = this.ListCarrito.findIndex(
+      (product) => product.codigo === item.codigo
+    );
+    if (existingProductIndex !== -1) {
+      this.ListCarrito[existingProductIndex].cantidad += 1; // Aumenta la cantidad
+    }
+  }
+
+  // Método para disminuir la cantidad
+  disminuirCantidad(item: any): void {
+    const existingProductIndex = this.ListCarrito.findIndex(
+      (product) => product.codigo === item.codigo
+    );
+    if (existingProductIndex !== -1) {
+      if (this.ListCarrito[existingProductIndex].cantidad > 1) {
+        this.ListCarrito[existingProductIndex].cantidad -= 1; // Disminuye la cantidad
+      }
+    }
+  }
+
+  // Método para eliminar un producto del carrito
+  eliminarProducto(item: any): void {
+    this.ListCarrito = this.ListCarrito.filter(
+      (product) => product.codigo !== item.codigo
+    );
   }
 }

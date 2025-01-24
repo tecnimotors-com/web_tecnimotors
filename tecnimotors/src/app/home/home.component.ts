@@ -15,6 +15,7 @@ import { AuthService } from '../core/service/auth.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  standalone: false,
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private router: Router, private auth: AuthService) {}
@@ -155,14 +156,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ];
 
   public listarticulo: any[] = [
-    { src: 'PORTADAS-PAGINA-WEB-5.jpg' },
-    { src: 'PORTADAS-PAGINA-WEB-6.jpg' },
+    { src: '1.jpg' },
+    { src: '1_1.jpg' },
     { src: 'PORTADAS-PAGINA-WEB.jpg' },
   ];
   public src1: string =
-    'assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB-5.jpg';
+    'assets/img/banner/tecnimotors/1.jpg';
   public src2: string =
-    'assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB-6.jpg';
+    'assets/img/banner/tecnimotors/1_1.jpg';
   public src3: string = 'assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB.jpg';
 
   ngOnInit(): void {

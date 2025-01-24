@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MaestroarticuloService } from '../../../core/service/maestroarticulo.service';
 import { AuthService } from '../../../core/service/auth.service';
+import { CotizacionService } from '../../../core/service/cotizacion.service';
 
 @Component({
   selector: 'app-detallecamara',
   templateUrl: './detallecamara.component.html',
   styleUrls: ['./detallecamara.component.css'],
+  standalone: false,
 })
 export class DetallecamaraComponent implements OnInit, OnDestroy {
   public srcimg: string = '';
@@ -25,11 +27,13 @@ export class DetallecamaraComponent implements OnInit, OnDestroy {
 
   public count: number = 1;
   public blndisable = false;
+  public ListCarrito: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService,
-    private auth: AuthService
+    private auth: AuthService,
+    private cotizacionService: CotizacionService
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +78,6 @@ export class DetallecamaraComponent implements OnInit, OnDestroy {
 
       this.servicesmaestro.getDetalleCamaraAll(this.id).subscribe({
         next: (dtl: any) => {
-          console.log(dtl);
           this.Dtlid = dtl.id;
           this.Dtlcodigoimg = dtl.codigo;
           this.Dtlcodigo = dtl.codigo.slice(-5);
@@ -120,5 +123,26 @@ export class DetallecamaraComponent implements OnInit, OnDestroy {
     } else {
       this.count--;
     }
+  }
+
+  AgregarCarrito() {
+    // Crear el producto que se va a agregar
+    const product = {
+      id: this.Dtlid,
+      codigo: this.Dtlcodigoimg,
+      descripcion: this.DtlDescripcion,
+      familia: this.DtlFamilia,
+      subfamilia: this.DtlSubFamilia,
+      marca: this.DtlMarca,
+      tipo: this.DtlTipoArticulo,
+      unidad: this.DtlUnidadMedida,
+      cantidad: this.count, // Usar la cantidad actual
+    };
+
+    // Agregar el producto al carrito a través del servicio
+    this.cotizacionService.addToCart(product);
+
+    // Obtener el carrito actualizado
+    this.ListCarrito = this.cotizacionService.getCartItems();
   }
 }

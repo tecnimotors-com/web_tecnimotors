@@ -53,7 +53,7 @@
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Repositories\\MaestroArticulo\\Repo\\MaestroArticuloRepository.cs",
               "ToolTip": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Repositories\\MaestroArticulo\\Repo\\MaestroArticuloRepository.cs",
               "RelativeToolTip": "ApiDockerTecnimotors\\Repositories\\MaestroArticulo\\Repo\\MaestroArticuloRepository.cs",
-              "ViewState": "AgIAAG0CAAAAAAAAAAAQwMsCAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMsCAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T15:48:09.165Z",
               "EditorCaption": ""
@@ -68,8 +68,7 @@
               "RelativeToolTip": "ApiDockerTecnimotors\\Repositories\\MaestroArticulo\\Interface\\IMaestroArticuloRepository.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAawCcAAABuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T15:48:12.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T15:48:12.226Z"
             },
             {
               "$type": "Document",
@@ -81,8 +80,7 @@
               "RelativeToolTip": "ApiDockerTecnimotors\\Controllers\\MaestroArticuloController.cs",
               "ViewState": "AgIAAHgAAAAAAAAAAAAmwIgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T20:58:52.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-18T20:58:52.171Z"
             }
           ]
         }
