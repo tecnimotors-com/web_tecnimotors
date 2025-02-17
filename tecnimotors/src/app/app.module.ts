@@ -42,6 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     ReactiveFormsModule,
     NgSelectModule,
+    NgbModule,
   ],
   providers: [
     DatePipe,
