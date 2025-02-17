@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-protected',
   templateUrl: './protected.component.html',
-  styleUrl: './protected.component.css',
+  styleUrls: ['./protected.component.css'],
   standalone: false,
 })
 export class ProtectedComponent implements OnInit {
