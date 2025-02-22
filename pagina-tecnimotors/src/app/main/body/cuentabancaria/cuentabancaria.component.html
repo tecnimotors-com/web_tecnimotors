@@ -1,0 +1,155 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<!-- End preloader -->
+<app-header></app-header>
+<main class="main__content_wrapper">
+
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content text-center">
+                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                            <li class="breadcrumb__content--menu__items">
+                                <a [routerLink]="['/home']">Pagina Principal</a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items"><span>Cuenta Bancaria Tecnimotors</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="my__account--section section--padding">
+        <div class="container" style="justify-items: center;">
+            <div class=" border-radius-10 d-flex">
+                <div class="account__content">
+                    <div class="account__table--area">
+                        <table class="account__table">
+                            <thead class="account__table--header">
+                                <tr class="account__table--header__child">
+                                    <th class="account__table--header__child--items" style="justify-items: center;">
+                                        <h2>Cuentas Bancarias</h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <thead class="account__table--header">
+                                <tr class="account__table--header__child">
+                                    <th class="account__table--header__child--items" style="justify-items: center;">
+                                        <h4 style="text-align: left;" for="inloneform1">
+                                            Razon Social: REPRESENTACIONES TECNIMOTORS EIRL<br>
+                                            Ruc: 20100990998
+                                        </h4>
+                                        <input type="text" id="inloneform1" hidden>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="account__table--body" *ngFor="let item of Listbancario, let i = index">
+                                <tr class="account__table--body__child">
+                                    <td class="account__table--body__child--items">
+                                        <div class="row" style="text-align: center;">
+                                            <div class="col-5" style="align-content: center;color: black">
+                                                <label style="font-size: 20px;" [htmlFor]="'inlinefroma'+ (i + 1)">
+                                                    {{item.titulo}}
+                                                </label>
+                                                <input type="text" hidden [id]="'inlinefroma'+ (i + 1)">
+                                            </div>
+                                            <div class="col-7" style="text-align: left;">
+                                                <li style="color: black;font-size: 13px;">
+                                                    <p>
+                                                        <strong>{{item.banco}}</strong>
+                                                    </p>
+                                                    <br>
+                                                    <ul>
+                                                        <li style="list-style: disc;" *ngIf="item.ccAhorros!">
+                                                            <label [htmlFor]="'inlinefromb'+ (i + 1)">Cuenta de AHORROS
+                                                                MN:
+                                                                {{item.ccAhorros}}
+                                                            </label>
+                                                            <input type="text" hidden [id]="'inlinefromb'+ (i + 1)">
+                                                        </li>
+                                                        <li style="list-style: disc;" *ngIf="item.cuentaMN!">
+                                                            <label [htmlFor]="'inlinefromc'+ (i + 1)">Cuenta MN:
+                                                                {{item.cuentaMN}}
+                                                            </label>
+                                                            <input type="text" hidden [id]="'inlinefromc'+ (i + 1)">
+                                                        </li>
+                                                        <li *ngIf="item.cciSoles!">
+                                                            <label [htmlFor]="'inlinefromd'+ (i + 1)">
+                                                                CCI SOLES: {{item.cciSoles}}
+                                                            </label>
+                                                            <input type="text" hidden [id]="'inlinefromd'+ (i + 1)">
+                                                        </li>
+                                                        <br>
+                                                        <li style="list-style: disc;" *ngIf="item.cuentaME!">
+                                                            <label [htmlFor]="'inlinefrome'+ (i + 1)">
+                                                                Cuenta ME: {{item.cuentaME}}
+                                                            </label>
+                                                            <input type="text" hidden [id]="'inlinefrome'+ (i + 1)">
+                                                        </li>
+                                                        <li *ngIf="item.cuentaME!">
+                                                            <label [htmlFor]="'inlinefromf'+ (i + 1)">
+                                                                {{item.cciDolares}}
+                                                            </label>
+                                                            <input type="text" hidden [id]="'inlinefromf'+ (i + 1)">
+                                                        </li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>

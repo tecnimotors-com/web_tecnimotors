@@ -1,0 +1,299 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+<div class="container">
+    <div class="page-container">
+        <br>
+        <h2 class="text-center">Registro Mayoristas</h2>
+        <div class="rte">
+
+            <style>
+                #formulario {
+                    max-width: 600px;
+                    margin: auto;
+                    margin-top: 20px;
+                    font-size: 16px;
+                    border-color: #CFCFCF;
+                }
+
+                .form-control {
+                    border-radius: 0.5rem !important;
+                    border-color: #CFCFCF;
+                }
+
+                input,
+                textarea {
+                    font-size: 16px !important;
+                    border-radius: 0.5rem !important;
+                    border-color: #CFCFCF;
+                }
+
+                select {
+                    font-size: 15px !important;
+                    border-radius: 0.5rem !important;
+                    color: black;
+                    border-color: #C6C6C6;
+                }
+
+                .subtitle {
+                    font-size: 16px;
+                    margin-top: 10px;
+                }
+
+                h1 {
+                    text-align: center;
+                }
+
+                span.required {
+                    color: rgb(255, 49, 49);
+                }
+            </style>
+            <p class="subtitle text-muted text-center">
+                Ingrese sus datos, para que uno de nuestros vendedores se
+                contacte con Ud. y complete el registro
+            </p>
+            <!--<form action="codigo.php" method="POST" style="width:35%;margin:0 auto;">-->
+            <form id="formulario">
+                <div class="row">
+                    <div class="col-sm-4  mb-4">
+                        <label class="form-label" for="txtnombre">
+                            Nombres
+                            <span class="required">* </span>
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbnombre" id="txtnombre" name="lblnombre">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertnom==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> Nombres
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtapepater">
+                            Apellido Paterno
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbapellidoparteno" id="txtapepater"
+                            name="lblapepater" required="true">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertpater==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> apellido paterno
+                        </div>
+                    </div>
+                    <div class="col-sm-4  mb-4">
+                        <label class="form-label" for="txtapemater">
+                            Apellido Materno
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbapellidomaterno" id="txtapemater"
+                            name="lblapemater">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertmater==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> apellido materno
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6  mb-4">
+                        <label class="form-label" for="txtcelular">
+                            Celular
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbcelular" id="txtcelular"
+                            name="lblcelular">
+                        <div class="alert alert-danger" *ngIf="alerts.showalertcelular==true" id="success-alert"
+                            style="font-size: 14px;">
+                            <strong>Vacio!</strong> celular
+                        </div>
+                    </div>
+                    <div class="col-sm-6  mb-4">
+                        <label class="form-label" for="txttelefijo">
+                            Teléfono Fijo
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbtelefijo" id="txttelefijo"
+                            name="lbltelefijo">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="txtcorreo">
+                        Correo
+                        <span class="required">*</span>
+                    </label>
+                    <input class="form-control" type="text" [(ngModel)]="lbcorreo" id="txtcorreo" name="lblcorreo">
+                    <div class="alert alert-danger" *ngIf="alerts.showalertcorreo==true" id="success-alert"
+                        style="font-size: 14px;">
+                        <strong>Vacio!</strong> correo
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtruc">
+                            Ruc
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbrucdni" id="txtruc" name="lblruc">
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtrazon">
+                            Razon Social
+                        </label>
+                        <input class="form-control" type="text" [(ngModel)]="lbrazonnombre" id="txtrazon"
+                            name="lblrazon">
+                    </div>
+
+                </div>
+                <div class="mb-4">
+                    <label class="form-label" for="txtdireccion">
+                        Dirección
+                        <span class="required">*</span>
+                    </label>
+                    <textarea class="form-control" type="text" [(ngModel)]="lbdireccion" id="txtdireccion" rows="2"
+                        cols="30" name="lbldireccion"></textarea>
+                    <div class="alert alert-danger" *ngIf="alerts.showalertdireccion==true" id="success-alert"
+                        style="font-size: 14px;">
+                        <strong>Vacio!</strong> dirección
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtdepa">
+                            Departamento
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" (change)="ObtenerProvincia()" [(ngModel)]="departamento_id"
+                            id="txtdepa" name="lbldepa">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listDepartamento" [value]="item.departamento_id">
+                                {{item.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtpro">
+                            Provincia
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" (change)="listarDistrito()" [(ngModel)]="provincia_id" id="txtpro"
+                            name="lblprovi">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listProvincia" [value]="item.provincia_id">
+                                {{item.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <label class="form-label" for="txtdis">
+                            Distrito
+                            <span class="required">*</span>
+                        </label>
+                        <select class="form-select" (change)="getdistrito()" [(ngModel)]="distrito_id" id="txtdis"
+                            name="lbldis">
+                            <option value="0" disabled selected>Seleccione</option>
+                            <option *ngFor="let item of listDistrito" [value]="item.distrito_id">
+                                {{item.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="txtfecnac">
+                            Fecha de Nacimiento:
+                            <span class="required">*</span>
+                        </label>
+                        <input class="form-control" type="date" [(ngModel)]="lbfechanac" id="txtfecnac"
+                            name="lblfecnac">
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label class="form-label" for="genero">
+                            Género:
+                            <input type="text" name="txtgenero" id="genero" [(ngModel)]="lbgenero" hidden>
+                        </label>
+                        <div style="display: inline-flex; margin-right: 2rem;">
+                            <input value="masculino" type="radio" id="txthombre" name="genero" [(ngModel)]="lbgenero">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txthombre"> masculino
+                            </label>
+                        </div>
+                        <div style="display: inline-flex;">
+                            <input value="femenino" type="radio" id="txtmujer" name="genero" [(ngModel)]="lbgenero">
+                            <label style="margin: 0px; padding: 0rem 0rem 0rem 1rem;" for="txtmujer"> femenino </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <label for="txtestado">estado</label>
+                    <input class="form-control" type="text" name="lblestado" id="txtestado">
+                </div>
+                <div class="form-group" hidden>
+                    <label for="txtfuente">Fuente</label>
+                    <input class="form-control" type="text" name="lblfuente" id="txtfuente">
+                </div>
+                <div class="form-group">
+                    <label for="txtcoment">Comentario</label>
+                    <textarea placeholder="Comentario..." class="form-control" rows="5" cols="30" [(ngModel)]="lbcoment"
+                        id="txtcoment" name="lblcoment"></textarea>
+                </div>
+                <div class="form-check mb-4">
+                    <div class="form-group" id="checkbox-value">
+                    </div>
+                    <label for="txtcheck"></label>
+                    <input value="false" class="inline checkbox" type="checkbox" [(ngModel)]="lbcheckauto" id="txtcheck"
+                        name="lblcheck">
+                    <label class="form-check-label" for="txtcheck">
+                        Autorizo a Tecnimotors al tratamiento de mis datos personales para que pueda
+                        hacerme llegar por cualquier vía información sobre acciones formativas, iniciativas o
+                        servicios que el centro ponga en marcha y que puedan resultar de mi interés.
+                    </label>
+                </div>
+                <button style="width: 100%;font-size: 16px !important;border-radius: 0.5rem !important;"
+                    class="btn btn-primary" type="button" (click)="Registrarse()">
+                    Registrarse
+                </button>
+                <!--*ngIf="alerts.showalertdireccion==true"-->
+                <div class="alert alert-success" *ngIf="showsuccess" id="success-alert"
+                    style="font-size: 14px;margin-top: 1rem;text-align: center;">
+                    <strong>Se registro Correctamente </strong> al Mayorista
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

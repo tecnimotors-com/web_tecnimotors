@@ -1,0 +1,456 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+<main class="main__content_wrapper">
+    <section class="hero__slider--section">
+        <!-- Carousel -->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner"
+                style="background-image: url('../../assets/img/banner/tecnimotors/FONDO-1.jpg')">
+                <div class="carousel-item active" style="transition: transform 0.5s ease;">
+                    <img [src]="src1" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
+                    <img [src]="src2" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="carousel-item" style="transition: transform 0.5s ease;max-width: 100%;height: auto;">
+                    <img [src]="src3" class="d-block w-100" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            <!-- Left and right controls/icons -->
+            <button class=" carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class=" -chevron-left">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class=" -chevron-right">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </section>
+    <!-- Start slider section -->
+    <section class="hero__slider--section">
+        <div class="slider__thumbnail--style5 position-relative">
+            <div class="search__filter--section search__filter--style5">
+                <div class="container">
+                    <div class="search__filter--inner style5"
+                        style="padding: 1.3rem;background: linear-gradient(to right, #c0c0c0, #ffffff) !important;">
+                        <form class="search__filter--form__style2 d-flex" action="#"
+                            style="justify-content: space-evenly;">
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="selectProducto($event)"
+                                    name="producthome">
+                                    <option value="" selected disabled>Producto</option>
+                                    <option *ngFor="let item of ListProducto" [value]="item.idproduct">
+                                        {{item.producthome}}</option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width" [hidden]="istruevehiculo">
+                                <select class="search__filter--select__field" (change)="selectTipoProducto($event)"
+                                    [(ngModel)]="selectedTipoVehiculo" name="tipoproducthome">
+                                    <option value="" selected disabled>Tipo de Vehículo</option>
+                                    <option *ngFor="let item of ListTipoVehiculo"
+                                        [value]="item.idproducttipo??item.aplicacion">
+                                        {{item.productipovehiculo??item.aplicacion}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width"
+                                [hidden]="istruetipovehiculo">
+                                <select class="search__filter--select__field" (change)="selectMarca()"
+                                    [(ngModel)]="txtSelectmarca" name="selectmarca">
+                                    <option value="" selected disabled>Marca</option>
+                                    <option *ngFor="let item of ListMarca">
+                                        {{item.productmarca}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="search__filter--width">
+                                <button class="search__filter--btn primary__btn" type="submit"
+                                    (click)="BtnBuscar()">Buscar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End search filter area -->
+        </div>
+
+    </section>
+    <!-- End slider section -->
+    <!-- Start product section -->
+    <section class="product__section" style="background-color: white;box-shadow: 0px 2px 20px black;
+        padding: 1rem 0;border-top: black 1px solid;">
+        <div class="container" style="padding-left:1rem;padding-right:1rem;max-width: 160rem;">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col" *ngFor="let logo of logos">
+                                <a>
+                                    <img [src]="logo.src" alt="Logo" />
+                                </a>
+                                <!--
+                                <img src="../../assets/img/logo/logotecnimotors/RTM.jpg">
+                                -->
+                            </div>
+                            <!--
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/TSK.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/KENDA.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/DUNLOP.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/CHENG-SHIN.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/MAXXIS.jpg">
+                            </div>
+                            <div class="col">
+                                <img src="../../assets/img/logo/logotecnimotors/WANDA.jpg">
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <!-- End product section -->
+
+    <section class="product__section section--padding">
+        <div class="container">
+            <div class="section__heading border-bottom mb-30">
+                <h2 class="section__heading--maintitle">VEHÍCULOS</h2>
+            </div>
+            <div class="product__section--inner pb-15 product__swiper--activation swiper" #swiperContainer>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <article class="product__card" style="border: 0px solid var(--border-color);">
+                            <div class="product__card--thumbnail">
+                                <a class="product__card--thumbnail__link display-block">
+                                    <img class="product__card--thumbnail__img" style="border-radius: 2rem;border: 1px solid black;
+                                        transform: scale(1.00);" alt="product-img"
+                                        src="assets/img/banner/tecnimotors/motocicleta1.jpg">
+                                </a>
+                                <ul class="product__card--action d-flex align-items-center justify-content-center">
+                                    <li class="product__card--action__list" (click)="BtnVehiculoMotocicleta()"
+                                        style="cursor: pointer;">
+                                        <a class="btnclassa" title="Wishlist" (click)="BtnVehiculoMotocicleta()"
+                                            style="cursor: pointer;">
+                                            <label style="margin:0px" for="inlineform1">VER</label>
+                                            <input type=" text" id="inlineform1" hidden>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__card--content">
+                                <h3 class="product__card--title" style="text-align: center;">
+                                    <a>
+                                        Motocicletas
+                                    </a>
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="product__card" style="border: 0px solid var(--border-color);">
+                            <div class="product__card--thumbnail">
+                                <a class="product__card--thumbnail__link display-block">
+                                    <img class="product__card--thumbnail__img" style="border-radius: 2rem;border: 1px solid black;
+                                        transform: scale(1.00);" alt="product-img"
+                                        src="assets/img/banner/tecnimotors/bicicletas1.jpg">
+                                </a>
+                                <ul class="product__card--action d-flex align-items-center justify-content-center">
+                                    <li class="product__card--action__list" (click)="BtnVehiculoBicicleta()"
+                                        style="cursor: pointer;">
+                                        <a class="btnclassa" title="Wishlist" (click)="BtnVehiculoBicicleta()"
+                                            style="cursor: pointer;">
+                                            <label style="margin:0px" for="inlineform2">VER</label>
+                                            <input type=" text" id="inlineform2" hidden>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__card--content">
+                                <h3 class="product__card--title" style="text-align: center;">
+                                    <a>
+                                        Bicicletas
+                                    </a>
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="product__card" style="border: 0px solid var(--border-color);">
+                            <div class="product__card--thumbnail">
+                                <a class="product__card--thumbnail__link display-block">
+                                    <img class="product__card--thumbnail__img" style="border-radius: 2rem;border: 1px solid black;
+                                        transform: scale(1.00);" alt="product-img"
+                                        src="assets/img/banner/tecnimotors/cuatrimotos3.jpg">
+                                </a>
+                                <ul class="product__card--action d-flex align-items-center justify-content-center">
+                                    <li class="product__card--action__list" (click)="BtnVehiculoCuatrimotos()"
+                                        style="cursor: pointer;">
+                                        <a class="btnclassa" title="Wishlist" (click)="BtnVehiculoCuatrimotos()"
+                                            style="cursor: pointer;">
+                                            <label style="margin:0px" for="inlineform3">VER</label>
+                                            <input type=" text" id="inlineform3" hidden>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__card--content">
+                                <h3 class="product__card--title" style="text-align: center;">
+                                    <a>
+                                        Cuatrimotos
+                                    </a>
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="product__card" style="border: 0px solid var(--border-color);">
+                            <div class="product__card--thumbnail">
+                                <a class="product__card--thumbnail__link display-block">
+                                    <img class="product__card--thumbnail__img" style="border-radius: 2rem;border: 1px solid black;
+                                        transform: scale(1.00);" alt="product-img"
+                                        src="assets/img/banner/tecnimotors/cargueros1.jpg">
+                                </a>
+                                <ul class="product__card--action d-flex align-items-center justify-content-center">
+                                    <li class="product__card--action__list" (click)="BtnVehiculoCargueros()"
+                                        style="cursor: pointer;">
+                                        <a class="btnclassa" title="Wishlist" (click)="BtnVehiculoCargueros()"
+                                            style="cursor: pointer;">
+                                            <label style="margin:0px" for="inlineform4">VER</label>
+                                            <input type=" text" id="inlineform4" hidden>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__card--content">
+                                <h3 class="product__card--title" style="text-align: center;">
+                                    <a>
+                                        Cargueros
+                                    </a>
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start banner section -->
+    <section class="banner__section section--padding pt-0">
+        <div class="container">
+            <div class="row mb--n30">
+                <div class="col-lg-6 col-md-6 mb-30">
+                    <div class="container" style="padding: 0px;background-color: rgb(133, 133, 133);
+                        color: white;width: 24rem;margin: 0px;">
+                        <label style="text-align: left;padding: 0px 1rem;font-weight: 700;" for="inlineform5">
+                            LLANTAS
+                        </label>
+                        <input type=" text" id="inlineform5" hidden>
+                    </div>
+                    <br>
+                    <article class="product__card" style="border: 0px solid var(--border-color);">
+                        <div class="product__card--thumbnail">
+                            <a class="product__card--thumbnail__link display-block" style="justify-items: center">
+                                <img src="assets/img/banner/tecnimotors/homeLlantasCamara2.jpg" alt="banner-img"
+                                    style="width: 80%;height: 80%;border-radius: 2rem;border: 1px solid black;transform: scale(1.00);">
+                            </a>
+                            <ul
+                                class="product__card--action d-flex align-items-center justify-content-center playhover">
+                                <li class="product__card--action__list" (click)="BtnLlantas()" style="cursor:pointer">
+                                    <a class="btnclass2a" title="Wishlist" (click)="BtnLlantas()"
+                                        style="cursor:pointer">
+                                        <label style="margin:0px" (click)="BtnLlantas()" style="cursor:pointer"
+                                            for="inlineform6">VER</label>
+                                        <input type=" text" id="inlineform6" hidden>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__card--content">
+                            <h3 class="product__card--title" style="text-align: center;">
+                                <a>
+                                    Motocicletas, Bicicletas, Cargueros y cuatrimotos
+                                </a>
+                            </h3>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-6 col-md-6 mb-30" style="justify-items: end;">
+                    <div class="container" style="padding: 0px;background-color: rgb(133, 133, 133);
+                        color: white;width: 24rem;margin: 0px;justify-items: end;">
+                        <label style="text-align: left;padding: 0px 1rem;font-weight: 700;" for="inlineform7">
+                            CÁMARAS
+                        </label>
+                        <input type=" text" id="inlineform7" hidden>
+                    </div>
+                    <br>
+                    <article class="product__card" style="border: 0px solid var(--border-color);">
+                        <div class="product__card--thumbnail">
+                            <a class="product__card--thumbnail__link display-block" style="justify-items: center">
+                                <img src="assets/img/banner/tecnimotors/homeRepuestos2.jpg" alt="banner-img"
+                                    style="width: 80%;height: 80%;border-radius: 2rem;border: 1px solid black;transform: scale(1.00);">
+                            </a>
+                            <ul
+                                class="product__card--action d-flex align-items-center justify-content-center playhover">
+                                <li class="product__card--action__list" (click)="BtnCamara()" style="cursor:pointer">
+                                    <a class="btnclass2a" title="Wishlist" (click)="BtnCamara()" style="cursor:pointer">
+                                        <label style="margin:0px" (click)="BtnCamara()" style="cursor:pointer"
+                                            for="inlineform8">VER</label>
+                                        <input type=" text" id="inlineform8" hidden>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__card--content">
+                            <h3 class="product__card--title" style="text-align: center;">
+                                <a>
+                                    Motocicletas, Bicicletas, Cargueros y cuatrimotos
+                                </a>
+                            </h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="banner__section section--padding pt-0">
+        <div class="container">
+            <div class="row mb--n30">
+                <div class="col-lg-6 col-md-6 mb-30">
+                    <div class="container" style="padding: 0px;background-color: rgb(133, 133, 133);
+                        color: white;width: 24rem;margin: 0px;">
+                        <label style="text-align: left;padding: 0px 1rem;font-weight: 700;" for="inlineform9">
+                            ACEITES Y LUBRICANTES
+                        </label>
+                        <input type=" text" id="inlineform9" hidden>
+                    </div>
+                    <br>
+                    <article class="product__card" style="border: 0px solid var(--border-color);">
+                        <div class="product__card--thumbnail">
+                            <a class="product__card--thumbnail__link display-block" style="justify-items: center">
+                                <img src="assets/img/banner/tecnimotors/homeAceiteLubricante2.jpg" alt="banner-img"
+                                    style="width: 80%;height: 80%;border-radius: 2rem;border: 1px solid black;transform: scale(1.00);">
+                            </a>
+                            <ul
+                                class="product__card--action d-flex align-items-center justify-content-center playhover">
+                                <li class="product__card--action__list" (click)="BtnAceite()" style="cursor:pointer">
+                                    <a class="btnclass2a" title="Wishlist" (click)="BtnAceite()" style="cursor:pointer">
+                                        <label style="margin:0px" (click)="BtnAceite()" style="cursor:pointer"
+                                            for="inlineform10">VER</label>
+                                        <input type=" text" id="inlineform10" hidden>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-6 col-md-6 mb-30" style="justify-items: end;">
+                    <div class="container" style="padding: 0px;background-color: rgb(133, 133, 133);
+                        color: white;width: 24rem;margin: 0px;justify-items: end;">
+                        <label style="text-align: left;padding: 0px 1rem;font-weight: 700;" for="inlineform11">
+                            REPUESTOS
+                        </label>
+                        <input type=" text" id="inlineform11" hidden>
+                    </div>
+                    <br>
+                    <article class="product__card" style="border: 0px solid var(--border-color);">
+                        <div class="product__card--thumbnail">
+                            <a class="product__card--thumbnail__link display-block" style="justify-items: center">
+                                <img src="assets/img/banner/tecnimotors/homeAccesorios2.jpg" alt="banner-img"
+                                    style="width: 80%;height: 80%;border-radius: 2rem;border: 1px solid black;transform: scale(1.00);">
+                            </a>
+                            <ul
+                                class="product__card--action d-flex align-items-center justify-content-center playhover">
+                                <li class="product__card--action__list" (click)="BtnRepuesto()" style="cursor:pointer">
+                                    <a class="btnclass2a" title="Wishlist" (click)="BtnRepuesto()"
+                                        style="cursor:pointer">
+                                        <label style="margin:0px" (click)="BtnRepuesto()" style="cursor:pointer"
+                                            for="inlineform12">VER</label>
+                                        <input type=" text" id="inlineform12" hidden>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End banner section -->
+
+
+
+
+</main>
+<app-footer></app-footer>

@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "0cRRsmy5lpmjZF6bK82bNsRfRFlUA7xXxfSrQ6VK1Cs=",
+  "Hash": "oyVRTMQagTQltLDZ1O2ap1o5LHD2G5pGYmbwoSEUwzA=",
   "Source": "ApiDockerTecnimotors",
   "BasePath": "_content/ApiDockerTecnimotors",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

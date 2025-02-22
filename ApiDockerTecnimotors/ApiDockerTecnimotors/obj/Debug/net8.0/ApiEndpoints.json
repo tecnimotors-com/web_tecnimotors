@@ -1,5 +1,26 @@
 [
   {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.ImagesController",
+    "Method": "SubirImagenes",
+    "RelativePath": "api/Images/subir",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "archivos",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "codigoInterno",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroArticuloController",
     "Method": "AllfiltroPrincipalCocada",
     "RelativePath": "api/MaestroArticulo/AllfiltroPrincipalCocada",
@@ -263,6 +284,106 @@
       {
         "Name": "txtcategoria",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ActualizarPathImagen",
+    "RelativePath": "api/MaestroClasificado/ActualizarPathImagen",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "DetalleVehiculo",
+    "RelativePath": "api/MaestroClasificado/DetalleVehiculo/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoCategoriaVehiculos",
+    "RelativePath": "api/MaestroClasificado/ListadoCategoriaVehiculos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralCategoria",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralCategoria/{motocicleta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "motocicleta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralVehiculos",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralVehiculos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Trgeneral",
+        "Type": "ApiDockerTecnimotors.Controllers.GeneralVehiculo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoModeloVehiculo",
+    "RelativePath": "api/MaestroClasificado/ListadoModeloVehiculo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TrModelo",
+        "Type": "ApiDockerTecnimotors.Controllers.GeneralModelo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListarMarcaVehiculo",
+    "RelativePath": "api/MaestroClasificado/ListarMarcaVehiculo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TrModelo",
+        "Type": "ApiDockerTecnimotors.Controllers.GeneralMarca",
         "IsRequired": true
       }
     ],

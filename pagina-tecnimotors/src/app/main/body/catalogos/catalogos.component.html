@@ -1,0 +1,192 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+
+<main class="main__content_wrapper">
+
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content text-center">
+                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                            <li class="breadcrumb__content--menu__items">
+                                <a [routerLink]="['/home']">Pagina Principal</a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items"><span>Catálogo</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
+    <!-- Start shop section -->
+    <div class="shop__section section--padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
+                    <form>
+                        <div class="shop__sidebar--widget widget__area d-lg-block">
+                            <div class="single__widget widget__bg">
+                                <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
+                                    Buscar Catálogo
+                                    <button type="button" style="color: white;background-color: black;
+                                        border-radius: 5px;cursor: pointer;" (click)="Limpiar()">
+                                        Limpiar
+                                    </button>
+                                </h2>
+
+                                <ul class="widget__categories--menu">
+                                    <li class="widget__categories--menu__list">
+                                        <input type="text" placeholder="Buscar Catálogo"
+                                            class="widget__categories--menu__label d-flex align-items-center"
+                                            name="tipoproducthome" style="width: -webkit-fill-available;
+                                            border: 1px solid;padding: 10px;color: #04195b;">
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="single__widget widget__bg">
+                                <h2 class="widget__title h3">Tipo de Catálogo</h2>
+                                <ul class="widget__categories--menu">
+                                    <li class="widget__categories--menu__list">
+                                        <select class="widget__categories--menu__label d-flex align-items-center"
+                                            name="tipoproducthome" style="width: -webkit-fill-available;
+                                            border: 0px solid;padding: 10px;color: #04195b;"
+                                            [(ngModel)]="txttipocatalogo" (change)="SelectCatalogo()">
+                                            <option selected disabled value="0">Tipo Catálogo</option>
+                                            <option *ngFor="let item of ListTipoCatalogo"
+                                                [value]="item.id_tipo_catalogo">
+                                                {{item.tipo_catalogo}}</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
+                    <div class="shop__right--sidebar">
+                        <!-- Start categories section -->
+                        <div class="categories__shop mb-50">
+                            <div class="section__heading border-bottom mb-30">
+                                <h2 class="section__heading--maintitle">Catálogo Tecnimotors</h2>
+                            </div>
+
+
+                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                                nextLabel="Siguiente" [maxSize]="10">
+                            </pagination-controls>
+                            <ul class="categories__shop--inner" [@fadeInOut]>
+                                <li class="categories__shop--card" *ngFor="let item of ListCatalogo | paginate: 
+                                { itemsPerPage: itemper, currentPage: p }, let i = index">
+                                    <a class="categories__shop--card__link">
+                                        <div class="product__card--thumbnail mb-15">
+                                            <a class="product__card--thumbnail__link display-block">
+                                                <img class="categories__thumbnail--img" src="{{item.imagen}}"
+                                                    style="border-radius: 2rem;border: 1px solid black;transform: scale(1.00);"
+                                                    alt="product-img">
+                                            </a>
+                                            <div class="product__media--view__icon">
+                                                <a class="product__media--view__icon--link glightbox"
+                                                    data-gallery="product-media-zoom">
+                                                    <svg class="product__items--action__btn--svg"
+                                                        xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443"
+                                                        viewBox="0 0 512 512">
+                                                        <path
+                                                            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                                                            fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                            stroke-width="32"></path>
+                                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-miterlimit="10" stroke-width="32"
+                                                            d="M338.29 338.29L448 448"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="categories__content">
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                {{item.titulo}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                Fecha : {{item.fecha_registro}}
+                                            </span>
+                                            <span class="categories__content--subtitle"
+                                                style="width: -webkit-fill-available;text-align: start;">
+                                                <a target="_blank" href="{{item.link}}"
+                                                    style="width: -webkit-fill-available;text-align: start;">
+                                                    Visualizar PDFs
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
+                                nextLabel="Siguiente" [maxSize]="10">
+                            </pagination-controls>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End shop section -->
+
+
+
+</main>
+
+<app-footer></app-footer>

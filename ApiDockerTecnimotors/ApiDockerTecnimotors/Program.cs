@@ -1,15 +1,24 @@
 using ApiAlmacen.Context;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configurar el límite de tamaño de la solicitud
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
+});
+
+// Configurar Kestrel para aumentar el límite de tamaño de la solicitud
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromHours(2);
-    serverOptions.Limits.RequestHeadersTimeout = TimeSpan.FromHours(2); //horas 2 horas se probara mañana
+    serverOptions.Limits.MaxRequestBodySize = 104857600; // 100 MB
 });
 
 var Configuration = builder.Configuration;
@@ -19,7 +28,7 @@ var postgreSQLConnectionConfiguration = new PostgreSQLConfiguration(Configuratio
 builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 
 builder.Services.AddScoped<IMaestroArticuloRepository, MaestroArticuloRepository>();
-
+builder.Services.AddScoped<IMaestroClasificado, MaestroClasificado>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -47,22 +56,17 @@ else
                         await context.Response.WriteAsync(ex.Error.Message);
                     }
                 }
-             );
+            );
         }
-     );
+    );
 }
 
 app.UseDefaultFiles();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllers();
 

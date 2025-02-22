@@ -1,5 +1,6 @@
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\appsettings.Development.json
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\appsettings.json
+D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\ApiDockerTecnimotors.staticwebassets.endpoints.json
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\ApiDockerTecnimotors.exe
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\ApiDockerTecnimotors.deps.json
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\ApiDockerTecnimotors.runtimeconfig.json
@@ -25,14 +26,17 @@ D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotor
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.MvcApplicationPartsAssemblyInfo.cs
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.MvcApplicationPartsAssemblyInfo.cache
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.sourcelink.json
+D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\scopedcss\bundle\ApiDockerTecnimotors.styles.css
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets.build.json
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets.development.json
+D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets\msbuild.ApiDockerTecnimotors.Microsoft.AspNetCore.StaticWebAssets.props
+D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets\msbuild.ApiDockerTecnimotors.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets\msbuild.build.ApiDockerTecnimotors.props
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ApiDockerTecnimotors.props
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ApiDockerTecnimotors.props
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets.pack.json
-D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\scopedcss\bundle\ApiDockerTecnimotors.styles.css
+D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDocke.A9A41B31.Up2Date
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.dll
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\refint\ApiDockerTecnimotors.dll

@@ -1,0 +1,670 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ApiDockerTecnimotors",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Images/subir": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "archivos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "codigoInterno": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "archivos": {
+                  "style": "form"
+                },
+                "codigoInterno": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListArticulosGeneral": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/GetBanner": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "ruta",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/AllfiltroPrincipalCocada": {
+      "post": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/DetalleArticulo/{Id}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListCategorieCamara": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListModeloCamara/{txtcategoria}/{txtmarca}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "txtmarca",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoCamaraGeneral/{txtcategoria}/{txtmarca}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "txtmarca",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/DetalleCamaraAll/{Id}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoCamaraGeneralModelo/{IdCamara}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "IdCamara",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListCategorieAceite": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListModeloAceite/{txtcategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoAceiteGeneral/{txtcategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListModeloVehiculo/{txtcategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoVehiculoGeneral/{txtcategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoRepuestoTipoCategoria/{txtcategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "txtcategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoModeloRepuesto/{TipoCategoria}/{Categoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "TipoCategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Categoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroArticulo/ListadoRepuestoGeneralALl/{TipoCategoria}": {
+      "get": {
+        "tags": [
+          "MaestroArticulo"
+        ],
+        "parameters": [
+          {
+            "name": "TipoCategoria",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoCategoriaVehiculos": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoGeneralCategoria/{motocicleta}": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "parameters": [
+          {
+            "name": "motocicleta",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoGeneralVehiculos": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralVehiculo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralVehiculo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralVehiculo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoModeloVehiculo": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralModelo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralModelo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralModelo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListarMarcaVehiculo": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralMarca"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralMarca"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralMarca"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/DetalleVehiculo/{Id}": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ActualizarPathImagen": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeneralMarca": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "medida": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneralModelo": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeneralVehiculo": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "medida": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrFrombody": {
+        "type": "object",
+        "properties": {
+          "ancho": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "aro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cocada": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

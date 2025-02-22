@@ -1,8 +1,7 @@
 ﻿namespace ApiAlmacen.Context
 {
-    public class PostgreSQLConfiguration
+    public class PostgreSQLConfiguration(string connectionString)
     {
-        public PostgreSQLConfiguration(string connectionString) => ConnectionString = connectionString;
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } = connectionString;
     }
 }

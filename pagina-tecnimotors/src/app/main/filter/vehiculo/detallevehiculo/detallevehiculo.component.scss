@@ -1,0 +1,17 @@
+.table-responsive {
+  max-height: 400px; /* Ajusta la altura máxima según sea necesario */
+  overflow-y: auto; /* Habilita el scroll vertical */
+  border: 1px solid #ddd; /* Opcional: agrega un borde alrededor del contenedor */
+}
+
+/* Opcional: Estilo para la tabla */
+.table {
+  width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho del contenedor */
+  border-collapse: collapse; /* Colapsa los bordes de la tabla */
+}
+
+.table th,
+.table td {
+  padding: 8px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+}
