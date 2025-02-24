@@ -96,6 +96,43 @@ namespace ApiDockerTecnimotors.Controllers
 
             return Ok(new { mensaje = "Rutas de imágenes actualizadas correctamente." });
         }
+
+        [HttpGet("GetBanner1/{ruta}")]
+
+        public ActionResult GetBanner1(string ruta)
+        {
+            FileStream stream = System.IO.File.OpenRead(ruta);
+            return File(stream, "image/jpeg");
+        }
+
+        [HttpGet("GetBanner2")]
+
+        public ActionResult GetBanner2(string ruta)
+        {
+            FileStream stream = System.IO.File.OpenRead(ruta);
+            return File(stream, "image/jpeg");
+        }
+
+        [HttpPost("GetBanner3")]
+
+        public ActionResult GetBanner3([FromForm] Trruta ruta)
+        {
+            FileStream stream = System.IO.File.OpenRead(ruta.Ruta!);
+            return File(stream, "image/jpeg");
+        }
+
+        [HttpPost("GetBanner4")]
+
+        public ActionResult GetBanner4([FromBody] Trruta ruta)
+        {
+            FileStream stream = System.IO.File.OpenRead(ruta.Ruta!);
+            return File(stream, "image/jpeg");
+        }
+    }
+
+    public class Trruta
+    {
+        public string? Ruta { get; set; }
     }
     public class GeneralVehiculo
     {

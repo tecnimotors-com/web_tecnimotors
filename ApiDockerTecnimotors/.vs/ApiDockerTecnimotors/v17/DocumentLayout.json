@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{096CE77C-2B68-4AEF-B724-7B3D84B169E9}|ApiDockerTecnimotors\\ApiDockerTecnimotors.csproj|d:\\tecnimotors\\1. produccion\\16. tecnimotors\\web_tecnimotors\\apidockertecnimotors\\apidockertecnimotors\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{096CE77C-2B68-4AEF-B724-7B3D84B169E9}|ApiDockerTecnimotors\\ApiDockerTecnimotors.csproj|solutionrelative:apidockertecnimotors\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{096CE77C-2B68-4AEF-B724-7B3D84B169E9}|ApiDockerTecnimotors\\ApiDockerTecnimotors.csproj|d:\\tecnimotors\\1. produccion\\16. tecnimotors\\web_tecnimotors\\apidockertecnimotors\\apidockertecnimotors\\controllers\\maestroclasificadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{096CE77C-2B68-4AEF-B724-7B3D84B169E9}|ApiDockerTecnimotors\\ApiDockerTecnimotors.csproj|solutionrelative:apidockertecnimotors\\controllers\\maestroclasificadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -30,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ImagesController.cs",
               "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Controllers\\ImagesController.cs",
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Controllers\\ImagesController.cs",
@@ -43,7 +47,19 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABrAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-22T15:04:00.581Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Dockerfile",
+              "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Dockerfile",
+              "ToolTip": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Dockerfile",
+              "RelativeToolTip": "ApiDockerTecnimotors\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-24T14:35:51.942Z",
               "EditorCaption": ""
             },
             {
@@ -52,7 +68,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TlClasificado.cs",
               "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Model\\TlClasificado.cs",
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Model\\TlClasificado.cs",
@@ -60,25 +76,24 @@
               "RelativeToolTip": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Model\\TlClasificado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-22T16:53:40.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-22T16:53:40.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MaestroClasificadoController.cs",
               "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Controllers\\MaestroClasificadoController.cs",
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Controllers\\MaestroClasificadoController.cs",
               "ToolTip": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Controllers\\MaestroClasificadoController.cs",
               "RelativeToolTip": "ApiDockerTecnimotors\\Controllers\\MaestroClasificadoController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAcwEUAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAuwGQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-22T16:46:02.899Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IMaestroClasificado.cs",
               "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Interface\\IMaestroClasificado.cs",
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Interface\\IMaestroClasificado.cs",
@@ -86,12 +101,11 @@
               "RelativeToolTip": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Interface\\IMaestroClasificado.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T16:47:06.188Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-19T16:47:06.188Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MaestroClasificado.cs",
               "DocumentMoniker": "D:\\TECNIMOTORS\\1. Produccion\\16. Tecnimotors\\web_tecnimotors\\ApiDockerTecnimotors\\ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Repo\\MaestroClasificado.cs",
               "RelativeDocumentMoniker": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Repo\\MaestroClasificado.cs",
@@ -99,8 +113,7 @@
               "RelativeToolTip": "ApiDockerTecnimotors\\Repositories\\MaestroClasificado\\Repo\\MaestroClasificado.cs",
               "ViewState": "AgIAAIEAAAAAAAAAAAArwNEAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T16:47:34.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-19T16:47:34.104Z"
             }
           ]
         }

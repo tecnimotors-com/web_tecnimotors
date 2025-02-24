@@ -317,6 +317,70 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "GetBanner1",
+    "RelativePath": "api/MaestroClasificado/GetBanner1/{ruta}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ruta",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "GetBanner2",
+    "RelativePath": "api/MaestroClasificado/GetBanner2",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ruta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "GetBanner3",
+    "RelativePath": "api/MaestroClasificado/GetBanner3",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Ruta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "GetBanner4",
+    "RelativePath": "api/MaestroClasificado/GetBanner4",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ruta",
+        "Type": "ApiDockerTecnimotors.Controllers.Trruta",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListadoCategoriaVehiculos",
     "RelativePath": "api/MaestroClasificado/ListadoCategoriaVehiculos",
     "HttpMethod": "GET",

@@ -585,6 +585,111 @@
           }
         }
       }
+    },
+    "/api/MaestroClasificado/GetBanner1/{ruta}": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "parameters": [
+          {
+            "name": "ruta",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/GetBanner2": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "parameters": [
+          {
+            "name": "ruta",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/GetBanner3": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Ruta": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Ruta": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/GetBanner4": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Trruta"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Trruta"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Trruta"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -659,6 +764,16 @@
             "nullable": true
           },
           "tipoUso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Trruta": {
+        "type": "object",
+        "properties": {
+          "ruta": {
             "type": "string",
             "nullable": true
           }
