@@ -1,8 +1,15 @@
-
 .minicart__product {
-    max-height: calc(
-      100vh - 200px
-    ); /* Ajusta este valor según la altura de los elementos fijos (header, footer, etc.) */
-    overflow-y: auto;
-    margin: 0px;
-  }
+  max-height: calc(
+    100vh - 200px
+  ); /* Ajusta este valor según la altura de los elementos fijos (header, footer, etc.) */
+  overflow-y: auto;
+  margin: 0px;
+}
+.classimgvacio {
+  width: 120px;
+  height: 120px;
+}
+.classimglleno {
+  width: 140px;
+  height: 110px;
+}

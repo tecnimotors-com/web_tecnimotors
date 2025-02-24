@@ -232,11 +232,14 @@
                                     <tr class="cart__table--body__items">
                                         <td class="cart__table--body__list">
                                             <div class="product__image two  d-flex align-items-center">
-                                                <div class="product__thumbnail border-radius-5">
+                                                <div class="border-radius-5" style="border: 1px solid var(--border-color);
+                                                    position: relative;line-height: 1;">
                                                     <a class="display-block">
-                                                        <img class="display-block border-radius-5"
-                                                            src="assets/img/product/small-product/product9.webp"
-                                                            alt="cart-product"></a>
+                                                        <img [src]="item.pathimagen === '' ? srcimg :txtlink + item.pathimagen"
+                                                            alt="product-media-img" [ngClass]="{classimglleno: item.pathimagen !== '',
+                                                            classimgvacio: item.pathimagen === '',
+                                                            }" alt="prduct-img" class="display-block border-radius-5">
+                                                    </a>
                                                     <span class="product__thumbnail--quantity">{{item.cantidad}}</span>
                                                 </div>
                                                 <div class="product__description">

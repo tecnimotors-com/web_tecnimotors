@@ -9,6 +9,7 @@ import {
 import { CotizacionService } from '../core/service/cotizacion.service';
 import { SharedHeader } from './sharedheader';
 import { Subscription } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-header',
@@ -40,7 +41,9 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   public isOpenCarShop: boolean = false;
-
+  public txtlink: string =
+    environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
+  public srcimg: string = 'assets/img/product/main-product/product6.webp';
   public isOpen: boolean = false;
   public correo: string = 'ventas@tecnimotors.com';
   public isSticky: boolean = false;
@@ -522,6 +525,9 @@ export class HeaderComponent implements OnInit {
   private acuerdoSubscription!: Subscription | undefined; // Para manejar la suscripción
   private cartSubscription!: Subscription | undefined;
 
+  public Listwishlist: any[] = [];
+  private wishlistSubscription!: Subscription | undefined;
+
   constructor(private cotizacionService: CotizacionService) {}
   ngOnInit(): void {
     this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
@@ -532,6 +538,12 @@ export class HeaderComponent implements OnInit {
     this.acuerdoSubscription = this.cotizacionService.acuerdo$.subscribe(
       (acuerdo) => {
         this.txtacuerdotrue = acuerdo; // Actualiza blnProducto cuando cambia
+      }
+    );
+
+    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+      (items) => {
+        this.Listwishlist = items;
       }
     );
   }
@@ -640,6 +652,7 @@ export class HeaderComponent implements OnInit {
     });
     thirdtitle.isSelected = true;
   }
+
   ngOnDestroy(): void {
     if (this.acuerdoSubscription) {
       this.acuerdoSubscription.unsubscribe();
@@ -647,7 +660,11 @@ export class HeaderComponent implements OnInit {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
     }
+    if (this.wishlistSubscription) {
+      this.wishlistSubscription.unsubscribe();
+    }
   }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isSticky = window.scrollY > 0; // Cambia esto según tu necesidad

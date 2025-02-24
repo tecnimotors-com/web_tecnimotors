@@ -73,36 +73,32 @@
     <!-- Start product details section -->
     <section class="product__details--section section--padding" style="padding: 2rem 1rem;">
         <div class="row row-cols-lg-2 row-cols-md-2" style="justify-content: center;margin: 0px;">
-            <div class="col-lg-2">
-                <div class="col" style="margin-bottom: 3rem;">
-                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                        (click)="DtlImagen1()">
-                        <img class="product__media--nav__items--img" style="height: 80%;width:80%;"
-                            src="../../../../assets/img/banner/banner5.webp" alt="product-nav-img">
-                    </div>
-                </div>
-                <div class="col" style="margin-bottom: 3rem;">
-                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                        (click)="DtlImagen2()">
-                        <img class="product__media--nav__items--img" style="height: 80%;width:80%;"
-                            src="../../../../assets/img/banner/banner10.webp" alt="product-nav-img">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="product__media--nav__items" style="justify-items: center;cursor: pointer;"
-                        (click)="DtlImagen3()">
-                        <img class="product__media--nav__items--img" style="height: 80%;width:80%;"
-                            src="../../../../assets/img/banner/banner17.webp" alt="product-nav-img">
+            <div class="col-lg-2" style="overflow-y: auto;height: 37rem;">
+                <div class="row">
+                    <div class="col-lg-6" *ngFor="let item of Listrutaoriginal; let i = index">
+                        <div class="product__details--media" style="margin-bottom: 2rem;">
+                            <div class="single__product--preview" style="justify-items: center;">
+                                <div class="product__media--preview__items"
+                                    style="border: 1px solid; justify-items: center;">
+                                    <a class="product__media--preview__items--link glightbox"
+                                        style="justify-items: center;">
+                                        <img class="product__media--preview__items--img" style="height: 10rem;"
+                                            [src]="item === '' ? srcimg : txtlink + item" alt="product-media-img">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="product__details--media">
-                    <div class="single__product--preview  swiper mb-25 swiperfiel">
-                        <div class="product__media--preview__items" style="border: 1px solid;">
-                            <a class="product__media--preview__items--link glightbox" style="justify-items:center;">
-                                <img class="product__media--preview__items--img" style="height: 80%;width: 80%;"
-                                    src="{{srcimg}}" alt="product-media-img">
+                <div class="product__details--media" style="margin-bottom: 2rem;">
+                    <div class="single__product--preview" style="justify-items: center;">
+                        <div class="product__media--preview__items" style="border: 1px solid;justify-items: center;">
+                            <a class="product__media--preview__items--link glightbox" style="justify-items: center;">
+                                <img class="product__media--preview__items--img"
+                                    [src]="lblpathoriginal === '' ? srcimg : txtlink + lblpathoriginal"
+                                    alt="product-media-img">
                             </a>
                         </div>
                     </div>
@@ -198,7 +194,7 @@
             </div>
             <div class="col-lg-10">
                 <div class="table-responsive">
-                    <table class="table" style="text-align: center;">
+                    <table class="table" style="text-align: center;margin: 0px;">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">Código</th>
@@ -238,6 +234,12 @@
             </svg>
         </button>
     </section>
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
 </main>
 <!-- Customscript js -->
 <app-footer></app-footer>

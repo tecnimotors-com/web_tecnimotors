@@ -8,6 +8,7 @@ import { CotizacionService } from '../../../../core/service/cotizacion.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { MinoristaService } from '../../../../core/service/marketing/minorista.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-listadovehiculo',
@@ -41,7 +42,7 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   public lblmedida: string = '';
   public lblmodelo: string = '';
   public lblmedidaestandarizado: string = '';
-
+  public lblpathimagen: string = '';
   public lblid: string = '';
   public lblcodigo: string = '';
   public lblfamilia: string = '';
@@ -52,9 +53,15 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   public blndisable = false;
   public txtacuerdotrue: boolean = false;
   private cartSubscription!: Subscription | undefined; // Para manejar la suscripción
-
+  public txtlink: string =
+    environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
   public srcimg: string = 'assets/img/product/main-product/product6.webp';
-  http: any;
+
+  public isLoading: boolean = true;
+
+  private wishlistSubscription!: Subscription | undefined;
+  public ListWishlist: any[] = [];
+  public wishlistItems: any[] = [];
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -82,13 +89,36 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     this.ListarModeloVehiculo();
     this.ListarMarcaVehiculo();
     this.initializePreLoader();
+    // Suscribirse a los cambios en la wishlist
+    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+      (items) => {
+        this.wishlistItems = items; // Actualiza la lista de productos en la wishlist
+      }
+    );
     setTimeout(() => {
       this.finalizePreLoader();
     }, 1000);
   }
 
+  isInWishlist(productId: number): boolean {
+    return this.wishlistItems.some((item) => item.id === productId);
+  }
+
+  isInWishlist2(productId: string): boolean {
+    const product = parseInt(productId);
+    return this.wishlistItems.some((item) => item.id === product);
+  }
+
   ngOnDestroy(): void {
     this.finalizePreLoader();
+  }
+
+  onImageLoad() {
+    this.isLoading = false;
+  }
+
+  onImageError() {
+    this.isLoading = false;
   }
 
   ListarCategoriaVehiculo() {
@@ -110,29 +140,7 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     this.maestroclasifi.getListadoGeneralVehiculos(frombody).subscribe({
       next: (lst: any) => {
         this.ListGeneral = lst.list;
-        console.log(lst.list);
-        this.loadImages();
       },
-    });
-  }
-
-  loadImages() {
-    this.ListGeneral.forEach(item => {
-      if (item.pathimagen) {
-        this.http.get(`https://api-testing-web.grupotecnimotors.com/api/images/${item.pathimagen.split('/').pop()}`, { responseType: 'blob' })
-          .subscribe({
-            next: (imageBlob: Blob | MediaSource) => {
-              const imageUrl = URL.createObjectURL(imageBlob);
-              item.pathimagen = imageUrl; // Asignar la URL de la imagen al item
-            },
-            error: (err: any) => {
-              console.error('Error loading image:', err);
-              item.pathimagen = this.srcimg; // Asignar imagen por defecto en caso de error
-            }
-          });
-      } else {
-        item.pathimagen = this.srcimg; // Asignar imagen por defecto si no hay path
-      }
     });
   }
 
@@ -259,6 +267,7 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
       vendor: item.marca,
       quantity: this.count,
       color: '',
+      pathimagen: item.pathimagen,
     };
     this.cotizacionService.addToCart2(product);
     this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
@@ -288,7 +297,9 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
       vendor: this.lblmarca,
       quantity: this.count,
       color: '',
+      pathimagen: this.lblpathimagen,
     };
+
     this.cotizacionService.addToCart2(product);
     this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
       this.ListCarrito = items;
@@ -310,7 +321,7 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     this.lblmedida = '';
     this.lblmodelo = '';
     this.lblmedidaestandarizado = '';
-
+    this.lblpathimagen = '';
     this.lblid = '';
     this.lblcodigo = '';
     this.lblfamilia = '';
@@ -320,8 +331,9 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   }
 
   MdVehiculolistado(content: any, item: any) {
+    const product = parseInt(item.id);
+    this.wishlistItems.some((item) => item.id === product);
     this.clearVoid();
-
     this.lbldescripcion = item.descripcion;
     this.lblunidadmedida = item.unidadmedida;
     this.lblcategoria = item.categoria;
@@ -337,7 +349,7 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     this.lblfamilia = item.familia;
     this.lblsubfamilia = item.subfamilia;
     this.lbltipo = item.tipo;
-
+    this.lblpathimagen = item.pathimagen;
     this.modalService
       .open(content, {
         windowClass: 'myCustomModalClass',
@@ -363,5 +375,36 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  MdWishListFavorito(item: any) {
+    const product = {
+      descripcion: item.descripcion,
+      unidad: item.unidadmedida,
+      categoria: item.aplicacion,
+      marca: item.marca,
+      marcaoriginal: item.marcaoriginal,
+      medida: item.medida,
+      modelo: item.modelo,
+      medidaestandarizado: item.medidaestandarizado,
+      id: item.id,
+      codigo: item.codigo,
+      familia: item.familia,
+      subfamilia: item.subfamilia,
+      tipo: item.tipo,
+      cantidad: 1,
+      sku: item.codigo,
+      producto: item.marcaoriginal,
+      vendor: item.marca,
+      quantity: this.count,
+      color: '',
+      pathimagen: item.pathimagen,
+    };
+    this.cotizacionService.addToWishlist(product);
+    this.wishlistSubscription = this.cotizacionService.cart$.subscribe(
+      (items) => {
+        this.ListWishlist = items; // Actualiza la lista de productos en el carrito
+      }
+    );
   }
 }

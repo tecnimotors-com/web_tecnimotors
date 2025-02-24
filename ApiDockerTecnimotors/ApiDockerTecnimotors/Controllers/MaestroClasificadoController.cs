@@ -53,10 +53,52 @@ namespace ApiDockerTecnimotors.Controllers
         [HttpGet("DetalleVehiculo/{Id}")]
         public async Task<ActionResult> DetalleVehiculo(int Id)
         {
+            // Obtener los detalles del vehículo
             var detailArt = await imaestroclasificado.DetalleVehiculo(Id);
-            return Ok(detailArt);
-        }
 
+            // Verificar si se obtuvo el detalle
+            if (detailArt == null)
+            {
+                return NotFound("El vehículo no fue encontrado.");
+            }
+
+            // Obtener el código interno del detalle
+            var codigoInterno = detailArt.Codigo; // Asegúrate de que el código interno esté en el modelo
+
+            // Crear la ruta de la carpeta para el código interno
+            var carpetaCodigoInterno = Path.Combine(Directory.GetCurrentDirectory(), "Imagen", codigoInterno!);
+
+            // Verificar si la carpeta existe
+            if (!Directory.Exists(carpetaCodigoInterno))
+            {
+                return Ok(new
+                {
+                    listado = detailArt,
+                    codigointerno = codigoInterno,
+                    TotalImagenes = 0,
+                    RutasOriginales = new List<string>(), // Lista vacía si no hay imágenes
+                    PrimeraRutaOriginal = "" // Asignar cadena vacía si no hay ruta
+                });
+            }
+
+            // Obtener las imágenes existentes en la carpeta
+            var imagenesExistentes = Directory.GetFiles(carpetaCodigoInterno);
+            var rutasOriginales = imagenesExistentes.ToList(); // Guardar rutas completas
+            int totalImagenes = rutasOriginales.Count;
+
+            // Obtener la primera ruta, si existe
+            var primeraRuta = rutasOriginales.FirstOrDefault() ?? ""; // Asignar cadena vacía si no hay ruta
+
+            // Devolver la información
+            return Ok(new
+            {
+                listado = detailArt,
+                codigointerno = codigoInterno,
+                TotalImagenes = totalImagenes,
+                RutasOriginales = rutasOriginales,
+                PrimeraRutaOriginal = primeraRuta // Solo la primera ruta
+            });
+        }
 
         [HttpPost("ActualizarPathImagen")]
         public async Task<ActionResult> ActualizarPathImagen()

@@ -234,7 +234,7 @@
                             </a>
                         </li>
                         <li class="header__account--items header__minicart--items">
-                            <a class="header__account--btn">
+                            <a class="header__account--btn" [routerLink]="['/wishlist']">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class=" -heart" style="color:white">
@@ -242,7 +242,7 @@
                                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                                     </path>
                                 </svg>
-                                <span class="items__count">3</span>
+                                <span class="items__count">{{Listwishlist.length}}</span>
                             </a>
                         </li>
                         <li class="header__account--items header__minicart--items">
@@ -589,8 +589,11 @@
         </div>
         <div class="minicart__product">
             <div class="minicart__product--items d-flex" *ngFor="let item of ListCarrito, let i = index">
-                <div class="minicart__thumb">
-                    <img src="assets/img/product/small-product/product1.webp" style="width: 12rem;" alt="prduct-img">
+                <div class="minicart__thumb" style="align-content: center;">
+                    <img [src]="item.pathimagen === '' ? srcimg :txtlink + item.pathimagen" alt="product-media-img"
+                        [ngClass]="{classimglleno: item.pathimagen !== '',
+                    classimgvacio: item.pathimagen === '',
+                    }" alt="prduct-img">
                 </div>
                 <div class="minicart__text">
                     <label class="textopuntos" style="font-size: 14px;margin: 0px;" [htmlFor]="'inlinea' + (i+1)">

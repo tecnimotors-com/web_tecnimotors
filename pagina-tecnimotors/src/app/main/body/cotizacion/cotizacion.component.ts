@@ -7,6 +7,7 @@ import { MinoristaService } from '../../../core/service/marketing/minorista.serv
 import { CotizacionService } from '../../../core/service/cotizacion.service';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-cotizacion',
@@ -15,6 +16,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./cotizacion.component.scss'],
 })
 export class CotizacionComponent implements OnInit, OnDestroy {
+  public txtlink: string =
+    environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
+  public srcimg: string = 'assets/img/product/main-product/product6.webp';
   public txtnombre: string = '';
   public txtapellido: string = '';
   public txtcelular: string = '';
@@ -255,7 +259,7 @@ export class CotizacionComponent implements OnInit, OnDestroy {
           vendedores: '',
           listProduct: this.ListCarrito,
         };
-        
+
         this.minoristaservice.getRegistroMinoristaAll(bodyform).subscribe({
           next: () => {
             this.showAlert('Se registro exitosamente ', 'success');

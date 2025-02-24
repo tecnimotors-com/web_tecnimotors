@@ -6,6 +6,7 @@ import { MaestroarticuloService } from '../../../../core/service/maestroarticulo
 import { CotizacionService } from '../../../../core/service/cotizacion.service';
 import { AuthService } from '../../../../core/service/auth.service';
 import { MaestroclasificadoService } from '../../../../core/service/maestroclasificado.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-detallevehiculo',
@@ -14,6 +15,7 @@ import { MaestroclasificadoService } from '../../../../core/service/maestroclasi
   styleUrls: ['./detallevehiculo.component.scss'],
 })
 export class DetallevehiculoComponent implements OnInit, OnDestroy {
+  
   public srcimg: string =
     '../../../../assets/img/product/big-product/product1.webp';
   public lbldescripcion: string = '';
@@ -33,6 +35,8 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
   public lblsubfamilia: string = '';
   public lbltipo: string = '';
   public lblcodigoequivalente: string = '';
+  public lblpathoriginal: string = '';
+  public lbltotalImagenes: number = 0;
 
   public count: number = 1;
   public blndisable = false;
@@ -40,6 +44,11 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
   private cartSubscription!: Subscription | undefined;
   public ListCarrito: any[] = [];
   public isVisible: boolean = false;
+  public txtlink: string =
+    environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
+  public txtlinkoriginal: string =
+    environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
+  public Listrutaoriginal: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -71,24 +80,29 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
 
       this.serviceclasificado.getDetalleVehiculo(this.lblid).subscribe({
         next: (dtl: any) => {
-          this.lbldescripcion = dtl.descripcion;
-          this.lblunidadmedida = dtl.unidadmedida;
-          this.lblcategoria = dtl.categoria;
-          this.lblmarca = dtl.marca;
-          this.lblmarcaoriginal = dtl.marcaoriginal;
-          this.lblmedida = dtl.medida;
-          this.lblmodelo = dtl.modelo;
-          this.lblmedidaestandarizado = dtl.medidaestandarizado;
-          this.lblid = dtl.id;
-          this.lblcodigo = dtl.codigo;
-          this.lblfamilia = dtl.familia;
-          this.lblsubfamilia = dtl.subfamilia;
-          this.lbltipo = dtl.tipo;
+          console.log(dtl);
+          this.lbldescripcion = dtl.listado.descripcion;
+          this.lblunidadmedida = dtl.listado.unidadmedida;
+          this.lblcategoria = dtl.listado.categoria;
+          this.lblmarca = dtl.listado.marca;
+          this.lblmarcaoriginal = dtl.listado.marcaoriginal;
+          this.lblmedida = dtl.listado.medida;
+          this.lblmodelo = dtl.listado.modelo;
+          this.lblmedidaestandarizado = dtl.listado.medidaestandarizado;
+          this.lblid = dtl.listado.id;
+          this.lblcodigo = dtl.listado.codigo;
+          this.lblfamilia = dtl.listado.familia;
+          this.lblsubfamilia = dtl.listado.subfamilia;
+          this.lbltipo = dtl.listado.tipo;
 
-          this.lblcodigoequivalente = dtl.codigoequivalente;
-          this.lblaplicacion = dtl.aplicacion;
-          this.lblproducto = dtl.producto;
-          this.lbltipo1 = dtl.tipo1;
+          this.lblcodigoequivalente = dtl.listado.codigoequivalente;
+          this.lblaplicacion = dtl.listado.aplicacion;
+          this.lblproducto = dtl.listado.producto;
+          this.lbltipo1 = dtl.listado.tipo1;
+
+          this.lblpathoriginal = dtl.primeraRutaOriginal;
+          this.Listrutaoriginal = dtl.rutasOriginales;
+          this.lbltotalImagenes = dtl.totalImagenes;
         },
       });
     });
@@ -162,18 +176,9 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
     });
   }
 
-  DtlImagen1() {
-    this.srcimg = '../../../../assets/img/product/big-product/product1.webp';
+  DtlImagen1(item: string) {
+    this.lblpathoriginal = item; // Cambia la imagen principal a la que se hizo clic
   }
-
-  DtlImagen2() {
-    this.srcimg = '../../../../assets/img/banner/banner10.webp';
-  }
-
-  DtlImagen3() {
-    this.srcimg = '../../../../assets/img/banner/banner17.webp';
-  }
-
   subir() {
     // Desplaza la página hacia arriba
     window.scrollTo({ top: 0, behavior: 'smooth' });

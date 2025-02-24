@@ -14,7 +14,13 @@ export class CotizacionService {
   private cartSubject = new BehaviorSubject<any>(false);
   cart$ = this.cartSubject.asObservable();
 
+  private wishlistItems: any[] = []; // Almacena los productos en la wishlist
+  private wishlistSubject = new BehaviorSubject<any[]>(this.wishlistItems); // Para emitir cambios
+
+  wishlist$ = this.wishlistSubject.asObservable(); // Observable para suscribirse a cambios
+
   constructor() {}
+
   addToCart2(product: any): void {
     const existingProductIndex = this.cartItems.findIndex(
       (item: any) => item.id === product.id
@@ -87,6 +93,35 @@ export class CotizacionService {
   clearAcuerdo(): void {
     this.acuerdoSubject.next(false); // Emitir false
   }
+
+  /*----------------wish list---------------------*/
+  addToWishlist(product: any): void {
+    const existingProductIndex = this.wishlistItems.findIndex(
+      (item: any) => item.id === product.id
+    );
+
+    if (existingProductIndex === -1) {
+      // Si el producto no existe, agrégalo a la wishlist
+      this.wishlistItems.push(product);
+      this.showAlert('Se Agregó a la Lista de Favorito', 'success');
+    } else {
+      this.wishlistItems[existingProductIndex].cantidad = product.cantidad;
+      this.showAlert('El producto ya está en la Lista de Favorito', 'warning');
+    }
+
+    // Emitir el nuevo estado de la wishlist
+    this.wishlistSubject.next(this.wishlistItems);
+  }
+
+  getWishlistItems(): any[] {
+    return this.wishlistItems;
+  }
+
+  clearWishlist(): void {
+    this.wishlistItems = []; // Limpia la wishlist
+    this.wishlistSubject.next(this.wishlistItems); // Emitir el nuevo estado de la wishlist (vacío)
+  }
+
   // type AlertType = 'success' | 'error' | 'info';
   showAlert(texto: string, type: any) {
     Swal.fire({

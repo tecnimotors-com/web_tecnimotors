@@ -61,6 +61,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./main/body/distribuidores/routes').then((m) => m.routes),
       },
+      {
+        path: 'wishlist',
+        loadChildren: () =>
+          import('./main/body/wishlist/routes').then((m) => m.routes),
+      },
 
       /*---------------------Filter-------------------------*/
       {
