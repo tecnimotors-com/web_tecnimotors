@@ -24,6 +24,13 @@ export class MaestroclasificadoService {
 
   private DetalleVehiculo = '/MaestroClasificado/DetalleVehiculo/';
 
+  private ListadoDistribuidores = '/Distribuidores/ListadoDistribuidores';
+
+  private DetailDistribuidores = '/Distribuidores/DetailDistribuidores/';
+
+  private ListadoDetalleDistribuidore =
+    '/Distribuidores/ListadoDetalleDistribuidore/';
+
   constructor(private http: HttpClient) {}
 
   getListadoCategoriaVehiculos(): Observable<any> {
@@ -47,5 +54,22 @@ export class MaestroclasificadoService {
 
   getDetalleVehiculo(Id: number): Observable<any> {
     return this.http.get(this.myurl + this.DetalleVehiculo + Id);
+  }
+
+  getListadoDistribuidores(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoDistribuidores);
+  }
+
+  getDetailDistribuidores(Id: number): Observable<any> {
+    return this.http.get(this.myurl + this.DetailDistribuidores + Id);
+  }
+
+  getListadoDetalleDistribuidore(
+    depa: string,
+    provi: string,
+    distri: string
+  ): Observable<any> {
+    const url = `${this.myurl}${this.ListadoDetalleDistribuidore}${depa}/${provi}/${distri}`;
+    return this.http.get(url);
   }
 }

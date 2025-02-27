@@ -15,7 +15,6 @@ import { environment } from '../../../../../environments/environment.development
   styleUrls: ['./detallevehiculo.component.scss'],
 })
 export class DetallevehiculoComponent implements OnInit, OnDestroy {
-  
   public srcimg: string =
     '../../../../assets/img/product/big-product/product1.webp';
   public lbldescripcion: string = '';
@@ -50,6 +49,10 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
     environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
   public Listrutaoriginal: any[] = [];
 
+  private wishlistSubscription!: Subscription | undefined;
+  public ListWishlist: any[] = [];
+  public wishlistItems: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private servicesmaestro: MaestroarticuloService,
@@ -64,10 +67,16 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
     this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
       this.ListCarrito = items; // Actualiza la lista de productos en el carrito
     });
-    setTimeout(() => {
-      this.initializePreLoader();
-    }, 0);
+
+    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+      (items) => {
+        this.wishlistItems = items; // Actualiza la lista de productos en la wishlist
+      }
+    );
     this.initializePreLoader();
+    setTimeout(() => {
+      this.finalizePreLoader();
+    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -169,6 +178,7 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
       vendor: this.lblmarca,
       quantity: this.count,
       color: '',
+      pathimagen: this.lblpathoriginal,
     };
     this.cotizacionService.addToCart2(product);
     this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
@@ -182,5 +192,44 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
   subir() {
     // Desplaza la página hacia arriba
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  MdWishListFavorito() {
+    const product = {
+      descripcion: this.lbldescripcion,
+      unidad: this.lblunidadmedida,
+      categoria: this.lblcategoria,
+      marca: this.lblmarca,
+      marcaoriginal: this.lblmarcaoriginal,
+      medida: this.lblmedida,
+      modelo: this.lblmodelo,
+      medidaestandarizado: this.lblmedidaestandarizado,
+      id: this.lblid,
+      codigo: this.lblcodigo,
+      familia: this.lblfamilia,
+      subfamilia: this.lblsubfamilia,
+      tipo: this.lbltipo,
+      cantidad: this.count ?? 1,
+
+      sku: this.lblcodigo,
+      producto: this.lblmarcaoriginal,
+      vendor: this.lblmarca,
+      quantity: this.count,
+      color: '',
+      pathimagen: this.lblpathoriginal,
+    };
+    this.cotizacionService.addToWishlist(product);
+    this.wishlistSubscription = this.cotizacionService.cart$.subscribe(
+      (items) => {
+        this.ListWishlist = items; // Actualiza la lista de productos en el carrito
+      }
+    );
+  }
+
+  imagenloading(item: any) {
+    this.lblpathoriginal = item;
+  }
+  isInWishlist(productId: number): boolean {
+    return this.wishlistItems.some((item) => item.id === productId);
   }
 }

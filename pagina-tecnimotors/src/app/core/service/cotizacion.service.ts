@@ -113,6 +113,14 @@ export class CotizacionService {
     this.wishlistSubject.next(this.wishlistItems);
   }
 
+  // Método para eliminar un producto del carrito
+  eliminarProductoWish(item: any): void {
+    this.wishlistItems = this.wishlistItems.filter(
+      (product) => product.codigo !== item.codigo
+    );
+    this.wishlistSubject.next(this.wishlistItems); // Emitir el nuevo estado del carrito
+  }
+
   getWishlistItems(): any[] {
     return this.wishlistItems;
   }

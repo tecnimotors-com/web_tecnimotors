@@ -18,6 +18,11 @@ export class DepartamentoService {
   private detalleprovincia = '/Provincias/ObtenerProvincia/';
   private detalledistrito = '/Distritos/ObtenerDistrito/';
 
+  private ObtenerDepartamento =
+    '/Departamento/ObtenerDepartamento?Departamento_id=';
+  private ObtenerProvincia = '/Provincias/ObtenerProvincia/';
+  private ObtenerDistrito = '/Distritos/ObtenerDistrito/';
+
   private token = sessionStorage.getItem('tokendepa');
   private headertoken = new HttpHeaders({
     Authorization: `Bearer ${this.token}`,
@@ -65,6 +70,25 @@ export class DepartamentoService {
 
   getdetalledistrito(id: string): Observable<any> {
     return this.http.get(this.myurl + this.detalledistrito + id, {
+      headers: this.headertoken,
+    });
+  }
+
+  // -------------------- Detalle Departamentos ------------------------
+  getObtenerDepartamento(id: number): Observable<any> {
+    return this.http.get(this.myurl + this.ObtenerDepartamento + id, {
+      headers: this.headertoken,
+    });
+  }
+
+  getObtenerProvincia(id: number): Observable<any> {
+    return this.http.get(this.myurl + this.ObtenerProvincia + id, {
+      headers: this.headertoken,
+    });
+  }
+
+  getObtenerDistrito(id: number): Observable<any> {
+    return this.http.get(this.myurl + this.ObtenerDistrito + id, {
       headers: this.headertoken,
     });
   }

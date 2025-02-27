@@ -1,0 +1,204 @@
+<!-- Start preloader -->
+<div id="preloader" #preloader>
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="C" class="letters-loading">
+                    C
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+
+                <span data-text-preloader="G" class="letters-loading">
+                    G
+                </span>
+
+                <span data-text-preloader="A" class="letters-loading">
+                    A
+                </span>
+
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+
+                <span data-text-preloader="D" class="letters-loading">
+                    D
+                </span>
+
+                <span data-text-preloader="O" class="letters-loading">
+                    O
+                </span>
+            </div>
+        </div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+</div>
+<!-- End preloader -->
+<app-header></app-header>
+<main>
+    <p>
+        <script crossorigin="anonymous"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </p>
+
+    <div class="container">
+        <div class="page-container">
+            <div class="accordion" id="accordion">
+                <div class="card">
+                    <div style="display: flex;" class="card-header">
+                        <div style="border: solid;border-radius: 10px;width: 30px;
+                            height: 30px;font-size: medium;text-align: center;">
+                            1
+                        </div>
+                        <h5 class="mb-0" style="display: flex;">
+                            <button disabled class="btn btn-link">
+                                <u style="color: black; font-size: 16px; font-weight: 600;">
+                                    Datos de la persona que presenta el reclamo
+                                </u>
+                            </button>
+                        </h5>
+                    </div>
+                    <div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="titlesub1">Tipo de Documento</label>
+                                    <input type="text" hidden id="titlesub1">
+                                    <select id="tipodoc" name="tipodoc" [(ngModel)]="tipodoc">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option value="dni">Dni</option>
+                                        <option value="ce">C.E.</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputAddress">N° de Documento</label>
+                                    <input type="number" class="form-control" id="inputAddress" name="ndocumento"
+                                        placeholder="N° documento Dni" [(ngModel)]="ndocumento">
+                                </div>
+                                <div class="form-group col-md-4"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Nombre</label>
+                                    <input type="text" class="form-control" style="text-transform: capitalize;"
+                                        name="nombre" id="inputEmail4" placeholder="Nombre" [(ngModel)]="nombre">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputPassword4">Apellido Paterno</label>
+                                    <input type="text" class="form-control" style="text-transform: capitalize;"
+                                        name="apellidoparteno" id="inputPassword4" placeholder="Apellido Parterno"
+                                        [(ngModel)]="apellidoparteno">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputPassword5">Apellido Materno</label>
+                                    <input type="text" class="form-control" style="text-transform: capitalize;"
+                                        name="apellidomaterno" id="inputPassword5" placeholder="Apellido Materno"
+                                        [(ngModel)]="apellidomaterno">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputPassword6">Telefono</label>
+                                    <input type="number" class="form-control" name="telefono" id="inputPassword6"
+                                        placeholder="Telefono" [(ngModel)]="telefono">
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label for="inputPassword7">Email</label>
+                                    <input type="email" class="form-control" name="correo" id="inputPassword7"
+                                        placeholder="Email@gmail.com" [(ngModel)]="correo">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputPassword8">Dirección</label>
+                                    <input type="text" class="form-control" name="direccion" id="inputPassword8"
+                                        placeholder="Av. P.º de la República 1647, La Victoria 15034"
+                                        [(ngModel)]="direccion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display: flex;" class="card-header">
+                        <div style="border: solid;border-radius: 10px;width: 30px;
+                            height: 30px;font-size: medium;text-align: center;">
+                            2
+                        </div>
+                        <h5 class="mb-0" style="display: flex;">
+                            <button disabled class="btn btn-link">
+                                <u style="color: black; font-size: 16px; font-weight: 600;">
+                                    Detalle de su Reclamo
+                                </u>
+                            </button>
+                        </h5>
+                    </div>
+                    <div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-2" style="margin-bottom: 0vw !important;">
+                                    <label for="inputAddress">Fecha de Solicitud</label>
+                                    <input style="margin-bottom: 1vw;" type="text" class="form-control"
+                                        id="fechasolicitud" readonly [(ngModel)]="fechasolicitud">
+                                </div>
+                                <div class="form-group col-md-10" style="margin-bottom: 0vw !important;"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="titlereclamo1">Tipo de Reclamo</label>
+                                    <input type="text" hidden id="titlereclamo1">
+                                    <select id="tiporeclamo" name="tiporeclamo" [(ngModel)]="tiporeclamo">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option value="Reclamo">Reclamo</option>
+                                        <option value="Queja">Queja</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-8" style="margin-bottom: 0vw !important;"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="_tipodocumento"> Motivo</label>
+                                    <input type="text" hidden id="_tipodocumento">
+                                    <select id="motivo" name="motivo" [(ngModel)]="motivo">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option value="CAMBIOS">CAMBIOS</option>
+                                        <option value="CANCELACIÓN">CANCELACIÓN</option>
+                                        <option value="COBROS - FACTURACIÓN">COBROS - FACTURACIÓN</option>
+                                        <option value="COLABORADORES">COLABORADORES</option>
+                                        <option value="CUENTAS">CUENTAS</option>
+                                        <option value="DEVOLUCIONES">DEVOLUCIONES</option>
+                                        <option value="ENTREGA">ENTREGA</option>
+                                        <option value="GARANTÍA">GARANTÍA</option>
+                                        <option value="MEDIOS DE PAGO">MEDIOS DE PAGO</option>
+                                        <option value="PRODUCTOS - SERVICIOS">PRODUCTOS - SERVICIOS</option>
+                                        <option value="PUBLICIDAD Y OFERTA">PUBLICIDAD Y OFERTA</option>
+                                        <option value="REEMBOLSO">REEMBOLSO</option>
+                                        <option value="SITIO">SITIO</option>
+                                        <option value="TIENDA">TIENDA</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-8" style="margin-bottom: 0vw !important;"></div>
+                                <div class="form-group col-md-8">
+                                    <label for="inputPassword4">Detalle del Reclamo</label>
+                                    <textarea rows="5" type="text" class="form-control" name="detallereclamo"
+                                        id="detallereclamo" [(ngModel)]="detallereclamo"
+                                        placeholder="Comente el detalle del reclamo o queja"></textarea>
+                                </div>
+                                <div class="form-group col-md-4"></div>
+                                <div class="form-group col-md-12">
+                                    <div id="snackbar">Se ha registrado Correctamente</div>
+                                    <button type="button" style="background-color: #ff6f00; border-color: #ff6f00;
+                                        color: white; width: -webkit-fill-available; font-size: 20px;"
+                                        class="btn btn-primary" (click)="btnEnviar()">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Customscript js -->
+<app-footer></app-footer>

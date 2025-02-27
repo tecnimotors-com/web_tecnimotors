@@ -44,8 +44,166 @@
 </div>
 <!-- End preloader -->
 <app-header></app-header>
-<main>
-    <h5> aca distribuidora </h5>
+
+<main class="main__content_wrapper">
+    <!-- Start blog section -->
+    <section class="blog__section" style="margin-top: 1rem;">
+        <div class="container">
+            <div class="section__heading border-bottom mb-2">
+                <h2 class="section__heading--maintitle">TIENDAS TECNIMOTORS</h2>
+            </div>
+            <div class="blog__section--inner">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <div style="margin-top: 1rem;">
+                            <div class="blog__card--thumbnail">
+                                <img class="imgdistribuidores" alt="blog-img"
+                                    src="assets/img/banner/prueba/imagenbrillantes.jpg">
+                            </div>
+                            <div>
+                                <p class="pdistribuidores">
+                                    BRILLANTES - Av. Paseo de la Republica N° 1647 - La Victoria, Lima
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <div style="margin-top: 1rem;">
+                            <div class="blog__card--thumbnail">
+                                <img class="imgdistribuidores" alt="blog-img"
+                                    src="assets/img/banner/prueba/imageniquitos.jpg">
+                            </div>
+                            <div>
+                                <p class="pdistribuidores">
+                                    AV. IQUITOS 442 - 446 - 448 - La Victoria, Lima
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End blog section -->
+
+
+    <!-- Start search filter area -->
+    <section class="blog__section" style="margin-top: 1rem;">
+        <div class="container">
+            <div class="section__heading border-bottom mb-2">
+                <h2 class="section__heading--maintitle">DISTRIBUIDORES TECNIMOTORS EN LIMA Y PROVINCIA</h2>
+            </div>
+            <div class="search__filter--section">
+                <div class="container">
+                    <div class="search__filter--inner style5" style="padding: 1.5rem;background: #d9d9d9;">
+                        <div class="search__filter--form__style2 d-flex">
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="ListadoProvincia()"
+                                    name="sldepartamento" [(ngModel)]="Iddepartamento">
+                                    <option selected disabled value=0>Departamento</option>
+                                    <option *ngFor="let item of ListDepa" [value]="item.departamento_id">
+                                        {{ item.nombre.trim()}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="ListadoDistrito()"
+                                    name="slprovincia" [(ngModel)]="Idprovincia">
+                                    <option selected disabled value=0>Provincia</option>
+                                    <option *ngFor="let item of ListProvi" [value]="item.provincia_id">
+                                        {{item.nombre.trim()}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="DetailDistribuidore()"
+                                    name="sldistrito" [(ngModel)]="Iddistrito">
+                                    <option selected value=0>Distrito</option>
+                                    <option *ngFor="let item of ListDistrito" [value]="item.distrito_id">
+                                        {{item.nombre.trim()}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" (change)="SelectFrom()"
+                                    name="sldistribucion" [(ngModel)]="txtid">
+                                    <option selected disabled value="">Seleccione una Distribuidores</option>
+                                    <option *ngFor="let item of Lstdistri" [value]="item.iddistribuidores">
+                                        {{ item.nombre.trim()}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <select class="search__filter--select__field" [(ngModel)]="direccion"
+                                    name="sldireccion">
+                                    <option value="" disabled selected>Seleccione una dirección</option>
+                                    <option>{{direccion}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End search filter area -->
+
+    <section class="blog__section" style="margin-top: 1rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="mb-3">Detalles del distribuidor</h2>
+                    <div class="main__contact--area position__relative">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="contact__form--list mb-10">
+                                    <h3 class="contact__form--title mb-2 mt-2">Distribuidor:</h3>
+                                    <label class="account__details--desc" placeholder="Your First Name" type="text"
+                                        for="input1">{{txtnombre}}</label>
+                                    <input type="text" hidden id="input1">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="contact__form--list mb-10">
+                                    <h3 class="contact__form--titlemb-1">Dirección:</h3>
+                                    <label class="account__details--desc" for="input2" placeholder="Your First Name"
+                                        type="text">{{txtdireccion}}</label>
+                                    <input type="text" hidden id="input2">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="contact__form--list mb-10">
+                                    <h3 class="contact__form--title mb-1">Teléfono | Celular:</h3>
+                                    <label class="account__details--desc" for="input3" placeholder="Your First Name"
+                                        type="text">{{txtcelular}}</label>
+                                    <input type="text" hidden id="input3">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="contact__form--list mb-2 mt-2">
+                                    <label class="account__details--desc" for="input4" placeholder="Your First Name"
+                                        type="text">
+                                        {{txtdepa}}, {{txtprovi}}, {{txtdistri}}
+                                    </label>
+                                    <input type="text" hidden id="input4">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <iframe tabindex="0" aria-hidden="false" style="border: 0;" width="870" height="450"
+                        [src]="urldireccion" allowfullscreen="" frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 <!-- Customscript js -->
 <app-footer></app-footer>

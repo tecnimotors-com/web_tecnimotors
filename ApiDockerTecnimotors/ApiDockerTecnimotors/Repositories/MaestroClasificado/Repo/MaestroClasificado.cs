@@ -7,14 +7,9 @@ using System.Text;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 {
-    public class MaestroClasificado : IMaestroClasificado
+    public class MaestroClasificado(PostgreSQLConfiguration connectionString) : IMaestroClasificado
     {
-        private readonly PostgreSQLConfiguration _connectionString;
-
-        public MaestroClasificado(PostgreSQLConfiguration connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private readonly PostgreSQLConfiguration _connectionString = connectionString;
 
         private NpgsqlConnection DbConnection()
         {
@@ -44,6 +39,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                         WHERE categoriageneral = 'Vehiculos' 
                           AND estado = '1' 
                           AND aplicacion IS NOT null 
+                          AND familia != '998' 
                         ORDER BY aplicacion ASC
                        ";
 
@@ -54,7 +50,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
             var db = DbConnection();
 
             var sql = @"
-                        SELECT * FROM public.maestro_articulo_clasificado where trim(codigo) = 'CHN0006714'
+                        SELECT * FROM public.maestro_articulo_clasificado where estado = '1' AND familia != '998' 
                        ";
 
             return await db.QueryAsync<TlMaestroGeneral>(sql, new { });
@@ -76,7 +72,63 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 
             await db.ExecuteAsync(sql, parameters); // Ejecutar la consulta
         }
+        public async Task ActualizarPathImagenBatch(List<(string Codigo, string PathImagen)> actualizaciones)
+        {
+            using (var db = DbConnection())
+            {
+                await db.OpenAsync();
+                using (var transaction = db.BeginTransaction())
+                {
+                    try
+                    {
+                        var sql = @"
+                                    UPDATE public.maestro_articulo_clasificado
+                                    SET pathimagen = @PathImagen
+                                    WHERE TRIM(codigo) = TRIM(@Codigo)";
 
+                        foreach (var (codigo, pathImagen) in actualizaciones)
+                        {
+                            var parameters = new
+                            {
+                                Codigo = codigo,
+                                PathImagen = pathImagen
+                            };
+
+                            await db.ExecuteAsync(sql, parameters, transaction); // Ejecutar la consulta dentro de la transacción
+                        }
+
+                        transaction.Commit(); // Confirmar la transacción
+                    }
+                    catch
+                    {
+                        transaction.Rollback(); // Revertir la transacción en caso de error
+                        throw; // Maneja el error según sea necesario
+                    }
+                }
+            }
+        }
+        /*
+        public async Task ActualizarPathImagenBatch(List<(string Codigo, string PathImagen)> actualizaciones)
+        {
+            var db = DbConnection(); // Asegúrate de que DbConnection() devuelva una conexión válida
+            var sql = @"
+                        UPDATE public.maestro_articulo_clasificado
+                        SET pathimagen = @PathImagen
+                        WHERE TRIM(codigo) = TRIM(@Codigo)";
+
+            foreach (var (codigo, pathImagen) in actualizaciones)
+            {
+                var parameters = new
+                {
+                    Codigo = codigo,
+                    PathImagen = pathImagen
+                };
+
+                await db.ExecuteAsync(sql, parameters); // Ejecutar la consulta
+            }
+        }
+        */
+        
         public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralCategoria(string motocicleta)
         {
             var db = DbConnection();
@@ -91,6 +143,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                           AND aplicacion = '" + motocicleta + @"'
                           AND estado = '1' 
                           AND aplicacion IS NOT null 
+                          AND familia != '998' 
                         ORDER BY aplicacion ASC
                        ";
 
@@ -106,7 +159,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
             sql.AppendLine("modelo, tipo1, tipo2, tipo3, tipo4, tipo5, tipo6, tipo7, gironegocio, equivalencia, ");
             sql.AppendLine("fabricante, categoriageneral, clasificacionproveedor, estado, pathimagen ");
             sql.AppendLine("FROM public.maestro_articulo_clasificado ");
-            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND aplicacion IS NOT NULL ");
+            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND aplicacion IS NOT NULL AND familia != '998' ");
 
             // Lista para almacenar los parámetros
             var parameters = new DynamicParameters();
@@ -143,7 +196,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
         {
             var sql = new StringBuilder();
             sql.AppendLine("SELECT DISTINCT marcaoriginal FROM public.maestro_articulo_clasificado ");
-            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND marcaoriginal IS NOT NULL ");
+            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND marcaoriginal IS NOT NULL AND familia != '998' ");
 
             // Lista para almacenar los parámetros
             var parameters = new DynamicParameters();
@@ -172,7 +225,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
         {
             var sql = new StringBuilder();
             sql.AppendLine("SELECT DISTINCT marca FROM public.maestro_articulo_clasificado ");
-            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND marca IS NOT NULL ");
+            sql.AppendLine("WHERE categoriageneral = 'Vehiculos' AND estado = '1' AND marca IS NOT NULL AND familia != '998' ");
 
             // Lista para almacenar los parámetros
             var parameters = new DynamicParameters();

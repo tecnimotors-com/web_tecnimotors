@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  //apimaestroarticulo: 'https://localhost:44368/api',
-  apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
+  apimaestroarticulo: 'https://localhost:44368/api',
+  //apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
 
   //myapiurlrrhh: 'https://api-testing-rrhh.grupotecnimotors.com/api',
   //myapiurlrrhh: 'https://localhost:44303/api',
@@ -15,10 +15,14 @@ export const environment = {
 
   myapimarketing: 'https://api-testing-marketing.grupotecnimotors.com/api',
   //myapimarketing: 'https://api-marketing.grupotecnimotors.com/api',
+
+  myapireclamo: 'https://api-libroreclamaciones.grupotecnimotors.com/api',
   /*--------------------------------------------------------------------------------*/
   userrrhh: 'Admin',
   passwordrrhh: 'GWqQv3EHBFmkuTSp9xsg7aDYAchr5LPARa6UvvnZg2xXePñS',
 
   userdepa: 'Admin',
   passworddepa: 'QjwU5mFOuuUR6sKDOZ6igDXczCaLDpMxJPdQtUtckj1P1bJcducklJlYnV8G',
+
+  apikeygoogle: 'AIzaSyB-_Qn6VKe7O2ysoI3IPGhVweKKKV5oqCs',
 };

@@ -8,7 +8,7 @@ import { SharedMain } from '../../sharedmain';
   selector: 'app-contactowsp',
   imports: [SharedMain],
   templateUrl: './contactowsp.component.html',
-  styleUrl: './contactowsp.component.scss',
+  styleUrls: ['./contactowsp.component.scss'],
 })
 export class ContactowspComponent implements OnInit, OnDestroy {
   public ListVendedor: any[] = [];

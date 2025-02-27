@@ -14,10 +14,6 @@ D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotor
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\System.IO.Pipelines.dll
-D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\System.Text.Encodings.Web.dll
-D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\System.Text.Json.dll
-D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.csproj.AssemblyReference.cache
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.GeneratedMSBuildEditorConfig.editorconfig
 D:\TECNIMOTORS\1. Produccion\16. Tecnimotors\web_tecnimotors\ApiDockerTecnimotors\ApiDockerTecnimotors\obj\Debug\net8.0\ApiDockerTecnimotors.AssemblyInfoInputs.cache

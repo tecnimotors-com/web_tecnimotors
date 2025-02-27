@@ -1,4 +1,6 @@
 using ApiAlmacen.Context;
+using ApiDockerTecnimotors.Repositories.Distribuidores.Interface;
+using ApiDockerTecnimotors.Repositories.Distribuidores.Repo;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
@@ -29,6 +31,7 @@ builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 
 builder.Services.AddScoped<IMaestroArticuloRepository, MaestroArticuloRepository>();
 builder.Services.AddScoped<IMaestroClasificado, MaestroClasificado>();
+builder.Services.AddScoped<IDistribuidoresRepository, DistribuidoresRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,0 +1,193 @@
+.header-left,
+.header-right {
+  flex: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  margin: 0px 0px 0px 0vw;
+  padding: 0px 0px 0px 0vw;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px !important;
+}
+
+.form-row {
+  margin-bottom: 0vw;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 0px;
+  font-size: 16px !important;
+}
+
+textarea {
+  width: 99%;
+  height: 10vw !important;
+  border-radius: 5px !important;
+  font-size: 16px !important;
+}
+
+.form-row input,
+.form-row select {
+  color: black;
+  width: 99%;
+  height: 45px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px !important;
+  box-sizing: border-box;
+  font-size: 16px !important;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  background: linear-gradient(to bottom right, #db4340, #ff6f00);
+  color: #fff;
+  border: none;
+  border-radius: 4px !important;
+  cursor: pointer;
+  font-size: 16px !important;
+}
+
+.accordion {
+  padding: 0px 0px 0px 0px;
+  margin: 20px 0px 20px 0px;
+}
+
+.card-header {
+  background-color: white;
+}
+
+.form-check-inline .form-check-input {
+  position: static;
+  margin-top: 0px;
+  margin-right: 0.6vw;
+  margin-left: 0;
+  margin-bottom: 0.4vw;
+}
+#snackbarerror {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbarerror.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: green;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.form-group.floating > label {
+  bottom: 118vw;
+  left: 8px;
+  position: relative;
+  padding: 0px 5px 0px 5px;
+  font-size: 1.1em;
+  transition: 0.1s;
+  pointer-events: none;
+  font-weight: 500 !important;
+  transform-origin: bottom left;
+}
+
+.form-control.floating:focus ~ label {
+  transform: translate(1px, -85%) scale(0.8);
+  opacity: 0.8;
+  color: #005ebf;
+}
+
+.form-control.floating:valid ~ label {
+  transform-origin: bottom left;
+  transform: translate(1px, -85%) scale(0.8);
+  opacity: 0.8;
+}

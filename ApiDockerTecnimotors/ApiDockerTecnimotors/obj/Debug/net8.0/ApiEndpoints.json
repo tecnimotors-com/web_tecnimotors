@@ -1,5 +1,89 @@
 [
   {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ApiDockerTecnimotors.Controllers.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ApiDockerTecnimotors.Controllers.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.DistribuidoresController",
+    "Method": "DetailDistribuidores",
+    "RelativePath": "api/Distribuidores/DetailDistribuidores/{idDistribuidores}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idDistribuidores",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.DistribuidoresController",
+    "Method": "ListadoDetalleDistribuidore",
+    "RelativePath": "api/Distribuidores/ListadoDetalleDistribuidore/{Depa}/{Provin}/{Distri}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Depa",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Provin",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Distri",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.DistribuidoresController",
+    "Method": "ListadoDistribuidores",
+    "RelativePath": "api/Distribuidores/ListadoDistribuidores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiDockerTecnimotors.Controllers.ImagesController",
     "Method": "SubirImagenes",
     "RelativePath": "api/Images/subir",
@@ -293,6 +377,16 @@
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ActualizarPathImagen",
     "RelativePath": "api/MaestroClasificado/ActualizarPathImagen",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ActualizarPathImagen2",
+    "RelativePath": "api/MaestroClasificado/ActualizarPathImagen2",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -66,6 +66,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./main/body/wishlist/routes').then((m) => m.routes),
       },
+      {
+        path: 'librodereclamo',
+        loadChildren: () =>
+          import('./main/body/libroreclamo/router').then((m) => m.routes),
+      },
 
       /*---------------------Filter-------------------------*/
       {

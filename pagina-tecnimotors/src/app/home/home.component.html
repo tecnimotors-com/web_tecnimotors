@@ -131,49 +131,26 @@
     <!-- Start product section -->
     <section class="product__section" style="background-color: white;box-shadow: 0px 2px 20px black;
         padding: 1rem 0;border-top: black 1px solid;">
-        <div class="container" style="padding-left:1rem;padding-right:1rem;max-width: 160rem;">
+        <div style="padding-left:1rem;padding-right:1rem;">
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col" *ngFor="let logo of logos">
-                                <a>
-                                    <img [src]="logo.src" alt="Logo" />
-                                </a>
-                                <!--
-                                <img src="../../assets/img/logo/logotecnimotors/RTM.jpg">
-                                -->
-                            </div>
-                            <!--
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/TSK.jpg">
-                            </div>
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/KENDA.jpg">
-                            </div>
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/DUNLOP.jpg">
-                            </div>
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/CHENG-SHIN.jpg">
-                            </div>
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/MAXXIS.jpg">
-                            </div>
-                            <div class="col">
-                                <img src="../../assets/img/logo/logotecnimotors/WANDA.jpg">
-                            </div>
-                            -->
+                    <div class="row" style="text-align: center;justify-content: center;
+                        overflow-x: auto;width: -webkit-fill-available;">
+                        <div class="col-1" *ngFor="let logo of logos">
+                            <img [src]="logo.src" alt="Logo" />
                         </div>
+                    </div>
+                    <div class="carousel-item active">
+
                     </div>
                 </div>
                 <a class="carousel-control-prev" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: black;"></span>
+                    <!--<span class="sr-only">Previous</span>-->
                 </a>
                 <a class="carousel-control-next" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: black;"></span>
+                    <!--<span class="sr-only">Next</span>-->
                 </a>
             </div>
         </div>

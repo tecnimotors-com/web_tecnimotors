@@ -4,21 +4,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { RrhhService } from './rrhh.service';
 import { DepartamentoService } from './departamento.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private myapitecni = environment.apimaestroarticulo;
   private isLoggedInSubject = new BehaviorSubject<boolean>(
     this.checkAuthStatus()
   );
   private selectId: string | null = null;
   private selectTipo: string | null = null;
+  private apiUrl = 'http://localhost:5000/api/auth';
 
   constructor(
     private router: Router,
     private rrhhService: RrhhService,
-    private departamentoservice: DepartamentoService
+    private departamentoservice: DepartamentoService,
+    private http: HttpClient
   ) {}
 
   login(username: string, password: string): Observable<boolean> {
@@ -110,5 +114,35 @@ export class AuthService {
       .subscribe((data) => {
         sessionStorage.setItem('tokendepa', data.tokendepa);
       });
+  }
+
+  registercliente(user: {
+    username: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post(`${this.myapitecni}/register`, user);
+  }
+
+  logincliente(user: { username: string; password: string }): Observable<any> {
+    return this.http.post(`${this.myapitecni}/login`, user);
+  }
+  // Método para guardar el usuario en localStorage
+  saveUsercliente(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  // Método para obtener el usuario de localStorage
+  getUsercliente() {
+    return JSON.parse(localStorage.getItem('user') || '{}');
+  }
+
+  // Método para verificar si el usuario está autenticado
+  isAuthenticatedcliente(): boolean {
+    return !!localStorage.getItem('user');
+  }
+
+  // Método para cerrar sesión
+  logoutcliente() {
+    localStorage.removeItem('user');
   }
 }

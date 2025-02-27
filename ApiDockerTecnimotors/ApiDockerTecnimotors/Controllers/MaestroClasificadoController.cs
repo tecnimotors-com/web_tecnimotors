@@ -87,7 +87,11 @@ namespace ApiDockerTecnimotors.Controllers
             int totalImagenes = rutasOriginales.Count;
 
             // Obtener la primera ruta, si existe
-            var primeraRuta = rutasOriginales.FirstOrDefault() ?? ""; // Asignar cadena vacía si no hay ruta
+            //var primeraRuta = rutasOriginales.FirstOrDefault() ?? "";
+            var primeraRuta = rutasOriginales
+                .Where(ruta => Path.GetFileName(ruta).StartsWith("1")) // Filtrar por nombre de archivo
+                .OrderBy(ruta => ruta) // Ordenar si es necesario
+                .FirstOrDefault() ?? "";// Asignar cadena vacía si no hay ruta
 
             // Devolver la información
             return Ok(new
@@ -135,6 +139,44 @@ namespace ApiDockerTecnimotors.Controllers
                 // Actualizar la base de datos con la nueva ruta de la imagen
                 await imaestroclasificado.ActualizarPathImagen(articulo.Codigo!, articulo.Pathimagen);
             }
+
+            return Ok(new { mensaje = "Rutas de imágenes actualizadas correctamente." });
+        }
+        [HttpPost("ActualizarPathImagen2")]
+        public async Task<ActionResult> ActualizarPathImagen2()
+        {
+            // Obtener todos los artículos
+            var articulos = await imaestroclasificado.ListadoGeneralArticulo();
+            var actualizaciones = new List<(string Codigo, string PathImagen)>();
+
+            foreach (var articulo in articulos)
+            {
+                var carpetaCodigoInterno = Path.Combine(_carpetaImagenes, articulo.Codigo!);
+
+                if (Directory.Exists(carpetaCodigoInterno))
+                {
+                    // Obtener la lista de imágenes en la carpeta
+                    var imagenes = Directory.GetFiles(carpetaCodigoInterno);
+
+                    // Filtrar las imágenes que comienzan con un número
+                    var imagenSeleccionada = imagenes
+                        .Where(imagen => Path.GetFileName(imagen).StartsWith("1-")) // Cambia "1-" por el número que necesites
+                        .FirstOrDefault();
+
+                    // Asignar la ruta de la imagen seleccionada o vacía si no se encuentra
+                    articulo.Pathimagen = imagenSeleccionada ?? "";
+                }
+                else
+                {
+                    articulo.Pathimagen = "";
+                }
+
+                // Acumular las actualizaciones
+                actualizaciones.Add((articulo.Codigo!, articulo.Pathimagen));
+            }
+
+            // Actualizar la base de datos en un solo paso
+            await imaestroclasificado.ActualizarPathImagenBatch(actualizaciones);
 
             return Ok(new { mensaje = "Rutas de imágenes actualizadas correctamente." });
         }
