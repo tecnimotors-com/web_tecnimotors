@@ -14,3 +14,12 @@
   background-color: red; /* Cambia el color de fondo */
   color: white; /* Cambia el color del texto */
 }
+.disabled {
+  pointer-events: none; /* Evita que se pueda hacer clic */
+  opacity: 0.5; /* Cambia la opacidad para indicar que está deshabilitado */
+}
+
+.carritoList-active {
+  background-color: black; /* Cambia el color de fondo */
+  color: white; /* Cambia el color del texto */
+}

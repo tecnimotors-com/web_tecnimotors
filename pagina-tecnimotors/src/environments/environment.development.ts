@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apimaestroarticulo: 'https://localhost:44368/api',
-  //apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
+  //apimaestroarticulo: 'https://localhost:44368/api',
+  apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
 
   //myapiurlrrhh: 'https://api-testing-rrhh.grupotecnimotors.com/api',
   //myapiurlrrhh: 'https://localhost:44303/api',
@@ -25,4 +25,5 @@ export const environment = {
   passworddepa: 'QjwU5mFOuuUR6sKDOZ6igDXczCaLDpMxJPdQtUtckj1P1bJcducklJlYnV8G',
 
   apikeygoogle: 'AIzaSyB-_Qn6VKe7O2ysoI3IPGhVweKKKV5oqCs',
+  apikeencriptado: '8!9@0#1$2%3^4&5*6(7)',
 };

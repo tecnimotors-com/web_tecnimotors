@@ -1,22 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { RrhhService } from './rrhh.service';
 import { DepartamentoService } from './departamento.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private key = environment.apikeencriptado;
   private myapitecni = environment.apimaestroarticulo;
   private isLoggedInSubject = new BehaviorSubject<boolean>(
     this.checkAuthStatus()
   );
-  private selectId: string | null = null;
-  private selectTipo: string | null = null;
-  private apiUrl = 'http://localhost:5000/api/auth';
+
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(
+    this.isAuthenticatedcliente()
+  );
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  private encrypt(data: string): string {
+    if (!data) {
+      throw new Error('Data to encrypt cannot be null or undefined');
+    }
+    return CryptoJS.AES.encrypt(data, this.key).toString();
+  }
+
+  private decrypt(data: string): string {
+    if (!data) {
+      return '';
+    }
+    const bytes = CryptoJS.AES.decrypt(data, this.key);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
 
   constructor(
     private router: Router,
@@ -92,6 +112,15 @@ export class AuthService {
   getRefreshToken() {
     this.registrarTokenRRHH();
     this.registrarTokenDepartamento();
+    localStorage.removeItem('marcavehiculo');
+    localStorage.removeItem('modelovehiculo');
+    localStorage.removeItem('pvehiculo');
+    localStorage.removeItem('categoriavehiculo');
+  }
+  getRefreshTokenvehiculo() {
+    localStorage.removeItem('returncategory');
+    this.registrarTokenRRHH();
+    this.registrarTokenDepartamento();
   }
 
   registrarTokenRRHH() {
@@ -116,33 +145,65 @@ export class AuthService {
       });
   }
 
-  registercliente(user: {
-    username: string;
-    password: string;
-  }): Observable<any> {
-    return this.http.post(`${this.myapitecni}/register`, user);
+  /*------------------------------------------------------*/
+  registercliente(user: any): Observable<any> {
+    return this.http.post(`${this.myapitecni}/Auth/register`, user);
   }
 
-  logincliente(user: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.myapitecni}/login`, user);
-  }
   // Método para guardar el usuario en localStorage
-  saveUsercliente(user: any) {
-    localStorage.setItem('user', JSON.stringify(user));
+  saveUsercliente(correo: any, rememberMe: any, uuid: any) {
+    const encrypteduuid = this.encrypt(uuid);
+    localStorage.setItem('correo', correo);
+    localStorage.setItem('rememberMe', rememberMe);
+    localStorage.setItem('uuid', encrypteduuid);
   }
 
   // Método para obtener el usuario de localStorage
   getUsercliente() {
-    return JSON.parse(localStorage.getItem('user') || '{}');
+    localStorage.getItem('uuid');
+    localStorage.getItem('rememberMe');
+    return localStorage.getItem('correo');
   }
 
   // Método para verificar si el usuario está autenticado
   isAuthenticatedcliente(): boolean {
-    return !!localStorage.getItem('user');
+    localStorage.getItem('uuid');
+    localStorage.getItem('rememberMe');
+    return !!localStorage.getItem('correo');
   }
 
-  // Método para cerrar sesión
+  logincliente(user: { correo: string; password: string }): Observable<any> {
+    return this.http.post(`${this.myapitecni}/Auth/login`, user).pipe(
+      tap(() => {
+        this.isAuthenticatedSubject.next(true); // Actualizar el estado de autenticación
+      })
+    );
+  }
+
+  getDesconvertir() {
+    var txtuuid = localStorage.getItem('uuid') ?? '';
+    var result = txtuuid == '' ? txtuuid : this.decrypt(txtuuid);
+    return result;
+  }
+
   logoutcliente() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('rememberMe');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('uuid');
+    this.isAuthenticatedSubject.next(false); // Actualizar el estado de autenticación
+    this.showAlert('Se cerro sesion del cliente', 'info');
+  }
+
+  // type AlertType = 'success' | 'error' | 'info';
+  showAlert(texto: string, type: any) {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      title: texto,
+      icon: type,
+    });
   }
 }

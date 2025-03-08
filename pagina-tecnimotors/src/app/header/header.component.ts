@@ -10,6 +10,11 @@ import { CotizacionService } from '../core/service/cotizacion.service';
 import { SharedHeader } from './sharedheader';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { AuthService } from '../core/service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-header',
@@ -40,6 +45,9 @@ import { environment } from '../../environments/environment.development';
   ],
 })
 export class HeaderComponent implements OnInit {
+  isAuthenticated: boolean = false;
+  userEmail: string | null = null;
+
   public isOpenCarShop: boolean = false;
   public txtlink: string =
     environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
@@ -528,24 +536,143 @@ export class HeaderComponent implements OnInit {
   public Listwishlist: any[] = [];
   private wishlistSubscription!: Subscription | undefined;
 
-  constructor(private cotizacionService: CotizacionService) {}
+  public isLoadinglogin: boolean = false;
+  public labelnombre: string = '';
+  public labelpassword: string = '';
+  public rememberMe: boolean = false;
+  public showPasswordLogin: boolean = false;
+  private modalRefEstado: any;
+  public currentUrl: string = '';
+
+  public isProcessingCarrito: boolean = false;
+  public isProcessingdiminuir: boolean = false;
+  public isProcessingaAumentar: boolean = false;
+
+  constructor(
+    private cotizacionService: CotizacionService,
+    private authService: AuthService,
+    private router: Router,
+    private modalService: NgbModal,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
-    this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
-      this.ListCarrito = items; // Actualiza la lista de productos en el carrito
+    // Capturar la URL completa
+    this.currentUrl = this.router.url;
+
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+      if (this.isAuthenticated) {
+        const txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+        this.userEmail = this.authService.getUsercliente();
+        this.loadWishlist(txtuuid);
+        this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+          (items) => {
+            this.Listwishlist = items;
+          }
+        );
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.ListCarrito = items;
+          }
+        );
+      } else {
+        this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+          (items) => {
+            this.Listwishlist = items; // Actualiza la lista de productos en la wishlist
+          }
+        );
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.ListCarrito = items; // Actualiza la lista de productos en el carrito
+          }
+        );
+      }
     });
 
-    this.ListCarrito = this.cotizacionService.getCartItems();
+    this.checkAuthentication();
+
     this.acuerdoSubscription = this.cotizacionService.acuerdo$.subscribe(
       (acuerdo) => {
         this.txtacuerdotrue = acuerdo; // Actualiza blnProducto cuando cambia
       }
     );
+  }
 
-    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
-      (items) => {
-        this.Listwishlist = items;
+  private loadWishlist(txtuuid: string): void {
+    this.cotizacionService.getAllWishlist(txtuuid).subscribe((dtl: any) => {
+      this.Listwishlist = dtl;
+    });
+    this.cotizacionService.getAllCarritoList(txtuuid).subscribe((dtl: any) => {
+      this.ListCarrito = dtl;
+    });
+  }
+
+  checkAuthentication() {
+    this.isAuthenticated = this.authService.isAuthenticatedcliente();
+    if (this.isAuthenticated) {
+      this.userEmail = this.authService.getUsercliente(); // Obtener el correo del usuario
+    }
+  }
+
+  handleWishClick(content: any) {
+    //this.authService.getRefreshToken();
+    if (this.isAuthenticated) {
+      // Si el usuario está autenticado, redirigir a la página de perfil
+      this.router.navigate(['/wishlist']);
+    } else {
+      var res = this.authService.getDesconvertir();
+      // Si no está autenticado, abrir el modal de inicio de sesión
+      this.modalRefEstado = this.modalService.open(content, {
+        windowClass: 'myCustomModalClass',
+        centered: true,
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'sm',
+      });
+    }
+  }
+
+  onLogout() {
+    this.authService.logoutcliente();
+    this.isAuthenticated = false;
+    this.userEmail = null;
+    this.cotizacionService.clearWishlist();
+    this.cotizacionService.clearCart();
+    this.cotizacionService.clearCart2();
+    this.cotizacionService.clearAcuerdo();
+    if (this.currentUrl) {
+      localStorage.setItem('returncategory', this.currentUrl.toString());
+      this.router.navigate([this.currentUrl.toString()]);
+    } else {
+      localStorage.setItem('returncategory', this.currentUrl.toString());
+      this.router.navigate(['/login']);
+    }
+  }
+
+  Cotizacion() {
+    if ((this.txtacuerdotrue = true)) {
+      if (this.isAuthenticated) {
+        localStorage.setItem('returncategory', this.currentUrl.toString());
+        this.router.navigate(['/cotizacion']);
+      } else {
+        localStorage.setItem('returncategory', this.currentUrl.toString());
+        this.router.navigate(['/login']);
       }
-    );
+    } else {
+      this.showAlert(
+        'Tiene que aceptar de Acuerdo de los productos Seleccionados',
+        'info'
+      );
+    }
+  }
+  authfavorito() {
+    if (this.isAuthenticated) {
+      localStorage.setItem('returncategory', this.currentUrl.toString());
+      this.router.navigate(['/wishlist']);
+    } else {
+      localStorage.setItem('returncategory', this.currentUrl.toString());
+      this.router.navigate(['/login']);
+    }
   }
 
   toggleblogmenu(menuItem: any) {
@@ -590,31 +717,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /*toggleSubMenuprueba(subItem: any) {
-    subItem.isOpen = !subItem.isOpen;
-    this.motoscycle.forEach((menu) => {
-      menu.subtitle.forEach((item: any) => {
-        if (item !== subItem) {
-          item.isOpen = false;
-          item.isSelected = false;
-        }
-      });
-    });
-  }
-  toggleSubMenuprueba(subItem: any) {
-    subItem.isOpen = !subItem.isOpen;
-    this.motoscycle.forEach((menu) => {
-      menu.subtitle.forEach((item: any) => {
-        if (item !== subItem) {
-          item.isOpen = false; // Cerrar otros subelementos
-          item.isSelected = false; // Desmarcar otros subelementos
-        } else {
-          item.isSelected = !item.isSelected; // Alternar selección del subItem
-        }
-      });
-    });
-  }
-*/
   toggleSubsubMenuprueba(subSubItem: any) {
     const parentMenu = this.motoscycle.find((item: any) =>
       item.subtitle.some(
@@ -737,36 +839,202 @@ export class HeaderComponent implements OnInit {
 
   // Método para aumentar la cantidad
   aumentarCantidad(item: any): void {
-    const existingProductIndex = this.ListCarrito.findIndex(
-      (product) => product.codigo === item.codigo
-    );
-    if (existingProductIndex !== -1) {
-      this.ListCarrito[existingProductIndex].cantidad += 1; // Aumenta la cantidad
+    if (this.isProcessingaAumentar) return;
+    this.isProcessingaAumentar = true;
+
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      // Validar que la cantidad no supere el límite de 10
+      if (item.cantidad < 10) {
+        // Aumentar la cantidad en la base de datos
+        this.cotizacionService
+          .UpdateCantidadCarritoList(
+            txtuuid,
+            item.codigo.trim(),
+            item.cantidad + 1
+          ) // Aumenta la cantidad en 1
+          .subscribe({
+            next: () => {
+              this.loadWishlist(txtuuid);
+              this.showAlert('Cantidad Actualizada', 'success');
+              this.isProcessingaAumentar = false;
+            },
+            error: () => {
+              this.isProcessingaAumentar = false;
+              this.showAlert('Error al actualizar la cantidad', 'error');
+            },
+          });
+      } else {
+        this.isProcessingaAumentar = false;
+        this.showAlert('La cantidad máxima permitida es 10', 'warning');
+      }
+    } else {
+      if (item.cantidad < 10) {
+        const existingProductIndex = this.ListCarrito.findIndex(
+          (product) => product.codigo === item.codigo
+        );
+        if (existingProductIndex !== -1) {
+          this.ListCarrito[existingProductIndex].cantidad += 1; // Aumenta la cantidad
+        }
+        this.isProcessingaAumentar = false;
+      } else {
+        this.isProcessingaAumentar = false;
+        this.showAlert('La cantidad máxima permitida es 10', 'warning');
+      }
     }
   }
 
   // Método para disminuir la cantidad
   disminuirCantidad(item: any): void {
-    const existingProductIndex = this.ListCarrito.findIndex(
-      (product) => product.codigo === item.codigo
-    );
-    if (existingProductIndex !== -1) {
-      if (this.ListCarrito[existingProductIndex].cantidad > 1) {
-        this.ListCarrito[existingProductIndex].cantidad -= 1; // Disminuye la cantidad
+    if (this.isProcessingdiminuir) return;
+    this.isProcessingdiminuir = true;
+
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      // Validar que la cantidad no sea menor que 1
+      if (item.cantidad > 1) {
+        // Disminuir la cantidad en la base de datos
+        this.cotizacionService
+          .UpdateCantidadCarritoList(
+            txtuuid,
+            item.codigo.trim(),
+            item.cantidad - 1
+          ) // Disminuye la cantidad en 1
+          .subscribe({
+            next: () => {
+              this.isProcessingdiminuir = false;
+              this.loadWishlist(txtuuid);
+              this.showAlert('Cantidad Actualizada', 'success');
+            },
+            error: () => {
+              this.isProcessingdiminuir = false;
+              this.showAlert('Error al actualizar la cantidad', 'error');
+            },
+          });
+      } else {
+        this.isProcessingdiminuir = false;
+        this.showAlert('La cantidad mínima permitida es 1', 'warning');
+      }
+    } else {
+      if (item.cantidad > 1) {
+        const existingProductIndex = this.ListCarrito.findIndex(
+          (product) => product.codigo === item.codigo
+        );
+        if (existingProductIndex !== -1) {
+          if (this.ListCarrito[existingProductIndex].cantidad > 1) {
+            this.ListCarrito[existingProductIndex].cantidad -= 1; // Disminuye la cantidad
+          }
+        }
+        this.isProcessingdiminuir = false;
+      } else {
+        this.isProcessingdiminuir = false;
+        this.showAlert('La cantidad mínima permitida es 1', 'warning');
       }
     }
   }
 
   // Método para eliminar un producto del carrito
   eliminarProducto(item: any): void {
-    this.ListCarrito = this.ListCarrito.filter(
-      (product) => product.codigo !== item.codigo
-    );
-    this.cotizacionService.eliminarProducto(item);
+    if (this.isProcessingCarrito) return;
+    this.isProcessingCarrito = true;
+
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      this.cotizacionService
+        .RemoveFromCarritoList(txtuuid, item.codigo.trim())
+        .subscribe({
+          next: () => {
+            this.loadWishlist(txtuuid); // Cargar la wishlist actualizada
+            this.showAlert(
+              'Producto eliminado de la lista de cotización',
+              'success'
+            );
+            this.isProcessingCarrito = false;
+          },
+          error: () => {
+            this.loadWishlist(txtuuid);
+            this.isProcessingCarrito = false;
+            this.showAlert(
+              'Error al eliminar a la lista de cotización',
+              'error'
+            );
+          },
+        });
+    } else {
+      this.ListCarrito = this.ListCarrito.filter(
+        (product) => product.codigo !== item.codigo
+      );
+      this.cotizacionService.eliminarProducto(item);
+      this.isProcessingCarrito = false;
+    }
   }
 
   AnclarDeAcuerdo() {
     this.cotizacionService.addtoBoleanAcuerdo(this.txtacuerdotrue);
     // Envía el valor booleano al servicio
+  }
+
+  toggePasswordLogin() {
+    this.showPasswordLogin = !this.showPasswordLogin;
+  }
+
+  onLogin() {
+    this.isLoadinglogin = true; // Activar el estado de carga
+    const user = { correo: this.labelnombre, password: this.labelpassword };
+
+    this.authService.logincliente(user).subscribe({
+      next: (dtl) => {
+        this.showAlert(dtl.msg, 'success');
+        this.authService.saveUsercliente(
+          this.labelnombre,
+          this.rememberMe,
+          dtl.body.uuid
+        );
+        this.isLoadinglogin = false;
+        this.router.navigateByUrl('/wishlist');
+        this.modalRefEstado.close('Save click');
+      },
+      error: (err: any) => {
+        var validad = err.error.msg == null ? '' : err.error.msg;
+        if (validad == '') {
+          this.showAlert('error de Credenciales', 'error');
+          //this.authService.logoutcliente();
+          this.isLoadinglogin = false;
+        } else {
+          this.showAlert(validad, 'error');
+          //this.authService.logoutcliente();
+          this.isLoadinglogin = false;
+        }
+      },
+      complete: () => {
+        this.isLoadinglogin = false; // Desactivar el estado de carga al completar la solicitud
+      },
+    });
+  }
+
+  private decrypt(data: string): string {
+    if (!data) {
+      return '';
+    }
+    const bytes = CryptoJS.AES.decrypt(data, environment.apikeencriptado);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
+
+  ClickCrear() {
+    this.router.navigateByUrl('/login');
+
+    this.modalRefEstado.close('Save click');
+  }
+
+  showAlert(texto: string, type: any) {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      title: texto,
+      icon: type,
+    });
   }
 }

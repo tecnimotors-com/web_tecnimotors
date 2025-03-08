@@ -8,10 +8,12 @@ import { CotizacionService } from '../../../core/service/cotizacion.service';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { environment } from '../../../../environments/environment.development';
+import { PreloaderComponent } from '../../helper/preloader/preloader.component';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-cotizacion',
-  imports: [SharedMain],
+  imports: [SharedMain, PreloaderComponent],
   templateUrl: './cotizacion.component.html',
   styleUrls: ['./cotizacion.component.scss'],
 })
@@ -24,6 +26,7 @@ export class CotizacionComponent implements OnInit, OnDestroy {
   public txtcelular: string = '';
   public txtcorreo: string = '';
   public txtmensaje: string = '';
+  public fecha: string = '';
 
   public departamento_id: string = '0';
   public provincia_id: string = '0';
@@ -34,16 +37,21 @@ export class CotizacionComponent implements OnInit, OnDestroy {
   public listDistrito: any[] = [];
   public ListCarrito: any[] = [];
 
-  public blnProducto: boolean = false; // Inicializa la variable
-  private acuerdoSubscription: Subscription | undefined; // Para manejar la suscripción
-  private cartSubscription!: Subscription | undefined; // Para manejar la suscripción
-
-  public isVisible: boolean = false;
-
   public ListAcuerdo: any[] = [];
-  public fecha: string = '';
+  public wishlistItems: any[] = [];
+  public cartItems: any[] = [];
+  public cartList: any[] = [];
 
+  // Inicializa la variable
+  private acuerdoSubscription: Subscription | undefined; // Para manejar la suscripción
+  private wishlistSubscription!: Subscription | undefined;
+  private cartSubscription!: Subscription | undefined;
+
+  public blnProducto: boolean = false;
+  public isVisible: boolean = false;
+  public isAuthenticated: boolean = false;
   public btnregistrar: boolean = false;
+  public isProgressing: boolean = false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -63,51 +71,75 @@ export class CotizacionComponent implements OnInit, OnDestroy {
     this.auth.getRefreshToken();
     this.listarDepartamentos();
 
-    this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
-      this.ListCarrito = items; // Actualiza la lista de productos en el carrito
+    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+      if (this.isAuthenticated) {
+        const txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+        this.detailInformacion(txtuuid);
+        this.loadWishlist(txtuuid);
+        this.Loadlogin();
+      } else {
+        // Suscribirse a los cambios en la wishlist
+        this.Loadlogin();
+        this.ListCarrito = this.cotizacionService.getCartItems();
+      }
     });
-
+  }
+  private Loadlogin() {
+    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+      (items) => {
+        this.wishlistItems = items;
+      }
+    );
+    this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
+      this.ListCarrito = items;
+    });
     this.acuerdoSubscription = this.cotizacionService.acuerdo$.subscribe(
       (acuerdo) => {
         this.blnProducto = acuerdo; // Actualiza blnProducto cuando cambia
       }
     );
-
-    this.initializePreLoader();
-    setTimeout(() => {
-      this.finalizePreLoader();
-    }, 1000);
+  }
+  private loadWishlist(txtuuid: string): void {
+    this.cotizacionService.getAllWishlist(txtuuid).subscribe((dtl: any) => {
+      this.wishlistItems = dtl;
+    });
+    this.cotizacionService.getAllCarritoList(txtuuid).subscribe((dtl: any) => {
+      this.cartItems = dtl;
+    });
   }
 
+  private decrypt(data: string): string {
+    if (!data) {
+      return '';
+    }
+    const bytes = CryptoJS.AES.decrypt(data, environment.apikeencriptado);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
+  detailInformacion(uuid: string) {
+    const frombody = {
+      uuid: uuid,
+    };
+    this.cotizacionService.getDetailClienteUuid(frombody).subscribe({
+      next: (dtl: any) => {
+        this.txtnombre = dtl.nombre;
+        this.txtapellido = dtl.apellido;
+        this.txtcelular = dtl.celular;
+        this.txtcorreo = dtl.correo;
+      },
+    });
+  }
   subir() {
     // Desplaza la página hacia arriba
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   ngOnDestroy(): void {
-    this.finalizePreLoader();
     if (this.acuerdoSubscription) {
       this.acuerdoSubscription.unsubscribe();
     }
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
-    }
-  }
-
-  private initializePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.remove('loaded');
-    } else {
-      console.error('Preloader not found!');
-    }
-  }
-
-  private finalizePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.add('loaded');
     }
   }
 
@@ -187,17 +219,18 @@ export class CotizacionComponent implements OnInit, OnDestroy {
   }
 
   // type AlertType = 'success' | 'error' | 'info';
-  showAlert(texto: string, type: any) {
+  private showAlert(texto: string, type: any): void {
     Swal.fire({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       title: texto,
       icon: type,
     });
   }
+
   private createMinoristaObject() {
     return {
       firstname: this.txtnombre,
@@ -236,37 +269,63 @@ export class CotizacionComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (this.isProgressing) return;
+    this.isProgressing = true;
+    this.showAlert('Cargando Información...', 'info');
     this.minoristaservice.getObtenerUltimoRegistro().subscribe({
       next: (lst: any) => {
         this.fecha = this.datePipe.transform(new Date(), 'dd/MM/yyyy')!;
+        this.cartList = this.ListCarrito;
 
-        // Agregar la propiedad 'quote' a cada elemento de ListCarrito
-        this.ListCarrito = this.ListCarrito.map((item) => ({
-          ...item, // Copia todas las propiedades del objeto original
-          quote: lst.quote, // Agrega la nueva propiedad 'quote'
-        }));
+        const txtuuid = this.decrypt(localStorage.getItem('uuid')!);
 
-        const bodyform: any = {
-          quote: lst.quote,
-          firstname: this.txtnombre,
-          lastname: this.txtapellido,
-          celular: this.txtcelular,
-          email: this.txtcorreo,
-          mensaje: this.txtmensaje,
-          fuente_id: 1,
-          estado_id: 1,
-          fecharegistro: this.fecha,
-          vendedores: '',
-          listProduct: this.ListCarrito,
+        const bodyCoti: any = {
+          ListCarritoLogin: this.cartList,
+          Quote: lst.quote,
+          Uuidcliente: txtuuid,
         };
-
-        this.minoristaservice.getRegistroMinoristaAll(bodyform).subscribe({
+        
+        this.cotizacionService.getRegistrarCarritologin(bodyCoti).subscribe({
           next: () => {
-            this.showAlert('Se registro exitosamente ', 'success');
-            this.voidLimpiar();
-            this.ListCarrito = [];
-            this.cotizacionService.clearAcuerdo();
-            this.cotizacionService.clearCart2();
+
+            // Agregar la propiedad 'quote' a cada elemento de ListCarrito
+            this.ListCarrito = this.ListCarrito.map((item) => ({
+              ...item, // Copia todas las propiedades del objeto original
+              quote: lst.quote, // Agrega la nueva propiedad 'quote'
+            }));
+
+            const bodyform: any = {
+              quote: lst.quote,
+              firstname: this.txtnombre,
+              lastname: this.txtapellido,
+              celular: this.txtcelular,
+              email: this.txtcorreo,
+              mensaje: this.txtmensaje,
+              fuente_id: 1,
+              estado_id: 1,
+              fecharegistro: this.fecha,
+              vendedores: '',
+              listProduct: this.ListCarrito,
+            };
+
+            this.minoristaservice.getRegistroMinoristaAll(bodyform).subscribe({
+              next: () => {
+                this.showAlert('Se registro exitosamente ', 'success');
+                this.voidLimpiar();
+                this.ListCarrito = [];
+                this.cotizacionService.clearAcuerdo();
+                this.cotizacionService.clearCart2();
+                this.isProgressing = false;
+              },
+              error: () => {
+                this.showAlert('Error, Volver a Enviar Cotización', 'error');
+                this.isProgressing = false;
+              },
+            });
+          },
+          error: () => {
+            this.showAlert('Error, Volver a Enviar Cotización', 'error');
+            this.isProgressing = false;
           },
         });
       },

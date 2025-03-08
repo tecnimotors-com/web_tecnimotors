@@ -1,47 +1,4 @@
-<!-- Start preloader -->
-<div id="preloader" #preloader>
-    <div id="ctn-preloader" class="ctn-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <span data-text-preloader="C" class="letters-loading">
-                    C
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="R" class="letters-loading">
-                    R
-                </span>
-
-                <span data-text-preloader="G" class="letters-loading">
-                    G
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="N" class="letters-loading">
-                    N
-                </span>
-
-                <span data-text-preloader="D" class="letters-loading">
-                    D
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
-                </span>
-            </div>
-        </div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
+<app-preloader></app-preloader>
 <!-- End preloader -->
 <app-header></app-header>
 <main class="main__content_wrapper">
@@ -120,13 +77,6 @@
                         </label>
                         <input type="text" hidden id="inlineaa1">
                     </p>
-                    <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblmarca!">
-                        Marca:
-                        <label style="font-weight: 400;padding-left: 5px;" for="inlineab2">
-                            {{lblmarca}}
-                        </label>
-                        <input type="text" hidden id="inlineab2">
-                    </p>
                     <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblcategoria!">
                         Categoría:
                         <label style="font-weight: 400;padding-left: 5px;" for="inlineac3">
@@ -142,7 +92,7 @@
                         <input type="text" hidden id="inlinead4">
                     </p>
                     <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblmedida!">
-                        medida:
+                        Medida:
                         <label style="font-weight: 400;padding-left: 5px;" for="inlineae5">
                             {{lblmedida}}
                         </label>
@@ -174,22 +124,28 @@
                                 </button>
                             </div>
                             <button class="primary__btn" style="margin-left: 15px;" type="submit"
-                                (click)="AgregarCarrito()">
-                                Agregar al carrito
+                                (click)="AgregarCarrito()"
+                                [ngClass]="{'carritoList-active': isInCarritolist(this.lblcodigo), 'disabled': isProcessingCarrito}">
+                                {{
+                                isInCarritolist(this.lblcodigo) ?
+                                'Actualizar Cantidad' : 'Agrega a la Cotización'
+                                }}
                             </button>
                         </div>
                         <div class="product__variant--list mb-15">
-                            <a class="variant__wishlist--icon mb-15" title="Add to wishlist"
-                                (click)="MdWishListFavorito()" style="transform: none;transition: none;">
+                            <a class="product__card--action__btn" title="Wishlist"
+                                (click)="!isProcessing ? MdWishListFavorito() : null"
+                                style="transform: none; transition: none;"
+                                [ngClass]="{'wishlist-active': isInWishlist(lblcodigo), 'disabled': isProcessing}">
                                 <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512" [ngClass]="{'wishlist-active': isInWishlist(lblid)}">
+                                    viewBox="0 0 512 512" style="margin: 0px;">
                                     <path
                                         d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
                                         fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="32" />
                                 </svg>
-                                Agregar al Favorito
                             </a>
+                            Agregar al Favorito
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-﻿namespace ApiAlmacen.Context
+﻿namespace ApiDockerTecnimotors.Context
 {
     public class PostgreSQLConfiguration(string connectionString)
     {

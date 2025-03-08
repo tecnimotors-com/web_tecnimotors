@@ -65,20 +65,20 @@
     </section>
 
 
-    <section class="my__account--section section--padding">
-        <div class="container" style="justify-items: center;">
+    <section class="my__account--section">
+        <div class="container mt-4" style="justify-items: center;">
             <div class=" border-radius-10 d-flex">
                 <div class="account__content">
                     <div class="account__table--area">
                         <table class="account__table">
-                            <thead class="account__table--header">
+                            <thead>
                                 <tr class="account__table--header__child">
                                     <th class="account__table--header__child--items" style="justify-items: center;">
                                         <h2>Cuentas Bancarias</h2>
                                     </th>
                                 </tr>
                             </thead>
-                            <thead class="account__table--header">
+                            <thead>
                                 <tr class="account__table--header__child">
                                     <th class="account__table--header__child--items" style="justify-items: center;">
                                         <h4 style="text-align: left;" for="inloneform1">
@@ -134,7 +134,7 @@
                                                         </li>
                                                         <li *ngIf="item.cuentaME!">
                                                             <label [htmlFor]="'inlinefromf'+ (i + 1)">
-                                                                {{item.cciDolares}}
+                                                                CCI DOLARES: {{item.cciDolares}}
                                                             </label>
                                                             <input type="text" hidden [id]="'inlinefromf'+ (i + 1)">
                                                         </li>

@@ -1,47 +1,4 @@
-<!-- Start preloader -->
-<div id="preloader" #preloader>
-    <div id="ctn-preloader" class="ctn-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <span data-text-preloader="C" class="letters-loading">
-                    C
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="R" class="letters-loading">
-                    R
-                </span>
-
-                <span data-text-preloader="G" class="letters-loading">
-                    G
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="N" class="letters-loading">
-                    N
-                </span>
-
-                <span data-text-preloader="D" class="letters-loading">
-                    D
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
-                </span>
-            </div>
-        </div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
+<app-preloader></app-preloader>
 <!-- End preloader -->
 <app-header></app-header>
 
@@ -97,7 +54,7 @@
                                                 </svg>
                                             </button>
                                             <div class="cart__thumbnail">
-                                                <a>
+                                                <a [routerLink]="">
                                                     <img class="border-radius-5"
                                                         [src]="item.pathimagen === '' ? srcimg : txtlink + item.pathimagen"
                                                         alt="cart-product">
@@ -105,7 +62,7 @@
                                             </div>
                                             <div class="cart__content">
                                                 <h3 class="cart__content--title h4">
-                                                    <a>{{item.marcaoriginal}}</a>
+                                                    <a>{{item.codigo.trim().slice(-5)}} - {{item.marcaoriginal}}</a>
                                                 </h3>
                                                 <span class="cart__content--variant">Categoria:
                                                     {{item.categoria}}</span>
@@ -128,17 +85,24 @@
                                     </td>
                                     <td class="cart__table--body__list text-right">
                                         <button class="wishlist__cart--btn primary__btn" type="submit"
-                                            style="margin: 0px;border-radius: 11px;" (click)="AgregarCarrito(item)">
-                                            Agregar A la Cotización
+                                            style="margin: 0px;border-radius: 11px;"
+                                            (click)="!isProcessingCarrito? AgregarCarrito(item) : null"
+                                            [ngClass]="{'carritoList-active': isInCarritolist(item.codigo), 'disabled': isProcessingCarrito}">
+                                            {{
+                                            isInCarritolist(item.codigo) ?
+                                            'Quitar de la Cotización' : 'Agrega a la Cotización'
+                                            }}
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <!--
                         <div class="continue__shopping d-flex justify-content-between">
                             <a class="continue__shopping--link" href="index.html">Continue shopping</a>
                             <a class="continue__shopping--clear" href="shop.html">View All Products</a>
                         </div>
+                        -->
                     </div>
                 </form>
             </div>

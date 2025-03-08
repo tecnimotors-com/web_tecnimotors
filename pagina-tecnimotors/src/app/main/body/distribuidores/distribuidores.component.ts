@@ -15,9 +15,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./distribuidores.component.scss'],
 })
 export class DistribuidoresComponent implements OnInit, OnDestroy {
-  public direccion: string = 'Lima lima, Perú';
+  public direccion: string =
+    'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
   public urldireccion: SafeResourceUrl | undefined;
-  public direccion2: string = 'Lima%20lima,%20Perú';
+  public direccion2: string =
+    'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
   public ListDepa: any[] = [];
   public ListProvi: any[] = [];
   public ListDistrito: any[] = [];
@@ -170,13 +172,17 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
           if (Array.isArray(lst) && lst.length > 0) {
             this.txtid = '';
             this.Lstdistri = lst;
-            this.direccion = 'Lima lima, Perú';
-            this.direccion2 = 'Lima%20lima,%20Perú';
+            this.direccion =
+              'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
+            this.direccion2 =
+              'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
             this.showAlert('Se encontraron resultados', 'success');
           } else {
             this.txtid = '';
-            this.direccion = 'Lima lima, Perú';
-            this.direccion2 = 'Lima%20lima,%20Perú';
+            this.direccion =
+              'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
+            this.direccion2 =
+              'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
             this.setUrlDireccion();
             this.clearDetalledistribuidore();
 
@@ -196,8 +202,10 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
     this.txtprovi = '';
     this.txtdistri = '';
     this.txtid = '';
-    this.direccion = 'Lima lima, Perú';
-    this.direccion2 = 'Lima%20lima,%20Perú';
+    this.direccion =
+      'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
+    this.direccion2 =
+      'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
   }
 
   SelectFrom() {
@@ -220,8 +228,10 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
         });
     } else {
       this.txtid = '';
-      this.direccion = 'Lima lima, Perú';
-      this.direccion2 = 'Lima%20lima,%20Perú';
+      this.direccion =
+        'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
+      this.direccion2 =
+        'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
     }
   }
   // type AlertType = 'success' | 'error' | 'info';

@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.AuthController",
+    "Method": "DetailClienteUuid",
+    "RelativePath": "api/Auth/DetailClienteUuid",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trlcliente",
+        "Type": "ApiDockerTecnimotors.Controllers.AuthController\u002BTrDetailCliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -9,7 +25,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "ApiDockerTecnimotors.Controllers.User",
+        "Type": "ApiDockerTecnimotors.Repositories.Auth.Models.User",
         "IsRequired": true
       }
     ],
@@ -18,14 +34,126 @@
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "user",
-        "Type": "ApiDockerTecnimotors.Controllers.User",
+        "Type": "ApiDockerTecnimotors.Repositories.Auth.Models.TlAuth",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "ListadoCarritoList",
+    "RelativePath": "api/CarritoCotizacion/ListadoCarritoList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trUuid",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.TrUuidCoti",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "RegisterCarritoList",
+    "RelativePath": "api/CarritoCotizacion/RegisterCarritoList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trModels",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.TrModelsCarrito",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "RegisterCotizacionList",
+    "RelativePath": "api/CarritoCotizacion/RegisterCotizacionList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trModels",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.TrLoginCarrito",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "AddtoCarritoList",
+    "RelativePath": "api/CarritoCotizacion/RegistrarCarritologin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "listCarritoRegiser",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.ListCarritoRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "RemoveFromCarritoList",
+    "RelativePath": "api/CarritoCotizacion/RemoveCarritoList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.RemoveFromCarritoListRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoCotizacionController",
+    "Method": "UpdateCantidadCarrito",
+    "RelativePath": "api/CarritoCotizacion/UpdateCantidadCarrito",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ApiDockerTecnimotors.Repositories.CarritoList.Models.UpdateFromCarritoModal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.CarritoLoginController",
+    "Method": "RegistrarCarritoYWishlist",
+    "RelativePath": "api/CarritoLogin/RegistrarCarritoYWishlist",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ApiDockerTecnimotors.Controllers.RegistrarCarritoYWishlistRequest",
         "IsRequired": true
       }
     ],
@@ -375,16 +503,6 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
-    "Method": "ActualizarPathImagen",
-    "RelativePath": "api/MaestroClasificado/ActualizarPathImagen",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ActualizarPathImagen2",
     "RelativePath": "api/MaestroClasificado/ActualizarPathImagen2",
     "HttpMethod": "POST",
@@ -542,6 +660,86 @@
       {
         "Name": "TrModelo",
         "Type": "ApiDockerTecnimotors.Controllers.GeneralMarca",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.WishListController",
+    "Method": "ListadoWishList",
+    "RelativePath": "api/WishList/ListadoWishList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TrUuid",
+        "Type": "ApiDockerTecnimotors.Repositories.WishList.Models.TrUuid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.WishListController",
+    "Method": "GetNextOrderNumber",
+    "RelativePath": "api/WishList/NextOrderNumber",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trtrial",
+        "Type": "ApiDockerTecnimotors.Repositories.WishList.Models.Trtrial",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.WishListController",
+    "Method": "RegisterWishList",
+    "RelativePath": "api/WishList/RegisterWishList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trModels",
+        "Type": "ApiDockerTecnimotors.Repositories.WishList.Models.TrModels",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.WishListController",
+    "Method": "AddToWishlist",
+    "RelativePath": "api/WishList/RegistrarWishlogin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "listRegister",
+        "Type": "ApiDockerTecnimotors.Repositories.WishList.Models.ListWishRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.WishListController",
+    "Method": "RemoveFromWishlist",
+    "RelativePath": "api/WishList/removeWishList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ApiDockerTecnimotors.Repositories.WishList.Models.RemoveFromWishlistRequest",
         "IsRequired": true
       }
     ],

@@ -21,16 +21,10 @@ export const listdata = [
     banco: 'SCOTIABANK S.A.A.',
     cuentaMN: '00-001-103-3852-05',
     cciSoles: '009 001 000103385205 92',
+    /*
     cuentaME: '01-001-103-3865-18',
     cciDolares: '009 001 00110 3386518 96',
-  },
-  {
-    titulo: 'SCOTIABANK',
-    banco: 'SCOTIABANK S.A.A.',
-    cuentaMN: '00-001-103-3852-05',
-    cciSoles: '009 001 000103385205 92',
-    cuentaME: '01-001-103-3865-18',
-    cciDolares: '009 001 00110 3386518 96',
+    */
   },
   {
     titulo: 'INTERBANK',
@@ -53,8 +47,10 @@ export const listdata = [
     banco: 'BAN BIF',
     cuentaMN: '7000560860',
     cciSoles: '038-100-107000560860-41',
+    /*
     cuentaME: '7000560878',
     cciDolares: '038-100-207000560878-42',
+    */
   },
   {
     titulo: 'BANCO DE LA NACIÓN',

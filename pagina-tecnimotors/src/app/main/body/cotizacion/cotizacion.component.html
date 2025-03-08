@@ -1,47 +1,5 @@
 <!-- Start preloader -->
-<div id="preloader" #preloader>
-    <div id="ctn-preloader" class="ctn-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <span data-text-preloader="C" class="letters-loading">
-                    C
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="R" class="letters-loading">
-                    R
-                </span>
-
-                <span data-text-preloader="G" class="letters-loading">
-                    G
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="N" class="letters-loading">
-                    N
-                </span>
-
-                <span data-text-preloader="D" class="letters-loading">
-                    D
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
-                </span>
-            </div>
-        </div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
+<app-preloader></app-preloader>
 <!-- End preloader -->
 <app-header></app-header>
 
@@ -80,7 +38,7 @@
                                 <h2 class="section__header--title h3">Información del contacto</h2>
                                 <p class="layout__flex--item">
                                     ¿Ya tienes una cuenta?
-                                    <a class="layout__flex--item__link">
+                                    <a class="layout__flex--item__link" [routerLink]="['/login']">
                                         Acceso
                                     </a>
                                 </p>
@@ -214,7 +172,7 @@
 
                         <div class="checkout__content--step__footer d-flex align-items-center">
                             <button type="button" class="continue__shipping--btn primary__btn
-                                    border-radius-5" (click)="EnviarCoti()">
+                                    border-radius-5" (click)="!isProgressing ? EnviarCoti() : null">
                                 Enviar cotización
                             </button>
                             <a class="previous__link--content" [routerLink]="['/home']">
@@ -245,7 +203,7 @@
                                                 <div class="product__description">
                                                     <h4 class="product__description--name">
                                                         <a>
-                                                            {{item.marcaoriginal}}
+                                                            {{item.codigo.trim().slice(5)}} - {{item.marcaoriginal}}
                                                         </a>
                                                     </h4>
                                                     <span class="product__description--variant" *ngIf="item.categoria"

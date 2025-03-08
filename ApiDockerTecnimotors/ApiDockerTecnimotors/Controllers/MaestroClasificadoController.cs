@@ -103,7 +103,7 @@ namespace ApiDockerTecnimotors.Controllers
                 PrimeraRutaOriginal = primeraRuta // Solo la primera ruta
             });
         }
-
+        /*
         [HttpPost("ActualizarPathImagen")]
         public async Task<ActionResult> ActualizarPathImagen()
         {
@@ -142,6 +142,7 @@ namespace ApiDockerTecnimotors.Controllers
 
             return Ok(new { mensaje = "Rutas de imágenes actualizadas correctamente." });
         }
+        */
         [HttpPost("ActualizarPathImagen2")]
         public async Task<ActionResult> ActualizarPathImagen2()
         {

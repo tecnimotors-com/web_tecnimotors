@@ -1,5 +1,5 @@
 ﻿
-using ApiAlmacen.Context;
+using ApiDockerTecnimotors.Context;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using Dapper;
@@ -650,11 +650,11 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
                 return await db.QueryAsync<TlCategoriesCamara>(sql, new { });
             }
         }
-        public async Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria,string Categoria)
+        public async Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria, string Categoria)
         {
             var db = DbConnection();
 
-            if (TipoCategoria == "0" && Categoria== "BICICLETA")
+            if (TipoCategoria == "0" && Categoria == "BICICLETA")
             {
                 var sql = @"
 							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
@@ -679,7 +679,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
                 return await db.QueryAsync<TlmodeloCamara>(sql, new { });
             }
 
-            else if(TipoCategoria != "0" && Categoria == "BICICLETA")
+            else if (TipoCategoria != "0" && Categoria == "BICICLETA")
             {
                 var sql = @"
 							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
@@ -705,7 +705,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
             }
             else
             {
-				
+
                 var sql = @"
 							SELECT distinct id, TRIM(mart.marca) AS descripcion_modificada
 							FROM public.maestro_articulos as mart

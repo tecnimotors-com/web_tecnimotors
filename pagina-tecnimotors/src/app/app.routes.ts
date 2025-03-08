@@ -71,7 +71,16 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./main/body/libroreclamo/router').then((m) => m.routes),
       },
-
+      {
+        path: 'login',
+        loadChildren: () =>
+          import('./main/body/login/router').then((m) => m.routes),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./main/body/profile/router').then((m) => m.routes),
+      },
       /*---------------------Filter-------------------------*/
       {
         path: 'homevehiculo/:marca',

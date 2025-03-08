@@ -1,10 +1,16 @@
-using ApiAlmacen.Context;
+using ApiDockerTecnimotors.Context;
+using ApiDockerTecnimotors.Repositories.Auth.Interface;
+using ApiDockerTecnimotors.Repositories.Auth.Repo;
+using ApiDockerTecnimotors.Repositories.CarritoList.Interface;
+using ApiDockerTecnimotors.Repositories.CarritoList.Repository;
 using ApiDockerTecnimotors.Repositories.Distribuidores.Interface;
 using ApiDockerTecnimotors.Repositories.Distribuidores.Repo;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo;
+using ApiDockerTecnimotors.Repositories.WishList.Interface;
+using ApiDockerTecnimotors.Repositories.WishList.Repository;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using System.Net;
@@ -32,6 +38,9 @@ builder.Services.AddSingleton(postgreSQLConnectionConfiguration);
 builder.Services.AddScoped<IMaestroArticuloRepository, MaestroArticuloRepository>();
 builder.Services.AddScoped<IMaestroClasificado, MaestroClasificado>();
 builder.Services.AddScoped<IDistribuidoresRepository, DistribuidoresRepository>();
+builder.Services.AddScoped<IAuthInterface, AuthRepository>();
+builder.Services.AddScoped<IWishList, WIshList>();
+builder.Services.AddScoped<ICarritoList, CarritoList>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

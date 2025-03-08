@@ -15,6 +15,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaestroclasificadoService } from '../core/service/maestroclasificado.service';
+import { PreloaderComponent } from '../main/helper/preloader/preloader.component';
 
 @Component({
   selector: 'app-home',

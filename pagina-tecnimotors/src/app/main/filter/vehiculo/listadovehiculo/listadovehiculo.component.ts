@@ -9,36 +9,48 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { MinoristaService } from '../../../../core/service/marketing/minorista.service';
 import { environment } from '../../../../../environments/environment.development';
+import { PreloaderComponent } from '../../../helper/preloader/preloader.component';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-listadovehiculo',
-  imports: [SharedMain],
+  imports: [SharedMain, PreloaderComponent],
   templateUrl: './listadovehiculo.component.html',
   styleUrls: ['./listadovehiculo.component.scss'],
 })
-export class ListadovehiculoComponent implements OnInit, OnDestroy {
+export class ListadovehiculoComponent implements OnInit {
   public ListarCategoria: any[] = [];
   public ListModelo: any[] = [];
   public ListMarca: any[] = [];
-
   public ListGeneral: any[] = [];
-  public txtcategoria: string = '';
-  public txtmodelo: string = '';
-  public txtmarca: string = '';
+  public ListCarrito: any[] = [];
+  public ListWishlist: any[] = [];
 
-  public p: number = 1;
+  public wishlistItems: any[] = [];
+  public cartItems: any[] = [];
+
+  public txtcategoria: string = localStorage.getItem('categoriavehiculo') || '';
+  public txtmodelo: string = localStorage.getItem('modelovehiculo') || '';
+  public txtmarca: string = localStorage.getItem('marcavehiculo') || '';
+  public p: number = parseInt(localStorage.getItem('pvehiculo')!) || 1;
+
+  public count: number = 1;
   public itemper: number = 10;
 
-  public ListCarrito: any[] = [];
   public isVisible: boolean = false;
-  closeResult: string = '';
+  public blndisable: boolean = false;
+  public txtacuerdotrue: boolean = false;
+  public isLoading: boolean = true;
+  public isAuthenticated: boolean = false;
+  public isProcessing: boolean = false;
+  public isProcessingCarrito: boolean = false;
 
+  closeResult: string = '';
   public lbldescripcion: string = '';
   public lblunidadmedida: string = '';
   public lblcategoria: string = '';
   public lblmarca: string = '';
   public lblmarcaoriginal: string = '';
-  //public lblproducto: string = '';
   public lblmedida: string = '';
   public lblmodelo: string = '';
   public lblmedidaestandarizado: string = '';
@@ -49,19 +61,12 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   public lblsubfamilia: string = '';
   public lbltipo: string = '';
 
-  public count: number = 1;
-  public blndisable = false;
-  public txtacuerdotrue: boolean = false;
-  private cartSubscription!: Subscription | undefined; // Para manejar la suscripción
   public txtlink: string =
     environment.apimaestroarticulo + '/MaestroClasificado/GetBanner2?ruta=';
   public srcimg: string = 'assets/img/product/main-product/product6.webp';
 
-  public isLoading: boolean = true;
-
   private wishlistSubscription!: Subscription | undefined;
-  public ListWishlist: any[] = [];
-  public wishlistItems: any[] = [];
+  private cartSubscription!: Subscription | undefined;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -80,37 +85,109 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.auth.getRefreshToken();
+    this.auth.getRefreshTokenvehiculo();
     this.route.params.subscribe((params) => {
-      this.txtcategoria = params['marca'].toString()!;
+      this.txtcategoria = params['marca'].toString() || '';
+      localStorage.setItem('categoriavehiculo', this.txtcategoria);
     });
+    this.initializeData();
+    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+      if (this.isAuthenticated) {
+        const txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+        this.loadWishlist(txtuuid);
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.cartItems = items;
+          }
+        );
+        this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+          (items) => {
+            this.wishlistItems = items;
+          }
+        ); // Cargar la wishlist desde la base de datos
+      } else {
+        // Suscribirse a los cambios en la wishlist
+        this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
+          (items) => {
+            this.wishlistItems = items;
+          }
+        );
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.cartItems = items;
+          }
+        );
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
+    this.wishlistSubscription?.unsubscribe();
+  }
+
+  private initializeData(): void {
     this.ListarGeneralVehiculo();
     this.ListarCategoriaVehiculo();
     this.ListarModeloVehiculo();
     this.ListarMarcaVehiculo();
-    this.initializePreLoader();
-    // Suscribirse a los cambios en la wishlist
-    this.wishlistSubscription = this.cotizacionService.wishlist$.subscribe(
-      (items) => {
-        this.wishlistItems = items; // Actualiza la lista de productos en la wishlist
-      }
-    );
-    setTimeout(() => {
-      this.finalizePreLoader();
-    }, 1000);
   }
 
-  isInWishlist(productId: number): boolean {
-    return this.wishlistItems.some((item) => item.id === productId);
+  private loadWishlist(txtuuid: string): void {
+    this.cotizacionService.getAllWishlist(txtuuid).subscribe((dtl: any) => {
+      this.wishlistItems = dtl;
+    });
+    this.cotizacionService.getAllCarritoList(txtuuid).subscribe((dtl: any) => {
+      this.cartItems = dtl;
+    });
   }
 
-  isInWishlist2(productId: string): boolean {
-    const product = parseInt(productId);
-    return this.wishlistItems.some((item) => item.id === product);
+  private decrypt(data: string): string {
+    if (!data) {
+      return '';
+    }
+    const bytes = CryptoJS.AES.decrypt(data, environment.apikeencriptado);
+    return bytes.toString(CryptoJS.enc.Utf8);
   }
 
-  ngOnDestroy(): void {
-    this.finalizePreLoader();
+  private showAlert(texto: string, type: any): void {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      title: texto,
+      icon: type,
+    });
+  }
+
+  Paginacion() {
+    localStorage.setItem('pvehiculo', this.p.toString());
+  }
+
+  isInWishlist(productIdentifier: string): boolean {
+    if (this.isAuthenticated) {
+      // Si está autenticado, usa el método que verifica por código
+      return this.wishlistItems.some(
+        (item) => item.codigo.trim() === productIdentifier.trim()
+      );
+    } else {
+      // Si no está autenticado, usa el método que verifica por id
+      return this.wishlistItems.some(
+        (item) => item.codigo === productIdentifier
+      );
+    }
+  }
+
+  isInCarritolist(productIdentifier: string): boolean {
+    if (this.isAuthenticated) {
+      return this.cartItems.some(
+        (item) => item.codigo.trim() === productIdentifier.trim()
+      );
+    } else {
+      return this.cartItems.some((item) => item.codigo === productIdentifier);
+    }
   }
 
   onImageLoad() {
@@ -175,11 +252,17 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     this.ListarModeloVehiculo();
     this.ListarGeneralVehiculo();
     this.ListarMarcaVehiculo();
+    localStorage.removeItem('marcavehiculo');
+    localStorage.removeItem('modelovehiculo');
+    localStorage.removeItem('pvehiculo');
   }
 
   Limpiar() {
     this.txtmarca = '';
     this.txtmodelo = '';
+    localStorage.removeItem('marcavehiculo');
+    localStorage.removeItem('modelovehiculo');
+    localStorage.removeItem('pvehiculo');
     this.router.navigate([`/homevehiculo/${this.txtcategoria}`]);
     this.ListarModeloVehiculo();
     this.ListarGeneralVehiculo();
@@ -188,28 +271,15 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
   SelectModelo() {
     this.ListarGeneralVehiculo();
     this.ListarMarcaVehiculo();
+    localStorage.removeItem('pvehiculo');
+    localStorage.setItem('modelovehiculo', this.txtmodelo);
   }
 
   SelectMarca() {
     this.ListarGeneralVehiculo();
     this.ListarModeloVehiculo();
-  }
-
-  private initializePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.remove('loaded');
-    } else {
-      console.error('Preloader not found!');
-    }
-  }
-
-  private finalizePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.add('loaded');
-    }
+    localStorage.removeItem('pvehiculo');
+    localStorage.setItem('marcavehiculo', this.txtmarca);
   }
 
   subir() {
@@ -217,18 +287,6 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // type AlertType = 'success' | 'error' | 'info';
-  showAlert(texto: string, type: any) {
-    Swal.fire({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true,
-      title: texto,
-      icon: type,
-    });
-  }
   AumentarCount() {
     if (this.count < 10) {
       this.blndisable = false;
@@ -246,69 +304,81 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
       this.count--;
     }
   }
-  AgregarCarrito(item: any) {
-    const product = {
-      descripcion: item.descripcion,
-      unidad: item.unidadmedida,
-      categoria: item.aplicacion,
-      marca: item.marca,
-      marcaoriginal: item.marcaoriginal,
-      medida: item.medida,
-      modelo: item.modelo,
-      medidaestandarizado: item.medidaestandarizado,
-      id: item.id,
-      codigo: item.codigo,
-      familia: item.familia,
-      subfamilia: item.subfamilia,
-      tipo: item.tipo,
-      cantidad: 1,
-      sku: item.codigo,
-      producto: item.marcaoriginal,
-      vendor: item.marca,
-      quantity: this.count,
-      color: '',
-      pathimagen: item.pathimagen,
-    };
-    this.cotizacionService.addToCart2(product);
-    this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
-      this.ListCarrito = items; // Actualiza la lista de productos en el carrito
-    });
-  }
+
   AgregarCarritoModal() {
     // Crear el producto que se va a agregar
-    const product = {
-      descripcion: this.lbldescripcion,
-      unidad: this.lblunidadmedida,
-      categoria: this.lblcategoria,
-      marca: this.lblmarca,
-      marcaoriginal: this.lblmarcaoriginal,
-      medida: this.lblmedida,
-      modelo: this.lblmodelo,
-      medidaestandarizado: this.lblmedidaestandarizado,
-      id: this.lblid,
-      codigo: this.lblcodigo,
-      familia: this.lblfamilia,
-      subfamilia: this.lblsubfamilia,
-      tipo: this.lbltipo,
-      cantidad: this.count ?? 1,
+    if (this.isProcessingCarrito) return;
+    this.isProcessingCarrito = true;
 
-      sku: this.lblcodigo,
-      producto: this.lblmarcaoriginal,
-      vendor: this.lblmarca,
-      quantity: this.count,
-      color: '',
-      pathimagen: this.lblpathimagen,
-    };
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      if (this.isInCarritolist(this.lblcodigo.trim())) {
+        this.cotizacionService
+          .UpdateCantidadCarritoList(txtuuid, this.lblcodigo.trim(), this.count)
+          .subscribe({
+            next: () => {
+              this.loadWishlist(txtuuid); // Cargar la wishlist actualizada
+              this.showAlert('Cantidad Actualizado', 'success');
+              this.isProcessingCarrito = false;
+            },
+            error: () => {
+              this.isProcessingCarrito = false;
+              this.showAlert('Error al actualizar la cantidad', 'error');
+            },
+          });
+      } else {
+        const authCarrito = this.createAuthCarritoModal();
+        this.cotizacionService.getRegisterCarritoList(authCarrito).subscribe({
+          next: () => {
+            this.loadWishlist(txtuuid); // Actualiza la wishlist después de agregar
+            this.showAlert(
+              'Producto agregado a la lista de cotización',
+              'success'
+            );
+            this.isProcessingCarrito = false;
+          },
+          error: () => {
+            this.isProcessingCarrito = false;
+            this.showAlert(
+              'Error al agregar a la lista de cotización',
+              'error'
+            );
+          },
+        });
+      }
+    } else {
+      const product = {
+        descripcion: this.lbldescripcion,
+        unidad: this.lblunidadmedida,
+        categoria: this.lblcategoria,
+        marca: this.lblmarca,
+        marcaoriginal: this.lblmarcaoriginal,
+        medida: this.lblmedida,
+        modelo: this.lblmodelo,
+        medidaestandarizado: this.lblmedidaestandarizado,
+        id: this.lblid,
+        codigo: this.lblcodigo,
+        familia: this.lblfamilia,
+        subfamilia: this.lblsubfamilia,
+        tipo: this.lbltipo,
+        cantidad: this.count ?? 1,
 
-    this.cotizacionService.addToCart2(product);
-    this.cartSubscription = this.cotizacionService.cart$.subscribe((items) => {
-      this.ListCarrito = items;
-    });
+        sku: this.lblcodigo,
+        producto: this.lblmarcaoriginal,
+        vendor: this.lblmarca,
+        quantity: this.count,
+        color: '',
+        pathimagen: this.lblpathimagen,
+      };
 
-    /*
-    this.cotizacionService.addToCart(product);
-    this.ListCarrito = this.cotizacionService.getCartItems();
-    */
+      this.cotizacionService.addToCart2(product);
+      this.cartSubscription = this.cotizacionService.cart$.subscribe(
+        (items) => {
+          this.isProcessingCarrito = false;
+          this.ListCarrito = items;
+        }
+      );
+    }
   }
 
   clearVoid() {
@@ -377,8 +447,218 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
     }
   }
 
+  AgregarCarrito(item: any) {
+    if (this.isProcessingCarrito) return;
+    this.isProcessingCarrito = true;
+
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      if (this.isInCarritolist(item.codigo)) {
+        this.cotizacionService
+          .RemoveFromCarritoList(txtuuid, item.codigo.trim())
+          .subscribe({
+            next: () => {
+              this.loadWishlist(txtuuid); // Cargar la wishlist actualizada
+              this.showAlert(
+                'Producto eliminado de la lista de cotización',
+                'success'
+              );
+              this.isProcessingCarrito = false;
+            },
+            error: () => {
+              this.isProcessingCarrito = false;
+              this.showAlert(
+                'Error al eliminar a la lista de cotización',
+                'error'
+              );
+            },
+          });
+      } else {
+        const authCarrito = this.createAuthCarrito(item);
+        this.cotizacionService.getRegisterCarritoList(authCarrito).subscribe({
+          next: () => {
+            this.loadWishlist(txtuuid); // Actualiza la wishlist después de agregar
+            this.showAlert(
+              'Producto agregado a la lista de cotización',
+              'success'
+            );
+            this.isProcessingCarrito = false;
+          },
+          error: () => {
+            this.isProcessingCarrito = false;
+            this.showAlert(
+              'Error al agregar a la lista de cotización',
+              'error'
+            );
+          },
+        });
+      }
+    } else {
+      const product = {
+        descripcion: item.descripcion,
+        unidad: item.unidadmedida,
+        categoria: item.aplicacion,
+        marca: item.marca,
+        marcaoriginal: item.marcaoriginal,
+        medida: item.medida,
+        modelo: item.modelo,
+        medidaestandarizado: item.medidaestandarizado,
+        id: item.id,
+        codigo: item.codigo,
+        familia: item.familia,
+        subfamilia: item.subfamilia,
+        tipo: item.tipo,
+        cantidad: 1,
+        sku: item.codigo,
+        producto: item.marcaoriginal,
+        vendor: item.marca,
+        quantity: this.count,
+        color: '',
+        pathimagen: item.pathimagen,
+      };
+      if (this.isInCarritolist(item.codigo)) {
+        this.cotizacionService.eliminarProducto(item);
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.isProcessingCarrito = false;
+            this.ListCarrito = items; // Actualiza la lista de productos en el carrito
+          }
+        );
+      } else {
+        this.cotizacionService.addToCart2(product);
+        this.cartSubscription = this.cotizacionService.cart$.subscribe(
+          (items) => {
+            this.isProcessingCarrito = false;
+            this.ListCarrito = items; // Actualiza la lista de productos en el carrito
+          }
+        );
+      }
+    }
+  }
+
   MdWishListFavorito(item: any) {
-    const product = {
+    if (this.isProcessing) return; // Evitar múltiples clics
+    this.isProcessing = true; // Establecer el estado de procesamiento
+
+    if (this.isAuthenticated) {
+      var txtuuid = this.decrypt(localStorage.getItem('uuid')!);
+      // Verificar si el producto ya está en la wishlist usando item.codigo
+      if (this.isInWishlist(item.codigo)) {
+        // Si ya está en la wishlist, marcarlo como inactivo
+        this.cotizacionService
+          .removeFromWishlist(txtuuid, item.codigo.trim())
+          .subscribe({
+            next: () => {
+              this.loadWishlist(txtuuid); // Cargar la wishlist actualizada
+              this.showAlert(
+                'Producto eliminado de la lista de deseos',
+                'success'
+              );
+              this.isProcessing = false;
+            },
+            error: () => {
+              this.isProcessing = false;
+              this.showAlert(
+                'Error al eliminar de la lista de deseos',
+                'error'
+              );
+            },
+          });
+      } else {
+        // Si no está en la wishlist, agregarlo
+        this.cotizacionService
+          .getNextOrderNumber2(txtuuid.toString())
+          .subscribe({
+            next: (dtl: any) => {
+              const authProduct = this.createAuthProduct(item, dtl.orderNumber);
+              this.cotizacionService
+                .getRegisterWishList(authProduct)
+                .subscribe({
+                  next: () => {
+                    this.loadWishlist(txtuuid); // Actualiza la wishlist después de agregar
+                    this.showAlert(
+                      'Producto agregado a la lista de deseos',
+                      'success'
+                    );
+                    this.isProcessing = false;
+                  },
+                  error: () => {
+                    this.isProcessing = false;
+                    this.showAlert(
+                      'Error al agregar a la lista de deseos',
+                      'error'
+                    );
+                  },
+                });
+            },
+          });
+      }
+    } else {
+      const product = {
+        descripcion: item.descripcion,
+        unidad: item.unidadmedida,
+        categoria: item.aplicacion,
+        marca: item.marca,
+        marcaoriginal: item.marcaoriginal,
+        medida: item.medida,
+        modelo: item.modelo,
+        medidaestandarizado: item.medidaestandarizado,
+        id: item.id,
+        codigo: item.codigo,
+        familia: item.familia,
+        subfamilia: item.subfamilia,
+        tipo: item.tipo,
+        cantidad: 1,
+        sku: item.codigo,
+        producto: item.marcaoriginal,
+        vendor: item.marca,
+        quantity: this.count,
+        color: '',
+        pathimagen: item.pathimagen,
+      };
+      this.cotizacionService.addToWishlist(product);
+      this.wishlistSubscription = this.cotizacionService.cart$.subscribe(
+        (items) => {
+          this.isProcessing = false;
+          this.ListWishlist = items; // Actualiza la lista de productos en el carrito
+        }
+      );
+    }
+  }
+
+  private createAuthProduct(item: any, orderNumber: string): any {
+    console.log(item)
+    return {
+      uuidcliente: this.decrypt(localStorage.getItem('uuid')!),
+      ordenwishlist: orderNumber,
+      descripcion: item.descripcion,
+      unidad: item.unidadmedida,
+      categoria: item.aplicacion,
+      marca: item.marca,
+      marcaoriginal: item.marcaoriginal,
+      medida: item.medida,
+      modelo: item.modelo,
+      medidaestandarizado: item.medidaestandarizado,
+      id: item.id,
+      codigo: item.codigo.trim(),
+      familia: item.familia,
+      subfamilia: item.subfamilia,
+      tipo: item.tipo,
+      cantidad: 1,
+      sku: item.codigo,
+      producto: item.marcaoriginal,
+      vendor: item.marca,
+      quantity: this.count,
+      color: '',
+      pathimagen: item.pathimagen,
+      estado: 'Activo',
+      fecharegistro: new Date().toISOString(),
+    };
+  }
+  private createAuthCarrito(item: any): any {
+    return {
+      uuidcliente: this.decrypt(localStorage.getItem('uuid')!),
+      ordernshopping: '',
       descripcion: item.descripcion,
       unidad: item.unidadmedida,
       categoria: item.aplicacion,
@@ -399,12 +679,37 @@ export class ListadovehiculoComponent implements OnInit, OnDestroy {
       quantity: this.count,
       color: '',
       pathimagen: item.pathimagen,
+      estado: 'Activo',
+      fecharegistro: new Date().toISOString(),
     };
-    this.cotizacionService.addToWishlist(product);
-    this.wishlistSubscription = this.cotizacionService.cart$.subscribe(
-      (items) => {
-        this.ListWishlist = items; // Actualiza la lista de productos en el carrito
-      }
-    );
+  }
+  private createAuthCarritoModal() {
+    return {
+      uuidcliente: this.decrypt(localStorage.getItem('uuid')!),
+      ordernshopping: '',
+      descripcion: this.lbldescripcion,
+      unidad: this.lblunidadmedida,
+      categoria: this.lblcategoria,
+      marca: this.lblmarca,
+      marcaoriginal: this.lblmarcaoriginal,
+      medida: this.lblmedida,
+      modelo: this.lblmodelo,
+      medidaestandarizado: this.lblmedidaestandarizado,
+      id: this.lblid,
+      codigo: this.lblcodigo,
+      familia: this.lblfamilia,
+      subfamilia: this.lblsubfamilia,
+      tipo: this.lbltipo,
+      cantidad: this.count ?? 1,
+
+      sku: this.lblcodigo,
+      producto: this.lblmarcaoriginal,
+      vendor: this.lblmarca,
+      quantity: this.count,
+      color: '',
+      pathimagen: this.lblpathimagen,
+      estado: 'Activo',
+      fecharegistro: new Date().toISOString(),
+    };
   }
 }

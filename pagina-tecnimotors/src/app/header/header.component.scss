@@ -191,3 +191,23 @@
   width: 120px;
   height: 120px;
 }
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px; /* Ajusta según sea necesario */
+  cursor: pointer;
+  color: #888; /* Color del ícono */
+}
+
+.password-toggle:hover {
+  color: #000; /* Color del ícono al pasar el mouse */
+}
+.provalidad {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
