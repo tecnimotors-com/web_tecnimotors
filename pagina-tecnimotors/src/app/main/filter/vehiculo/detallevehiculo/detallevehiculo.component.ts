@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { SharedMain } from '../../../sharedmain';
@@ -74,6 +74,12 @@ export class DetallevehiculoComponent implements OnInit, OnDestroy {
     private meta: Meta,
     private title: Title
   ) {}
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Verifica si el scroll es mayor a 200px
+    this.isVisible = window.scrollY > 200;
+  }
 
   ngOnInit(): void {
     this.auth.getRefreshTokenvehiculo();

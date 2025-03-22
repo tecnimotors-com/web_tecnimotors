@@ -1,52 +1,8 @@
 <!-- Start preloader -->
-<div id="preloader" #preloader>
-    <div id="ctn-preloader" class="ctn-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <span data-text-preloader="C" class="letters-loading">
-                    C
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="R" class="letters-loading">
-                    R
-                </span>
-
-                <span data-text-preloader="G" class="letters-loading">
-                    G
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="N" class="letters-loading">
-                    N
-                </span>
-
-                <span data-text-preloader="D" class="letters-loading">
-                    D
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
-                </span>
-            </div>
-        </div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
+<app-preloader></app-preloader>
 <!-- End preloader -->
 <app-header></app-header>
-
 <main class="main__content_wrapper">
-
     <!-- Start breadcrumb section -->
     <section class="breadcrumb__section breadcrumb__bg">
         <div class="container">
@@ -67,117 +23,219 @@
     <!-- End breadcrumb section -->
 
     <!-- Start shop section -->
-    <div class="shop__section section--padding">
+    <!-- <div class="shop__section section--padding"> -->
+    <div class="shop__section" style="margin-top: 15px;">
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
-                    <form>
-                        <div class="shop__sidebar--widget widget__area d-lg-block">
-                            <div class="single__widget widget__bg">
-                                <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
-                                    Buscar Catálogo
-                                    <button type="button" style="color: white;background-color: black;
-                                        border-radius: 5px;cursor: pointer;" (click)="Limpiar()">
-                                        Limpiar
-                                    </button>
-                                </h2>
-
-                                <ul class="widget__categories--menu">
-                                    <li class="widget__categories--menu__list">
-                                        <input type="text" placeholder="Buscar Catálogo"
-                                            class="widget__categories--menu__label d-flex align-items-center"
-                                            name="tipoproducthome" style="width: -webkit-fill-available;
-                                            border: 1px solid;padding: 10px;color: #04195b;">
-                                    </li>
-                                </ul>
-                            </div>
-
-
-                            <div class="single__widget widget__bg">
-                                <h2 class="widget__title h3">Tipo de Catálogo</h2>
-                                <ul class="widget__categories--menu">
-                                    <li class="widget__categories--menu__list">
-                                        <select class="widget__categories--menu__label d-flex align-items-center"
-                                            name="tipoproducthome" style="width: -webkit-fill-available;
-                                            border: 0px solid;padding: 10px;color: #04195b;"
-                                            [(ngModel)]="txttipocatalogo" (change)="SelectCatalogo()">
-                                            <option selected disabled value="0">Tipo Catálogo</option>
-                                            <option *ngFor="let item of ListTipoCatalogo"
-                                                [value]="item.id_tipo_catalogo">
-                                                {{item.tipo_catalogo}}</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </div>
+                <div class="col-xl-3 col-lg-4 shop-col-width-lg-4" style="margin-bottom: 20px;">
+                    <div class="shop__sidebar--widget widget__area d-lg-block">
+                        <div class="single__widget widget__bg">
+                            <h2 class="widget__title h3" style="display: flex;justify-content: space-between;
+                                margin-bottom: 15px;">
+                                Buscar Catálogo
+                                <button type="button" style="color: white;background-color: black;
+                                    border-radius: 5px;cursor: pointer;">
+                                    Limpiar
+                                </button>
+                            </h2>
+                            <ul class="widget__form--check">
+                                <li class="widget__form--check__list">
+                                    <input class="checkout__input--field border-radius-5" id="lblbuscarCata" type="text"
+                                        placeholder="Nombre del Catálogo">
+                                </li>
+                            </ul>
                         </div>
-                    </form>
+
+                        <div class="single__widget widget__bg">
+                            <h2 class="widget__title h3" style="display: flex;justify-content: space-between;
+                                margin-bottom: 15px;">
+                                Tipo de Catálogo
+                                <button type="button" style="color: white;background-color: black;
+                                    border-radius: 5px;cursor: pointer;" (click)="ListadoTipoCatalogo()">
+                                    Limpiar
+                                </button>
+                            </h2>
+                            <ul class="widget__form--check">
+                                <li class="widget__form--check__list">
+                                    <select class="search__filter--select__field" name="lbltipocata" id="lbltipocata"
+                                        [(ngModel)]="txttipocata" (change)="ChangeCatalogo()">
+                                        <option selected disabled value=0>Seleccione Tipo Catálogo</option>
+                                        <option *ngFor="let item of ListTipoCata" [value]="item.id_tipo_catalogo">
+                                            {{item.tipo_catalogo}}</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
                     <div class="shop__right--sidebar">
                         <!-- Start categories section -->
-                        <div class="categories__shop mb-50">
-                            <div class="section__heading border-bottom mb-30">
-                                <h2 class="section__heading--maintitle">Catálogo Tecnimotors</h2>
+                        <div class="categories__shop mb-10">
+                            <div class="section__heading border-bottom mb-10">
+                                <h2 class="section__heading--maintitle">Catálogos Tecnimotors</h2>
                             </div>
-
-
-                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
-                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
-                                nextLabel="Siguiente" [maxSize]="10">
-                            </pagination-controls>
-                            <ul class="categories__shop--inner" [@fadeInOut]>
-                                <li class="categories__shop--card" *ngFor="let item of ListCatalogo | paginate: 
-                                { itemsPerPage: itemper, currentPage: p }, let i = index">
-                                    <a class="categories__shop--card__link">
-                                        <div class="product__card--thumbnail mb-15">
-                                            <a class="product__card--thumbnail__link display-block">
-                                                <img class="categories__thumbnail--img" src="{{item.imagen}}"
-                                                    style="border-radius: 2rem;border: 1px solid black;transform: scale(1.00);"
-                                                    alt="product-img">
-                                            </a>
-                                            <div class="product__media--view__icon">
-                                                <a class="product__media--view__icon--link glightbox"
-                                                    data-gallery="product-media-zoom">
-                                                    <svg class="product__items--action__btn--svg"
-                                                        xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443"
-                                                        viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
-                                                            fill="none" stroke="currentColor" stroke-miterlimit="10"
-                                                            stroke-width="32"></path>
-                                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                            stroke-miterlimit="10" stroke-width="32"
-                                                            d="M338.29 338.29L448 448"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="categories__content">
-                                            <span class="categories__content--subtitle"
-                                                style="width: -webkit-fill-available;text-align: start;">
-                                                {{item.titulo}}
-                                            </span>
-                                            <span class="categories__content--subtitle"
-                                                style="width: -webkit-fill-available;text-align: start;">
-                                                Fecha : {{item.fecha_registro}}
-                                            </span>
-                                            <span class="categories__content--subtitle"
-                                                style="width: -webkit-fill-available;text-align: start;">
-                                                <a target="_blank" href="{{item.link}}"
-                                                    style="width: -webkit-fill-available;text-align: start;">
-                                                    Visualizar PDFs
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
-                                [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Anterior"
-                                nextLabel="Siguiente" [maxSize]="10">
-                            </pagination-controls>
-
                         </div>
+                        <!-- End categories section -->
+                        <div class="portfolio__section--inner" *ngIf="!tabpanel">
+                            <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-2">
+
+                                <div class="col mb-30" style="justify-items: center;"
+                                    *ngFor="let item of ListTipoCata, let i = index">
+                                    <div class="portfolio__items" style="width: 50%;">
+                                        <div class="portfolio__items--thumbnail position__relative">
+                                            <a class="portfolio__items--thumbnail__link display-block glightbox"
+                                                data-gallery="portfolio" (click)="DetalleCatalogo(item)">
+                                                <img class="portfolio__items--thumbnail__img" [src]="item.text2"
+                                                    alt="portfolio-img" style="border-radius: 15px;border: 1px solid;">
+                                                <div class="portfolio__view--icon">
+                                                    <span class="portfolio__view--icon__link labelDetalle">
+                                                        VER DETALLE
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            style="margin-left: 10px;" width="26" height="21"
+                                                            viewBox="0 0 39.697 27.066">
+                                                            <path
+                                                                d="M20.849,4.5A21.341,21.341,0,0,0,1,18.033a21.322,21.322,0,0,0,39.7,0A21.341,21.341,0,0,0,20.849,4.5Zm0,22.555a9.022,9.022,0,1,1,9.022-9.022A9.025,9.025,0,0,1,20.849,27.055Zm0-14.435a5.413,5.413,0,1,0,5.413,5.413A5.406,5.406,0,0,0,20.849,12.62Z"
+                                                                transform="translate(-1 -4.5)" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__items--thumbnail__link display-block glightbox labeltitle">
+                                        <label [htmlFor]="'lbltituloa' + (i + 1)">
+                                            {{item.tipo_catalogo}}
+                                        </label>
+                                        <input type="text" hidden [id]="'lbltituloa' + (i + 1)">
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col mb-30" style="justify-items: center;">
+                                    <div class="portfolio__items" style="width: 50%;">
+                                        <div class="portfolio__items--thumbnail position__relative">
+                                            <a class="portfolio__items--thumbnail__link display-block glightbox"
+                                                data-gallery="portfolio" (click)="DetalleCatalogo()">
+                                                <img class="portfolio__items--thumbnail__img"
+                                                    src="assets/img/banner/Catalogo/Llantas_Camara_Moto_Bicicleta.jpg"
+                                                    alt="portfolio-img" style="border-radius: 15px;border: 1px solid;">
+                                                <div class="portfolio__view--icon">
+                                                    <span class="portfolio__view--icon__link labelDetalle">
+                                                        VER DETALLE
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            style="margin-left: 10px;" width="26" height="21"
+                                                            viewBox="0 0 39.697 27.066">
+                                                            <path
+                                                                d="M20.849,4.5A21.341,21.341,0,0,0,1,18.033a21.322,21.322,0,0,0,39.7,0A21.341,21.341,0,0,0,20.849,4.5Zm0,22.555a9.022,9.022,0,1,1,9.022-9.022A9.025,9.025,0,0,1,20.849,27.055Zm0-14.435a5.413,5.413,0,1,0,5.413,5.413A5.406,5.406,0,0,0,20.849,12.62Z"
+                                                                transform="translate(-1 -4.5)" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__items--thumbnail__link display-block glightbox labeltitle">
+                                        <label for="lbltitulo">
+                                            CATÁLOGOS DE LLANTAS Y CÁMARAS DE MOTOS Y BICICLETAS
+                                        </label>
+                                        <input type="text" hidden id="lbltitulo">
+                                    </div>
+                                </div>
+                                <div class="col mb-30" style="justify-items: center;">
+                                    <div class="portfolio__items" style="width: 50%;">
+                                        <div class="portfolio__items--thumbnail position__relative">
+                                            <a class="portfolio__items--thumbnail__link display-block glightbox"
+                                                data-gallery="portfolio">
+                                                <img class="portfolio__items--thumbnail__img"
+                                                    src="assets/img/banner/Catalogo/Vehiculos.jpg" alt="portfolio-img"
+                                                    style="border-radius: 15px;border: 1px solid;">
+                                                <div class="portfolio__view--icon">
+                                                    <span class="portfolio__view--icon__link labelDetalle">
+                                                        VER DETALLE
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            style="margin-left: 10px;" width="26" height="21"
+                                                            viewBox="0 0 39.697 27.066">
+                                                            <path
+                                                                d="M20.849,4.5A21.341,21.341,0,0,0,1,18.033a21.322,21.322,0,0,0,39.7,0A21.341,21.341,0,0,0,20.849,4.5Zm0,22.555a9.022,9.022,0,1,1,9.022-9.022A9.025,9.025,0,0,1,20.849,27.055Zm0-14.435a5.413,5.413,0,1,0,5.413,5.413A5.406,5.406,0,0,0,20.849,12.62Z"
+                                                                transform="translate(-1 -4.5)" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__items--thumbnail__link display-block glightbox labeltitle">
+                                        <label for="lbltitulo2">
+                                            CATÁLOGOS DE VEHÍCULOS
+                                        </label>
+                                        <input type="text" hidden id="lbltitulo2">
+                                    </div>
+                                </div>
+                                <div class="col mb-30" style="justify-items: center;">
+                                    <div class="portfolio__items" style="width: 50%;">
+                                        <div class="portfolio__items--thumbnail position__relative">
+                                            <a class="portfolio__items--thumbnail__link display-block glightbox"
+                                                data-gallery="portfolio">
+                                                <img class="portfolio__items--thumbnail__img"
+                                                    src="assets/img/banner/Catalogo/Repuestos_Motos_Bicicletas.jpg"
+                                                    alt="portfolio-img" style="border-radius: 15px;border: 1px solid;">
+                                                <div class="portfolio__view--icon">
+                                                    <span class="portfolio__view--icon__link labelDetalle">
+                                                        VER DETALLE
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            style="margin-left: 10px;" width="26" height="21"
+                                                            viewBox="0 0 39.697 27.066">
+                                                            <path
+                                                                d="M20.849,4.5A21.341,21.341,0,0,0,1,18.033a21.322,21.322,0,0,0,39.7,0A21.341,21.341,0,0,0,20.849,4.5Zm0,22.555a9.022,9.022,0,1,1,9.022-9.022A9.025,9.025,0,0,1,20.849,27.055Zm0-14.435a5.413,5.413,0,1,0,5.413,5.413A5.406,5.406,0,0,0,20.849,12.62Z"
+                                                                transform="translate(-1 -4.5)" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__items--thumbnail__link display-block glightbox labeltitle">
+                                        <label for="lbltitulo3">
+                                            CATÁLOGOS DE REPUESTOS DE MOTOS Y BICICLETAS
+                                        </label>
+                                        <input type="text" hidden id="lbltitulo3">
+                                    </div>
+                                </div>
+                                <div class="col mb-30" style="justify-items: center;">
+                                    <div class="portfolio__items" style="width: 50%;">
+                                        <div class="portfolio__items--thumbnail position__relative">
+                                            <a class="portfolio__items--thumbnail__link display-block glightbox"
+                                                data-gallery="portfolio">
+                                                <img class="portfolio__items--thumbnail__img"
+                                                    src="assets/img/banner/Catalogo/Lubricantes.jpg" alt="portfolio-img"
+                                                    style="border-radius: 15px;border: 1px solid;">
+                                                <div class="portfolio__view--icon">
+                                                    <span class="portfolio__view--icon__link labelDetalle">
+                                                        VER DETALLE
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            style="margin-left: 10px;" width="26" height="21"
+                                                            viewBox="0 0 39.697 27.066">
+                                                            <path
+                                                                d="M20.849,4.5A21.341,21.341,0,0,0,1,18.033a21.322,21.322,0,0,0,39.7,0A21.341,21.341,0,0,0,20.849,4.5Zm0,22.555a9.022,9.022,0,1,1,9.022-9.022A9.025,9.025,0,0,1,20.849,27.055Zm0-14.435a5.413,5.413,0,1,0,5.413,5.413A5.406,5.406,0,0,0,20.849,12.62Z"
+                                                                transform="translate(-1 -4.5)" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__items--thumbnail__link display-block glightbox labeltitle">
+                                        <label for="lbltitulo4">
+                                            CATÁLOGOS DE LUBRICANTES
+                                        </label>
+                                        <input type="text" hidden id="lbltitulo4">
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -186,7 +244,12 @@
     <!-- End shop section -->
 
 
-
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
 </main>
 
 <app-footer></app-footer>

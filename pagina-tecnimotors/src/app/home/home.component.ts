@@ -5,6 +5,7 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild,
+  HostListener,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
@@ -19,7 +20,13 @@ import { PreloaderComponent } from '../main/helper/preloader/preloader.component
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+    FormsModule,
+    PreloaderComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -69,7 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   public selectmarca: string = '';
 
   ngAfterViewInit() {
-    this.initializePreLoader();
     this.swiper = new Swiper(this.swiperContainer2.nativeElement, {
       slidesPerGroupSkip: 4,
       keyboard: {
@@ -174,40 +180,25 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   public src1: string = 'assets/img/banner/tecnimotors/1.jpg';
   public src2: string = 'assets/img/banner/tecnimotors/1_1.jpg';
   public src3: string = 'assets/img/banner/tecnimotors/PORTADAS-PAGINA-WEB.jpg';
+  public isVisible: boolean = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Verifica si el scroll es mayor a 200px
+    this.isVisible = window.scrollY > 200;
+  }
+
+  subir() {
+    // Desplaza la página hacia arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   ngOnInit(): void {
     this.auth.getRefreshToken();
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      this.initializePreLoader();
-    }, 0);
-    this.initializePreLoader();
   }
 
-  ngOnDestroy(): void {
-    this.finalizePreLoader();
-  }
+  ngOnDestroy(): void {}
 
-  private initializePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.remove('loaded');
-
-      setTimeout(() => {
-        preloaderWrapper.classList.add('loaded');
-      }, 1000);
-    } else {
-      console.error('Preloader not found!');
-    }
-  }
-
-  private finalizePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.add('loaded');
-    }
-  }
   selectProducto(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     let selectedId = selectElement.value;

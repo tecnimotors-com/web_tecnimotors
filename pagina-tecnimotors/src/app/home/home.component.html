@@ -1,48 +1,5 @@
-<!-- Start preloader -->
-<div id="preloader" #preloader>
-    <div id="ctn-preloader" class="ctn-preloader">
-        <div class="animation-preloader">
-            <div class="spinner"></div>
-            <div class="txt-loading">
-                <span data-text-preloader="C" class="letters-loading">
-                    C
-                </span>
+<app-preloader></app-preloader>
 
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="R" class="letters-loading">
-                    R
-                </span>
-
-                <span data-text-preloader="G" class="letters-loading">
-                    G
-                </span>
-
-                <span data-text-preloader="A" class="letters-loading">
-                    A
-                </span>
-
-                <span data-text-preloader="N" class="letters-loading">
-                    N
-                </span>
-
-                <span data-text-preloader="D" class="letters-loading">
-                    D
-                </span>
-
-                <span data-text-preloader="O" class="letters-loading">
-                    O
-                </span>
-            </div>
-        </div>
-
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
-</div>
-<!-- End preloader -->
 <app-header></app-header>
 <main class="main__content_wrapper">
     <section class="hero__slider--section">
@@ -125,7 +82,6 @@
             </div>
             <!-- End search filter area -->
         </div>
-
     </section>
     <!-- End slider section -->
     <!-- Start product section -->
@@ -427,7 +383,12 @@
     <!-- End banner section -->
 
 
-
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
 
 </main>
 <app-footer></app-footer>

@@ -1,14 +1,16 @@
 export const environment = {
   production: true,
+
+  //myapiurlcatalogo: 'https://api-catalogo.grupotecnimotors.com/api',
+  myapiurlcatalogo: 'https://api-testing-catalogo.grupotecnimotors.com/api',
+  //  myapiurlcatalogo: 'https://localhost:44375/api',
+
   //apimaestroarticulo: 'https://localhost:44368/api',
   apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
 
   //myapiurlrrhh: 'https://api-testing-rrhh.grupotecnimotors.com/api',
   //myapiurlrrhh: 'https://localhost:44303/api',
   myapiurlrrhh: 'https://api-rrhh.grupotecnimotors.com/api',
-
-  myapiurlcatalogo: 'https://api-catalogo.grupotecnimotors.com/api',
-  //myapiurlcatalogo: 'https://api-catalogo.grupotecnimotors.com',
 
   myapiurldepa: 'https://api-departamentos.grupotecnimotors.com/api',
   //a myapiurldepa: 'http://localhost:57388/api',

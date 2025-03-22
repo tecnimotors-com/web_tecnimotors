@@ -1,113 +1,98 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AuthService } from '../../../core/service/auth.service';
 import { CatalogoService } from '../../../core/service/catalogo.service';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { SharedMain } from '../../sharedmain';
+import { PreloaderComponent } from '../../helper/preloader/preloader.component';
+import { environment } from '../../../../environments/environment.development';
+import { CotizacionService } from '../../../core/service/cotizacion.service';
 
 @Component({
   selector: 'app-catalogos',
-  imports: [SharedMain],
+  imports: [SharedMain, PreloaderComponent],
   templateUrl: './catalogos.component.html',
   styleUrls: ['./catalogos.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms ease-in', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [animate('500ms ease-out', style({ opacity: 0 }))]),
-    ]),
-  ],
 })
-export class CatalogosComponent implements OnInit, OnDestroy {
-  public p: number = 1;
-  public itemper: number = 12;
+export class CatalogosComponent implements OnInit {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Verifica si el scroll es mayor a 200px
+    this.isVisible = window.scrollY > 200;
+  }
 
-  public ListTipoCatalogo: any[] = [];
-  public txttipocatalogo: number = 0;
+  public isVisible: boolean = false;
+  public txtlink: string =
+    environment.myapiurlcatalogo + '/TipoCatalogo/GetBanner2?ruta=';
 
-  public ListCatalogo: any[] = [];
+  public txttipocata: number = 0;
+  public ListTipoCata: any[] = [];
+
+  public tabpanel: string = '1';
+
+  public array: any[] = [
+    {
+      text:
+        this.txtlink +
+        '/app/Imagen/Portadas_Tipo_Catalogo/Llantas_Camara_Moto_Bicicleta.jpg',
+      text2: 'assets/img/banner/Catalogo/Llantas_Camara_Moto_Bicicleta.jpg',
+      titulo: 'CATÁLOGOS DE LLANTAS Y CÁMARAS DE MOTOS Y BICICLETAS',
+    },
+    {
+      text: this.txtlink + '/app/Imagen/Portadas_Tipo_Catalogo/Vehiculos.jpg',
+      text2: 'assets/img/banner/Catalogo/Vehiculos.jpg',
+      titulo: 'CATÁLOGOS DE VEHÍCULOS',
+    },
+
+    {
+      text:
+        this.txtlink +
+        '/app/Imagen/Portadas_Tipo_Catalogo/Repuestos_Motos_Bicicletas.jpg',
+      text2: 'assets/img/banner/Catalogo/Repuestos_Motos_Bicicletas.jpg',
+      titulo: 'CATÁLOGOS DE REPUESTOS DE MOTOS Y BICICLETAS',
+    },
+    {
+      text: this.txtlink + '/app/Imagen/Portadas_Tipo_Catalogo/Lubricantes.jpg',
+      text2: 'assets/img/banner/Catalogo/Lubricantes.jpg',
+      titulo: 'CATÁLOGOS DE LUBRICANTES',
+    },
+  ];
 
   constructor(
     private auth: AuthService,
-    private catalogoservice: CatalogoService
+    private catalogoservice: CatalogoService,
+    private cotizacionservice: CotizacionService
   ) {}
 
   ngOnInit(): void {
-    this.Inicializador();
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      this.initializePreLoader();
-    }, 0);
-    this.initializePreLoader();
-  }
-
-  Inicializador() {
-    this.auth.getRefreshToken();
     this.ListadoTipoCatalogo();
-    this.ListadoCatalogo();
   }
 
-  ngOnDestroy(): void {
-    this.finalizePreLoader();
-  }
-
-  private initializePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.remove('loaded');
-
-      setTimeout(() => {
-        preloaderWrapper.classList.add('loaded');
-      }, 1000);
-    } else {
-      console.error('Preloader not found!');
-    }
-  }
-
-  private finalizePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.add('loaded');
-    }
-  }
-
-  ListadoCatalogo() {
-    if (this.txttipocatalogo == 0) {
-      this.catalogoservice.getListarCatalogoCompleto().subscribe({
-        next: (value: any) => {
-          this.ListCatalogo = value;
-        },
-      });
-    } else {
-      this.catalogoservice
-        .getListarFiltroTipoCatalogo(this.txttipocatalogo)
-        .subscribe({
-          next: (value: any) => {
-            this.ListCatalogo = value;
-          },
-        });
-    }
+  DetalleCatalogo(item: any) {
+    console.log(item);
   }
 
   ListadoTipoCatalogo() {
-    this.catalogoservice.getListarTipoCatalogo().subscribe({
-      next: (value: any) => {
-        this.ListTipoCatalogo = value;
+    this.catalogoservice.getListarTipoCatalogoAll().subscribe({
+      next: (lst: any) => {
+        this.ListTipoCata = lst;
       },
     });
   }
 
-  SelectCatalogo() {
-    this.ListadoCatalogo();
+  subir() {
+    // Desplaza la página hacia arriba
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  Limpiar() {
-    this.txttipocatalogo = 0;
-    this.catalogoservice.getListarCatalogoCompleto().subscribe({
-      next: (value: any) => {
-        this.ListCatalogo = value;
+  ChangeCatalogo() {
+    this.catalogoservice.getDetailTipoCatalogoALl(this.txttipocata).subscribe({
+      next: (lst: any) => {
+        this.ListTipoCata = lst;
       },
     });
   }

@@ -8,10 +8,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class PreloaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
-    window.scrollTo(0, 0);
     setTimeout(() => {
-      this.finalizePreLoader();
-    }, 1000);
+      window.scrollTo(0, 0);
+      this.initializePreLoader();
+    }, 0);
+    this.initializePreLoader();
   }
 
   ngOnDestroy(): void {
@@ -23,6 +24,10 @@ export class PreloaderComponent implements OnInit, OnDestroy {
 
     if (preloaderWrapper) {
       preloaderWrapper.classList.remove('loaded');
+
+      setTimeout(() => {
+        preloaderWrapper.classList.add('loaded');
+      }, 1000);
     } else {
       console.error('Preloader not found!');
     }

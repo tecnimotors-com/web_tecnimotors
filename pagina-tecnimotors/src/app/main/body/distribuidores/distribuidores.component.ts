@@ -7,10 +7,11 @@ import { MaestroclasificadoService } from '../../../core/service/maestroclasific
 import { DepartamentoService } from '../../../core/service/departamento.service';
 import { AuthService } from '../../../core/service/auth.service';
 import Swal from 'sweetalert2';
+import { PreloaderComponent } from '../../helper/preloader/preloader.component';
 
 @Component({
   selector: 'app-distribuidores',
-  imports: [SharedMain],
+  imports: [SharedMain, PreloaderComponent],
   templateUrl: './distribuidores.component.html',
   styleUrls: ['./distribuidores.component.scss'],
 })
@@ -47,10 +48,6 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
     this.setUrlDireccion();
     this.ListadoDistribuidores();
     this.ListadoDepartamento();
-    setTimeout(() => {
-      this.initializePreLoader();
-    }, 0);
-    this.initializePreLoader();
   }
 
   private setUrlDireccion(): void {
@@ -102,30 +99,7 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.finalizePreLoader();
-  }
-
-  private initializePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.remove('loaded');
-
-      setTimeout(() => {
-        preloaderWrapper.classList.add('loaded');
-      }, 1000);
-    } else {
-      console.error('Preloader not found!');
-    }
-  }
-
-  private finalizePreLoader(): void {
-    const preloaderWrapper = document.getElementById('preloader');
-    if (preloaderWrapper) {
-      preloaderWrapper.classList.add('loaded');
-    }
-  }
+  ngOnDestroy(): void {}
 
   DetailDistribuidore() {
     const departamento$ = this.departamento.getObtenerDepartamento(

@@ -15,6 +15,10 @@ export class CatalogoService {
   private ListarTipoCatalogo = '/TipoCatalogo/ListarTipoCatalogo';
   private ListarFiltroTipoCatalogo = '/Catalogo/ListarFiltroTipoCatalogo?Id=';
 
+  /*--------------------------------------------------------------------------*/
+  private ListarTipoCatalogoAll = '/TipoCatalogo/ListarTipoCatalogoAll';
+  private DetailTipoCatalogoALl = '/TipoCatalogo/DetailTipoCatalogoALl/';
+
   constructor(private http: HttpClient) {}
 
   getListarCatalogoCompleto(): Observable<any> {
@@ -34,5 +38,13 @@ export class CatalogoService {
   }
   getListarFiltroTipoCatalogo(id: number): Observable<any> {
     return this.http.get(this.baseUrl + this.ListarFiltroTipoCatalogo + id);
+  }
+
+  getListarTipoCatalogoAll(): Observable<any> {
+    return this.http.get(this.baseUrl + this.ListarTipoCatalogoAll);
+  }
+
+  getDetailTipoCatalogoALl(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + this.DetailTipoCatalogoALl + id);
   }
 }
