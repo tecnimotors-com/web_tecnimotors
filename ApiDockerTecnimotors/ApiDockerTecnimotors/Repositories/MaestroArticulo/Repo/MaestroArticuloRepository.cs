@@ -582,6 +582,16 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
             }
         }
 
+        public async Task<IEnumerable<TlListAceite>> TipoMarcaAceite()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+						SELECT distinct marca FROM public.maestro_articulo_clasificado as mart
+						where mart.familia != '998' and mart.tipo = '98' AND mart.subfamilia = '016' AND mart.estado = '1'
+					   ";
+            return await db.QueryAsync<TlListAceite>(sql, new { });
+        }
 
         /*--------------------Vehiculo----------------------*/
         public async Task<IEnumerable<TlmodeloCamara>> ListModeloVehiculo(string txtcategoria)

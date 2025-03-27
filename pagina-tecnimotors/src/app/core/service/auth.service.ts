@@ -85,18 +85,18 @@ export class AuthService {
         break;
       case '3':
         if (selectTipo === '1') {
-          this.router.navigate(['/homerepuesto/BICICLETA']);
+          this.router.navigate(['/homerepuesto']);
         } else if (selectTipo === '2') {
-          this.router.navigate(['/homerepuesto/MOTOCICLETA']);
+          this.router.navigate(['/homerepuesto']);
         } else {
-          this.router.navigate(['/homerepuesto/MOTOCICLETA']);
+          this.router.navigate(['/homerepuesto']);
         }
         break;
       case '4':
         if (selectTipo === '2') {
-          this.router.navigate(['/homeaceite/98']);
+          this.router.navigate(['/homeaceite']);
         } else {
-          this.router.navigate(['/homeaceite/98']);
+          this.router.navigate(['/homeaceite']);
         }
         break;
       case '5':

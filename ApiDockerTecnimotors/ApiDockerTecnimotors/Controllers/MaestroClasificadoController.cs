@@ -1,5 +1,7 @@
 ﻿using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ApiDockerTecnimotors.Controllers
 {
@@ -213,6 +215,54 @@ namespace ApiDockerTecnimotors.Controllers
             FileStream stream = System.IO.File.OpenRead(ruta.Ruta!);
             return File(stream, "image/jpeg");
         }
+
+
+        ///Sumary
+        ///Aceite
+        [HttpGet("TipoMarcaAceite")]
+        public async Task<ActionResult> TipoMarcaAceite()
+        {
+            var result = await imaestroclasificado.TipoMarcaAceite();
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoGeneralAceite")]
+        public async Task<ActionResult> ListadoGeneralAceite([FromBody] TrAceite traceite)
+        {
+            var result = await imaestroclasificado.ListadoGeneralAceite(traceite.TipoMarca!);
+            return Ok(result);
+        }
+
+        [HttpGet("ListadoRepuestoCategoria")]
+        public async Task<ActionResult> ListadoRepuestoCategoria()
+        {
+            var result = await imaestroclasificado.ListadoRepuestoCategoria();
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoRepuestoMarca")]
+        public async Task<ActionResult> ListadoRepuestoMarca(TrCatrepo trcat)
+        {
+            var result = await imaestroclasificado.ListadoRepuestoMarca(trcat.Categoria!);
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoGeneralRepuesto")]
+        public async Task<ActionResult> ListadoGeneralRepuesto(TrMarrepo trmar)
+        {
+            var result = await imaestroclasificado.ListadoGeneralRepuesto(trmar.Categoria!, trmar.Marca!);
+            return Ok(result);
+        }
+
+    }
+    public class TrCatrepo
+    {
+        public string? Categoria { get; set; }
+    }
+    public class TrMarrepo
+    {
+        public string? Categoria { get; set; }
+        public string? Marca { get; set; }
     }
 
     public class Trruta

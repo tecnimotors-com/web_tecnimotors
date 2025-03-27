@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  //apimaestroarticulo: 'https://localhost:44368/api',
-  apimaestroarticulo: 'https://api-testing-tracking.grupotecnimotors.com/api',
+  apimaestroarticulo: 'https://localhost:44368/api',
+  //apimaestroarticulo: 'https://api-testing-tracking.grupotecnimotors.com/api',
 
   //myapiurlrrhh: 'https://api-testing-rrhh.grupotecnimotors.com/api',
   //myapiurlrrhh: 'https://localhost:44303/api',

@@ -237,7 +237,6 @@ export class WishlistComponent implements OnInit, OnDestroy {
     }
   }
   private createAuthCarrito(item: any): any {
-    console.log(item);
     return {
       uuidcliente: this.decrypt(localStorage.getItem('uuid')!),
       ordernshopping: '',

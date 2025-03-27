@@ -603,6 +603,22 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralAceite",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralAceite",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "traceite",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroClasificado.Model.TrAceite",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListadoGeneralCategoria",
     "RelativePath": "api/MaestroClasificado/ListadoGeneralCategoria/{motocicleta}",
     "HttpMethod": "GET",
@@ -612,6 +628,22 @@
       {
         "Name": "motocicleta",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralRepuesto",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralRepuesto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trmar",
+        "Type": "ApiDockerTecnimotors.Controllers.TrMarrepo",
         "IsRequired": true
       }
     ],
@@ -651,6 +683,32 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoRepuestoCategoria",
+    "RelativePath": "api/MaestroClasificado/ListadoRepuestoCategoria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoRepuestoMarca",
+    "RelativePath": "api/MaestroClasificado/ListadoRepuestoMarca",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trcat",
+        "Type": "ApiDockerTecnimotors.Controllers.TrCatrepo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListarMarcaVehiculo",
     "RelativePath": "api/MaestroClasificado/ListarMarcaVehiculo",
     "HttpMethod": "POST",
@@ -663,6 +721,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "TipoMarcaAceite",
+    "RelativePath": "api/MaestroClasificado/TipoMarcaAceite",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

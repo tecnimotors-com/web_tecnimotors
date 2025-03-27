@@ -5,8 +5,8 @@ export const environment = {
   myapiurlcatalogo: 'https://api-testing-catalogo.grupotecnimotors.com/api',
   //  myapiurlcatalogo: 'https://localhost:44375/api',
 
-  //apimaestroarticulo: 'https://localhost:44368/api',
-  apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
+  apimaestroarticulo: 'https://localhost:44368/api',
+  //apimaestroarticulo: 'https://api-testing-web.grupotecnimotors.com/api',
 
   //myapiurlrrhh: 'https://api-testing-rrhh.grupotecnimotors.com/api',
   //myapiurlrrhh: 'https://localhost:44303/api',

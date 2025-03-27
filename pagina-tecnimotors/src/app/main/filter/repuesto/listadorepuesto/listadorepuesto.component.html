@@ -1,0 +1,294 @@
+<app-preloader></app-preloader>
+<app-header></app-header>
+
+<main class="main__content_wrapper">
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content text-center">
+                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                            <li class="breadcrumb__content--menu__items">
+                                <a [routerLink]="['/home']">Pagina Principal</a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items"><span>Respuestos</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
+    <!-- Start shop section -->
+    <div class="shop__section section--padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
+                    <div class="shop__sidebar--widget widget__area d-lg-block">
+                        <div class="single__widget widget__bg">
+                            <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
+                                Categoría
+                                <button type="button" style="color: white;background-color: black;
+                                border-radius: 5px;cursor: pointer;" (click)="Limpiar()">
+                                    Limpiar
+                                </button>
+                            </h2>
+
+
+                            <ul class="widget__form--check">
+                                <li class="widget__form--check__list">
+                                    <select class="search__filter--select__field" (change)="SelectCategoria()"
+                                        name="producthome" [(ngModel)]="txtcategoria">
+                                        <option value="" selected disabled>Seleccione Categoría</option>
+                                        <option *ngFor="let item of ListarCategoria" [value]="item.categoria">
+                                            {{item.categoria}}</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="single__widget widget__bg">
+                            <h2 class="widget__title h3" style="display: flex;justify-content: space-between;">
+                                Marca
+                            </h2>
+                            <ul class="widget__form--check">
+                                <li class="widget__form--check__list">
+                                    <select class="search__filter--select__field" (change)="SelectMarca()"
+                                        name="producthome" [(ngModel)]="txtmodelo">
+                                        <option value="" selected disabled>Seleccione Marca {{txtcategoria}}</option>
+                                        <option *ngFor="let item of ListModelo" [value]="item.marca">
+                                            {{item.marca}}</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
+                    <div class="shop__right--sidebar">
+                        <!-- Start categories section -->
+                        <div class="categories__shop mb-10">
+                            <div class="section__heading border-bottom mb-30">
+                                <h2 class="section__heading--maintitle">Compra de <span>Vehiculos</span></h2>
+                            </div>
+                        </div>
+                        <!-- End categories section -->
+                        <div class="shop__product--wrapper">
+                            <div class="tab_content">
+                                <div id="product_grid" class="tab_pane active show">
+                                    <div class="product__section--inner">
+                                        <div class="row mb--n30">
+                                            <div class="col-lg-4 custom-col mb-30"
+                                                *ngFor="let item of ListGeneral | paginate: { itemsPerPage: itemper, currentPage: p }; let i = index">
+                                                <div class="product__card">
+                                                    <a class="product__card--thumbnail__link display-block"
+                                                        style="justify-items: center;">
+                                                        <div class="loading" *ngIf="isLoading">Cargando...</div>
+                                                        <img [src]="item.pathimagen === '' ? srcimg : txtlink + item.pathimagen"
+                                                            alt="product-img" (load)="onImageLoad()"
+                                                            (error)="onImageError()" (loadstart)="isLoading = true"
+                                                            (loadend)="isLoading = false" [ngClass]="{classimglleno: item.pathimagen !== '',
+                                                                    classimgvacio: item.pathimagen === '',
+                                                        }" [routerLink]="'/detallevehiculo/'+ item.id">
+                                                    </a>
+                                                    <div class="product__card--content">
+                                                        <h3 style="text-align: center;">
+                                                            {{item.marcaoriginal}}
+                                                        </h3>
+                                                        <div>
+                                                            Categoría: <span class="old__price">
+                                                                {{item.categoria}}</span>
+                                                        </div>
+                                                        <div>
+                                                            Modelo: <span class="old__price">
+                                                                {{item.marca}} {{item.medida}}</span>
+                                                        </div>
+                                                        <div>
+                                                            Marca: <span class="old__price">
+                                                                {{item.marca}}</span>
+                                                        </div>
+                                                        <div *ngIf="item.codigo.trim().slice(-5)">
+                                                            Codigo: <span class="old__price">
+                                                                {{item.codigo.trim().slice(-5)}}</span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <a class="product__card--btn primary__btn"
+                                                                    (click)="!isProcessingCarrito? AgregarCarrito(item) : null"
+                                                                    style="margin: 0px;padding: 0px; transform: none;transition: none;"
+                                                                    [ngClass]="{'carritoList-active': isInCarritolist(item.codigo), 'disabled': isProcessingCarrito}">
+                                                                    <svg width="14" height="11" viewBox="0 0 14 11"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M13.2371 4H11.5261L8.5027 0.460938C8.29176 0.226562 7.9402 0.203125 7.70582 0.390625C7.47145 0.601562 7.44801 0.953125 7.63551 1.1875L10.0496 4H3.46364L5.8777 1.1875C6.0652 0.953125 6.04176 0.601562 5.80739 0.390625C5.57301 0.203125 5.22145 0.226562 5.01051 0.460938L1.98707 4H0.299574C0.135511 4 0.0183239 4.14062 0.0183239 4.28125V4.84375C0.0183239 5.00781 0.135511 5.125 0.299574 5.125H0.721449L1.3777 9.78906C1.44801 10.3516 1.91676 10.75 2.47926 10.75H11.0339C11.5964 10.75 12.0652 10.3516 12.1355 9.78906L12.7918 5.125H13.2371C13.3777 5.125 13.5183 5.00781 13.5183 4.84375V4.28125C13.5183 4.14062 13.3777 4 13.2371 4ZM11.0339 9.625H2.47926L1.86989 5.125H11.6433L11.0339 9.625ZM7.33082 6.4375C7.33082 6.13281 7.07301 5.875 6.76832 5.875C6.4402 5.875 6.20582 6.13281 6.20582 6.4375V8.3125C6.20582 8.64062 6.4402 8.875 6.76832 8.875C7.07301 8.875 7.33082 8.64062 7.33082 8.3125V6.4375ZM9.95582 6.4375C9.95582 6.13281 9.69801 5.875 9.39332 5.875C9.0652 5.875 8.83082 6.13281 8.83082 6.4375V8.3125C8.83082 8.64062 9.0652 8.875 9.39332 8.875C9.69801 8.875 9.95582 8.64062 9.95582 8.3125V6.4375ZM4.70582 6.4375C4.70582 6.13281 4.44801 5.875 4.14332 5.875C3.8152 5.875 3.58082 6.13281 3.58082 6.4375V8.3125C3.58082 8.64062 3.8152 8.875 4.14332 8.875C4.44801 8.875 4.70582 8.64062 4.70582 8.3125V6.4375Z"
+                                                                            fill="currentColor" />
+                                                                    </svg>
+                                                                    {{
+                                                                    isInCarritolist(item.codigo) ?
+                                                                    'Quitar de la Cotización' : 'Agrega a la Cotización'
+                                                                    }}
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <a class="product__card--action__btn" title="Quick View"
+                                                                    (click)="MdVehiculolistado(detallecarrito,item)"
+                                                                    style="transform: none;transition: none;">
+                                                                    <svg class="product__card--action__btn--svg"
+                                                                        width="16" height="16" viewBox="0 0 16 16"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z"
+                                                                            fill="currentColor"></path>
+                                                                    </svg>
+                                                                    <span class="visually-hidden">Quick View</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <a class="product__card--action__btn" title="Wishlist"
+                                                                    (click)="!isProcessing ? MdWishListFavorito(item) : null"
+                                                                    style="transform: none; transition: none;"
+                                                                    [ngClass]="{'wishlist-active': isInWishlist(item.codigo), 'disabled': isProcessing}">
+                                                                    <svg class="product__card--action__btn--svg"
+                                                                        width="18" height="18" viewBox="0 0 16 13"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M13.5379 1.52734C11.9519 0.1875 9.51832 0.378906 8.01442 1.9375C6.48317 0.378906 4.04957 0.1875 2.46364 1.52734C0.412855 3.25 0.713636 6.06641 2.1902 7.57031L6.97536 12.4648C7.24879 12.7383 7.60426 12.9023 8.01442 12.9023C8.39723 12.9023 8.7527 12.7383 9.02614 12.4648L13.8386 7.57031C15.2879 6.06641 15.5886 3.25 13.5379 1.52734ZM12.8816 6.64062L8.09645 11.5352C8.04176 11.5898 7.98707 11.5898 7.90504 11.5352L3.11989 6.64062C2.10817 5.62891 1.91676 3.71484 3.31129 2.53906C4.3777 1.63672 6.01832 1.77344 7.05739 2.8125L8.01442 3.79688L8.97145 2.8125C9.98317 1.77344 11.6238 1.63672 12.6902 2.51172C14.0847 3.71484 13.8933 5.62891 12.8816 6.64062Z"
+                                                                            fill="currentColor" />
+                                                                    </svg>
+                                                                    <span class="visually-hidden">Wishlist</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="pagination__area">
+                                <nav class="pagination justify-content-center">
+                                    <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                                        <pagination-controls (pageChange)="p=$event" (pageBoundsCorrection)="p=$event"
+                                            [directionLinks]="true" [autoHide]="true" [responsive]="true"
+                                            previousLabel="Anterior" nextLabel="Siguiente" [maxSize]="10"
+                                            (click)="Paginacion()">
+                                        </pagination-controls>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #detallecarrito let-modal>
+        <div class="modal-header quickview_m_header">
+            <button type="button" class="btn-close quickview__close--btn" data-bs-dismiss="modal"
+                (click)="modal.close('by: close icon')" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body quickview__inner">
+            <div class="row row-cols-lg-2 row-cols-md-2">
+                <div class="col" style="align-content: center;">
+                    <div class="quickview__gallery">
+                        <div class="product__media--preview  swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="product__media--preview__items">
+                                        <a class="product__media--preview__items--link glightbox"
+                                            data-gallery="product-media-preview" style="justify-items: center;">
+                                            <img class="product__media--preview__items--img"
+                                                [src]="lblpathimagen === '' ? srcimg :txtlink + lblpathimagen"
+                                                alt="product-media-img" [ngClass]="{classimglleno: lblpathimagen !== '',
+                                                classimgvacio: lblpathimagen === '',
+                                            }">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="quickview__info">
+                        <h2 class="product__details--info__title mb-15">{{lblmarcaoriginal}}</h2>
+                        <div class="product__variant">
+                            <div class="product__variant--list mb-10">
+                                <fieldset class="variant__input--fieldset" *ngIf="lblcodigo!">
+                                    <strong>Código: </strong> {{lblcodigo.trim().slice(-5)}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset" *ngIf="lbldescripcion!">
+                                    <strong>Descripcion: </strong> {{lbldescripcion}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset">
+                                    <strong>Modelo: </strong> {{lblmarca}} {{lblmedida}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset" *ngIf="lblcategoria!">
+                                    <strong>Categoria: </strong> {{lblcategoria}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset" *ngIf="lblmedida!">
+                                    <strong>Medida: </strong> {{lblmedida}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset" *ngIf="lblmodelo!">
+                                    <strong>Modelo: </strong> {{lblmodelo}}
+                                </fieldset>
+                                <fieldset class="variant__input--fieldset" *ngIf="lblmarca!">
+                                    <strong>Marca: </strong> {{lblmarca}}
+                                </fieldset>
+                                <!--
+                                <fieldset class="variant__input--fieldset" *ngIf="lblproducto!">
+                                    <strong>Producto: </strong> {{lblproducto}}
+                                </fieldset>
+                                -->
+                                <fieldset class="variant__input--fieldset" *ngIf="lblunidadmedida!">
+                                    <strong>Unidad: </strong> {{lblunidadmedida}}
+                                </fieldset>
+                            </div>
+                            <div class="quickview__variant--list quantity d-flex align-items-center mb-10">
+                                Cantidad:
+                                <div class="quantity__box">
+                                    <button type="button" name="btnminus"
+                                        class="quantity__value quickview__value--quantity decrease"
+                                        aria-label="Decrementar cantidad" (click)="RestarCount()">-
+                                    </button>
+                                    <label for="inputQuantity"></label>
+
+                                    <input type="number" id="inputQuantity"
+                                        class="quantity__number quickview__value--number" [(ngModel)]="count"
+                                        name="inputsum" aria-label="Cantidad" />
+                                    <button type="button" name="btnplus"
+                                        class="quantity__value quickview__value--quantity increase"
+                                        aria-label="Incrementar cantidad" (click)="AumentarCount()">+
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="quickview__variant--list variant__wishlist mb-10">
+                                <button class="primary__btn quickview__cart--btn" type="submit"
+                                    style="margin: 0px;border-radius: 11px;" (click)="AgregarCarritoModal()"
+                                    [ngClass]="{'carritoList-active': isInCarritolist(this.lblcodigo), 'disabled': isProcessingCarrito}">
+                                    Agregar A la Cotización
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
+</main>
+<app-footer></app-footer>

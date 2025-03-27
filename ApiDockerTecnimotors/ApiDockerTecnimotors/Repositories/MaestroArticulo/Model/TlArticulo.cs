@@ -110,4 +110,9 @@
         public string? Abreviado { get; set; }
         public string? Codigo_equivalente { get; set; }
     }
+
+    public class TlListAceite
+    {
+        public string? Marca { get; set; }
+    }
 }

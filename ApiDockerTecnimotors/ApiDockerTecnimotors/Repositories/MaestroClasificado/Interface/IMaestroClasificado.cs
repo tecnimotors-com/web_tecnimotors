@@ -1,4 +1,5 @@
-﻿using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
+﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface
 {
@@ -14,5 +15,13 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface
         public Task<IEnumerable<TlMaestroModelo>> ListadoModeloVehiculo(string categoria, string marca);
         public Task<IEnumerable<TlMaestroMarca>> ListarMarcaVehiculo(string categoria, string medida);
         public Task<TlMaestroGeneral> DetalleVehiculo(int Id);
+
+        /*-----------------------aceite-------------------------*/
+        /*--------------------------------------------------------*/
+        public Task<IEnumerable<TlListAceite>> TipoMarcaAceite();
+        public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralAceite(string TipoMarca);
+        public Task<IEnumerable<Trcatrepuesto>> ListadoRepuestoCategoria();
+        public Task<IEnumerable<Trmarcarepuesto>> ListadoRepuestoMarca(string Categoria);
+        public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralRepuesto(string Categoria, string Marca);
     }
 }

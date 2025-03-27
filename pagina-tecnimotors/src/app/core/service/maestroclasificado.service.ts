@@ -31,6 +31,14 @@ export class MaestroclasificadoService {
   private ListadoDetalleDistribuidore =
     '/Distribuidores/ListadoDetalleDistribuidore/';
 
+  private TipoMarcaAceite = '/MaestroClasificado/TipoMarcaAceite';
+  private ListadoGeneralAceite = '/MaestroClasificado/ListadoGeneralAceite';
+
+  private ListadoRepuestoCategoria =
+    '/MaestroClasificado/ListadoRepuestoCategoria';
+  private ListadoRepuestoMarca = '/MaestroClasificado/ListadoRepuestoMarca';
+  private ListadoGeneralRepuesto = '/MaestroClasificado/ListadoGeneralRepuesto';
+
   constructor(private http: HttpClient) {}
 
   getListadoCategoriaVehiculos(): Observable<any> {
@@ -71,5 +79,23 @@ export class MaestroclasificadoService {
   ): Observable<any> {
     const url = `${this.myurl}${this.ListadoDetalleDistribuidore}${depa}/${provi}/${distri}`;
     return this.http.get(url);
+  }
+
+  getTipoMarcaAceite(): Observable<any> {
+    return this.http.get(this.myurl + this.TipoMarcaAceite);
+  }
+
+  getListadoGeneralAceite(dtl: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoGeneralAceite, dtl);
+  }
+
+  getListadoRepuestoCategoria(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoRepuestoCategoria);
+  }
+  getListadoRepuestoMarca(from: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoRepuestoMarca, from);
+  }
+  getListadoGeneralRepuesto(from: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoGeneralRepuesto, from);
   }
 }

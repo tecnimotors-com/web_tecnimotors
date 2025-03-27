@@ -1,4 +1,5 @@
 ﻿using ApiDockerTecnimotors.Context;
+using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 using Dapper;
@@ -55,7 +56,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 
             return await db.QueryAsync<TlMaestroGeneral>(sql, new { });
         }
-
         public async Task ActualizarPathImagen(string codigo, string pathImagen)
         {
             var db = DbConnection(); // Asegúrate de que DbConnection() devuelva una conexión válida
@@ -107,6 +107,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 }
             }
         }
+
         /*
         public async Task ActualizarPathImagenBatch(List<(string Codigo, string PathImagen)> actualizaciones)
         {
@@ -128,7 +129,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
             }
         }
         */
-        
         public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralCategoria(string motocicleta)
         {
             var db = DbConnection();
@@ -149,7 +149,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 
             return await db.QueryAsync<TlMaestroGeneral>(sql, new { });
         }
-
 
         public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralVehiculos(string categoria, string medida, string marca)
         {
@@ -191,7 +190,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 return await db.QueryAsync<TlMaestroGeneral>(sql.ToString(), parameters);
             }
         }
-
         public async Task<IEnumerable<TlMaestroModelo>> ListadoModeloVehiculo(string categoria, string marca)
         {
             var sql = new StringBuilder();
@@ -220,7 +218,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 return await db.QueryAsync<TlMaestroModelo>(sql.ToString(), parameters);
             }
         }
-
         public async Task<IEnumerable<TlMaestroMarca>> ListarMarcaVehiculo(string categoria, string medida)
         {
             var sql = new StringBuilder();
@@ -250,7 +247,6 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 return await db.QueryAsync<TlMaestroMarca>(sql.ToString(), parameters);
             }
         }
-
         public async Task<TlMaestroGeneral> DetalleVehiculo(int Id)
         {
             var db = DbConnection();
@@ -264,6 +260,94 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 
             var result = await db.QueryFirstOrDefaultAsync<TlMaestroGeneral>(sql, new { });
             return result!;
+        }
+
+        /*-----------------------aceite-------------------------*/
+        public async Task<IEnumerable<TlListAceite>> TipoMarcaAceite()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+						SELECT distinct marca FROM public.maestro_articulo_clasificado as mart
+						where mart.familia != '998' and mart.tipo = '98' AND mart.subfamilia = '016' AND mart.estado = '1'
+					   ";
+            return await db.QueryAsync<TlListAceite>(sql, new { });
+        }
+        public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralAceite(string TipoMarca)
+        {
+            var db = DbConnection();
+            if (TipoMarca == "")
+            {
+                var sql = @"
+                            SELECT * FROM public.maestro_articulo_clasificado as mart
+                            where mart.familia != '998' and mart.tipo = '98' AND mart.subfamilia = '016' AND mart.estado = '1'
+                           ";
+                return await db.QueryAsync<TlMaestroGeneral>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+                            SELECT * FROM public.maestro_articulo_clasificado as mart
+                            where mart.familia != '998' and mart.tipo = '98' AND mart.subfamilia = '016' AND mart.estado = '1'
+                            AND marca = '" + TipoMarca + "'";
+
+                return await db.QueryAsync<TlMaestroGeneral>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<Trcatrepuesto>> ListadoRepuestoCategoria()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct categoria from public.maestro_articulo_clasificado
+                        where categoria ILIKE '%Repuestos%' and estado = '1'
+                       ";
+            return await db.QueryAsync<Trcatrepuesto>(sql, new { });
+        }
+        public async Task<IEnumerable<Trmarcarepuesto>> ListadoRepuestoMarca(string Categoria)
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct marca from public.maestro_articulo_clasificado 
+                        where categoria ILIKE '%" + Categoria + @"%' and estado = '1' and 
+                        categoriageneral is not null and marca is not null
+                       ";
+
+            return await db.QueryAsync<Trmarcarepuesto>(sql, new { });
+        }
+        public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralRepuesto(string Categoria, string Marca)
+        {
+            var db = DbConnection();
+
+            // Inicializa la consulta base
+            var sql = @"select * from public.maestro_articulo_clasificado where categoria ILIKE '%Repuestos%' and estado = '1' and estado = '1' and categoriageneral is not null and marca is not null";
+
+            // Lista para almacenar los parámetros
+            var parameters = new DynamicParameters();
+
+            // Agrega condiciones a la consulta según los parámetros
+            if (!string.IsNullOrWhiteSpace(Categoria))
+            {
+                sql += " AND categoria ILIKE @Categoria";
+                parameters.Add("Categoria", $"%{Categoria}%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(Marca))
+            {
+                sql += " AND marca = @Marca";
+                parameters.Add("Marca", Marca);
+            }
+
+            try
+            {
+                return await db.QueryAsync<TlMaestroGeneral>(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                throw new Exception("Error al obtener los repuestos", ex);
+            }
         }
     }
 }

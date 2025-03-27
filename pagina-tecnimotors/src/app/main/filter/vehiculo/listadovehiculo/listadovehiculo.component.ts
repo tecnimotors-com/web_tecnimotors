@@ -268,6 +268,7 @@ export class ListadovehiculoComponent implements OnInit {
     this.ListarGeneralVehiculo();
     this.ListarMarcaVehiculo();
   }
+  
   SelectModelo() {
     this.ListarGeneralVehiculo();
     this.ListarMarcaVehiculo();
@@ -627,7 +628,6 @@ export class ListadovehiculoComponent implements OnInit {
   }
 
   private createAuthProduct(item: any, orderNumber: string): any {
-    console.log(item)
     return {
       uuidcliente: this.decrypt(localStorage.getItem('uuid')!),
       ordenwishlist: orderNumber,

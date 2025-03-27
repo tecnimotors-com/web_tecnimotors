@@ -8,7 +8,23 @@
     {
         public string? Codigo { get; set; }
     }
-
+    public class TrAceite
+    {
+        public string? TipoMarca { get; set; }
+    }
+    public class Trcatrepuesto
+    {
+        public string? Categoria { get; set; }
+    }
+    public class Trmarcarepuesto
+    {
+        public string? Marca { get; set; }
+    }
+    public class TlRepuesto
+    {
+        public string? Tipo_articulo { get; set; }
+        public string? Descripcion_tipo_articulo { get; set; }
+    }
     public class TlMaestroGeneral
     {
         public string? Id { get; set; }

@@ -125,6 +125,7 @@ export class HomeaceiteComponent implements OnInit, OnDestroy {
       .getListadoAceiteGeneral(this.txtcategiescamara)
       .subscribe({
         next: (value: any) => {
+          console.log(value);
           this.listCamaraGene = value;
         },
         error: (err) => {

@@ -245,7 +245,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           idproducttipo: 2,
         },
       ];
-      this.istruevehiculo = false;
+      this.istruevehiculo = true;
       this.istruetipovehiculo = true;
     } else if (selectedId == '4') {
       this.resetSelect();
@@ -255,7 +255,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           idproducttipo: 2,
         },
       ];
-      this.istruevehiculo = false;
+      this.istruevehiculo = true;
       this.istruetipovehiculo = true;
       this.selectedTipoVehiculo = '2';
     } else {

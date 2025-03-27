@@ -96,6 +96,34 @@ export const routes: Routes = [
             (m) => m.routes
           ),
       },
+      {
+        path: 'homeaceite',
+        loadChildren: () =>
+          import('./main/filter/aceitelubricante/listadoaceite/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'detalleaceite/:id',
+        loadChildren: () =>
+          import('./main/filter/aceitelubricante/detalleaceite/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'homerepuesto',
+        loadChildren: () =>
+          import('./main/filter/repuesto/listadorepuesto/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'detallerepuesto/:id',
+        loadChildren: () =>
+          import('./main/filter/repuesto/detallerepuesto/routes').then(
+            (m) => m.routes
+          ),
+      },
     ],
   },
 ];

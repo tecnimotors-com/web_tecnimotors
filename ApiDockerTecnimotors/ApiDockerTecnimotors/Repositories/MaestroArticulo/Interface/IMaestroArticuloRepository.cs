@@ -1,4 +1,5 @@
 ﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
 {
@@ -39,5 +40,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
         public Task<IEnumerable<TlCategoriesCamara>> ListadoRepuestoTipoCategoria(string txtcategoria);
         public Task<IEnumerable<TlmodeloCamara>> ListadoModeloRepuesto(string TipoCategoria, string Categoria);
         public Task<IEnumerable<TlListCamaraAll>> ListadoRepuestoGeneralALl(string TipoCategoria);
+
+
     }
 }

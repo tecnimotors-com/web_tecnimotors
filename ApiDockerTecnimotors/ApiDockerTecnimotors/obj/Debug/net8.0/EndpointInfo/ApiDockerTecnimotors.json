@@ -1074,6 +1074,123 @@
         }
       }
     },
+    "/api/MaestroClasificado/TipoMarcaAceite": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoGeneralAceite": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrAceite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrAceite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrAceite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoRepuestoCategoria": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoRepuestoMarca": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoGeneralRepuesto": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/WishList/RegisterWishList": {
       "post": {
         "tags": [
@@ -1691,6 +1808,26 @@
         },
         "additionalProperties": false
       },
+      "TrAceite": {
+        "type": "object",
+        "properties": {
+          "tipoMarca": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrCatrepo": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TrDetailCliente": {
         "type": "object",
         "properties": {
@@ -1742,6 +1879,20 @@
             "nullable": true
           },
           "uuidcliente": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrMarrepo": {
+        "type": "object",
+        "properties": {
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
             "type": "string",
             "nullable": true
           }

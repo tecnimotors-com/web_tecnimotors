@@ -96,7 +96,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.cartSubscription = this.cotizacionService.cart$.subscribe(
           (items) => {
             this.ListCarrito = items;
-            console.log(this.ListCarrito);
           }
         );
       }
@@ -242,7 +241,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         ListCarrito: this.ListCarritoRegister,
         uuidcliente: uuid,
       };
-      console.log(frombody);
       this.cotizacionService.getRegisterCotizacionList(frombody).subscribe({
         next: () => {
           this.loadWishlist(uuid);
