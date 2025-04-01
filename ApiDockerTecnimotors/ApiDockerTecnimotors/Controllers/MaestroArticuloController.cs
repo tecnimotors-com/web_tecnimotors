@@ -1,9 +1,6 @@
 ﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
-using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace ApiDockerTecnimotors.Controllers
 {

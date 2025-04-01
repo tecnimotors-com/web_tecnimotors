@@ -513,6 +513,22 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "AllfiltroPrincipalLLanta",
+    "RelativePath": "api/MaestroClasificado/AllfiltroPrincipalLLanta",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trForm",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroClasificado.Model.TrFrombodyLlanta",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "DetalleVehiculo",
     "RelativePath": "api/MaestroClasificado/DetalleVehiculo/{Id}",
     "HttpMethod": "GET",
@@ -593,6 +609,32 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoAnchoPerfilLLANTA",
+    "RelativePath": "api/MaestroClasificado/ListadoAnchoPerfilLLANTA",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoCamaraMarca",
+    "RelativePath": "api/MaestroClasificado/ListadoCamaraMarca",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trcat",
+        "Type": "ApiDockerTecnimotors.Controllers.TrCatrepo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListadoCategoriaVehiculos",
     "RelativePath": "api/MaestroClasificado/ListadoCategoriaVehiculos",
     "HttpMethod": "GET",
@@ -612,6 +654,22 @@
       {
         "Name": "traceite",
         "Type": "ApiDockerTecnimotors.Repositories.MaestroClasificado.Model.TrAceite",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralCamara",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralCamara",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trmar",
+        "Type": "ApiDockerTecnimotors.Controllers.TrMarrepo",
         "IsRequired": true
       }
     ],
@@ -667,6 +725,46 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoLLantaCategoria",
+    "RelativePath": "api/MaestroClasificado/ListadoLLantaCategoria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoLLantaMarca",
+    "RelativePath": "api/MaestroClasificado/ListadoLLantaMarca",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoLLantaMedida",
+    "RelativePath": "api/MaestroClasificado/ListadoLLantaMedida",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoLLantaModelo",
+    "RelativePath": "api/MaestroClasificado/ListadoLLantaModelo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListadoModeloVehiculo",
     "RelativePath": "api/MaestroClasificado/ListadoModeloVehiculo",
     "HttpMethod": "POST",
@@ -705,6 +803,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoTipoCamaras",
+    "RelativePath": "api/MaestroClasificado/ListadoTipoCamaras",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

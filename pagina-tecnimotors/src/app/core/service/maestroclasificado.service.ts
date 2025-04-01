@@ -39,7 +39,28 @@ export class MaestroclasificadoService {
   private ListadoRepuestoMarca = '/MaestroClasificado/ListadoRepuestoMarca';
   private ListadoGeneralRepuesto = '/MaestroClasificado/ListadoGeneralRepuesto';
 
+  private ListadoTipoCamaras = '/MaestroClasificado/ListadoTipoCamaras';
+  private ListadoCamaraMarca = '/MaestroClasificado/ListadoCamaraMarca';
+  private ListadoGeneralCamara = '/MaestroClasificado/ListadoGeneralCamara';
+
+  private AllfiltroPrincipalCocada =
+    '/MaestroClasificado/AllfiltroPrincipalLLanta';
+  private ListadoAnchoPerfil = '/MaestroClasificado/ListadoAnchoPerfilLLANTA';
+
+  private ListadoLLantaMedida = '/MaestroClasificado/ListadoLLantaMedida';
+  private ListadoLLantaModelo = '/MaestroClasificado/ListadoLLantaModelo';
+  private ListadoLLantaMarca = '/MaestroClasificado/ListadoLLantaMarca';
+  private ListadoLLantaCategoria = '/MaestroClasificado/ListadoLLantaCategoria';
+
   constructor(private http: HttpClient) {}
+
+  getListadoAnchoPerfil(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoAnchoPerfil);
+  }
+
+  getAllfiltroPrincipalCocada(frombody: any): Observable<any> {
+    return this.http.post(this.myurl + this.AllfiltroPrincipalCocada, frombody);
+  }
 
   getListadoCategoriaVehiculos(): Observable<any> {
     return this.http.get(this.myurl + this.ListadoCategoriaVehiculos);
@@ -97,5 +118,28 @@ export class MaestroclasificadoService {
   }
   getListadoGeneralRepuesto(from: any): Observable<any> {
     return this.http.post(this.myurl + this.ListadoGeneralRepuesto, from);
+  }
+
+  getListadoTipoCamaras(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoTipoCamaras);
+  }
+  getListadoCamaraMarca(from: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoCamaraMarca, from);
+  }
+  getListadoGeneralCamara(from: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoGeneralCamara, from);
+  }
+
+  getListadoLLantaMedida(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoLLantaMedida);
+  }
+  getListadoLLantaModelo(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoLLantaModelo);
+  }
+  getListadoLLantaMarca(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoLLantaMarca);
+  }
+  getListadoLLantaCategoria(): Observable<any> {
+    return this.http.get(this.myurl + this.ListadoLLantaCategoria);
   }
 }

@@ -1,7 +1,7 @@
-﻿using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
+﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
+using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ApiDockerTecnimotors.Controllers
 {
@@ -105,46 +105,6 @@ namespace ApiDockerTecnimotors.Controllers
                 PrimeraRutaOriginal = primeraRuta // Solo la primera ruta
             });
         }
-        /*
-        [HttpPost("ActualizarPathImagen")]
-        public async Task<ActionResult> ActualizarPathImagen()
-        {
-            // Obtener todos los artículos
-            var articulos = await imaestroclasificado.ListadoGeneralArticulo(); // Asegúrate de que este método devuelva todos los artículos
-
-            foreach (var articulo in articulos)
-            {
-                // Crear la ruta de la carpeta para el código del artículo
-                var carpetaCodigoInterno = Path.Combine(_carpetaImagenes, articulo.Codigo!);
-
-                // Verificar si la carpeta existe
-                if (Directory.Exists(carpetaCodigoInterno))
-                {
-                    // Obtener la lista de imágenes en la carpeta
-                    var imagenes = Directory.GetFiles(carpetaCodigoInterno);
-
-                    // Si hay imágenes, asignar la ruta de la primera imagen
-                    if (imagenes.Length > 0)
-                    {
-                        articulo.Pathimagen = imagenes[0]; // Asignar la ruta completa de la primera imagen
-                    }
-                    else
-                    {
-                        articulo.Pathimagen = ""; // No hay imágenes, asignar vacio no null
-                    }
-                }
-                else
-                {
-                    articulo.Pathimagen = ""; // La carpeta no existe,  asignar vacio no null
-                }
-
-                // Actualizar la base de datos con la nueva ruta de la imagen
-                await imaestroclasificado.ActualizarPathImagen(articulo.Codigo!, articulo.Pathimagen);
-            }
-
-            return Ok(new { mensaje = "Rutas de imágenes actualizadas correctamente." });
-        }
-        */
         [HttpPost("ActualizarPathImagen2")]
         public async Task<ActionResult> ActualizarPathImagen2()
         {
@@ -216,9 +176,6 @@ namespace ApiDockerTecnimotors.Controllers
             return File(stream, "image/jpeg");
         }
 
-
-        ///Sumary
-        ///Aceite
         [HttpGet("TipoMarcaAceite")]
         public async Task<ActionResult> TipoMarcaAceite()
         {
@@ -254,6 +211,83 @@ namespace ApiDockerTecnimotors.Controllers
             return Ok(result);
         }
 
+        [HttpGet("ListadoTipoCamaras")]
+        public async Task<ActionResult> ListadoTipoCamaras()
+        {
+            var result = await imaestroclasificado.ListadoTipoCamaras();
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoCamaraMarca")]
+        public async Task<ActionResult> ListadoCamaraMarca(TrCatrepo trcat)
+        {
+            var result = await imaestroclasificado.ListadoCamaraMarca(trcat.Categoria!);
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoGeneralCamara")]
+        public async Task<ActionResult> ListadoGeneralCamara(TrMarrepo trmar)
+        {
+            var result = await imaestroclasificado.ListadoGeneralCamara(trmar.Categoria!, trmar.Marca!);
+            return Ok(result);
+        }
+
+        /*---------------------------------------------------------------------------------------------------------------------*/
+        [HttpGet("ListadoAnchoPerfilLLANTA")]
+        public async Task<ActionResult> ListadoAnchoPerfilLLANTA()
+        {
+            var articulos = await imaestroclasificado.ListadoAnchoPerfilLLANTA();
+            return Ok(articulos);
+        }
+
+        [HttpPost("AllfiltroPrincipalLLanta")]
+        public async Task<ActionResult> AllfiltroPrincipalLLanta([FromBody] TrFrombodyLlanta trForm)
+        {
+            /*------------------------------------------------------------------string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso-------*/
+            var listaroawait = await imaestroclasificado.AllListadoCocadaAroLLANTA(trForm.Ancho!, trForm.Perfil!, trForm.Aro!, trForm.Cocada!, trForm.Marca!, trForm.TipoUso!);
+            var listcocada = await imaestroclasificado.AllListadoCocadaCocadaLLANTA(trForm.Ancho!, trForm.Perfil!, trForm.Aro!, trForm.Cocada!, trForm.Marca!, trForm.TipoUso!);
+            var listmarca = await imaestroclasificado.AllListadoCocadaMarcaLLANTA(trForm.Ancho!, trForm.Perfil!, trForm.Aro!, trForm.Cocada!, trForm.Marca!, trForm.TipoUso!);
+            var listtipouso = await imaestroclasificado.AllListadoCocadaTipoUsoLLANTA(trForm.Ancho!, trForm.Perfil!, trForm.Aro!, trForm.Cocada!, trForm.Marca!, trForm.TipoUso!);
+            var listarticulo = await imaestroclasificado.AllListadoCocadaArticuloLLANTA(trForm.Ancho!, trForm.Perfil!, trForm.Aro!, trForm.Cocada!, trForm.Marca!, trForm.TipoUso!);
+            SearchDataLlanta tldata = new()
+            {
+                Listaro = (List<LstmodelAro>)listaroawait,
+                Listcocada = (List<LstmodelCodada>)listcocada,
+                Listmarca = (List<LstmodelMarca>)listmarca,
+                LisTtipouso = (List<LstmodelTipoUso>)listtipouso,
+                ListArticulo = (List<TlArticulo>)listarticulo,
+            };
+
+            return Ok(tldata);
+        }
+
+        [HttpGet("ListadoLLantaMedida")]
+        public async Task<ActionResult> ListadoLLantaMedida()
+        {
+            var ListadoMedida = await imaestroclasificado.ListadoLLantaMedida();
+            return Ok(ListadoMedida);
+        }
+
+        [HttpGet("ListadoLLantaModelo")]
+        public async Task<ActionResult> ListadoLLantaModelo()
+        {
+            var ListadoModelo = await imaestroclasificado.ListadoLLantaModelo();
+            return Ok(ListadoModelo);
+        }
+
+        [HttpGet("ListadoLLantaMarca")]
+        public async Task<ActionResult> ListadoLLantaMarca()
+        {
+            var ListadoMarca = await imaestroclasificado.ListadoLLantaMarca();
+            return Ok(ListadoMarca);
+        }
+
+        [HttpGet("ListadoLLantaCategoria")]
+        public async Task<ActionResult> ListadoLLantaCategoria()
+        {
+            var ListadoCategoria = await imaestroclasificado.ListadoLLantaCategoria();
+            return Ok(ListadoCategoria);
+        }
     }
     public class TrCatrepo
     {

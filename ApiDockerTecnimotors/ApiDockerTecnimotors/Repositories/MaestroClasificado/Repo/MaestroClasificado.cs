@@ -1,5 +1,4 @@
 ﻿using ApiDockerTecnimotors.Context;
-using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 using Dapper;
@@ -263,7 +262,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
         }
 
         /*-----------------------aceite-------------------------*/
-        public async Task<IEnumerable<TlListAceite>> TipoMarcaAceite()
+        public async Task<IEnumerable<Trmarcarepuesto>> TipoMarcaAceite()
         {
             var db = DbConnection();
 
@@ -271,7 +270,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 						SELECT distinct marca FROM public.maestro_articulo_clasificado as mart
 						where mart.familia != '998' and mart.tipo = '98' AND mart.subfamilia = '016' AND mart.estado = '1'
 					   ";
-            return await db.QueryAsync<TlListAceite>(sql, new { });
+            return await db.QueryAsync<Trmarcarepuesto>(sql, new { });
         }
         public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralAceite(string TipoMarca)
         {
@@ -300,7 +299,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
 
             var sql = @"
                         select distinct categoria from public.maestro_articulo_clasificado
-                        where categoria ILIKE '%Repuestos%' and estado = '1'
+                        where categoria ILIKE '%Repuestos%' and estado = '1' and categoriageneral is not null and marca is not null
                        ";
             return await db.QueryAsync<Trcatrepuesto>(sql, new { });
         }
@@ -321,7 +320,8 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
             var db = DbConnection();
 
             // Inicializa la consulta base
-            var sql = @"select * from public.maestro_articulo_clasificado where categoria ILIKE '%Repuestos%' and estado = '1' and estado = '1' and categoriageneral is not null and marca is not null";
+            var sql = @"select * from public.maestro_articulo_clasificado where categoria ILIKE '%Repuestos%' and estado = '1'
+                        and categoriageneral is not null and marca is not null";
 
             // Lista para almacenar los parámetros
             var parameters = new DynamicParameters();
@@ -349,5 +349,381 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 throw new Exception("Error al obtener los repuestos", ex);
             }
         }
+        public async Task<IEnumerable<Trcatrepuesto>> ListadoTipoCamaras()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct categoria from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Camaras%' and estado = '1' and categoriageneral is not null and marca is not null
+                       ";
+            return await db.QueryAsync<Trcatrepuesto>(sql, new { });
+        }
+        public async Task<IEnumerable<Trmarcarepuesto>> ListadoCamaraMarca(string Categoria)
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct marca from public.maestro_articulo_clasificado 
+                        where categoria ILIKE '%" + Categoria + @"%' and estado = '1' and 
+                        categoriageneral is not null and marca is not null";
+            return await db.QueryAsync<Trmarcarepuesto>(sql, new { });
+        }
+        public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralCamara(string Categoria, string Marca)
+        {
+            var db = DbConnection();
+
+            var sql = @"select * from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Camaras%' and estado = '1' and categoriageneral is not null and marca is not null";
+            var parameters = new DynamicParameters();
+
+            if (!string.IsNullOrWhiteSpace(Categoria))
+            {
+                sql += " AND categoria ILIKE @Categoria";
+                parameters.Add("Categoria", $"%{Categoria}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(Marca))
+            {
+                sql += " AND marca = @Marca";
+                parameters.Add("Marca", Marca);
+            }
+            try
+            {
+                return await db.QueryAsync<TlMaestroGeneral>(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los repuestos", ex);
+            }
+        }
+
+        public async Task<IEnumerable<TlLlanta>> ListadoAnchoPerfilLLANTA()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                    SELECT distinct CONCAT(
+	                    (CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2),'R',1) WHEN split_part(subquery.marca,' ',2) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 2),'X',1) ELSE '--' END)
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 3),'/',1) WHEN split_part(subquery.marca,' ',3) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%A%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'A',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',1),'A',2) ELSE '--' END)
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1)  ELSE '--' END)
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'X',1),'AT',2) ELSE '--' END)
+	                    ELSE '--' END) ,' ', (CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END) 
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'B',1) WHEN split_part(subquery.marca,' ',3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'ZR',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',2),'R',1) 
+	                    WHEN split_part(subquery.marca,' ',3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'R',1) WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'-',1) WHEN split_part(subquery.marca,' ',3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3),'-',1) ELSE '' END) 
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+	                    WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'ZR',1),'/',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'R',1),'/',2) 
+	                    WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+	                    ELSE '' END)) as anchoperfil FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+	                    AND estado = '1' order by id asc) AS subquery
+                    ";
+            return await db.QueryAsync<TlLlanta>(sql, new { });
+        }
+        public async Task<IEnumerable<LstmodelAro>> AllListadoCocadaAroLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso)
+        {
+            var db = DbConnection();
+            if (Marca == "")
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2), '-', 2) WHEN split_part(subquery.marca, ' ', 2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca, ' ', 3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3), '-', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'B',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'ZR',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'R',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2),'-',2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(subquery.marca,' ',2),'ZR',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca,' ',2),'R',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',2) ELSE '' END)
+							 ELSE '' END AS aro
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						order by id asc) AS subquery
+                       ";
+                return await db.QueryAsync<LstmodelAro>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2), '-', 2) WHEN split_part(subquery.marca, ' ', 2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca, ' ', 3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3), '-', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'B',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'ZR',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'R',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2),'-',2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(subquery.marca,' ',2),'ZR',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca,' ',2),'R',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',2) ELSE '' END)
+							 ELSE '' END AS aro
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						AND CASE WHEN split_part(marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+						 WHEN split_part(marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+						 WHEN split_part(marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+						 WHEN split_part(marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+						 ELSE '' END  = '" + Marca + @"'
+						order by id asc) AS subquery
+                       ";
+                return await db.QueryAsync<LstmodelAro>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<LstmodelCodada>> AllListadoCocadaCocadaLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso)
+        {
+            var db = DbConnection();
+            if (Marca == "")
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN split_part(subquery.marca, ' ', 1)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN split_part(subquery.marca, ' ', 2) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN split_part(subquery.marca, ' ', 1) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN split_part(subquery.marca, ' ', 1) 
+							 ELSE '' END AS cocada
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelCodada>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN split_part(subquery.marca, ' ', 1)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN split_part(subquery.marca, ' ', 2) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN split_part(subquery.marca, ' ', 1) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN split_part(subquery.marca, ' ', 1) 
+							 ELSE '' END AS cocada
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						AND CASE WHEN split_part(marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+						 WHEN split_part(marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+						 WHEN split_part(marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+						 WHEN split_part(marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+						 ELSE '' END  = '" + Marca + @"'
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelCodada>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<LstmodelMarca>> AllListadoCocadaMarcaLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso)
+        {
+            var db = DbConnection();
+            if (Marca == "")
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+							 ELSE '' END AS marcaoriginal
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelMarca>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+							 ELSE '' END AS marcaoriginal
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						AND CASE WHEN split_part(marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+						 WHEN split_part(marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+						 WHEN split_part(marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+						 WHEN split_part(marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+						 ELSE '' END  = '" + Marca + @"'
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelMarca>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<LstmodelTipoUso>> AllListadoCocadaTipoUsoLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso)
+        {
+            var db = DbConnection();
+            if (Marca == "")
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN subquery.marca LIKE '%TT%' THEN 'TT' WHEN subquery.marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END AS tipouso
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelTipoUso>(sql, new { });
+            }
+            else
+            {
+                var sql = @"
+						SELECT DISTINCT
+						CASE WHEN subquery.marca LIKE '%TT%' THEN 'TT' WHEN subquery.marca LIKE '%TL%' THEN 'TL' ELSE '' END AS tipouso
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						AND CASE WHEN split_part(marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+						 WHEN split_part(marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+						 WHEN split_part(marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+						 WHEN split_part(marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+						 ELSE '' END  = '" + Marca + @"'
+						 order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<LstmodelTipoUso>(sql, new { });
+            }
+        }
+        public async Task<IEnumerable<TlArticulo>> AllListadoCocadaArticuloLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso)
+        {
+            var db = DbConnection();
+            if (Marca == "")
+            {
+                var sql = @"
+						SELECT id, TRIM(subquery.marca) AS marca, TRIM(codigo) as codigo, TRIM(descripcion) as descripcion,
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+							 ELSE '' END AS marcaoriginal,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN split_part(subquery.marca, ' ', 1)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN split_part(subquery.marca, ' ', 2) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN split_part(subquery.marca, ' ', 1) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN split_part(subquery.marca, ' ', 1) 
+							 ELSE '' END AS cocada,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2),'R',1) WHEN split_part(subquery.marca,' ',2) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 2),'X',1) ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 3),'/',1) WHEN split_part(subquery.marca,' ',3) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%A%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'A',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',1),'A',2) ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1)  ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'X',1),'AT',2) ELSE '--' END)
+							 ELSE '--' END as ancho,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'B',1) WHEN split_part(subquery.marca,' ',3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'ZR',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',2),'R',1) WHEN split_part(subquery.marca,' ',3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'R',1) WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'-',1) WHEN split_part(subquery.marca,' ',3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3),'-',1) ELSE '' END) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'ZR',1),'/',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'R',1),'/',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+							 ELSE '' END AS perfil,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2), '-', 2) WHEN split_part(subquery.marca, ' ', 2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca, ' ', 3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3), '-', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'B',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'ZR',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'R',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2),'-',2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(subquery.marca,' ',2),'ZR',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca,' ',2),'R',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',2) ELSE '' END)
+							 ELSE '' END AS aro,
+	 
+						CASE WHEN subquery.marca LIKE '%TT%' THEN 'TT' WHEN subquery.marca LIKE '%TL%' THEN 'TL' ELSE '' END AS tipouso, estado
+	 
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<TlArticulo>(sql, new { });
+
+            }
+            else
+            {
+                var sql = @"
+						SELECT id, TRIM(subquery.marca) AS marca, TRIM(codigo) as codigo, TRIM(descripcion) as descripcion,
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+							 ELSE '' END AS marcaoriginal,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN split_part(subquery.marca, ' ', 1)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN split_part(subquery.marca, ' ', 2) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN split_part(subquery.marca, ' ', 1) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN split_part(subquery.marca, ' ', 1) 
+							 ELSE '' END AS cocada,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2),'R',1) WHEN split_part(subquery.marca,' ',2) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 2),'X',1) ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 3),'/',1) WHEN split_part(subquery.marca,' ',3) LIKE '%AT%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'AT',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%A%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'A',2),'X',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',1),'A',2) ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1)  ELSE '--' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(subquery.marca, ' ', 2),'/',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 2),'X',1),'AT',2) ELSE '--' END)
+							 ELSE '--' END as ancho,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca,' ',3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'B',1) WHEN split_part(subquery.marca,' ',3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'ZR',1) WHEN split_part(subquery.marca,' ',3) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'X',2),'R',1) WHEN split_part(subquery.marca,' ',3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'R',1) WHEN split_part(subquery.marca,' ',3) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3),'/',2),'-',1) WHEN split_part(subquery.marca,' ',3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3),'-',1) ELSE '' END) 
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'ZR',1),'/',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'R',1),'/',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',1) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',1) ELSE '' END)
+							 ELSE '' END AS perfil,
+	 
+						CASE WHEN split_part(subquery.marca, ' ', 1) LIKE 'HD%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2), '-', 2) WHEN split_part(subquery.marca, ' ', 2) LIKE '%R%' THEN split_part(split_part(subquery.marca, ' ', 2), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'DUN%' THEN (CASE WHEN split_part(subquery.marca, ' ', 3) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 3), '-', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%B%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'B',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%ZR%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'ZR',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%R%' THEN split_part(split_part(split_part(subquery.marca, ' ', 3), '/', 2),'R',2) WHEN split_part(subquery.marca, ' ', 3) LIKE '%X%' THEN split_part(split_part(subquery.marca, ' ', 3), 'R', 2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'W-%' THEN (CASE WHEN split_part(subquery.marca, ' ', 2) LIKE '%-%' THEN split_part(split_part(subquery.marca, ' ', 2),'-',2) ELSE '' END)
+							 WHEN split_part(subquery.marca, ' ', 1) LIKE 'CS%' THEN (CASE WHEN split_part(subquery.marca,' ',2) LIKE '%X%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'X',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%ZR%' THEN split_part(split_part(subquery.marca,' ',2),'ZR',2) WHEN split_part(subquery.marca,' ',2) LIKE '%R%' THEN split_part(split_part(subquery.marca,' ',2),'R',2) WHEN split_part(subquery.marca,' ',2) LIKE '%/%' THEN split_part(split_part(split_part(subquery.marca,' ',2),'/',2),'-',2) WHEN split_part(subquery.marca,' ',2) LIKE '%-%' THEN split_part(split_part(subquery.marca,' ',2),'-',2) ELSE '' END)
+							 ELSE '' END AS aro,
+	 
+						CASE WHEN subquery.marca LIKE '%TT%' THEN 'TT' WHEN subquery.marca LIKE '%TL%' THEN 'TL' ELSE '' END AS tipouso, estado
+	 
+						FROM (SELECT id, marcaoriginal AS marca, codigo, descripcion, estado FROM public.maestro_articulo_clasificado WHERE tipo BETWEEN '02' AND '03' AND familia = '003'
+						AND estado = '1' AND marca like '%" + Cocada + @"%%" + Ancho + @"%%" + Perfil + @"%%" + Aro + @"%'
+						AND CASE WHEN marca LIKE '%TT%' THEN 'TT' WHEN marca LIKE '%TL%' THEN 'TL' ELSE 'No Tiene' END  Like '%" + TipoUso + @"%' 
+						AND CASE WHEN split_part(marca, ' ', 1) LIKE 'HD%' THEN 'CELIMO' 
+						WHEN split_part(marca, ' ', 1) LIKE 'DUN%' THEN 'DUNLOP'
+						WHEN split_part(marca, ' ', 1) LIKE 'W-%' THEN 'WANDA'
+						WHEN split_part(marca, ' ', 1) LIKE 'CS%' THEN 'MAXXIS'
+						ELSE '' END  = '" + Marca + @"'
+						order by id asc) AS subquery
+                       ";
+
+                return await db.QueryAsync<TlArticulo>(sql, new { });
+            }
+        }
+    
+        public async Task<IEnumerable<TlMedida>> ListadoLLantaMedida()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct medida from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
+                        not null and medida is not null and modelo is not null
+                       ";
+            return await db.QueryAsync<TlMedida>(sql, new { });
+        }
+        public async Task<IEnumerable<TlModelo>> ListadoLLantaModelo()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct modelo from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
+                        not null and medida is not null and modelo is not null
+                       ";
+            return await db.QueryAsync<TlModelo>(sql, new { });
+        }
+        public async Task<IEnumerable<TlMarca>> ListadoLLantaMarca()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct marca from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
+                        not null and medida is not null and modelo is not null
+                       ";
+            return await db.QueryAsync<TlMarca>(sql, new { });
+        }
+        public async Task<IEnumerable<TlCategoria>> ListadoLLantaCategoria()
+        {
+            var db = DbConnection();
+
+            var sql = @"
+                        select distinct categoria from public.maestro_articulo_clasificado where categoria 
+                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is 
+                        not null and medida is not null and modelo is not null
+                       ";
+            return await db.QueryAsync<TlCategoria>(sql, new { });
+        }
+        
     }
 }

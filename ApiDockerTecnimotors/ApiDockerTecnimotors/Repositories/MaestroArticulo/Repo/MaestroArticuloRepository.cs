@@ -4,7 +4,6 @@ using ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface;
 using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
 using Dapper;
 using Npgsql;
-using System.Collections;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Repo
 {

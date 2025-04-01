@@ -1,0 +1,95 @@
+<app-preloader></app-preloader>
+<app-header></app-header>
+<main class="main__content_wrapper">
+    <section class="hero__slider--section">
+        <div class="slider__thumbnail--style5 position-relative">
+            <img class="slider__thumbnail--img__style5" src="assets/img/banner/tecnimotors/1_2.jpg" alt="slider-img">
+            <!-- Start search filter area -->
+            <div class="search__filter--section search__filter--style5">
+                <div class="container">
+                    <div class="search__filter--inner style5">
+                        <form class="search__filter--form__style2 d-flex">
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" [(ngModel)]="NgMolmedida"
+                                        (change)="SelectMedida()" [ngClass]="{'loading': loading, 'success': success}"
+                                        id="lblmedida" name="lblmedida">
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option *ngFor="let item of ListMedida" [value]="item.medida">
+                                            {{item.medida}}
+                                        </option>
+                                    </select>
+                                    <label for="lblmedida">
+                                        Medida
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" [(ngModel)]="NgMolmodelo"
+                                        (change)="SelectModelo()" [ngClass]="{'loading': loading, 'success': success}"
+                                        id="lblmodelo" name="lblmodelo">
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option *ngFor="let item of ListModelo" [value]="item.modelo">
+                                            {{item.modelo}}
+                                        </option>
+                                    </select>
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblaro">
+                                        Modelo
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" [(ngModel)]="NgMolmarca"
+                                        (change)="SelectMarca()" [ngClass]="{'loading': loading, 'success': success}"
+                                        id="lblmarca" name="lblmarca">
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option *ngFor="let item of ListMarca" [value]="item.marca">
+                                            {{item.marca}}
+                                        </option>
+                                    </select>
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblmarca">
+                                        Marca
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search__filter--select select search__filter--width">
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" [(ngModel)]="NgMolcategoria"
+                                        (change)="SelectCategoria()" [ngClass]="{'loading': loading, 'success': success}"
+                                        id="lblcategoria" name="lblcategoria">
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option *ngFor="let item of ListCategoria" [value]="item.categoria">
+                                            {{item.categoria}}
+                                        </option>
+                                    </select>
+                                    <label [ngClass]="{'loading': loading, 'success': success}" for="lblcategoria">
+                                        Categoria
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search__filter--width">
+                                <button class="search__filter--btn primary__btn" type="submit"
+                                    (click)="Limpiar()">Limpiar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End search filter area -->
+        </div>
+
+    </section>
+
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
+</main>
+<app-footer></app-footer>

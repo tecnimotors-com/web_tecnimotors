@@ -1,43 +1,42 @@
 .table-responsive {
-    max-height: 400px; /* Ajusta la altura máxima según sea necesario */
-    overflow-y: auto; /* Habilita el scroll vertical */
-    border: 1px solid #ddd; /* Opcional: agrega un borde alrededor del contenedor */
-  }
-  
-  /* Opcional: Estilo para la tabla */
-  .table {
-    width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho del contenedor */
-    border-collapse: collapse; /* Colapsa los bordes de la tabla */
-  }
-  
-  .table th,
-  .table td {
-    padding: 8px; /* Espaciado interno */
-    text-align: center; /* Alineación del texto */
-  }
-  
-  .classimgvacio {
-    width: 348px;
-    height: 283px;
-    border: 1px solid;
-    margin-top: 7px;
-  }
-  .classimglleno {
-    width: 348px;
-    height: 283px;
-    border: 1px solid;
-    margin-top: 7px;
-  }
-  .wishlist-active {
-    background-color: red; /* Cambia el color de fondo */
-    color: white; /* Cambia el color del texto */
-  }
-  .disabled {
-    pointer-events: none; /* Evita que se pueda hacer clic */
-    opacity: 0.5; /* Cambia la opacidad para indicar que está deshabilitado */
-  }
-  .carritoList-active {
-    background-color: black; /* Cambia el color de fondo */
-    color: white; /* Cambia el color del texto */
-  }
-  
+  max-height: 400px; /* Ajusta la altura máxima según sea necesario */
+  overflow-y: auto; /* Habilita el scroll vertical */
+  border: 1px solid #ddd; /* Opcional: agrega un borde alrededor del contenedor */
+}
+
+/* Opcional: Estilo para la tabla */
+.table {
+  width: 100%; /* Asegúrate de que la tabla ocupe todo el ancho del contenedor */
+  border-collapse: collapse; /* Colapsa los bordes de la tabla */
+}
+
+.table th,
+.table td {
+  padding: 8px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+}
+
+.classimgvacio {
+  width: 348px;
+  height: 283px;
+  border: 1px solid;
+  margin-top: 7px;
+}
+.classimglleno {
+  width: 348px;
+  height: 283px;
+  border: 1px solid;
+  margin-top: 7px;
+}
+.wishlist-active {
+  background-color: red; /* Cambia el color de fondo */
+  color: white; /* Cambia el color del texto */
+}
+.disabled {
+  pointer-events: none; /* Evita que se pueda hacer clic */
+  opacity: 0.5; /* Cambia la opacidad para indicar que está deshabilitado */
+}
+.carritoList-active {
+  background-color: black; /* Cambia el color de fondo */
+  color: white; /* Cambia el color del texto */
+}

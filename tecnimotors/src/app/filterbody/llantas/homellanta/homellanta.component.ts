@@ -158,8 +158,10 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
   itemper: number = 4;
   imageCache: { [key: string]: boolean } = {};
 
-  constructor(private servicesmaestro: MaestroarticuloService,
-      private auth: AuthService) {}
+  constructor(
+    private servicesmaestro: MaestroarticuloService,
+    private auth: AuthService
+  ) {}
 
   public imagenError(event: any) {
     let ruta = this.defaultImage;
@@ -267,6 +269,7 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
         marca: marca,
         tipoUso: tipouso,
       };
+      console.log(frombody);
       this.servicesmaestro.getAllfiltroPrincipalCocada(frombody).subscribe({
         next: ({
           listaro,
@@ -283,6 +286,11 @@ export class HomellantaComponent implements OnInit, OnDestroy, AfterViewInit {
             this.listmarca = listmarca;
             this.listtipouso = lisTtipouso;
             this.listarticulo = listArticulo;
+            console.log(listaro);
+            console.log(listcocada);
+            console.log(listmarca);
+            console.log(lisTtipouso);
+            console.log(listArticulo);
             if (this.swiper) {
               this.swiper.slideTo(0);
             }

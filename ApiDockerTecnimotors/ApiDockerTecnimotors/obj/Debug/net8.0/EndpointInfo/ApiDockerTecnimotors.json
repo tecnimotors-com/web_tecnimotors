@@ -1191,6 +1191,171 @@
         }
       }
     },
+    "/api/MaestroClasificado/ListadoTipoCamaras": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoCamaraMarca": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrCatrepo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoGeneralCamara": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrMarrepo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoAnchoPerfilLLANTA": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/AllfiltroPrincipalLLanta": {
+      "post": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombodyLlanta"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombodyLlanta"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrFrombodyLlanta"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoLLantaMedida": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoLLantaModelo": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoLLantaMarca": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MaestroClasificado/ListadoLLantaCategoria": {
+      "get": {
+        "tags": [
+          "MaestroClasificado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/WishList/RegisterWishList": {
       "post": {
         "tags": [
@@ -1839,6 +2004,36 @@
         "additionalProperties": false
       },
       "TrFrombody": {
+        "type": "object",
+        "properties": {
+          "ancho": {
+            "type": "string",
+            "nullable": true
+          },
+          "perfil": {
+            "type": "string",
+            "nullable": true
+          },
+          "aro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cocada": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TrFrombodyLlanta": {
         "type": "object",
         "properties": {
           "ancho": {

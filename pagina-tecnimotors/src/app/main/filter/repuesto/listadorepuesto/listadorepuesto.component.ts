@@ -167,7 +167,7 @@ export class ListadorepuestoComponent implements OnInit {
     });
   }
 
-  MdVehiculolistado(content: any, item: any) {
+  MdRepuestolistado(content: any, item: any) {
     const product = parseInt(item.id);
     this.wishlistItems.some((item) => item.id === product);
     this.clearVoid();
@@ -226,7 +226,8 @@ export class ListadorepuestoComponent implements OnInit {
 
   Limpiar() {
     this.txtmodelo = '';
-    this.txtcategoria='';
+    this.txtcategoria = '';
+    localStorage.removeItem('categoriarepuesto');
     localStorage.removeItem('modelorepuesto');
     localStorage.removeItem('pvehiculo');
     this.ListarMarcaRepuesto();
@@ -234,6 +235,7 @@ export class ListadorepuestoComponent implements OnInit {
   }
 
   SelectCategoria() {
+    localStorage.setItem('categoriarepuesto', this.txtcategoria);
     this.txtmodelo = '';
     this.ListarMarcaRepuesto();
     this.ListarGeneralRepuesto();

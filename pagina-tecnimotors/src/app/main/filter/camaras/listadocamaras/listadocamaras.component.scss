@@ -1,0 +1,24 @@
+.classimgvacio {
+  width: 348px;
+  height: 283px;
+  border: 1px solid;
+  margin-top: 7px;
+}
+.classimglleno {
+  width: 348px;
+  height: 283px;
+  border: 1px solid;
+  margin-top: 7px;
+}
+.wishlist-active {
+  background-color: red;
+  color: white;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.carritoList-active {
+  background-color: black;
+  color: white;
+}

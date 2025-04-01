@@ -76,11 +76,11 @@ export class AuthService {
         break;
       case '2':
         if (selectTipo === '1') {
-          this.router.navigate(['/homecamara/06/' + productmarca]);
+          this.router.navigate(['/homecamara']);
         } else if (selectTipo === '2') {
-          this.router.navigate(['/homecamara/07/' + productmarca]);
+          this.router.navigate(['/homecamara']);
         } else {
-          this.router.navigate(['/homecamara/0/' + productmarca]);
+          this.router.navigate(['/homecamara']);
         }
         break;
       case '3':

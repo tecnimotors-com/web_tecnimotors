@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiDockerTecnimotors")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3748d2c440ca11261cb61a323932d5b5c03f38a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b6abb0f685c2afa7d9337c1e9d59defd6846d88")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiDockerTecnimotors")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiDockerTecnimotors")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

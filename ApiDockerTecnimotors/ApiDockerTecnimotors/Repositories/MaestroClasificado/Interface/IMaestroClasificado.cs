@@ -1,5 +1,4 @@
-﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
-using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
+﻿using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface
 {
@@ -18,10 +17,24 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface
 
         /*-----------------------aceite-------------------------*/
         /*--------------------------------------------------------*/
-        public Task<IEnumerable<TlListAceite>> TipoMarcaAceite();
+        public Task<IEnumerable<Trmarcarepuesto>> TipoMarcaAceite();
         public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralAceite(string TipoMarca);
         public Task<IEnumerable<Trcatrepuesto>> ListadoRepuestoCategoria();
         public Task<IEnumerable<Trmarcarepuesto>> ListadoRepuestoMarca(string Categoria);
         public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralRepuesto(string Categoria, string Marca);
+        public Task<IEnumerable<Trcatrepuesto>> ListadoTipoCamaras();
+        public Task<IEnumerable<Trmarcarepuesto>> ListadoCamaraMarca(string Categoria);
+        public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralCamara(string Categoria, string Marca);
+        public Task<IEnumerable<TlLlanta>> ListadoAnchoPerfilLLANTA();
+        public Task<IEnumerable<LstmodelAro>> AllListadoCocadaAroLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
+        public Task<IEnumerable<LstmodelCodada>> AllListadoCocadaCocadaLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
+        public Task<IEnumerable<LstmodelMarca>> AllListadoCocadaMarcaLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
+        public Task<IEnumerable<LstmodelTipoUso>> AllListadoCocadaTipoUsoLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
+        public Task<IEnumerable<TlArticulo>> AllListadoCocadaArticuloLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
+        /*-----------------------------------------------------------------*/
+        public Task<IEnumerable<TlMedida>> ListadoLLantaMedida();
+        public Task<IEnumerable<TlModelo>> ListadoLLantaModelo();
+        public Task<IEnumerable<TlMarca>> ListadoLLantaMarca();
+        public Task<IEnumerable<TlCategoria>> ListadoLLantaCategoria();
     }
 }

@@ -71,7 +71,7 @@
                         <!-- Start categories section -->
                         <div class="categories__shop mb-10">
                             <div class="section__heading border-bottom mb-30">
-                                <h2 class="section__heading--maintitle">Compra de <span>Vehiculos</span></h2>
+                                <h2 class="section__heading--maintitle">Compra de <span>Repuestos</span></h2>
                             </div>
                         </div>
                         <!-- End categories section -->
@@ -91,13 +91,14 @@
                                                             (error)="onImageError()" (loadstart)="isLoading = true"
                                                             (loadend)="isLoading = false" [ngClass]="{classimglleno: item.pathimagen !== '',
                                                                     classimgvacio: item.pathimagen === '',
-                                                        }" [routerLink]="'/detallevehiculo/'+ item.id">
+                                                        }" [routerLink]="'/detallerepuesto/'+ item.id">
                                                     </a>
                                                     <div class="product__card--content">
                                                         <h3 style="text-align: center;">
                                                             {{item.marcaoriginal}}
                                                         </h3>
-                                                        <div>
+                                                        <div style="display: flex;margin: 5px 0px;
+                                                            overflow-wrap: break-word;">
                                                             Categoría: <span class="old__price">
                                                                 {{item.categoria}}</span>
                                                         </div>
@@ -109,7 +110,8 @@
                                                             Marca: <span class="old__price">
                                                                 {{item.marca}}</span>
                                                         </div>
-                                                        <div *ngIf="item.codigo.trim().slice(-5)">
+                                                        <div *ngIf="item.codigo.trim().slice(-5)"
+                                                            style="margin: 5px 0px;">
                                                             Codigo: <span class="old__price">
                                                                 {{item.codigo.trim().slice(-5)}}</span>
                                                         </div>
@@ -133,7 +135,7 @@
                                                             </div>
                                                             <div class="col-2">
                                                                 <a class="product__card--action__btn" title="Quick View"
-                                                                    (click)="MdVehiculolistado(detallecarrito,item)"
+                                                                    (click)="MdRepuestolistado(detallecarrito,item)"
                                                                     style="transform: none;transition: none;">
                                                                     <svg class="product__card--action__btn--svg"
                                                                         width="16" height="16" viewBox="0 0 16 16"

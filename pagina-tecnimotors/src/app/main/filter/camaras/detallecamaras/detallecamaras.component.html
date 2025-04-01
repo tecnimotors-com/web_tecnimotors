@@ -1,0 +1,199 @@
+<app-preloader></app-preloader>
+<app-header></app-header>
+<main class="main__content_wrapper">
+    <!-- Start breadcrumb section -->
+    <section class="breadcrumb__section breadcrumb__bg">
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <div class="breadcrumb__content text-center">
+                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                            <li class="breadcrumb__content--menu__items">
+                                <a [routerLink]="['/homecamara']">Principal</a>
+                            </li>
+                            <li class="breadcrumb__content--menu__items">
+                                <span>
+                                    Camaras
+                                    {{lblcodigo ? lblcodigo.trim().slice(-5) : '' }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End breadcrumb section -->
+
+    <!-- Start product details section -->
+    <section class="product__details--section section--padding" style="padding: 2rem 1rem;">
+        <div class="row row-cols-lg-2 row-cols-md-2" style="justify-content: center;margin: 0px;">
+            <div class="col-lg-2" style="overflow-y: auto;height: 37rem;">
+                <div class="row">
+                    <div class="col-lg-6" *ngFor="let item of Listrutaoriginal; let i = index">
+                        <div class="product__details--media" style="margin-bottom: 2rem;">
+                            <div class="single__product--preview" style="justify-items: center;">
+                                <div class="product__media--preview__items"
+                                    style="border: 1px solid; justify-items: center;">
+                                    <a class="product__media--preview__items--link glightbox"
+                                        style="justify-items: center;">
+                                        <img class="product__media--preview__items--img" style="height: 10rem;"
+                                            [src]="item === '' ? srcimg : txtlink + item" alt="product-media-img"
+                                            (click)="imagenloading(item)">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="product__details--media" style="margin-bottom: 2rem;">
+                    <div class="single__product--preview" style="justify-items: center;">
+                        <div class="product__media--preview__items" style="border: 1px solid;justify-items: center;">
+                            <a class="product__media--preview__items--link glightbox" style="justify-items: center;">
+                                <img class="product__media--preview__items--img"
+                                    [src]="lblpathoriginal === '' ? srcimg : txtlink + lblpathoriginal"
+                                    alt="product-media-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="product__details--info">
+                    <h2 class="product__details--info__title mb-15">
+                        {{lblcodigo.trim().slice(-5)}} - {{lblcodigoequivalente}}
+                    </h2>
+                    <h3 class="product__details--info__desc negritaP" style="display: flex;">
+                        CARACTERISTICAS DESCRIPCION
+                    </h3>
+                    <p class="product__details--info__desc negritaP" style="display: flex;">
+                        Código:
+                        <label style="font-weight: 400;padding-left: 5px;" for="inlineaa1">
+                            {{lblcodigo.trim().slice(-5)}}
+                        </label>
+                        <input type="text" hidden id="inlineaa1">
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblcategoria!">
+                        Categoría:
+                        <label style="font-weight: 400;padding-left: 5px;" for="inlineac3">
+                            {{lblcategoria}}
+                        </label>
+                        <input type="text" hidden id="inlineac3">
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lbldescripcion!">
+                        Descripcion:
+                        <label style="font-weight: 400;padding-left: 5px;" for="inlinead4">
+                            {{lbldescripcion}}
+                        </label>
+                        <input type="text" hidden id="inlinead4">
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblmedida!">
+                        Medida:
+                        <label style="font-weight: 400;padding-left: 5px;" for="inlineae5">
+                            {{lblmedida}}
+                        </label>
+                        <input type="text" hidden id="inlineae5">
+                    </p>
+                    <p class="product__details--info__desc negritaP" style="display: flex;" *ngIf="lblmarcaoriginal!">
+                        Marca:
+                        <label style="font-weight: 400;padding-left: 5px;" for="inlineaf6">
+                            {{lblmarcaoriginal}}
+                        </label>
+                        <input type="text" hidden id="inlineaf6">
+                    </p>
+                    <br>
+                    <div class="product__variant">
+                        <div class="product__variant--list quantity d-flex align-items-center mb-20">
+                            <div class="quantity__box">
+                                <button type="button" name="btnminus"
+                                    class="quantity__value quickview__value--quantity decrease"
+                                    aria-label="Decrementar cantidad" (click)="RestarCount()">-
+                                </button>
+                                <label for="inputQuantity">
+                                    <input type="number" id="inputQuantity"
+                                        class="quantity__number quickview__value--number" [(ngModel)]="count"
+                                        name="inputsum" aria-label="Cantidad" />
+                                </label>
+                                <button type="button" name="btnplus"
+                                    class="quantity__value quickview__value--quantity increase"
+                                    aria-label="Incrementar cantidad" (click)="AumentarCount()">+
+                                </button>
+                            </div>
+                            <button class="primary__btn" style="margin-left: 15px;" type="submit"
+                                (click)="AgregarCarrito()"
+                                [ngClass]="{'carritoList-active': isInCarritolist(this.lblcodigo), 'disabled': isProcessingCarrito}">
+                                {{
+                                isInCarritolist(this.lblcodigo) ?
+                                'Actualizar Cantidad' : 'Agrega a la Cotización'
+                                }}
+                            </button>
+                        </div>
+                        <div class="product__variant--list mb-15">
+                            <a class="product__card--action__btn" title="Wishlist"
+                                (click)="!isProcessing ? MdWishListFavorito() : null"
+                                style="transform: none; transition: none;"
+                                [ngClass]="{'wishlist-active': isInWishlist(lblcodigo), 'disabled': isProcessing}">
+                                <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512" style="margin: 0px;">
+                                    <path
+                                        d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
+                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="32" />
+                                </svg>
+                            </a>
+                            Agregar al Favorito
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="table-responsive">
+                    <table class="table" style="text-align: center;margin: 0px;">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col" *ngIf="lblunidadmedida">Unidad</th>
+                                <th scope="col" *ngIf="lblmarca">Marca</th>
+                                <th scope="col" *ngIf="lblaplicacion">Aplicacion</th>
+                                <th scope="col" *ngIf="lblcategoria">Categoria</th>
+                                <th scope="col" *ngIf="lblproducto">Producto</th>
+                                <th scope="col" *ngIf="lblmedida">Medida</th>
+                                <th scope="col" *ngIf="lblmodelo">Modelo</th>
+                                <th scope="col" *ngIf="lbltipo1">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>{{lblcodigo.trim().slice(-5)}}</th>
+                                <td *ngIf="lblunidadmedida">{{lblunidadmedida}}</td>
+                                <td *ngIf="lblmarca">{{lblmarca}}</td>
+                                <td *ngIf="lblaplicacion">{{lblaplicacion}}</td>
+                                <td *ngIf="lblcategoria">{{lblcategoria}}</td>
+                                <td *ngIf="lblproducto">{{lblproducto}}</td>
+                                <td *ngIf="lblmedida">{{lblmedida}}</td>
+                                <td *ngIf="lblmodelo">{{lblmodelo}}</td>
+                                <td *ngIf="lbltipo1">{{lbltipo1}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                    d="M112 244l144-144 144 144M256 120v292"></path>
+            </svg>
+        </button>
+    </section>
+    <button id="scroll__top" [class.active]="isVisible" (click)="subir()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"
+                d="M112 244l144-144 144 144M256 120v292"></path>
+        </svg>
+    </button>
+</main>
+<app-footer></app-footer>

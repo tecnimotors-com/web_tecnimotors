@@ -124,6 +124,34 @@ export const routes: Routes = [
             (m) => m.routes
           ),
       },
+      {
+        path: 'homecamara',
+        loadChildren: () =>
+          import('./main/filter/camaras/listadocamaras/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'detallecamara/:id',
+        loadChildren: () =>
+          import('./main/filter/camaras/detallecamaras/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'homellantas',
+        loadChildren: () =>
+          import('./main/filter/llantas/listadollantas/routes').then(
+            (m) => m.routes
+          ),
+      },
+      {
+        path: 'detallellanta/:id',
+        loadChildren: () =>
+          import('./main/filter/llantas/listadollantas/routes').then(
+            (m) => m.routes
+          ),
+      },
     ],
   },
 ];

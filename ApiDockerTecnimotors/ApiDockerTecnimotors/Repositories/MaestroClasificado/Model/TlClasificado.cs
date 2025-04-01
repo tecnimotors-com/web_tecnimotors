@@ -1,5 +1,59 @@
 ﻿namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Model
 {
+    public class SearchDataLlanta
+    {
+        public List<LstmodelAro>? Listaro { get; set; }
+        public List<LstmodelCodada>? Listcocada { get; set; }
+        public List<LstmodelMarca>? Listmarca { get; set; }
+        public List<LstmodelTipoUso>? LisTtipouso { get; set; }
+        public List<TlArticulo>? ListArticulo { get; set; }
+    }
+    public class TrFrombodyLlanta
+    {
+        public string? Ancho { get; set; }
+        public string? Perfil { get; set; }
+        public string? Aro { get; set; }
+        public string? Cocada { get; set; }
+        public string? Marca { get; set; }
+        public string? TipoUso { get; set; }
+    }
+    public class TlArticulo
+    {
+        public int Id { get; set; }
+        public string? Marca { get; set; }
+        public string? Codigo { get; set; }
+        public string? Descripcion { get; set; }
+        public string? Marcaoriginal { get; set; }
+        public string? Cocada { get; set; }
+        public string? Ancho { get; set; }
+        public string? Perfil { get; set; }
+        public string? Aro { get; set; }
+        public string? Tipouso { get; set; }
+        public string? Estado { get; set; }
+    }
+    public class LstmodelAro
+    {
+        public string? Aro { get; set; }
+    }
+
+    public class LstmodelCodada
+    {
+        public string? Cocada { get; set; }
+    }
+
+    public class LstmodelMarca
+    {
+        public string? Marcaoriginal { get; set; }
+    }
+
+    public class LstmodelTipoUso
+    {
+        public string? Tipouso { get; set; }
+    }
+    public class TlLlanta
+    {
+        public string? Anchoperfil { get; set; }
+    }
     public class TlClasificado
     {
         public string? Aplicacion { get; set; }

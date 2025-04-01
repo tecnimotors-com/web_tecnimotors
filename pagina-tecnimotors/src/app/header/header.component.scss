@@ -8,7 +8,10 @@
     color: white;
     /*transition: position 0.3s ease; */ /* Transición suave */
   }
-
+  .header__sub--menu.visible {
+    visibility: visible; /* Hacer visible el menú */
+    opacity: 1; /* Cambiar la opacidad a 1 */
+  }
   .fixed-position {
     position: fixed;
     top: 0;

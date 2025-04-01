@@ -87,7 +87,7 @@ export class HeaderComponent implements OnInit {
           subtitle: 'CÁMARAS',
           isOpen: false,
           style: this.divstyle,
-          routerlink: '/homecamara/0/0',
+          routerlink: '/homecamara',
         },
       ],
     },
@@ -137,7 +137,8 @@ export class HeaderComponent implements OnInit {
   public isProcessingCarrito: boolean = false;
   public isProcessingdiminuir: boolean = false;
   public isProcessingaAumentar: boolean = false;
-
+  public isDropdownOpen: boolean = false;
+  
   constructor(
     private cotizacionService: CotizacionService,
     private authService: AuthService,
@@ -390,6 +391,9 @@ export class HeaderComponent implements OnInit {
   clicksearch(): void {
     this.hdnSearch = !this.hdnSearch;
   }
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen; // Alternar el estado del menú
+  }
 
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
@@ -413,7 +417,21 @@ export class HeaderComponent implements OnInit {
     if (this.isOpenCarShop && !isclickInsideToggleButton) {
       this.cerrarCarrito();
     }
+    // Cierra el submenú si se hace clic fuera de él
+    if (
+      !target.closest('.header__sub--menu') &&
+      !target.closest('.header__menu--items')
+    ) {
+      this.isSubMenuOpen = false; // Cerrar el submenú
+    }
 
+    // Cierra el menú desplegable si se hace clic fuera de él
+    if (
+      !target.closest('.header__sub--menu') &&
+      !target.closest('.header__menu--link')
+    ) {
+      this.isDropdownOpen = false; // Cerrar el menú desplegable
+    }
     // Cierra el submenú si se hace clic fuera de él
     if (
       !target.closest('.header__sub--menu') &&

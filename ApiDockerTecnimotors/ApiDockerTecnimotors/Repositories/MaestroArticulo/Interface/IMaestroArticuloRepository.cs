@@ -1,5 +1,4 @@
 ﻿using ApiDockerTecnimotors.Repositories.MaestroArticulo.Model;
-using ApiDockerTecnimotors.Repositories.MaestroClasificado.Model;
 
 namespace ApiDockerTecnimotors.Repositories.MaestroArticulo.Interface
 {

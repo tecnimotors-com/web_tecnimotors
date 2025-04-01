@@ -74,7 +74,6 @@ export class ListadoaceiteComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.getRefreshTokenvehiculo();
-    this.txtcategoria = '';
     localStorage.setItem('categoriaaceite', this.txtcategoria);
     this.initializeData();
     this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
@@ -278,6 +277,7 @@ export class ListadoaceiteComponent implements OnInit {
   }
 
   SelectTipoAceite() {
+    localStorage.setItem('categoriaaceite', this.txtcategoria);
     this.ListarGeneralAceite();
   }
 
