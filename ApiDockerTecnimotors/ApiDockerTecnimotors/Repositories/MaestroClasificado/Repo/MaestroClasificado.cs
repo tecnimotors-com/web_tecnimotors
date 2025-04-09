@@ -679,51 +679,181 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Repo
                 return await db.QueryAsync<TlArticulo>(sql, new { });
             }
         }
-    
-        public async Task<IEnumerable<TlMedida>> ListadoLLantaMedida()
+        /*
+        public async Task<IEnumerable<string>> ListadoLLanta(string tipo, TlModelsFilter trmdelfilter)
         {
             var db = DbConnection();
 
-            var sql = @"
-                        select distinct medida from public.maestro_articulo_clasificado where categoria 
-                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
-                        not null and medida is not null and modelo is not null
-                       ";
-            return await db.QueryAsync<TlMedida>(sql, new { });
+            // Construcción de la consulta SQL
+            string sql = $@"
+                            SELECT DISTINCT {tipo} 
+                            FROM public.maestro_articulo_clasificado 
+                            WHERE categoria ILIKE '%Llantas%' 
+                            AND estado = '1' 
+                            AND categoriageneral IS NOT NULL 
+                            AND marca IS NOT NULL 
+                            AND medida IS NOT NULL 
+                            AND modelo IS NOT NULL";
+
+            var parameters = new DynamicParameters();
+
+            // Agregar condiciones basadas en el filtro
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Medida))
+            {
+                sql += " AND medida = @Medida";
+                parameters.Add("Medida", trmdelfilter.Medida);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Modelo))
+            {
+                sql += " AND modelo = @Modelo";
+                parameters.Add("Modelo", trmdelfilter.Modelo);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Marca))
+            {
+                sql += " AND marca = @Marca";
+                parameters.Add("Marca", trmdelfilter.Marca);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Categoria))
+            {
+                sql += " AND categoria = @Categoria";
+                parameters.Add("Categoria", trmdelfilter.Categoria);
+            }
+
+            try
+            {
+                // Ejecutar la consulta y devolver los resultados
+                return await db.QueryAsync<string>(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los repuestos", ex);
+            }
         }
-        public async Task<IEnumerable<TlModelo>> ListadoLLantaModelo()
+        */
+        public async Task<IEnumerable<string>> ListadoLLanta(string tipo, TlModelsFilter trmdelfilter)
         {
             var db = DbConnection();
 
-            var sql = @"
-                        select distinct modelo from public.maestro_articulo_clasificado where categoria 
-                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
-                        not null and medida is not null and modelo is not null
-                       ";
-            return await db.QueryAsync<TlModelo>(sql, new { });
-        }
-        public async Task<IEnumerable<TlMarca>> ListadoLLantaMarca()
-        {
-            var db = DbConnection();
+            // Construcción de la consulta SQL
+            string sql = $@"
+                    SELECT DISTINCT {tipo} 
+                    FROM public.maestro_articulo_clasificado 
+                    WHERE categoria ILIKE '%Llantas%' 
+                    AND estado = '1' 
+                    AND categoriageneral IS NOT NULL 
+                    AND marca IS NOT NULL 
+                    AND medida IS NOT NULL 
+                    AND modelo IS NOT NULL 
+                    AND trim(upper(marca)) NOT IN ('SIN MARCA') 
+                    ";
 
-            var sql = @"
-                        select distinct marca from public.maestro_articulo_clasificado where categoria 
-                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is
-                        not null and medida is not null and modelo is not null
-                       ";
-            return await db.QueryAsync<TlMarca>(sql, new { });
-        }
-        public async Task<IEnumerable<TlCategoria>> ListadoLLantaCategoria()
-        {
-            var db = DbConnection();
+            var parameters = new DynamicParameters();
 
-            var sql = @"
-                        select distinct categoria from public.maestro_articulo_clasificado where categoria 
-                        ILIKE '%Llantas%' and estado = '1' and categoriageneral is not null and marca is 
-                        not null and medida is not null and modelo is not null
-                       ";
-            return await db.QueryAsync<TlCategoria>(sql, new { });
+            // Agregar condiciones basadas en el filtro
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Medida))
+            {
+                sql += " AND medida = @Medida";
+                parameters.Add("Medida", trmdelfilter.Medida);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Modelo))
+            {
+                sql += " AND modelo = @Modelo";
+                parameters.Add("Modelo", trmdelfilter.Modelo);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Marca))
+            {
+                sql += " AND marca = @Marca";
+                parameters.Add("Marca", trmdelfilter.Marca);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Categoria))
+            {
+                sql += " AND categoria = @Categoria";
+                parameters.Add("Categoria", trmdelfilter.Categoria);
+            }
+
+            // Agregar la cláusula ORDER BY
+            if (!string.IsNullOrWhiteSpace(tipo))
+            {
+                sql += $" ORDER BY {tipo} asc"; // Asegúrate de que 'tipo' sea seguro para evitar inyecciones SQL
+            }
+
+            try
+            {
+                // Ejecutar la consulta y devolver los resultados
+                return await db.QueryAsync<string>(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los repuestos", ex);
+            }
         }
-        
+        public async Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralLlantas(TlModelsFilter trmdelfilter)
+        {
+            // Verificar si todos los filtros están vacíos
+            if (string.IsNullOrWhiteSpace(trmdelfilter.Medida) &&
+                string.IsNullOrWhiteSpace(trmdelfilter.Modelo) &&
+                string.IsNullOrWhiteSpace(trmdelfilter.Marca) &&
+                string.IsNullOrWhiteSpace(trmdelfilter.Categoria))
+            {
+                // Si todos los filtros están vacíos, devolver un arreglo vacío
+                return [];
+            }
+
+            var db = DbConnection();
+            var sql = @"SELECT * FROM public.maestro_articulo_clasificado
+                WHERE categoria ILIKE '%Llantas%' 
+                AND estado = '1' 
+                AND categoriageneral IS NOT NULL 
+                AND marca IS NOT NULL 
+                AND medida IS NOT NULL 
+                AND modelo IS NOT NULL
+                AND trim(upper(marca)) NOT IN ('SIN MARCA') ";
+
+            var parameters = new DynamicParameters();
+
+            // Agregar condiciones basadas en el filtro
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Medida))
+            {
+                sql += " AND medida = @Medida";
+                parameters.Add("Medida", trmdelfilter.Medida);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Modelo))
+            {
+                sql += " AND modelo = @Modelo";
+                parameters.Add("Modelo", trmdelfilter.Modelo);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Marca))
+            {
+                sql += " AND marca = @Marca";
+                parameters.Add("Marca", trmdelfilter.Marca);
+            }
+
+            if (!string.IsNullOrWhiteSpace(trmdelfilter.Categoria))
+            {
+                sql += " AND categoria = @Categoria";
+                parameters.Add("Categoria", trmdelfilter.Categoria);
+            }
+            // Agregar la cláusula ORDER BY
+
+            sql += $" ORDER BY descripcion asc";
+
+            try
+            {
+                // Ejecutar la consulta y devolver los resultados
+                return await db.QueryAsync<TlMaestroGeneral>(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los repuestos", ex);
+            }
+        }
     }
 }

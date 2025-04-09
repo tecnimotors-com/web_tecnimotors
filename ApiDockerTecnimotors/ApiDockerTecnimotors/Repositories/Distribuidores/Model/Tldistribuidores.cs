@@ -19,4 +19,11 @@
         public string? Direccion { get; set; }
         public string? Direccion2 { get; set; }
     }
+
+    public class TlFilterDistribuidor
+    {
+        public string? Departamento { get; set; }
+        public string? Provincia { get; set; }
+        public string? Distrito { get; set; }
+    }
 }

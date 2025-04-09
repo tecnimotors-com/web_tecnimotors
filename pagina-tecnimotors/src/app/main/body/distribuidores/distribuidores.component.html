@@ -53,50 +53,73 @@
             </div>
             <div class="search__filter--section">
                 <div class="container">
-                    <div class="search__filter--inner style5" style="padding: 1.5rem;background: #d9d9d9;">
+                    <div class="search__filter--inner style5"
+                        style="padding: 1.5rem;background: #d9d9d9;padding-bottom: 0px;">
                         <div class="search__filter--form__style2 d-flex">
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" (change)="ListadoProvincia()"
-                                    name="sldepartamento" [(ngModel)]="Iddepartamento">
-                                    <option selected disabled value=0>Departamento</option>
-                                    <option *ngFor="let item of ListDepa" [value]="item.departamento_id">
-                                        {{ item.nombre.trim()}}
-                                    </option>
-                                </select>
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" (change)="ChangeDepartamento()"
+                                        name="sldepartamento" [(ngModel)]="Iddepartamento">
+                                        <option selected disabled value=0>Departamento</option>
+                                        <option *ngFor="let item of ListDepa" [value]="item.departamento_id">
+                                            {{ item.nombre.trim()}}
+                                        </option>
+                                    </select>
+                                    <i class="fa-solid fa-circle-xmark iconclose" (click)="ClearDepartamento()"
+                                        style="cursor: pointer;" *ngIf="Iddepartamento"></i>
+                                </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" (change)="ListadoDistrito()"
-                                    name="slprovincia" [(ngModel)]="Idprovincia">
-                                    <option selected disabled value=0>Provincia</option>
-                                    <option *ngFor="let item of ListProvi" [value]="item.provincia_id">
-                                        {{item.nombre.trim()}}
-                                    </option>
-                                </select>
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" (change)="ChangeProvincia()"
+                                        name="slprovincia" [(ngModel)]="Idprovincia">
+                                        <option selected disabled value=0>Provincia</option>
+                                        <option *ngFor="let item of ListProvi" [value]="item.provincia_id">
+                                            {{item.nombre.trim()}}
+                                        </option>
+                                    </select>
+                                    <i class="fa-solid fa-circle-xmark iconclose" (click)="ClearProvincia()"
+                                        style="cursor: pointer;" *ngIf="Idprovincia"></i>
+                                </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" (change)="DetailDistribuidore()"
-                                    name="sldistrito" [(ngModel)]="Iddistrito">
-                                    <option selected value=0>Distrito</option>
-                                    <option *ngFor="let item of ListDistrito" [value]="item.distrito_id">
-                                        {{item.nombre.trim()}}
-                                    </option>
-                                </select>
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" (change)="ChangeDistrito()"
+                                        name="sldistrito" [(ngModel)]="Iddistrito">
+                                        <option selected disabled value=0>Distrito</option>
+                                        <option *ngFor="let item of ListDistrito" [value]="item.distrito_id">
+                                            {{item.nombre.trim()}}
+                                        </option>
+                                    </select>
+                                    <i class="fa-solid fa-circle-xmark iconclose" (click)="ClearDistrito()"
+                                        style="cursor: pointer;" *ngIf="Iddistrito"></i>
+                                </div>
                             </div>
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" (change)="SelectFrom()"
-                                    name="sldistribucion" [(ngModel)]="txtid">
-                                    <option selected disabled value="">Seleccione una Distribuidores</option>
-                                    <option *ngFor="let item of Lstdistri" [value]="item.iddistribuidores">
-                                        {{ item.nombre.trim()}}
-                                    </option>
-                                </select>
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" (change)="SelectFrom()"
+                                        name="sldistribucion" [(ngModel)]="txtid">
+                                        <option selected disabled value="">Seleccione una Distribuidores</option>
+                                        <option *ngFor="let item of Lstdistribuidor" [value]="item.iddistribuidores">
+                                            {{ item.nombre.trim()}}
+                                        </option>
+                                    </select>
+                                    <i class="fa-solid fa-circle-xmark iconclose" (click)="ClearDistribuidores()"
+                                        style="cursor: pointer;" *ngIf="txtid"></i>
+                                </div>
                             </div>
+
+
                             <div class="search__filter--select select search__filter--width">
-                                <select class="search__filter--select__field" [(ngModel)]="direccion"
-                                    name="sldireccion">
-                                    <option value="" disabled selected>Seleccione una dirección</option>
-                                    <option>{{direccion}}</option>
-                                </select>
+                                <div class="form-floating">
+                                    <select class="search__filter--select__field" [(ngModel)]="direccion"
+                                        name="sldireccion">
+                                        <option selected disabled value="">Seleccione una dirección</option>
+                                        <option *ngIf="direccion">{{direccion}}</option>
+                                    </select>
+                                    <i class="fa-solid fa-circle-xmark iconclose" (click)="ClearDireccion()"
+                                        style="cursor: pointer;" *ngIf="txtid"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,7 +146,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="contact__form--list mb-10">
-                                    <h3 class="contact__form--titlemb-1">Dirección:</h3>
+                                    <h3 class="contact__form--title mb-1">Dirección:</h3>
                                     <label class="account__details--desc" for="input2" placeholder="Your First Name"
                                         type="text">{{txtdireccion}}</label>
                                     <input type="text" hidden id="input2">
@@ -133,14 +156,23 @@
                                 <div class="contact__form--list mb-10">
                                     <h3 class="contact__form--title mb-1">Teléfono | Celular:</h3>
                                     <label class="account__details--desc" for="input3" placeholder="Your First Name"
-                                        type="text">{{txtcelular}}</label>
+                                        type="text">{{txtcelular}}
+                                        <div class="whatsapp-link" *ngIf="txtid">
+                                            <a href="https://wa.me/{{txtcelular}}" target="_blank"
+                                                rel="noopener noreferrer" style="font-weight: 600;">
+                                                Enviar mensaje por WhatsApp
+                                            </a>
+                                        </div>
+                                    </label>
                                     <input type="text" hidden id="input3">
+
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="contact__form--list mb-2 mt-2">
+                                    <h3 class="contact__form--title mb-1">Departamento - Provincia - distrito:</h3>
                                     <label class="account__details--desc" for="input4" placeholder="Your First Name"
-                                        type="text">
+                                        type="text" *ngIf="txtid">
                                         {{txtdepa}}, {{txtprovi}}, {{txtdistri}}
                                     </label>
                                     <input type="text" hidden id="input4">
@@ -155,9 +187,13 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <iframe tabindex="0" aria-hidden="false" style="border: 0;" width="870" height="450"
-                        [src]="urldireccion" allowfullscreen="" frameborder="0">
-                    </iframe>
+                    <div class="card" style="width: -webkit-fill-available;height: 100%;">
+                        <!--width="870" height="450"-->
+                        <iframe tabindex="0" aria-hidden="false" style="border: 0;" [src]="urldireccion"
+                            allowfullscreen="" frameborder="0" style="width: -webkit-fill-available;
+                            height: -webkit-fill-available;" *ngIf="direccion">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>

@@ -31,6 +31,9 @@ export class MaestroclasificadoService {
   private ListadoDetalleDistribuidore =
     '/Distribuidores/ListadoDetalleDistribuidore/';
 
+  private ListadoGeneralDistribuidores =
+    '/Distribuidores/ListadoGeneralDistribuidores';
+
   private TipoMarcaAceite = '/MaestroClasificado/TipoMarcaAceite';
   private ListadoGeneralAceite = '/MaestroClasificado/ListadoGeneralAceite';
 
@@ -47,10 +50,7 @@ export class MaestroclasificadoService {
     '/MaestroClasificado/AllfiltroPrincipalLLanta';
   private ListadoAnchoPerfil = '/MaestroClasificado/ListadoAnchoPerfilLLANTA';
 
-  private ListadoLLantaMedida = '/MaestroClasificado/ListadoLLantaMedida';
-  private ListadoLLantaModelo = '/MaestroClasificado/ListadoLLantaModelo';
-  private ListadoLLantaMarca = '/MaestroClasificado/ListadoLLantaMarca';
-  private ListadoLLantaCategoria = '/MaestroClasificado/ListadoLLantaCategoria';
+  private ListadoLLanta = '/MaestroClasificado/ListadoLLanta';
 
   constructor(private http: HttpClient) {}
 
@@ -92,6 +92,12 @@ export class MaestroclasificadoService {
   getDetailDistribuidores(Id: number): Observable<any> {
     return this.http.get(this.myurl + this.DetailDistribuidores + Id);
   }
+  getListadoGeneralDistribuidores(frombody: any): Observable<any> {
+    return this.http.post(
+      this.myurl + this.ListadoGeneralDistribuidores,
+      frombody
+    );
+  }
 
   getListadoDetalleDistribuidore(
     depa: string,
@@ -130,16 +136,7 @@ export class MaestroclasificadoService {
     return this.http.post(this.myurl + this.ListadoGeneralCamara, from);
   }
 
-  getListadoLLantaMedida(): Observable<any> {
-    return this.http.get(this.myurl + this.ListadoLLantaMedida);
-  }
-  getListadoLLantaModelo(): Observable<any> {
-    return this.http.get(this.myurl + this.ListadoLLantaModelo);
-  }
-  getListadoLLantaMarca(): Observable<any> {
-    return this.http.get(this.myurl + this.ListadoLLantaMarca);
-  }
-  getListadoLLantaCategoria(): Observable<any> {
-    return this.http.get(this.myurl + this.ListadoLLantaCategoria);
+  getListadoLLanta(request: any): Observable<any> {
+    return this.http.post(this.myurl + this.ListadoLLanta, request);
   }
 }

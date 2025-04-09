@@ -322,27 +322,35 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   BtnVehiculoMotocicleta() {
-    this.auth.navigate('5', '2', '');
+    localStorage.setItem('categoriavehiculo', 'Motocicleta');
+    this.router.navigate(['/homevehiculo/Motocicleta']);
   }
   BtnVehiculoBicicleta() {
-    this.auth.navigate('5', '1', '');
+    localStorage.setItem('categoriavehiculo', 'Bicicleta');
+    this.router.navigate(['/homevehiculo/Bicicleta']);
   }
   BtnVehiculoCuatrimotos() {
-    this.auth.navigate('5', '3', '');
+    localStorage.setItem('categoriavehiculo', 'Cuatrimoto');
+    this.router.navigate(['/homevehiculo/Cuatrimoto']);
   }
   BtnVehiculoCargueros() {
-    this.auth.navigate('5', '4', '');
+    localStorage.setItem('categoriavehiculo', 'Trimoto de carga');
+    this.router.navigate(['/homevehiculo/Trimoto de carga']);
   }
+
   BtnLlantas() {
-    this.auth.navigate('1', '', '');
+    this.router.navigate(['/homellantas']);
   }
+
   BtnCamara() {
-    this.auth.navigate('2', '0', '0');
+    this.router.navigate(['/homecamara']);
   }
-  BtnRepuesto() {
-    this.auth.navigate('3', '2', '');
-  }
+
   BtnAceite() {
-    this.auth.navigate('4', '2', '');
+    this.router.navigate(['/homeaceite']);
+  }
+
+  BtnRepuesto() {
+    this.router.navigate(['/homerepuesto']);
   }
 }

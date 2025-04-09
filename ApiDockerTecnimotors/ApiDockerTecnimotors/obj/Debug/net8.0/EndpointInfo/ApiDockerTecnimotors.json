@@ -388,6 +388,37 @@
         }
       }
     },
+    "/api/Distribuidores/ListadoGeneralDistribuidores": {
+      "post": {
+        "tags": [
+          "Distribuidores"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlFilterDistribuidor"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlFilterDistribuidor"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlFilterDistribuidor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Images/subir": {
       "post": {
         "tags": [
@@ -1308,11 +1339,30 @@
         }
       }
     },
-    "/api/MaestroClasificado/ListadoLLantaMedida": {
-      "get": {
+    "/api/MaestroClasificado/ListadoLLanta": {
+      "post": {
         "tags": [
           "MaestroClasificado"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1320,35 +1370,30 @@
         }
       }
     },
-    "/api/MaestroClasificado/ListadoLLantaModelo": {
-      "get": {
+    "/api/MaestroClasificado/ListadoGeneralLlantas": {
+      "post": {
         "tags": [
           "MaestroClasificado"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TlModelsFilter"
+              }
+            }
           }
-        }
-      }
-    },
-    "/api/MaestroClasificado/ListadoLLantaMarca": {
-      "get": {
-        "tags": [
-          "MaestroClasificado"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/MaestroClasificado/ListadoLLantaCategoria": {
-      "get": {
-        "tags": [
-          "MaestroClasificado"
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1867,6 +1912,24 @@
         },
         "additionalProperties": false
       },
+      "TlFilterDistribuidor": {
+        "type": "object",
+        "properties": {
+          "departamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "provincia": {
+            "type": "string",
+            "nullable": true
+          },
+          "distrito": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TlModelsCarrito": {
         "type": "object",
         "properties": {
@@ -1969,6 +2032,28 @@
           "quantity": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TlModelsFilter": {
+        "type": "object",
+        "properties": {
+          "medida": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
+          "marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

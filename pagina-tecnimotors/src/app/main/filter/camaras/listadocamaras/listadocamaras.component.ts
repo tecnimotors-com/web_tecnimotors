@@ -74,6 +74,7 @@ export class ListadocamarasComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.getRefreshTokenvehiculo();
+    localStorage.setItem('categoriacamara', this.txtcategoria);
     this.initializeData();
     this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isAuthenticated = isAuthenticated;

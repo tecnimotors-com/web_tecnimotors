@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
-      //withHashLocation()
+      withHashLocation()
     ),
     provideHttpClient(),
     // Registro del interceptor funcional

@@ -19,4 +19,18 @@
     {
         public string? Categoria { get; set; }
     }
+
+    public class TlModelsFilter
+    {
+        public string? Medida { get; set; }
+        public string? Modelo { get; set; }
+        public string? Marca { get; set; }
+        public string? Categoria { get; set; }
+    }
+
+    public class ListadoRequest
+    {
+        public string? Tipo { get; set; }
+        public TlModelsFilter? Filtro { get; set; }
+    }
 }

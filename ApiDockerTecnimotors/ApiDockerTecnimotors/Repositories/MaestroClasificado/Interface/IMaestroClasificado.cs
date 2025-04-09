@@ -32,9 +32,7 @@ namespace ApiDockerTecnimotors.Repositories.MaestroClasificado.Interface
         public Task<IEnumerable<LstmodelTipoUso>> AllListadoCocadaTipoUsoLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
         public Task<IEnumerable<TlArticulo>> AllListadoCocadaArticuloLLANTA(string Ancho, string Perfil, string Aro, string Cocada, string Marca, string TipoUso);
         /*-----------------------------------------------------------------*/
-        public Task<IEnumerable<TlMedida>> ListadoLLantaMedida();
-        public Task<IEnumerable<TlModelo>> ListadoLLantaModelo();
-        public Task<IEnumerable<TlMarca>> ListadoLLantaMarca();
-        public Task<IEnumerable<TlCategoria>> ListadoLLantaCategoria();
+        public Task<IEnumerable<string>> ListadoLLanta(string tipo, TlModelsFilter trmdelfilter);
+        public Task<IEnumerable<TlMaestroGeneral>> ListadoGeneralLlantas(TlModelsFilter trmdelfilter);
     }
 }

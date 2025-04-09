@@ -178,7 +178,6 @@ export class ListadoaceiteComponent implements OnInit {
   }
 
   MdWishListFavorito(item: any) {
-    console.log(item);
     if (this.isProcessing) return; // Evitar múltiples clics
     this.isProcessing = true; // Establecer el estado de procesamiento
 

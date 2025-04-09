@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SharedMain } from '../../sharedmain';
 import { environment } from '../../../../environments/environment.development';
@@ -8,6 +7,7 @@ import { DepartamentoService } from '../../../core/service/departamento.service'
 import { AuthService } from '../../../core/service/auth.service';
 import Swal from 'sweetalert2';
 import { PreloaderComponent } from '../../helper/preloader/preloader.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-distribuidores',
@@ -15,20 +15,22 @@ import { PreloaderComponent } from '../../helper/preloader/preloader.component';
   templateUrl: './distribuidores.component.html',
   styleUrls: ['./distribuidores.component.scss'],
 })
-export class DistribuidoresComponent implements OnInit, OnDestroy {
-  public direccion: string =
-    'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
+export class DistribuidoresComponent implements OnInit {
+  public direccion: string = '';
+  public direccion2: string = '';
   public urldireccion: SafeResourceUrl | undefined;
-  public direccion2: string =
-    'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
+
   public ListDepa: any[] = [];
   public ListProvi: any[] = [];
   public ListDistrito: any[] = [];
-  public Lstdistri: any[] = [];
+  public Lstdistribuidor: any[] = [];
   public txtid: string = '';
   public Iddepartamento: number = 0;
   public Idprovincia: number = 0;
   public Iddistrito: number = 0;
+  public lbldepartamento: string = '';
+  public lblprovincia: string = '';
+  public lbldistrito: string = '';
 
   public txtnombre: string = '';
   public txtcelular: string = '';
@@ -36,6 +38,7 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
   public txtdepa: string = '';
   public txtprovi: string = '';
   public txtdistri: string = '';
+
   constructor(
     private sanitizer: DomSanitizer,
     private maestroservice: MaestroclasificadoService,
@@ -45,7 +48,6 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.auth.getRefreshToken();
-    this.setUrlDireccion();
     this.ListadoDistribuidores();
     this.ListadoDepartamento();
   }
@@ -60,18 +62,110 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
     this.departamento.getListarDepartamentos().subscribe({
       next: (lst: any) => {
         this.ListDepa = lst;
-        this.clearDetalledistribuidore();
+      },
+    });
+  }
+
+  ChangeDepartamento() {
+    this.showAlert('Cargando información de distribuidores', 'info');
+    const departamento$ = this.departamento.getObtenerDepartamento(
+      this.Iddepartamento
+    );
+    const provincias$ = this.departamento.getListarProvincias(
+      this.Iddepartamento
+    );
+
+    forkJoin([departamento$, provincias$]).subscribe({
+      next: ([obter, listdistri]) => {
+        const frombody = {
+          departamento: obter.nombre.trim() ?? '',
+          provincia: this.lblprovincia ?? '',
+          distrito: this.lbldistrito ?? '',
+        };
+
+        this.maestroservice
+          .getListadoGeneralDistribuidores(frombody)
+          .subscribe({
+            next: (dtl) => {
+              this.Lstdistribuidor = dtl;
+              this.lbldepartamento = obter.nombre.trim();
+              this.ListProvi = listdistri;
+              this.Idprovincia = 0;
+              this.Iddistrito = 0;
+              this.showAlert(
+                'Se cargó exitosamente la información de distribuidores',
+                'success'
+              );
+            },
+            error: (err) => {
+              console.error('Error al obtener distribuidores:', err);
+              this.showAlert(
+                'Error al cargar la información de distribuidores',
+                'error'
+              );
+            },
+          });
+      },
+      error: (err) => {
+        console.error('Error al obtener departamento o provincias:', err);
+        this.showAlert(
+          'Error al cargar la información de departamento o provincias',
+          'error'
+        );
       },
     });
   }
 
   ListadoProvincia() {
     this.departamento.getListarProvincias(this.Iddepartamento).subscribe({
-      next: (lst: any) => {
-        this.ListProvi = lst;
-        this.Idprovincia = 0;
-        this.Iddistrito = 0;
-        this.clearDetalledistribuidore();
+      next: (lstprovi) => {
+        this.ListProvi = lstprovi;
+      },
+    });
+  }
+
+  ChangeProvincia() {
+    this.showAlert('Cargando información de distribuidores', 'info');
+    const Provincia$ = this.departamento.getObtenerProvincia(this.Idprovincia);
+    const Distrito$ = this.departamento.getListarDistritos(
+      this.Iddepartamento,
+      this.Idprovincia
+    );
+    forkJoin([Provincia$, Distrito$]).subscribe({
+      next: ([obter, listdistri]) => {
+        const frombody = {
+          departamento: this.lbldepartamento ?? '',
+          provincia: obter.nombre.trim(),
+          distrito: this.lbldistrito ?? '',
+        };
+        this.maestroservice
+          .getListadoGeneralDistribuidores(frombody)
+          .subscribe({
+            next: (dtl) => {
+              this.Lstdistribuidor = dtl;
+              this.lblprovincia = obter.nombre.trim();
+              this.ListDistrito = listdistri;
+              this.Iddistrito = 0;
+              this.showAlert(
+                'Se cargó exitosamente la información de distribuidores',
+                'success'
+              );
+            },
+            error: (err) => {
+              console.error('Error al obtener distribuidores:', err);
+              this.showAlert(
+                'Error al cargar la información de distribuidores',
+                'error'
+              );
+            },
+          });
+      },
+      error: (err) => {
+        console.error('Error al obtener departamento o provincias:', err);
+        this.showAlert(
+          'Error al cargar la información de departamento o provincias',
+          'error'
+        );
       },
     });
   }
@@ -82,24 +176,64 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (lst: any) => {
           this.ListDistrito = lst;
-          this.Iddistrito = 0;
-          this.clearDetalledistribuidore();
         },
       });
+  }
+
+  ChangeDistrito() {
+    this.showAlert('Cargando información de distribuidores', 'info');
+    const Distrito$ = this.departamento.getObtenerDistrito(this.Iddistrito);
+    forkJoin([Distrito$]).subscribe({
+      next: ([obter]) => {
+        const frombody = {
+          departamento: this.lbldepartamento ?? '',
+          provincia: this.lblprovincia,
+          distrito: obter.nombre.trim(),
+        };
+        this.maestroservice
+          .getListadoGeneralDistribuidores(frombody)
+          .subscribe({
+            next: (dtl) => {
+              this.Lstdistribuidor = dtl;
+              this.lbldistrito = obter.nombre.trim();
+              this.showAlert(
+                'Se cargó exitosamente la información de distribuidores',
+                'success'
+              );
+            },
+            error: (err) => {
+              console.error('Error al obtener distribuidores:', err);
+              this.showAlert(
+                'Error al cargar la información de distribuidores',
+                'error'
+              );
+            },
+          });
+      },
+      error: (err) => {
+        console.error('Error al obtener departamento o provincias:', err);
+        this.showAlert(
+          'Error al cargar la información de departamento o provincias',
+          'error'
+        );
+      },
+    });
   }
 
   ListadoDistribuidores() {
     this.maestroservice.getListadoDistribuidores().subscribe({
       next: (lst: any) => {
-        this.Lstdistri = lst;
+        this.Lstdistribuidor = lst;
+        this.showAlert(
+          'Se cargó exitosamente la información de distribuidores',
+          'success'
+        );
       },
       error: (err) => {
         console.error('Error al obtener distribuidores', err);
       },
     });
   }
-
-  ngOnDestroy(): void {}
 
   DetailDistribuidore() {
     const departamento$ = this.departamento.getObtenerDepartamento(
@@ -142,21 +276,12 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (lst: any) => {
-          // Verifica si lst es un array y tiene elementos
           if (Array.isArray(lst) && lst.length > 0) {
             this.txtid = '';
-            this.Lstdistri = lst;
-            this.direccion =
-              'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
-            this.direccion2 =
-              'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
+            this.Lstdistribuidor = lst;
             this.showAlert('Se encontraron resultados', 'success');
           } else {
             this.txtid = '';
-            this.direccion =
-              'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
-            this.direccion2 =
-              'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
             this.setUrlDireccion();
             this.clearDetalledistribuidore();
 
@@ -176,10 +301,8 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
     this.txtprovi = '';
     this.txtdistri = '';
     this.txtid = '';
-    this.direccion =
-      'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
-    this.direccion2 =
-      'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
+    this.direccion = '';
+    this.direccion2 = '';
   }
 
   SelectFrom() {
@@ -202,12 +325,11 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
         });
     } else {
       this.txtid = '';
-      this.direccion =
-        'Av. Paseo de la Republica N° 1647. Distrito de la Victoria, Lima, Perú';
-      this.direccion2 =
-        'Av.%20Paseo%20de%20la%20Republica%20N°%201647.%20Distrito%20de%20la%20Victoria,%20Lima,%20Perú';
+      this.direccion = '';
+      this.direccion2 = '';
     }
   }
+
   // type AlertType = 'success' | 'error' | 'info';
   showAlert(texto: string, type: any) {
     Swal.fire({
@@ -218,6 +340,95 @@ export class DistribuidoresComponent implements OnInit, OnDestroy {
       timerProgressBar: true,
       title: texto,
       icon: type,
+    });
+  }
+
+  ClearDistribuidores() {
+    this.txtnombre = '';
+    this.txtcelular = '';
+    this.txtdireccion = '';
+    this.direccion = '';
+    this.direccion2 = '';
+    this.txtdepa = '';
+    this.txtprovi = '';
+    this.txtdistri = '';
+    this.txtid = '';
+    this.direccion = '';
+    this.direccion2 = '';
+    this.setUrlDireccion();
+  }
+
+  ClearDireccion() {
+    this.txtnombre = '';
+    this.txtcelular = '';
+    this.txtdireccion = '';
+    this.direccion = '';
+    this.direccion2 = '';
+    this.txtdepa = '';
+    this.txtprovi = '';
+    this.txtdistri = '';
+    this.txtid = '';
+    this.direccion = '';
+    this.direccion2 = '';
+    this.setUrlDireccion();
+  }
+
+  ClearDepartamento() {
+    this.showAlert('Cargando información de distribuidores', 'info');
+    this.Iddepartamento = 0;
+    this.Idprovincia = 0;
+    this.Iddistrito = 0;
+    this.lbldepartamento = '';
+    this.lblprovincia = '';
+    this.lbldistrito = '';
+    this.ListDepa = [];
+    this.ListProvi = [];
+    this.ListDistrito = [];
+    this.Lstdistribuidor = [];
+    this.direccion = '';
+    this.direccion2 = '';
+    this.setUrlDireccion();
+    this.ListadoDistribuidores();
+    this.ListadoDepartamento();
+  }
+
+  ClearProvincia() {
+    this.Idprovincia = 0;
+    this.Iddistrito = 0;
+    this.lblprovincia = '';
+    this.lbldistrito = '';
+    this.ListProvi = [];
+    this.ListDistrito = [];
+    this.Lstdistribuidor = [];
+    this.direccion = '';
+    this.direccion2 = '';
+    this.setUrlDireccion();
+    this.ListadoProvincia();
+    this.ListgeneralDistribuidores();
+  }
+
+  ClearDistrito() {
+    this.Iddistrito = 0;
+    this.lbldistrito = '';
+    this.ListDistrito = [];
+    this.Lstdistribuidor = [];
+    this.direccion = '';
+    this.direccion2 = '';
+    this.setUrlDireccion();
+    this.ListadoDistrito();
+    this.ListgeneralDistribuidores();
+  }
+
+  ListgeneralDistribuidores() {
+    const frombody = {
+      departamento: this.lbldepartamento ?? '',
+      provincia: this.lblprovincia ?? '',
+      distrito: this.lbldistrito ?? '',
+    };
+    this.maestroservice.getListadoGeneralDistribuidores(frombody).subscribe({
+      next: (dtl) => {
+        this.Lstdistribuidor = dtl;
+      },
     });
   }
 }

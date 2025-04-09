@@ -10,3 +10,22 @@
   height: 180px;
   width: -webkit-fill-available;
 }
+
+.iconclose {
+  cursor: pointer;
+  color: red;
+  font-size: medium;
+  margin-left: 3px;
+}
+
+.search__filter--select {
+  position: relative; /* Para posicionar el ícono relativo al contenedor */
+}
+
+.iconclose {
+  position: absolute; /* Posiciona el ícono de manera absoluta */
+  right: 10px; /* Ajusta la distancia desde la derecha */
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta para centrar el ícono */
+  pointer-events: auto; /* Asegúrate de que el ícono sea clickeable */
+}

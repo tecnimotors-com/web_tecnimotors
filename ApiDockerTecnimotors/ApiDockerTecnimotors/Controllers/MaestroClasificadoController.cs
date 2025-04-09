@@ -154,7 +154,7 @@ namespace ApiDockerTecnimotors.Controllers
 
         [HttpGet("GetBanner2")]
 
-        public ActionResult GetBanner2(string ruta)
+        public ActionResult GetBanner2(string ruta) 
         {
             FileStream stream = System.IO.File.OpenRead(ruta);
             return File(stream, "image/jpeg");
@@ -261,32 +261,30 @@ namespace ApiDockerTecnimotors.Controllers
             return Ok(tldata);
         }
 
-        [HttpGet("ListadoLLantaMedida")]
-        public async Task<ActionResult> ListadoLLantaMedida()
+        [HttpPost("ListadoLLanta")]
+        public async Task<ActionResult> ListadoLLanta([FromBody] TlModelsFilter trmdelfilter)
         {
-            var ListadoMedida = await imaestroclasificado.ListadoLLantaMedida();
-            return Ok(ListadoMedida);
+            var medidas = await imaestroclasificado.ListadoLLanta("medida", trmdelfilter);
+            var modelos = await imaestroclasificado.ListadoLLanta("modelo", trmdelfilter);
+            var marcas = await imaestroclasificado.ListadoLLanta("marca", trmdelfilter);
+            var categorias = await imaestroclasificado.ListadoLLanta("categoria", trmdelfilter);
+            var generallanta = await imaestroclasificado.ListadoGeneralLlantas(trmdelfilter);
+
+            return Ok(new
+            {
+                medidas,
+                modelos,
+                marcas,
+                categorias,
+                generallanta,
+            });
         }
 
-        [HttpGet("ListadoLLantaModelo")]
-        public async Task<ActionResult> ListadoLLantaModelo()
+        [HttpPost("ListadoGeneralLlantas")]
+        public async Task<ActionResult> ListadoGeneralLlantas([FromBody] TlModelsFilter trmdelfilter)
         {
-            var ListadoModelo = await imaestroclasificado.ListadoLLantaModelo();
-            return Ok(ListadoModelo);
-        }
-
-        [HttpGet("ListadoLLantaMarca")]
-        public async Task<ActionResult> ListadoLLantaMarca()
-        {
-            var ListadoMarca = await imaestroclasificado.ListadoLLantaMarca();
-            return Ok(ListadoMarca);
-        }
-
-        [HttpGet("ListadoLLantaCategoria")]
-        public async Task<ActionResult> ListadoLLantaCategoria()
-        {
-            var ListadoCategoria = await imaestroclasificado.ListadoLLantaCategoria();
-            return Ok(ListadoCategoria);
+            var LlantaGeneral = await imaestroclasificado.ListadoGeneralLlantas(trmdelfilter);
+            return Ok(LlantaGeneral);
         }
     }
     public class TrCatrepo

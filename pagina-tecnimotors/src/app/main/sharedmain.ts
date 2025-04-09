@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const SharedMain = [
   RouterModule,
@@ -15,4 +16,5 @@ export const SharedMain = [
   HeaderComponent,
   FooterComponent,
   ReactiveFormsModule,
+  FontAwesomeModule,
 ];

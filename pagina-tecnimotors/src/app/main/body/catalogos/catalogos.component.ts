@@ -32,36 +32,6 @@ export class CatalogosComponent implements OnInit {
   public txttipocata: number = 0;
   public ListTipoCata: any[] = [];
 
-  public tabpanel: string = '1';
-
-  public array: any[] = [
-    {
-      text:
-        this.txtlink +
-        '/app/Imagen/Portadas_Tipo_Catalogo/Llantas_Camara_Moto_Bicicleta.jpg',
-      text2: 'assets/img/banner/Catalogo/Llantas_Camara_Moto_Bicicleta.jpg',
-      titulo: 'CATÁLOGOS DE LLANTAS Y CÁMARAS DE MOTOS Y BICICLETAS',
-    },
-    {
-      text: this.txtlink + '/app/Imagen/Portadas_Tipo_Catalogo/Vehiculos.jpg',
-      text2: 'assets/img/banner/Catalogo/Vehiculos.jpg',
-      titulo: 'CATÁLOGOS DE VEHÍCULOS',
-    },
-
-    {
-      text:
-        this.txtlink +
-        '/app/Imagen/Portadas_Tipo_Catalogo/Repuestos_Motos_Bicicletas.jpg',
-      text2: 'assets/img/banner/Catalogo/Repuestos_Motos_Bicicletas.jpg',
-      titulo: 'CATÁLOGOS DE REPUESTOS DE MOTOS Y BICICLETAS',
-    },
-    {
-      text: this.txtlink + '/app/Imagen/Portadas_Tipo_Catalogo/Lubricantes.jpg',
-      text2: 'assets/img/banner/Catalogo/Lubricantes.jpg',
-      titulo: 'CATÁLOGOS DE LUBRICANTES',
-    },
-  ];
-
   constructor(
     private auth: AuthService,
     private catalogoservice: CatalogoService,
@@ -79,6 +49,7 @@ export class CatalogosComponent implements OnInit {
   ListadoTipoCatalogo() {
     this.catalogoservice.getListarTipoCatalogoAll().subscribe({
       next: (lst: any) => {
+        console.log(lst);
         this.ListTipoCata = lst;
       },
     });

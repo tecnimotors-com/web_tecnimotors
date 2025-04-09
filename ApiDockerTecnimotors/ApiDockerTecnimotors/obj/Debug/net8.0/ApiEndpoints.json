@@ -212,6 +212,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.DistribuidoresController",
+    "Method": "ListadoGeneralDistribuidores",
+    "RelativePath": "api/Distribuidores/ListadoGeneralDistribuidores",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tlfilterDistri",
+        "Type": "ApiDockerTecnimotors.Repositories.Distribuidores.Model.TlFilterDistribuidor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ApiDockerTecnimotors.Controllers.ImagesController",
     "Method": "SubirImagenes",
     "RelativePath": "api/Images/subir",
@@ -693,6 +709,22 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
+    "Method": "ListadoGeneralLlantas",
+    "RelativePath": "api/MaestroClasificado/ListadoGeneralLlantas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "trmdelfilter",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroClasificado.Model.TlModelsFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
     "Method": "ListadoGeneralRepuesto",
     "RelativePath": "api/MaestroClasificado/ListadoGeneralRepuesto",
     "HttpMethod": "POST",
@@ -725,42 +757,18 @@
   },
   {
     "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
-    "Method": "ListadoLLantaCategoria",
-    "RelativePath": "api/MaestroClasificado/ListadoLLantaCategoria",
-    "HttpMethod": "GET",
+    "Method": "ListadoLLanta",
+    "RelativePath": "api/MaestroClasificado/ListadoLLanta",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
-    "Method": "ListadoLLantaMarca",
-    "RelativePath": "api/MaestroClasificado/ListadoLLantaMarca",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
-    "Method": "ListadoLLantaMedida",
-    "RelativePath": "api/MaestroClasificado/ListadoLLantaMedida",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ApiDockerTecnimotors.Controllers.MaestroClasificadoController",
-    "Method": "ListadoLLantaModelo",
-    "RelativePath": "api/MaestroClasificado/ListadoLLantaModelo",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "trmdelfilter",
+        "Type": "ApiDockerTecnimotors.Repositories.MaestroClasificado.Model.TlModelsFilter",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

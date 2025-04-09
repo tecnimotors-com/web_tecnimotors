@@ -18,6 +18,7 @@ import CryptoJS from 'crypto-js';
   templateUrl: './listadovehiculo.component.html',
   styleUrls: ['./listadovehiculo.component.scss'],
 })
+
 export class ListadovehiculoComponent implements OnInit {
   public ListarCategoria: any[] = [];
   public ListModelo: any[] = [];

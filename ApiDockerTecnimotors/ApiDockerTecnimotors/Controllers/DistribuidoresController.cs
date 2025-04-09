@@ -1,4 +1,5 @@
 ﻿using ApiDockerTecnimotors.Repositories.Distribuidores.Interface;
+using ApiDockerTecnimotors.Repositories.Distribuidores.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDockerTecnimotors.Controllers
@@ -27,7 +28,14 @@ namespace ApiDockerTecnimotors.Controllers
         public async Task<ActionResult> ListadoDetalleDistribuidore(string Depa, string Provin, string Distri)
         {
             var result = await idistribuidore.ListadoDetalleDistribuidore(Depa, Provin, Distri);
-            return Ok(result); 
+            return Ok(result);
+        }
+
+        [HttpPost("ListadoGeneralDistribuidores")]
+        public async Task<ActionResult> ListadoGeneralDistribuidores([FromBody] TlFilterDistribuidor tlfilterDistri)
+        {
+            var result = await idistribuidore.ListadoGeneralDistribuidores(tlfilterDistri);
+            return Ok(result);
         }
     }
 }

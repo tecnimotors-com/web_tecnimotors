@@ -189,6 +189,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.rememberMe,
           dtl.body.uuid
         );
+        this.showAlert(dtl.msg, 'success');
         const encrypteduuid = this.encrypt(dtl.body.uuid);
         var returncategory = localStorage.getItem('returncategory');
         localStorage.setItem('uuid', encrypteduuid);
@@ -198,13 +199,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate([returncategory]);
         } else {
           this.loadWishlist(dtl.body.uuid);
-          this.router.navigate(['/login']);
+          this.router.navigate(['/home']);
         }
       },
       error: (err: any) => {
         var validad = err.error.msg == null ? '' : err.error.msg;
         this.showAlert(validad || 'Error de Credenciales', 'error');
-        this.authService.logoutcliente();
+        //this.authService.logoutcliente();
         this.isLoadinglogin = false; // Desactivar el estado de carga
       },
     });

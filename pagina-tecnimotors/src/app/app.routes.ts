@@ -148,7 +148,7 @@ export const routes: Routes = [
       {
         path: 'detallellanta/:id',
         loadChildren: () =>
-          import('./main/filter/llantas/listadollantas/routes').then(
+          import('./main/filter/llantas/detallellantas/routes').then(
             (m) => m.routes
           ),
       },
